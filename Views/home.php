@@ -1,6 +1,5 @@
 <?php
     require_once("header.php");
-    require_once("nav.php");
 ?>
 <html>
     <div class="row">
