@@ -54,10 +54,11 @@
                      $id = $content["id"]; 
                      $nombre = $content["nombre"];
                      $direccion = $content["direccion"];
+                     $capacidad = $content["capacidad"];
                      $hor_apertura = $content["hor_apertura"];
                      $hor_cierre = $content["hor_cierre"];
                      $valor_entrada = $content["valor_entrada"];
-                     $cineObj = new Cine($id, $nombre, $direccion, $hor_apertura, $hor_cierre, $valor_entrada);
+                     $cineObj = new Cine($id, $nombre, $direccion, $capacidad ,$hor_apertura, $hor_cierre, $valor_entrada);
                      array_push($this->cineList, $cineObj);
                  }
              }
@@ -73,6 +74,7 @@
                 $valuesArray["id"] = $cine->getId();
                 $valuesArray["nombre"] = $cine->getNombre();
                 $valuesArray["direccion"] = $cine->getDireccion();
+                $valuesArray["capacidad"] = $cine->getCapacidad();
                 $valuesArray["hor_apertura"] = $cine->getHor_apertura();
                 $valuesArray["hor_cierre"] = $cine->getHor_cierre();
                 $valuesArray["valor_entrada"] = $cine->getValor_entrada();
