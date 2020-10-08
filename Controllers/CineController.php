@@ -22,9 +22,9 @@
      
         
 
-        public function Add($id, $nombre, $direccion, $apertura, $cierre, $valor_entrada)
+        public function Add($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada)
         {
-            $cine = new Cine($id, $nombre, $direccion, $apertura, $cierre, $valor_entrada);
+            $cine = new Cine($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada);
 
             $this->cineDAO->Add($cine);
 
