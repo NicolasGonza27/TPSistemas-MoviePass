@@ -14,7 +14,6 @@
 	Autoload::start();
 
 	session_start();
-	session_destroy();
 
 	require_once(VIEWS_PATH."header.php");
 
