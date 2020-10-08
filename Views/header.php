@@ -1,7 +1,7 @@
-|<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Add Cellphone</title>
+<title>Movie-Pass</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="<?php echo CSS_PATH;?>bootstrap.grid.css" rel="stylesheet">

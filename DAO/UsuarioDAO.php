@@ -77,7 +77,7 @@
             $this->RetrieveData();
             foreach($this->usersList as $user)
             {
-                if( ($user->getEmail() == $email) && ($user->getPassword()) == $password) 
+                if( ($user->getEmail() == $email) && ($user->getPassword() == $password ) )
                 {
                     return $user;
                 }
@@ -108,7 +108,7 @@
         
         private function RetrieveData()
         {
-            $this->cellPhoneList = array();
+            $this->usersList = array();
 
             if(file_exists($this->fileName))
             {
@@ -117,7 +117,7 @@
 
                 foreach($arrayToDecode as $valuesArray)
                 {
-                    $id = $this->returnLastId() + 1;
+                    $id = 0;
                     $nombreYApellido = $valuesArray["nombreYApellido"];
                     $dni = $valuesArray["dni"];
                     $email = $valuesArray["email"];

@@ -1,23 +1,31 @@
 <?php
     require_once("header.php");
 ?>
-<div class="row">
-    <div class="col-sm-12">
-        <h1>MOVIE-PASS</h1>
-        <form action="<?php echo FRONT_ROOT."Home/Login"?>" method="post">
-            <div class="col-6">
-                <span class="col-6">Usuario</span>
-                <input class="col-6 input-login" type="text" name="userName" placeholder="Nombre Usuario" required>
+<form class="container" action="<?php echo FRONT_ROOT."Home/Login"?>" method="post">
+    <h1>MOVIE-PASS</h1>
+    <small class="text-uppercase">Iniciar Sesión:</small>
+    <div class="row">
+        <div class="col-6 mb-3 mt-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Usuario</span>
+                </div>
+                <input type="text" class="userName form-control"  name="userName" required>
             </div>
-            <div class="col-sm-6">
-                <span class="col-6">Contraseña</span>
-                <input class="col-6 input-login" type="password" name="password" placeholder="Contraseña" required >
+        </div>
+        <div class="col-6 mb-3 mt-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Contraseña</span>
+                </div>
+                <input type="password" class="userName form-control" name="password" required>
             </div>
-            <button class="btn btn-info btn-rounded" type="submit" name="btnLogin">Ingresar</button>
-        </form>
+        </div>
+        <div class="container" style="text-align: center">
+            <button class="btn btn-info btn-rounded" type="submit">Ingresar</button>
+        </div>
     </div>
-</div>
+</form>
 <?php
-    require_once("Views-Cliente/content-movie.php");
     require_once("footer.php");
 ?>
