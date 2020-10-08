@@ -2,8 +2,8 @@
     require_once("Views/header.php");
     require_once("nav.php");
 ?>
-<div class="wrapper row4">
-    <main class="hoc container clear">
+<div class="row">
+    <div class="container">
         <div class="content">
             <div class="scrollable">
                 <form class="form" action="<?php echo FRONT_ROOT."/"?>" method="post">
@@ -28,7 +28,7 @@
                 </form>
             </div>
         </div>
-    </main>
+</div>
 </div>
 <?php
     require_once("Views/footer.php");

@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "nombreYApellido": "Nicolas",
+        "dni": "12345678",
+        "email": "gmail",
+        "password": "pass",
+        "fecha_nac": "17\/03\/2001",
+        "is_admin": false
+    }
+]

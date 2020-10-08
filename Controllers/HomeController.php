@@ -50,17 +50,17 @@
             if($user)
             {
                 if($user->getIs_admin())
-                    {   
-                        $this->ShowDashboardView();
-                    }
-                    else
-                    {
-                        $this->ShowListMovieView();
-                    }
+                {   
+                    $this->ShowDashboardView();
+                }
+                else
+                {
+                    $this->ShowListMovieView();
+                }
             }
             else
             {
-                $this->Index("Incorrect username and/or password");
+               // $this->Index("Incorrect username and/or password");
             }
         
         }
