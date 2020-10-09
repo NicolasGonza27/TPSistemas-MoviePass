@@ -11,12 +11,12 @@
         private $hor_cierre;
         private $valor_entrada;
 
-        function __construct (int $id = null, string $nombre = '', string $direccion = '', string $capacidad = '',  float $hor_apertura = '', float $hor_cierre = '', float $valor_entrada = ''){
+        function __construct (int $id = null, string $nombre = '', string $direccion = '', string $capacidad = '',  float $hor_apertura = null, float $hor_cierre = null, float $valor_entrada = null){
 
           $this->id = $id;
           $this->nombre = $nombre;
           $this->direccion = $direccion;
-          $this->capadidad = $capacidad;
+          $this->capacidad = $capacidad;
           $this->hor_apertura = $hor_apertura;
           $this->hor_cierre = $hor_cierre;
           $this->valor_entrada = $valor_entrada;

@@ -6,6 +6,6 @@
         "email": "gmail",
         "password": "pass",
         "fecha_nac": "17\/03\/2001",
-        "is_admin": false
+        "is_admin": true
     }
 ]
