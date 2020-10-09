@@ -1,13 +1,14 @@
 <?php
-    require_once(VIEWS_PATH."header.php");
-    require_once(VIEWS_PATH."nav.php");
+    //require_once(VIEWS_PATH."header.php");
+    //require_once(VIEWS_PATH."nav.php");
 
-    require_once("API/MovieAPI.php");
 
-    use API\MovieAPI as MovieAPI;
+require_once("API/MovieAPI.php");
+use API\MovieAPI as MovieAPI;
 
-    $movieAPI = new MovieAPI();
-    $listMovie = $movieAPI->getAll();
+
+$movieAPI = new MovieAPI();
+$listMovie = $movieAPI->getAll();
 
 ?>
 <div class="row">
@@ -54,5 +55,5 @@
 </div>
 </div>
 <?php
-    require_once(VIEWS_PATH."footer.php");
+    //require_once(VIEWS_PATH."footer.php");
 ?>
