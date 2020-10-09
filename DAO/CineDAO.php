@@ -38,30 +38,43 @@
             $this->SaveData();
         }
 
+        public function Modify($id,Cine $newCine)
+        {
+            $this->RetrieveData();
+
+            foreach($this->cineList as $key=>$cine)
+            {
+                if($cine->getId() == $id)
+                {
+                    $this->cineList[$key] = $newCine;
+                } 
+            }
+        }
+
         private function RetrieveData()
         {
-             $this->cineList = array();
+            $this->cineList = array();
 
-             if(file_exists($this->fileName))
-             {
-                 $jsonToDecode = file_get_contents($this->fileName);
+            if(file_exists($this->fileName))
+            {
+                $jsonToDecode = file_get_contents($this->fileName);
 
-                 $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
-                 
-                 foreach($contentArray as $content)
-                 {
-                     
-                     $id = $content["id"]; 
-                     $nombre = $content["nombre"];
-                     $direccion = $content["direccion"];
-                     $capacidad = $content["capacidad"];
-                     $hor_apertura = $content["hor_apertura"];
-                     $hor_cierre = $content["hor_cierre"];
-                     $valor_entrada = $content["valor_entrada"];
-                     $cineObj = new Cine($id, $nombre, $direccion, $capacidad ,$hor_apertura, $hor_cierre, $valor_entrada);
-                     array_push($this->cineList, $cineObj);
-                 }
-             }
+                $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
+                
+                foreach($contentArray as $content)
+                {
+                    
+                    $id = $content["id"]; 
+                    $nombre = $content["nombre"];
+                    $direccion = $content["direccion"];
+                    $capacidad = $content["capacidad"];
+                    $hor_apertura = $content["hor_apertura"];
+                    $hor_cierre = $content["hor_cierre"];
+                    $valor_entrada = $content["valor_entrada"];
+                    $cineObj = new Cine($id, $nombre, $direccion, $capacidad ,$hor_apertura, $hor_cierre, $valor_entrada);
+                    array_push($this->cineList, $cineObj);
+                }
+            }
         }
 
         private function SaveData()
