@@ -12,8 +12,8 @@
         private $password;
         private $fecha_nac;
         private $is_admin;
-
-        public function __construct(int $id, String $nombreYApellido, String $dni, String $email, String $password, String $fecha_nac, $is_admin)
+        
+        public function __construct(int $id = null, String $nombreYApellido = "", String $dni = "", String $email = "", String $password = "", String $fecha_nac = "", $is_admin = false)
         {
             $this->id = $id;
             $this->nombreYApellido = $nombreYApellido;

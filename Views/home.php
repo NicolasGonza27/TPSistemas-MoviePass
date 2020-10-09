@@ -27,15 +27,7 @@
         </div>
     </div>
 </form>
-
-
-
 <?php
     require_once("signUp.php");
-?>
-  
-
-
-<?php
     require_once("footer.php");
 ?>

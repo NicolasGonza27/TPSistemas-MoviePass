@@ -25,7 +25,9 @@
                             <th>Dirección</th>
                             <th>Horario Apertura</th>
                             <th>Horario Cierre</th>
+                            <th>Capacidad</th>
                             <th>Valor Entrada</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,47 +38,8 @@
                                 <td><?php echo $cine->getHor_apertura()?></td>
                                 <td><?php echo $cine->getHor_cierre()?></td>
                                 <td><?php echo $cine->getCapacidad()?></td>
+                                <td><?php echo $cine->getValor_entrada()?></td>
                             </tr>
-
-                            <!-- This is the modal -->
-                            <div id="cine<?php echo $cine->getId() ?>">
-                                <div class="">
-                                    <form action="" method="POST">
-                                        
-                                        <div class="">
-                                            <label for="user">Título</label>
-                                            <input type="text" name="title" class="" value="<?php echo $cine->getNombre() ?>" />
-                                        </div>
-
-                                        <div class="">
-                                            <label for="">Direccion</label>
-                                            <input type="text" name="" class="" value="<?php echo $cine->getDireccion() ?>"/>
-                                        </div>
-
-                                        <div class="">
-                                            <label for="">Fecha de Apertura</label>
-                                            <input type="text" name="" class="" value="<?php echo $cine->getHor_apertura() ?>"/>
-                                        </div>
-
-                                        <div class="">
-                                            <label for="">Fecha de Cierre</label>
-                                            <input type="text" name="" class="" value="<?php echo $cine->getHor_cierre() ?>"/>
-                                        </div>
-
-                                        <div class="">
-                                            <label for="">Valor de Entrada</label>
-                                            <input type="text" name="" class="" value="<?php echo $cine->getValor_entrada() ?>"/>
-                                        </div>
-
-                                        <div class="">
-                                            <label for="">Capacidad</label>
-                                            <span><?php echo $cine->getCapacidad() ?>"</span>
-                                        </div>
-
-                                        <button type="submit" class="">Enviar</button>
-                                    </form>
-                                </div>
-                            </div>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -85,6 +48,51 @@
     </div>
 </div>
 
+<!-- This is the modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="cine<?php echo $cine->getId() ?>">
+                <div class="">
+                    <form action="" method="POST">
+                        
+                        <div class="">
+                            <label for="user">Título</label>
+                            <input type="text" name="title" class="" value="<?php echo $cine->getNombre() ?>" />
+                        </div>
+
+                        <div class="">
+                            <label for="">Direccion</label>
+                            <input type="text" name="" class="" value="<?php echo $cine->getDireccion() ?>"/>
+                        </div>
+
+                        <div class="">
+                            <label for="">Fecha de Apertura</label>
+                            <input type="text" name="" class="" value="<?php echo $cine->getHor_apertura() ?>"/>
+                        </div>
+
+                        <div class="">
+                            <label for="">Fecha de Cierre</label>
+                            <input type="text" name="" class="" value="<?php echo $cine->getHor_cierre() ?>"/>
+                        </div>
+
+                        <div class="">
+                            <label for="">Valor de Entrada</label>
+                            <input type="text" name="" class="" value="<?php echo $cine->getValor_entrada() ?>"/>
+                        </div>
+
+                        <div class="">
+                            <label for="">Capacidad</label>
+                            <span><?php echo $cine->getCapacidad() ?>"</span>
+                        </div>
+
+                        <button type="submit" class="">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
     require_once("Views/footer.php");
 ?>

@@ -1,11 +1,101 @@
 [
     {
-        "id": 1,
+        "id": 0,
         "nombreYApellido": "Nicolas",
         "dni": "12345678",
         "email": "gmail",
         "password": "pass",
         "fecha_nac": "17\/03\/2001",
         "is_admin": true
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "123",
+        "dni": "123",
+        "email": "123",
+        "password": "",
+        "fecha_nac": "",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "123",
+        "dni": "123",
+        "email": "123",
+        "password": "",
+        "fecha_nac": "",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "123",
+        "dni": "123",
+        "email": "",
+        "password": "",
+        "fecha_nac": "",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "123",
+        "dni": "123",
+        "email": "",
+        "password": "",
+        "fecha_nac": "",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "123",
+        "dni": "123",
+        "email": "123",
+        "password": "",
+        "fecha_nac": "",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "123",
+        "dni": "123",
+        "email": "123",
+        "password": "",
+        "fecha_nac": "",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "nuevo",
+        "dni": "123123",
+        "email": "",
+        "password": "",
+        "fecha_nac": "",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "nuevo",
+        "dni": "123123",
+        "email": "",
+        "password": "",
+        "fecha_nac": "",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "Admin Dios",
+        "dni": "12345678",
+        "email": "niclausegonzalez@gmail.com",
+        "password": "123",
+        "fecha_nac": "1231231",
+        "is_admin": true
+    },
+    {
+        "id": null,
+        "nombreYApellido": "Admin Dios",
+        "dni": "12345678",
+        "email": "niclausegonzalez@gmail.com",
+        "password": "123",
+        "fecha_nac": "1231231",
+        "is_admin": false
     }
 ]

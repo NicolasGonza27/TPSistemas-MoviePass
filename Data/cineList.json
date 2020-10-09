@@ -10,36 +10,36 @@
     },
     {
         "id": 2,
-        "nombre": "Aldrei",
-        "direccion": "Calle",
-        "capacidad": "100",
+        "nombre": "Paseo",
+        "direccion": "Una calle",
+        "capacidad": "400",
         "hor_apertura": 12,
         "hor_cierre": 12,
         "valor_entrada": 12
     },
     {
         "id": 3,
-        "nombre": "Aldrei",
-        "direccion": "Calle",
-        "capacidad": "100",
+        "nombre": "Aldrei2Pros",
+        "direccion": "Calle44",
+        "capacidad": "600",
         "hor_apertura": 12,
         "hor_cierre": 12,
         "valor_entrada": 12
     },
     {
         "id": 4,
-        "nombre": "Aldrei",
-        "direccion": "Calle",
-        "capacidad": "100",
+        "nombre": "OtroCine",
+        "direccion": "Calle11",
+        "capacidad": "300",
         "hor_apertura": 12,
         "hor_cierre": 12,
         "valor_entrada": 12
     },
     {
         "id": 5,
-        "nombre": "Aldrei",
-        "direccion": "Calle",
-        "capacidad": "100",
+        "nombre": "ElCine",
+        "direccion": "Calle76",
+        "capacidad": "455",
         "hor_apertura": 12,
         "hor_cierre": 12,
         "valor_entrada": 12
