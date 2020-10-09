@@ -20,6 +20,19 @@
             $this->usuarioDAO->Add($user);
         }
         
+        public function AddNuevoUsuario($nombreYApellido, $dni, $email, $password, $fecha_nac)
+        {
+            $user = new Usuario();
+            $user->setNombreYApellido($nombreYApellido);
+            $user->setDni($dni);
+            $user->setEmail($email);
+            $user->setPassword($password);
+            $user->setFecha_nac($fecha_nac);
+            
+            $this->usuarioDAO->Add($user);
+            require_once("Views/home.php");
+        }
+
         public function Delete($id)
         {
             $this->usuarioDAO->Delete($id);

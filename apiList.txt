@@ -46,7 +46,7 @@ $listMovie = $movieAPI->getAll();
                 </form>
             </div>
         </div>
-</div>
+    </div>
 </div>
 <?php
     //require_once(VIEWS_PATH."footer.php");
