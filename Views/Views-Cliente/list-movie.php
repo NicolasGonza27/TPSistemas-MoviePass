@@ -28,7 +28,7 @@
                 </form>
             </div>
         </div>
-</div>
+    </div>
 </div>
 <?php
     require_once("Views/footer.php");

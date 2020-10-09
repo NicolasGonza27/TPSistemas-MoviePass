@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "nombre": "Aldrei",
+        "direccion": "Calle",
+        "capacidad": "100",
+        "hor_apertura": 12,
+        "hor_cierre": 12,
+        "valor_entrada": 12
+    },
+    {
+        "id": 2,
+        "nombre": "Aldrei",
+        "direccion": "Calle",
+        "capacidad": "100",
+        "hor_apertura": 12,
+        "hor_cierre": 12,
+        "valor_entrada": 12
+    },
+    {
+        "id": 3,
+        "nombre": "Aldrei",
+        "direccion": "Calle",
+        "capacidad": "100",
+        "hor_apertura": 12,
+        "hor_cierre": 12,
+        "valor_entrada": 12
+    },
+    {
+        "id": 4,
+        "nombre": "Aldrei",
+        "direccion": "Calle",
+        "capacidad": "100",
+        "hor_apertura": 12,
+        "hor_cierre": 12,
+        "valor_entrada": 12
+    },
+    {
+        "id": 5,
+        "nombre": "Aldrei",
+        "direccion": "Calle",
+        "capacidad": "100",
+        "hor_apertura": 12,
+        "hor_cierre": 12,
+        "valor_entrada": 12
+    }
+]
