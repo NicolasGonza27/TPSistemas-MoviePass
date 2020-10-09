@@ -2,13 +2,13 @@
     require_once("header.php");
 ?>
 <form class="container" action="<?php echo FRONT_ROOT."Home/Login"?>" method="post">
-    <h1>MOVIE-PASS</h1>
+    <h1 style="text-align: center">MOVIE-PASS</h1>
     <small class="text-uppercase">Iniciar Sesión:</small>
     <div class="row">
         <div class="col-6 mb-3 mt-3">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Usuario</span>
+                    <span class="input-group-text">Correo</span>
                 </div>
                 <input type="text" class="userName form-control"  name="userName" required>
             </div>
