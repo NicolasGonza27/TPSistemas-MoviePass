@@ -55,7 +55,7 @@
 
             $this->cineDAO->Modify($id, $cine);
             
-            require_once("Views/Views-Admin/dashboard.php");
+            $this->ShowDashboardView();
         }
     }
 ?>
