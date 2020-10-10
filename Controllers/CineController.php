@@ -39,7 +39,23 @@
         {
             $this->cineDAO->Modify($id, $cine);
 
-            $this->ShowDashboardView();
+            
+        }
+
+        public function ModifyModal($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada)
+        {
+            $cine = new Cine();
+            $cine->setId($id);
+            $cine->setNombre($nombre);
+            $cine->setDireccion($direccion);
+            $cine->setCapacidad($capacidad);
+            $cine->setHor_apertura($apertura);
+            $cine->setHor_cierre($cierre);
+            $cine->setValor_entrada($valor_entrada);
+
+            $this->cineDAO->Modify($id, $cine);
+            
+            require_once("Views/Views-Admin/dashboard.php");
         }
     }
 ?>

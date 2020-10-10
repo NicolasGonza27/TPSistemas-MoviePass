@@ -47,6 +47,8 @@
                 if($cine->getId() == $id)
                 {
                     $this->cineList[$key] = $newCine;
+
+                    $this->SaveData();
                 } 
             }
         }

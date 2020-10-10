@@ -3,28 +3,19 @@
         "id": 1,
         "nombre": "Aldrei",
         "direccion": "Calle",
-        "capacidad": "100",
+        "capacidad": "123",
         "hor_apertura": 12,
         "hor_cierre": 12,
         "valor_entrada": 12
     },
     {
-        "id": 2,
-        "nombre": "Paseo",
-        "direccion": "Una calle",
-        "capacidad": "400",
-        "hor_apertura": 12,
-        "hor_cierre": 12,
-        "valor_entrada": 12
-    },
-    {
-        "id": 3,
-        "nombre": "Aldrei2Pros",
-        "direccion": "Calle44",
-        "capacidad": "600",
-        "hor_apertura": 12,
-        "hor_cierre": 12,
-        "valor_entrada": 12
+        "id": "3",
+        "nombre": "moded",
+        "direccion": "nueva calle",
+        "capacidad": "123",
+        "hor_apertura": "10.05",
+        "hor_cierre": "12.5",
+        "valor_entrada": "333"
     },
     {
         "id": 4,
@@ -37,9 +28,9 @@
     },
     {
         "id": 5,
-        "nombre": "ElCine",
+        "nombre": "ElCinelala",
         "direccion": "Calle76",
-        "capacidad": "455",
+        "capacidad": "",
         "hor_apertura": 12,
         "hor_cierre": 12,
         "valor_entrada": 12
