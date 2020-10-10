@@ -7,9 +7,6 @@
     use DAO\CineDAO as CineDAO;
 
     $cineDao = new CineDAO();
-    //$cine1 = new Cine(0,"Aldrei","Calle","100",12,12,12);
-    
-    //$cineDao->Add($cine1);
     $listaCine = $cineDao->GetAll();
     
 ?>
