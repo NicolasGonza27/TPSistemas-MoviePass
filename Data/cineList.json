@@ -1,30 +1,21 @@
 [
     {
         "id": 1,
-        "nombre": "Aldrei",
-        "direccion": "Calle",
-        "capacidad": "123",
-        "hor_apertura": 12,
-        "hor_cierre": 12,
-        "valor_entrada": 12
+        "nombre": "Aldrei lala",
+        "direccion": "Calletal",
+        "capacidad": "10000",
+        "hor_apertura": 1200,
+        "hor_cierre": 1200,
+        "valor_entrada": 1200
     },
     {
-        "id": "3",
+        "id": 3,
         "nombre": "moded",
         "direccion": "nueva calle",
         "capacidad": "123",
-        "hor_apertura": "10.05",
-        "hor_cierre": "12.5",
-        "valor_entrada": "333"
-    },
-    {
-        "id": 4,
-        "nombre": "OtroCine",
-        "direccion": "Calle11",
-        "capacidad": "300",
-        "hor_apertura": 12,
-        "hor_cierre": 12,
-        "valor_entrada": 12
+        "hor_apertura": 10.05,
+        "hor_cierre": 12.5,
+        "valor_entrada": 45454
     },
     {
         "id": 5,
@@ -34,5 +25,14 @@
         "hor_apertura": 12,
         "hor_cierre": 12,
         "valor_entrada": 12
+    },
+    {
+        "id": 6,
+        "nombre": "nuevo",
+        "direccion": "nuevo",
+        "capacidad": "nuevo",
+        "hor_apertura": 123,
+        "hor_cierre": 123,
+        "valor_entrada": null
     }
 ]
