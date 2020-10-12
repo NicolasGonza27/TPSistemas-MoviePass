@@ -1,12 +1,12 @@
 [
     {
-        "id": 1,
-        "nombre": "Aldrei lala",
-        "direccion": "Calletal",
-        "capacidad": "10000",
-        "hor_apertura": 1200,
-        "hor_cierre": 1200,
-        "valor_entrada": 1200
+        "id": "1",
+        "nombre": "Aldrei54",
+        "direccion": "Calletal74",
+        "capacidad": "",
+        "hor_apertura": "1200",
+        "hor_cierre": "1200",
+        "valor_entrada": "1200"
     },
     {
         "id": 3,
@@ -15,7 +15,7 @@
         "capacidad": "123",
         "hor_apertura": 10.05,
         "hor_cierre": 12.5,
-        "valor_entrada": 45454
+        "valor_entrada": 45
     },
     {
         "id": 5,
@@ -34,5 +34,14 @@
         "hor_apertura": 123,
         "hor_cierre": 123,
         "valor_entrada": null
+    },
+    {
+        "id": "7",
+        "nombre": "Aldre12",
+        "direccion": "nueva calle20",
+        "capacidad": "",
+        "hor_apertura": "",
+        "hor_cierre": "",
+        "valor_entrada": ""
     }
 ]

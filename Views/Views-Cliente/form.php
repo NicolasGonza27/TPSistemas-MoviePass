@@ -19,7 +19,7 @@
 <br>
 
 <div class="tab-content">
-  <div class="tab-pane active white-box" id="home" role="tabpanel">
+  <div class="tab-pane active black-box" id="home" role="tabpanel">
   <form class = "form-control:valid "  action="<?php echo FRONT_ROOT."Home/ShowListMovieView"?>" method="post">
         <div style="text-align:center">
           <h5 class="genero"  id="exampleModalLabel">Seleccione un genero</h5>
@@ -42,7 +42,7 @@
   </div>
 
   <div class="tab-pane" id="profile" role="tabpanel">    
-  <div  style="text-align:center" class="white-box">
+  <div  style="text-align:center" class="black-box">
       <form action="<?php echo FRONT_ROOT."Home/ShowListMovieView"?>" method="post" >
         <div style="text-align:center">
           <h5 class="genero" id="exampleModalLabel">Seleccione una fecha de estreno</h5>

@@ -1,8 +1,14 @@
-.white-box {
+.black-box {
     padding: 15px;
     border-radius: 20px;
     box-shadow: 0 0 15px #d4dbe2;
     background-color: black;
+}
+
+.white-box {
+    padding: 15px;
+    border-radius: 20px;
+    background-color: white;
 }
 
 .hide {
@@ -16,23 +22,13 @@ body {
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
-    
+
     background-image: url("../img/cineMovie.jpg");
-    
+
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
     background-attachment:fixed;
-    
-  }
-
-h1,small{
-    color: azure;
-   
-}
-
- .container{
-  text-align: center;
 }
 
 .input-group {
@@ -44,47 +40,45 @@ h1,small{
     -ms-flex-align: stretch;
     align-items: stretch;
     width: 100%;
-  }
+}
 
-  .wrapper{
-      display:block;
-       position:relative; 
-       width:100%; 
-       margin:0; 
-       padding:0;
-        text-align:-webkit-center; 
-        word-wrap:break-word;
-        color: azure;
-    }
+.wrapper {
+    display:block;
+    position:relative; 
+    width:100%; 
+    margin:0; 
+    padding:0;
+    text-align:-webkit-center; 
+    word-wrap:break-word;
+    color: azure;
+}
 
-.genero{
+.genero {
     text-align: center;
     color:azure;
 }
-.col_57{
+
+.col_57 {
     position: center;
     width: 100%;
     padding-right: 600px;
-    padding-left: 600px;
-    
+    padding-left: 600px;  
 }
 
-.titulo
-   {
-       background: none;
-       background-size:cover ;
-       font-style:italic;
-       font-weight:bold;
-       font-family:'Helvetica','Verdana','Monaco',sans-serif;
-       font-size: 55px;
-       width: 80%;
-       padding: 20px;
-       text-align: center;
-   } 
+.titulo {
+    background: none;
+    background-size:cover ;
+    font-style:italic;
+    font-weight:bold;
+    font-family:'Helvetica','Verdana','Monaco',sans-serif;
+    font-size: 55px;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+} 
 
 
-.img-movies
-{
+.img-movies {
     border: 2px solid (opacity=0);
     margin-left: 20px;
     margin-right: 20px;
@@ -92,8 +86,7 @@ h1,small{
     margin-bottom: 20px;
 }
 
-.img-movies:hover
-{
+.img-movies:hover {
     border:2px solid #8C0000;
 }
 

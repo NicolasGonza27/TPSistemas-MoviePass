@@ -11,7 +11,7 @@
         private $hor_cierre;
         private $valor_entrada;
 
-        function __construct (int $id = null, string $nombre = '', string $direccion = '', string $capacidad = '',  float $hor_apertura = null, float $hor_cierre = null, float $valor_entrada = null){
+        function __construct ($id = null, $nombre = '', $direccion = '', $capacidad = '', $hor_apertura = null, $hor_cierre = null, $valor_entrada = null){
 
           $this->id = $id;
           $this->nombre = $nombre;
