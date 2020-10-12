@@ -1,5 +1,5 @@
 <?php
-    require_once("Views/header.php");
+    require_once(VIEWS_PATH."header.php");
     require_once("nav.php");
 
     use Models\Cine as Cine;
@@ -58,41 +58,42 @@
         <div class="modal-content">
             <form action="<?php echo FRONT_ROOT."Cine/ModifyModal"?>" method="post">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edición de Cine</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                    <h5 class="modal-title" id="exampleModalLabel">Edición de Cine</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body pl-3 pr-3">
                     <input type="numbre" name="id" class="hide" value="<?php echo $cine->getId()?>"/>
-                    <div class="">
-                        <label>Nombre</label>
-                        <input type="text" name="nombre" class="" value="<?php echo $cine->getNombre()?>"/>
+                    <div class="row form-group pr-3">
+                        <label class="col-6">Nombre:</label>
+                        <input type="text" name="nombre" class="col-6" value="<?php echo $cine->getNombre()?>"/>
                     </div>
 
-                    <div class="">
-                        <label>Dirección</label>
-                        <input type="text" name="direccion" class="" value="<?php echo $cine->getDireccion()?>"/>
+                    <div class="row form-group pr-3">
+                        <label class="col-6">Dirección:</label>
+                        <input type="text" name="direccion" class="col-6" value="<?php echo $cine->getDireccion()?>"/>
                     </div>
 
-                    <div class="">
-                        <label>Capacidad</label>
-                        <input type="text" name="capacidad" class="" value="<?php echo $cine->getCapacidad()?>"/>
+                    <input type="text" name="capacidad" class="hide" value="<?php echo $cine->getCapacidad()?>"/>
+                    
+                    <div class="row form-group pr-3">
+                        <label class="col-6">Hora de Apertura:</label>
+                        <input type="number" name="apertura" class="col-6" value="<?php echo $cine->getHor_apertura()?>"/>
                     </div>
 
-                    <div class="">
-                        <label>Fecha de Apertura</label>
-                        <input type="number" name="apertura" class="" value="<?php echo $cine->getHor_apertura()?>"/>
+                    <div class="row form-group pr-3">
+                        <label class="col-6">Hora de Cierre:</label>
+                        <input type="number" name="cuerre" class="col-6" value="<?php echo $cine->getHor_cierre()?>"/>
                     </div>
 
-                    <div class="">
-                        <label>Fecha de Cierre</label>
-                        <input type="number" name="cuerre" class="" value="<?php echo $cine->getHor_cierre()?>"/>
+                    <div class="row form-group pr-3">
+                        <label class="col-6">Valor de Entrada:</label>
+                        <input type="numbre" name="valor_entrada" class="col-6" value="<?php echo $cine->getValor_entrada()?>"/>
                     </div>
 
-                    <div class="">
-                        <label>Valor de Entrada</label>
-                        <input type="numbre" name="valor_entrada" class="" value="<?php echo $cine->getValor_entrada()?>"/>
+                    <div class="row pr-3">
+                        <label class="col-12">Capacidad: <?php echo $cine->getCapacidad()?> personas.</label>
                     </div>
                 </div>
                 <div class="modal-footer">
