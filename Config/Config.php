@@ -5,8 +5,10 @@ define("ROOT", dirname(__DIR__) . "/");
 define("FRONT_ROOT", "/dashboard/TPSistemas-MoviePass/");
 define("VIEWS_PATH", "Views/");
 define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "css/");
+define("CSSF_PATH", FRONT_ROOT.VIEWS_PATH . "cssFont/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
 define("IMG_PATH", VIEWS_PATH . "img/");
+
 ?>
 
 
