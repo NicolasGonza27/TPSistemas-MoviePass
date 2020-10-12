@@ -3,3 +3,136 @@
     border-radius: 4px;
     box-shadow: 0 0 15px #d4dbe2;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.titulo
+   {
+       background: none;
+       background-size:cover ;
+       font-style:italic;
+       font-weight:bold;
+       font-family:'Helvetica','Verdana','Monaco',sans-serif;
+       font-size: 55px;
+       width: 80%;
+       padding: 20px;
+       text-align: center;
+   } 
+
+
+.img-movies
+{
+    border: 2px solid (opacity=0);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.img-movies:hover
+{
+    border:2px solid #8C0000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
