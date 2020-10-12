@@ -117,12 +117,21 @@
         "is_admin": false
     },
     {
-        "id": null,
+        "id": 0,
         "nombreYApellido": "lucas",
         "dni": "2334421",
         "email": "lu@lu",
         "password": "da",
         "fecha_nac": "2\/2\/2",
+        "is_admin": false
+    },
+    {
+        "id": null,
+        "nombreYApellido": "Luciano Gonzalez",
+        "dni": "123412312",
+        "email": "l@gmail",
+        "password": "123",
+        "fecha_nac": "20\/01\/2004",
         "is_admin": false
     }
 ]

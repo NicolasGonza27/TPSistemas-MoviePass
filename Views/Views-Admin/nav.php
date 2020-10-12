@@ -1,52 +1,62 @@
-<html>
-    <div class="container content">
-        <div class="col-12">
-            <div class="text-right">
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
-            </div>
+<html>  
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Movie-Pass</a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowDashboardView"?>">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link "  href= "<?php echo FRONT_ROOT."Home/form"?>"role="button">Filtrar Por</a>
+                </li>
+                <li class = "nav-item">
+                    <a class="nav-link"  href= "<?php echo FRONT_ROOT."Home/Logout"?>"role="button">Cerrar Sesión</a>
+                </li> -->
+            </ul>
+            <button type="button" class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
         </div>
-    </div>
+    </nav>
+
+    
 
     <div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form action="<?php echo FRONT_ROOT."Cine/Add"?>" method="post">
                     <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edición de Cine</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                        <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo cine</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="modal-body">
-                        <input type="numbre" name="id" class="hide" value=""/>
-                        <div class="">
-                            <label>Nombre</label>
-                            <input type="text" name="nombre" class="" value=""/>
+                    <div class="modal-body pl-3 pr-3">
+                        <input type="numbre" name="id" class="hide"/>
+                        <div class="row form-group pr-3">
+                            <label class="col-6">Nombre:</label>
+                            <input type="text" name="nombre" class="col-6"/>
                         </div>
 
-                        <div class="">
-                            <label>Dirección</label>
-                            <input type="text" name="direccion" class="" value=""/>
+                        <div class="row form-group pr-3">
+                            <label class="col-6">Dirección:</label>
+                            <input type="text" name="direccion" class="col-6"/>
                         </div>
 
-                        <div class="">
-                            <label>Capacidad</label>
-                            <input type="text" name="capacidad" class="" value=""/>
+                        <input type="text" name="capacidad" class="hide"/>
+                    
+                        <div class="row form-group pr-3">
+                            <label class="col-6">Hora de Apertura:</label>
+                            <input type="number" name="apertura" class="col-6"/>
                         </div>
 
-                        <div class="">
-                            <label>Fecha de Apertura</label>
-                            <input type="number" name="apertura" class="" value=""/>
+                        <div class="row form-group pr-3">
+                            <label class="col-6">Hora de Cierre:</label>
+                            <input type="number" name="cuerre" class="col-6"/>
                         </div>
 
-                        <div class="">
-                            <label>Fecha de Cierre</label>
-                            <input type="number" name="cuerre" class="" value=""/>
-                        </div>
-
-                        <div class="">
-                            <label>Valor de Entrada</label>
-                            <input type="numbre" name="valor_entrada" class="" value=""/>
+                        <div class="row form-group pr-3">
+                            <label class="col-6">Valor de Entrada:</label>
+                            <input type="numbre" name="valor_entrada" class="col-6"/>
                         </div>
                     </div>
                     <div class="modal-footer">
