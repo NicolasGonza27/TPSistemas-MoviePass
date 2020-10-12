@@ -90,12 +90,39 @@
         "is_admin": true
     },
     {
-        "id": null,
+        "id": 0,
         "nombreYApellido": "Admin Dios",
         "dni": "12345678",
         "email": "niclausegonzalez@gmail.com",
         "password": "123",
         "fecha_nac": "1231231",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "lucas",
+        "dni": "2334421",
+        "email": "lu@lu",
+        "password": "123",
+        "fecha_nac": "2\/2\/2",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "lucas",
+        "dni": "2334421",
+        "email": "lu@lu",
+        "password": "da",
+        "fecha_nac": "2\/2\/2",
+        "is_admin": false
+    },
+    {
+        "id": null,
+        "nombreYApellido": "lucas",
+        "dni": "2334421",
+        "email": "lu@lu",
+        "password": "da",
+        "fecha_nac": "2\/2\/2",
         "is_admin": false
     }
 ]

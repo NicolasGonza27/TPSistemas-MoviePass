@@ -55,7 +55,7 @@
                 }
                 else
                 {
-                    $this->ShowListMovieView();
+                    require_once(VIEWS_PATH ."Views-Cliente/indexCliente.php");
                 }
             }
             else
@@ -70,5 +70,10 @@
             session_destroy();
             $this->Index();
         }
+
+        public function form()
+        {
+            require_once(VIEWS_PATH."Views-Cliente/form.php");
+        }  
     }
 ?>

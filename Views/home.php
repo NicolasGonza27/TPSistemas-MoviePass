@@ -2,8 +2,10 @@
     require_once("header.php");
 ?>
 <form class="container" action="<?php echo FRONT_ROOT."Home/Login"?>" method="post">
-    <h1 style="text-align: center">MOVIE-PASS</h1>
-    <small class="text-uppercase">Iniciar Sesión:</small>
+    <h1 class="mt-5">MOVIE-PASS</h1>
+    <br>
+    <div class="mt-5">
+    <small>INICIAR SESIÓN:</small>
     <div class="row">
         <div class="col-6 mb-3 mt-3">
             <div class="input-group">
@@ -25,6 +27,7 @@
         <div class="container" style="text-align: center">
             <button class="btn btn-info btn-rounded" type="submit">Ingresar</button>
         </div>
+    </div>
     </div>
 </form>
 <?php

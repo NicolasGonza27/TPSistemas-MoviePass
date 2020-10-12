@@ -1,6 +1,6 @@
 <?php
     require_once(VIEWS_PATH."header.php");
-    require_once(VIEWS_PATH."nav.php");
+    require_once(VIEWS_PATH."Views-Cliente/nav.php");
 
     require_once("API/MovieAPI.php");
 
@@ -10,6 +10,7 @@
     $listMovie = $movieAPI->getAll();
 
 ?>
+<br>
 <div class="row">
     <div class="container">
         <div class="content">
