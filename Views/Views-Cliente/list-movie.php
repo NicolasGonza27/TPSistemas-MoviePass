@@ -12,5 +12,5 @@
                             <?php
                             }?>
                 </div>
-        </div>
+            </div>
 </form>
