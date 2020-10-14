@@ -1,5 +1,5 @@
 <html>  
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top mb-5">
         <a class="navbar-brand" href="#">Movie-Pass</a>
 
         <div class="collapse navbar-collapse">
@@ -9,10 +9,10 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link "  href= "<?php echo FRONT_ROOT."Home/form"?>"role="button">Filtrar Por</a>
-                </li>
+                </li> -->
                 <li class = "nav-item">
                     <a class="nav-link"  href= "<?php echo FRONT_ROOT."Home/Logout"?>"role="button">Cerrar Sesión</a>
-                </li> -->
+                </li>
             </ul>
             <button type="button" class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
         </div>
@@ -34,29 +34,29 @@
                         <input type="numbre" name="id" class="hide"/>
                         <div class="row form-group pr-3">
                             <label class="col-6">Nombre:</label>
-                            <input type="text" name="nombre" class="col-6"/>
+                            <input type="text" name="nombre" class="col-6" required/>
                         </div>
 
                         <div class="row form-group pr-3">
                             <label class="col-6">Dirección:</label>
-                            <input type="text" name="direccion" class="col-6"/>
+                            <input type="text" name="direccion" class="col-6" required/>
                         </div>
 
                         <input type="text" name="capacidad" class="hide"/>
                     
                         <div class="row form-group pr-3">
                             <label class="col-6">Hora de Apertura:</label>
-                            <input type="number" name="apertura" class="col-6"/>
+                            <input type="number" name="apertura" class="col-6" required/>
                         </div>
 
                         <div class="row form-group pr-3">
                             <label class="col-6">Hora de Cierre:</label>
-                            <input type="number" name="cuerre" class="col-6"/>
+                            <input type="number" name="cuerre" class="col-6" required/>
                         </div>
 
                         <div class="row form-group pr-3">
                             <label class="col-6">Valor de Entrada:</label>
-                            <input type="numbre" name="valor_entrada" class="col-6"/>
+                            <input type="numbre" name="valor_entrada" class="col-6" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
