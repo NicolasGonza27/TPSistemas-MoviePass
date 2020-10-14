@@ -1,14 +1,14 @@
  
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark " id ="navbar-examle2">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id ="navbar-examle2">
   <a class="navbar-brand" href="#">Movie-Pass</a>
     <ul class="navbar-nav justify-content-end">
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowDashboardView"?>"> Inicio </a>
+        <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowHomeClientViews"?>"> Inicio </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link "  href= "<?php echo FRONT_ROOT."Home/form"?>" id="navbarDropdownMenuLink" role="button">
+        <a class="nav-link "  href= "<?php echo FRONT_ROOT."Home/ShowFiltersViews"?>" id="navbarDropdownMenuLink" role="button">
           Filtrar Por
         </a>
        </li> 

@@ -20,6 +20,11 @@
             $this->usuarioDAO->Add($user);
         }
         
+        public function ShowHomeClientViews()
+        {
+            require_once(VIEWS_PATH."Views-Cliente/home-client.php");
+        }
+
         public function AddNuevoUsuario($nombreYApellido, $dni, $email, $password, $fecha_nac)
         {
             $user = new Usuario();
