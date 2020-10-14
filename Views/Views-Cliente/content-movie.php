@@ -2,7 +2,7 @@
    require_once("nav.php");
 ?>
 <div class="wrapper row4">
-    <main class="container clear"> 
+    <main class="container clear espaciado-sup"> 
 
         <table class="table text-white text-uppercase" style="font-weight: bold;">
             <thead>
