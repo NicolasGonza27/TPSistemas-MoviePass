@@ -3,12 +3,15 @@
 ?>
 <div class="wrapper row4">
     <main class="container clear espaciado-sup"> 
+        
+        <div class="text-left mb-2">
+            <button class="btn btn-secondary"><a style="text-decoration:none; color:Red; font-size:20px; font-weight: bold;"href="<?=$_SERVER["HTTP_REFERER"]?>/">&larr; Atras</a></button>
+        </div>
 
         <table class="table text-white text-uppercase" style="font-weight: bold;">
             <thead>
                 <th colspan = 3>Movie</th>
             </thead>
-
             <tbody>     
                             <tr>
                                 <td rowspan=5><img src="<?php echo $movie->getImage()?>" alt=""></td>

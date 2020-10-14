@@ -78,24 +78,43 @@ class MovieAPI
 
         public function GetOne($id)
         {
-            $this->RetrieveData();
+            $jsonContent = file_get_contents("https://api.themoviedb.org/3/movie/$id?api_key=241053b8db24b510787d177925c66cdb");
+            $contentArray = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
-            foreach($this->movieList as $movie)
-            {   
-                if($movie->getId() == $id)
-                {   
+            if(!empty($contentArray)) 
+            {
+                  
+                    $popularity = $contentArray["popularity"]; 
+                    $vote_count = $contentArray["vote_count"];
+                    $video = $contentArray["video"];
+                    $poster_path = $contentArray["poster_path"];
+                    $id = $contentArray["id"];
+                    $adult = $contentArray["adult"];
+                    $backdrop_path = $contentArray["backdrop_path"];
+                    $original_language = $contentArray["original_language"];
+                    $original_title = $contentArray["original_title"];
+                    $genre_ids = $contentArray["genre_ids"];
+                    $title = $contentArray["title"];
+                    $vote_average = $contentArray["vote_average"];
+                    $overview = $contentArray["overview"];
+                    $release_date = date($contentArray["release_date"]);
+                    
+                    $movie = new Movie($popularity,$vote_count,$video,$poster_path,$id,$adult,$backdrop_path,$original_language,
+                    $original_title,$genre_ids,$title,$vote_average,$overview,$release_date);
+                    
                     return $movie;
                 }
-            }
-        
+
             return false;
-        }
+            }
+
+        
 
         public function RetrieveData()
         {
             $this->movieList = array();
 
-            for($i = 1; $i < 68; $i++)
+            for($i = 1; $i < 40; $i++)
             {
                 $jsonContent = file_get_contents($this->fileName."&page=$i");
                 $contentArray = ($jsonContent) ? json_decode($jsonContent, true) : array();
