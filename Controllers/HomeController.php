@@ -40,8 +40,19 @@
 
         public function ShowListMovieView()
         {
+            $listMovie = 
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
+
+        public function ShowHomeClientViews()
+        {
+            require_once(VIEWS_PATH."Views-Cliente/home-client.php");
+        }
+
+        public function ShowFiltersViews()
+        {
+            require_once(VIEWS_PATH."Views-Cliente/filters.php");
+        }  
 
         public function Login($email,$password)
         {
@@ -55,7 +66,7 @@
                 }
                 else
                 {
-                    require_once(VIEWS_PATH ."Views-Cliente/indexCliente.php");
+                    require_once(VIEWS_PATH ."Views-Cliente/home-client.php");
                 }
             }
             else
@@ -71,9 +82,6 @@
             $this->Index();
         }
 
-        public function form()
-        {
-            require_once(VIEWS_PATH."Views-Cliente/form.php");
-        }  
+
     }
 ?>

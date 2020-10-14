@@ -1,5 +1,7 @@
 <?php 
 
+    namespace Controllers;
+
     use API\MovieAPI as MovieAPI;
 
     class MovieController
@@ -38,7 +40,9 @@
 
         public function ShowContentViews($id)
         {
+           var_dump($id);
             $movie = $this->movieAPI->GetOne($id);
+            
             require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
         }
 

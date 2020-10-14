@@ -1,10 +1,10 @@
 <?php
-    require_once("nav.php");
+   require_once("nav.php");
 ?>
 <div class="wrapper row4">
     <main class="container clear"> 
 
-        <table class="table">
+        <table class="table text-white text-uppercase" style="font-weight: bold;">
             <thead>
                 <th colspan = 3>Movie</th>
             </thead>

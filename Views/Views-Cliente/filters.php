@@ -3,7 +3,11 @@
    
    require_once(VIEWS_PATH."header.php");
    require_once(VIEWS_PATH."Views-Cliente/nav.php");
-  
+   
+   use API\MovieGenderAPI as MovieGenderAPI;
+
+   $movieGenderAPI = new MovieGenderAPI();
+   $listMovieGender = $movieGenderAPI->GetAll();
 
 ?>
 
@@ -20,17 +24,22 @@
 
 <div class="tab-content">
   <div class="tab-pane active black-box" id="home" role="tabpanel">
-  <form class = "form-control:valid "  action="<?php echo FRONT_ROOT."Home/ShowListMovieView"?>" method="post">
+  <form class = "form-control:valid "  action="<?php echo FRONT_ROOT."Movie/ShowListViewsByGender"?>" method="post">
         <div style="text-align:center">
           <h5 class="genero"  id="exampleModalLabel">Seleccione un genero</h5>
         </div>
         
         <div class="modal-body">
-          <select name="" class = "col"  >
+          <select name="gender" class = "col"  >
+            
             <option value="" disabled selected>Elija una opción</option>
-            <option value="terror">Terror</option>
-            <option value="aventura">Aventura</option>
-            <option value="accion">Accion</option>
+
+            <?php foreach($listMovieGender as $movieGender) { ?>
+          
+            <option value="<?php echo $movieGender->getName(); ?>"><?php echo $movieGender->getName(); ?></option>
+             
+            <?php } ?>
+
           </select>
         </div>
 
@@ -43,7 +52,7 @@
 
   <div class="tab-pane" id="profile" role="tabpanel">    
   <div  style="text-align:center" class="black-box">
-      <form action="<?php echo FRONT_ROOT."Home/ShowListMovieView"?>" method="post" >
+      <form action="<?php echo FRONT_ROOT."Movie/ShowListViewsByDate"?>" method="post" >
         <div style="text-align:center">
           <h5 class="genero" id="exampleModalLabel">Seleccione una fecha de estreno</h5>
 

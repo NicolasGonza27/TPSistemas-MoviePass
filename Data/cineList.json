@@ -1,12 +1,12 @@
 [
     {
         "id": "1",
-        "nombre": "Aldrei54",
-        "direccion": "Calletal74",
+        "nombre": "asdasd",
+        "direccion": "Calle 123asdasdas",
         "capacidad": "",
-        "hor_apertura": "1200",
-        "hor_cierre": "1200",
-        "valor_entrada": "1200"
+        "hor_apertura": "",
+        "hor_cierre": "",
+        "valor_entrada": "dasd"
     },
     {
         "id": 3,
@@ -34,14 +34,5 @@
         "hor_apertura": 123,
         "hor_cierre": 123,
         "valor_entrada": null
-    },
-    {
-        "id": "7",
-        "nombre": "Aldre12",
-        "direccion": "nueva calle20",
-        "capacidad": "",
-        "hor_apertura": "",
-        "hor_cierre": "",
-        "valor_entrada": ""
     }
 ]
