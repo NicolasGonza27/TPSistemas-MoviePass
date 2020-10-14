@@ -55,6 +55,7 @@
             }
             
             $listMovie = $this->GetAllByGender($gender);
+            $_SESSION["busqueda"] = $gender;
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
 
