@@ -40,21 +40,36 @@
 
         public function ShowContentViews($id)
         {
-           var_dump($id);
             $movie = $this->movieAPI->GetOne($id);
-            
             require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
         }
 
-        public function ShowListViewsByGender($gender)
+        public function ShowListViewsByGender($gender = null)
         {   
+            if(!$gender) 
+            {
+                if(isset($_SESSION["busqueda"]))
+                {   
+                    $gender = $_SESSION["busqueda"];
+                }
+            }
+            
             $listMovie = $this->GetAllByGender($gender);
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
 
-        public function ShowListViewsByDate($date)
+        public function ShowListViewsByDate($date = null)
         {   
+            if(!$date)
+            {
+                if(isset($_SESSION["busqueda"]))
+                {   
+                    $date = $_SESSION["busqueda"];
+                }
+            }
+           
             $listMovie = $this->GetAllByDate($date);
+            $_SESSION["busqueda"] = $date;
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
 
