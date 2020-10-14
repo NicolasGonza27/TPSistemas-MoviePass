@@ -11,7 +11,7 @@
     
 ?>
 
-<div class="container">
+<div class="container espaciado-sup">
     <div class="content">
         <div class="scrollable">
             <h3 class="text-white mt-3 mb-3">Listado de Cines</h3>
@@ -66,29 +66,29 @@
                     <input type="numbre" name="id" class="hide" value="<?php echo $cine->getId()?>"/>
                     <div class="row form-group pr-3">
                         <label class="col-6">Nombre:</label>
-                        <input type="text" name="nombre" class="col-6" value="<?php echo $cine->getNombre()?>"/>
+                        <input type="text" name="nombre" class="col-6" value="<?php echo $cine->getNombre()?>" required/>
                     </div>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Dirección:</label>
-                        <input type="text" name="direccion" class="col-6" value="<?php echo $cine->getDireccion()?>"/>
+                        <input type="text" name="direccion" class="col-6" value="<?php echo $cine->getDireccion()?>" required/>
                     </div>
 
                     <input type="text" name="capacidad" class="hide" value="<?php echo $cine->getCapacidad()?>"/>
                     
                     <div class="row form-group pr-3">
                         <label class="col-6">Hora de Apertura:</label>
-                        <input type="number" name="apertura" class="col-6" value="<?php echo $cine->getHor_apertura()?>"/>
+                        <input type="number" name="apertura" class="col-6" value="<?php echo $cine->getHor_apertura()?>" required/>
                     </div>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Hora de Cierre:</label>
-                        <input type="number" name="cuerre" class="col-6" value="<?php echo $cine->getHor_cierre()?>"/>
+                        <input type="number" name="cuerre" class="col-6" value="<?php echo $cine->getHor_cierre()?>" required/>
                     </div>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Valor de Entrada:</label>
-                        <input type="numbre" name="valor_entrada" class="col-6" value="<?php echo $cine->getValor_entrada()?>"/>
+                        <input type="numbre" name="valor_entrada" class="col-6" value="<?php echo $cine->getValor_entrada()?>" required/>
                     </div>
 
                     <div class="row pr-3">
