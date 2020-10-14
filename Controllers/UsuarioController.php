@@ -34,8 +34,18 @@
             $user->setPassword($password);
             $user->setFecha_nac($fecha_nac);
             
-            $this->usuarioDAO->Add($user);
+            if ($this->usuarioDAO->SearchUserBoolean($email,$password)) 
+            {
+                echo'<script type="text/javascript">
+                        alert("El correo electronico o la contraseña no estan disponibles");
+                    </script>';     
+            }
+            else 
+            {
+                $this->usuarioDAO->Add($user);
+            }
             require_once("Views/home.php");
+            
         }
 
         public function Delete($id)
@@ -44,7 +54,4 @@
         }
        
     }
-
-    
-
 ?>

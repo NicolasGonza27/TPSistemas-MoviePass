@@ -54,7 +54,7 @@
                 $id = $user->getId();
             }
 
-        return $id;
+            return $id;
         }
 
         public function returnKeyById($id)
@@ -73,7 +73,6 @@
         
         public function SearchUser($email,$password)
         {
-            
             $this->RetrieveData();
             foreach($this->usersList as $user)
             {
@@ -83,6 +82,23 @@
                 }
             }
         
+            return false;
+        }
+
+        public function SearchUserBoolean($email,$password)
+        {
+            $this->RetrieveData();
+            foreach($this->usersList as $user)
+            {
+                if($user->getEmail() == $email)
+                {
+                    return true;
+                }
+                if($user->getPassword() == $password )
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
@@ -127,7 +143,6 @@
 
                     $user = new Usuario($id,$nombreYApellido,$dni,$email,$password,$fecha_nac,$is_admin);
                     array_push($this->usersList, $user);
-                    
                 }
             }
         }
