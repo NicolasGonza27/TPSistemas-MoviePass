@@ -36,7 +36,7 @@
         </select>
       </div>
       <div class="text-center">
-        <button type="submit" class="btn btn-primary">Send</button>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
       </div>
     </form>
   </div>
@@ -51,7 +51,7 @@
            <input type="date" name="date" class="col" >
         </div>
         <div  style= "text-align:center">
-          <button type="submit" class="btn btn-primary">Send</button>
+          <button type="submit" class="btn btn-primary">Filtrar</button>
         </div>
       </form> 
     </div>
