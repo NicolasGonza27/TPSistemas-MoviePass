@@ -95,13 +95,9 @@ body {
 }
 
 
-h3{
-    color:#fff;
-
-}
-
 .underlin{
-  
+
+    
     text-decoration: underline;
     text-decoration-color: #DC8E47;
     font-weight: bold;
@@ -109,5 +105,16 @@ h3{
     position:relative; 
     padding:0 0 15px 0
 
+}
+
+
+.articles{
+    text-align: center;
+    color:#fff;
+}
+
+.mt8{
+
+    margin-top: 20%;
 }
 
