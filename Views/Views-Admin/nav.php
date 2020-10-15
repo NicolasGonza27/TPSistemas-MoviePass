@@ -46,17 +46,17 @@
                     
                         <div class="row form-group pr-3">
                             <label class="col-6">Hora de Apertura:</label>
-                            <input type="number" name="apertura" class="col-6" required/>
+                            <input type="time" name="apertura" class="col-6" required/>
                         </div>
 
                         <div class="row form-group pr-3">
                             <label class="col-6">Hora de Cierre:</label>
-                            <input type="number" name="cuerre" class="col-6" required/>
+                            <input type="time" name="cierre" class="col-6" required/>
                         </div>
 
                         <div class="row form-group pr-3">
                             <label class="col-6">Valor de Entrada:</label>
-                            <input type="numbre" name="valor_entrada" class="col-6" required/>
+                            <input type="number" name="valor_entrada" step="0.50" class="col-6" required/>
                         </div>
                     </div>
                     <div class="modal-footer">

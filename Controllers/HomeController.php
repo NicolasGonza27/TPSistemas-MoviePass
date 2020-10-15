@@ -24,7 +24,7 @@
                 }
                 else
                 {
-                    $this->ShowListMovieView();
+                    $this->ShowHomeClientViews();
                 }
             }
             else

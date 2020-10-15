@@ -78,17 +78,17 @@
                     
                     <div class="row form-group pr-3">
                         <label class="col-6">Hora de Apertura:</label>
-                        <input type="number" name="apertura" class="col-6" value="<?php echo $cine->getHor_apertura()?>" required/>
+                        <input type="time" name="apertura" class="col-6" value="<?php echo $cine->getHor_apertura()?>" required/>
                     </div>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Hora de Cierre:</label>
-                        <input type="number" name="cuerre" class="col-6" value="<?php echo $cine->getHor_cierre()?>" required/>
+                        <input type="time" name="cierre" class="col-6" value="<?php echo $cine->getHor_cierre()?>" required/>
                     </div>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Valor de Entrada:</label>
-                        <input type="numbre" name="valor_entrada" class="col-6" value="<?php echo $cine->getValor_entrada()?>" required/>
+                        <input type="number" name="valor_entrada" class="col-6" step="0.50" value="<?php echo $cine->getValor_entrada()?>" required/>
                     </div>
 
                     <div class="row pr-3">
