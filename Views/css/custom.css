@@ -93,3 +93,21 @@ body {
 .espaciado-sup {
     margin-top: 62px;
 }
+
+
+h3{
+    color:#fff;
+
+}
+
+.underlin{
+  
+    text-decoration: underline;
+    text-decoration-color: #DC8E47;
+    font-weight: bold;
+    display:inline-block; 
+    position:relative; 
+    padding:0 0 15px 0
+
+}
+
