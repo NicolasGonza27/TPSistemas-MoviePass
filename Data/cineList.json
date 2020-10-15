@@ -1,1 +1,11 @@
-[]
+[
+    {
+        "id": "1",
+        "nombre": "Aldrey",
+        "direccion": "nueva calle",
+        "capacidad": "",
+        "hor_apertura": "06:30",
+        "hor_cierre": "12:59",
+        "valor_entrada": "700.5"
+    }
+]
