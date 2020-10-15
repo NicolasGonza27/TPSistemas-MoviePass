@@ -126,11 +126,20 @@
         "is_admin": false
     },
     {
-        "id": null,
+        "id": 0,
         "nombreYApellido": "Luciano Gonzalez",
         "dni": "123412312",
         "email": "l@gmail",
         "password": "123",
+        "fecha_nac": "20\/01\/2004",
+        "is_admin": false
+    },
+    {
+        "id": null,
+        "nombreYApellido": "Luciano Gonzalez",
+        "dni": "0000",
+        "email": "luchobro@gmail.com",
+        "password": "Altobolutres",
         "fecha_nac": "20\/01\/2004",
         "is_admin": false
     }

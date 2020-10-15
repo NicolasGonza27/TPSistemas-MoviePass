@@ -33,7 +33,7 @@
           </div>
           <div class="row form-group pr-3">
             <label class="col-6">Fecha de Nacimiento </label>
-            <input type="text" name="fecha_nac" class="col-6" required/>
+            <input type="date" id="fecha_nac" name="fecha_nac" min="1910-01-01" max="<?php echo date("Y").'-'.date("m").'-'.(date("d")-1);?>" class="col-6" required/>
           </div>
         </div>
         <div class="modal-footer">

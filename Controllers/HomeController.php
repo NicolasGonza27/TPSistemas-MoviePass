@@ -71,7 +71,8 @@
             }
             else
             {
-               // $this->Index("Incorrect username and/or password");
+                echo "<script> if(confirm('Los datos que ingreso no corresponden a nungun usuario registrado.'));";
+                echo "window.location = '/dashboard/TPSistemas-MoviePass/Home'; </script>";
             }
         
         }
