@@ -85,16 +85,12 @@
             return false;
         }
 
-        public function SearchUserBoolean($email,$password)
+        public function SearchUserBoolean($email)
         {
             $this->RetrieveData();
             foreach($this->usersList as $user)
             {
                 if($user->getEmail() == $email)
-                {
-                    return true;
-                }
-                if($user->getPassword() == $password )
                 {
                     return true;
                 }
