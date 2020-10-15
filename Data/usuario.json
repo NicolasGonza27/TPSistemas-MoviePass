@@ -135,12 +135,30 @@
         "is_admin": false
     },
     {
-        "id": null,
+        "id": 0,
         "nombreYApellido": "Luciano Gonzalez",
         "dni": "0000",
         "email": "luchobro@gmail.com",
         "password": "Altobolutres",
         "fecha_nac": "20\/01\/2004",
+        "is_admin": false
+    },
+    {
+        "id": 0,
+        "nombreYApellido": "Nahuel salomon",
+        "dni": "42678461",
+        "email": "na@huelito",
+        "password": "1234",
+        "fecha_nac": "2020-10-05",
+        "is_admin": false
+    },
+    {
+        "id": null,
+        "nombreYApellido": "Nahuelito",
+        "dni": "426784641",
+        "email": "n@a",
+        "password": "12345",
+        "fecha_nac": "2020-09-29",
         "is_admin": false
     }
 ]
