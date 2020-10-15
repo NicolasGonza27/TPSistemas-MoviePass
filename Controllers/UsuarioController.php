@@ -34,10 +34,10 @@
             $user->setPassword($password);
             $user->setFecha_nac($fecha_nac);
             
-            if ($this->usuarioDAO->SearchUserBoolean($email,$password)) 
+            if ($this->usuarioDAO->SearchUserBoolean($email)) 
             {
                 echo'<script type="text/javascript">
-                        alert("El correo electronico o la contraseña no estan disponibles");
+                        alert("El correo electronico no esta disponible");
                     </script>';     
             }
             else 
