@@ -37,7 +37,7 @@ if(isset($_SESSION["userLogged"])){
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class = "nav-item">
-                <a class="nav-link text-white"> Welcome <span class="font-weight-bold"><?php echo ucfirst($user->getNombreYApellido())."!";?></span> </a>
+                <a class="nav-link text-white"> Welcome <span class="font-weight-bold"><?php if(isset($user))echo ucfirst($user->getNombreYApellido())."!";?></span></a>
                 </li>
                        <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                        <a class= "dropdown-item  bg-secondary text-white" href= "<?php echo FRONT_ROOT."Home/form"?>">Genero</a>           

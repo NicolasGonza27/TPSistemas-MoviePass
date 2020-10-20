@@ -60,6 +60,8 @@
 
             if($user)
             {
+                $_SESSION["userLogged"] = $user;
+
                 if($user->getIs_admin())
                 {   
                     $this->ShowDashboardView();
@@ -79,6 +81,8 @@
 
         public function Logout()
         {   
+            session_destroy();
+            session_start();
             session_destroy();
             $this->Index();
         }
