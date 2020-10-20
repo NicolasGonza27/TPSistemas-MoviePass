@@ -1,4 +1,4 @@
-<div class="container fixed-bottom" style="margin-top: 10px;">
+<div class="container" style="margin-top: 10px;">
   <footer id="footer" class="clear"></footer>
   <div id="copyright" class="clear text-white text-center"> 
     <p >Copyright &copy; <?php echo date('Y'); ?> - All Rights Reserved - UTN Laboratorio IV</p>
