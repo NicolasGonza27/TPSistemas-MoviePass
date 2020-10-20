@@ -17,11 +17,13 @@
                         
                         <?php } else { ?>
                             
+                        <div>
                             <input class="hide" name="id" type="text" value="<?php echo $movie->getId(); ?>"></input>
-                            <input type="image" class="img-movies" src="\dashboard\TPSistemas-MoviePass\Views\img\sin-Imagen-disponible.jpg" alt="" width="80%" height="80%" title="<?php echo $movie->getTitle();?>">
-                            
+                            <input type="image" class="img-movies img-without-movie" src="\dashboard\TPSistemas-MoviePass\Views\img\sin-Imagen-disponible.jpg" alt="" width="80%" height="80%" title="<?php echo $movie->getTitle();?>">
+                            <div class="centrado"><?php echo $movie->getTitle();?></div>
+                        </div>
+                       
                         <?php }?>
-                    
                     </form>
                 </div>
             <?php } 
