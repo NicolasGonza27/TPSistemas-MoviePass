@@ -10,10 +10,8 @@
                 <li class="nav-item">
                     <a class="nav-link "  href= "<?php echo FRONT_ROOT."Home/form"?>"role="button">Filtrar Por</a>
                 </li> -->
-                <li class = "nav-item">
-                    <a class="nav-link"  href= "<?php echo FRONT_ROOT."Home/Logout"?>"role="button">Cerrar Sesión</a>
-                </li>
             </ul>
+            <a class="nav-link text-white"  href= "<?php echo FRONT_ROOT."Home/Logout"?>"role="button">Cerrar Sesión</a>
             <button type="button" class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
         </div>
     </nav>

@@ -20,10 +20,10 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Dirección</th>
-                        <th>Horario Apertura</th>
-                        <th>Horario Cierre</th>
-                        <th>Capacidad</th>
-                        <th>Valor Entrada</th>
+                        <th class="text-center">Horario Apertura</th>
+                        <th class="text-center">Horario Cierre</th>
+                        <th class="text-center">Capacidad</th>
+                        <th class="text-center">Valor Entrada</th>
                         <th class="text-center">Opciones</th>
                     </tr>
                 </thead>
@@ -32,10 +32,10 @@
                         <tr>
                             <td><?php echo $cine->getNombre()?></td>
                             <td><?php echo $cine->getDireccion()?></td>
-                            <td class="text-right"><?php echo $cine->getHor_apertura()?></td>
-                            <td class="text-right"><?php echo $cine->getHor_cierre()?></td>
-                            <td class="text-right"><?php echo $cine->getCapacidad()?></td>
-                            <td class="text-right"><?php echo $cine->getValor_entrada()?></td>
+                            <td class="text-center"><?php echo $cine->getHor_apertura()?></td>
+                            <td class="text-center"><?php echo $cine->getHor_cierre()?></td>
+                            <td class="text-center"><?php echo $cine->getCapacidad()?></td>
+                            <td class="text-center"><?php echo $cine->getValor_entrada()?></td>
                             <form action="<?php echo FRONT_ROOT."Cine/Remove"?>" method="post">
                                 <td class="text-center">
                                     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$cine->getId()?>">Editar</button>
