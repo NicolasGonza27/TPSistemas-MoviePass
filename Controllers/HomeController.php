@@ -60,6 +60,7 @@
 
             if($user)
             {
+                $_SESSION["userLogged"] = $user;
                 if($user->getIs_admin())
                 {   
                     $this->ShowDashboardView();
