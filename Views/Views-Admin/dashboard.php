@@ -13,43 +13,41 @@
 
 <div class="container espaciado-sup">
     <div class="content">
-        <div class="scrollable">
-            <h3 class="text-white mt-3 mb-3">
-                Listado de Cines
-                <button type="button" class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
-            </h3>
-            <table class="table">
-                <thead class="thead-dark">
+        <h3 class="text-white mt-3 mb-3">
+            Listado de Cines
+            <button type="button" class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
+        </h3>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th class="text-center">Horario Apertura</th>
+                    <th class="text-center">Horario Cierre</th>
+                    <th class="text-center">Capacidad</th>
+                    <th class="text-center">Valor Entrada</th>
+                    <th class="text-center">Opciones</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                <?php foreach($listaCine as $cine) { ?>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Dirección</th>
-                        <th class="text-center">Horario Apertura</th>
-                        <th class="text-center">Horario Cierre</th>
-                        <th class="text-center">Capacidad</th>
-                        <th class="text-center">Valor Entrada</th>
-                        <th class="text-center">Opciones</th>
+                        <td><?php echo $cine->getNombre()?></td>
+                        <td><?php echo $cine->getDireccion()?></td>
+                        <td class="text-center"><?php echo $cine->getHor_apertura()?></td>
+                        <td class="text-center"><?php echo $cine->getHor_cierre()?></td>
+                        <td class="text-center"><?php echo $cine->getCapacidad()?></td>
+                        <td class="text-center"><?php echo $cine->getValor_entrada()?></td>
+                        <form action="<?php echo FRONT_ROOT."Cine/Remove"?>" method="post">
+                            <td class="text-center">
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$cine->getId()?>">Editar</button>
+                                <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $cine->getId()?>">Borrar</button>
+                            </td>
+                        </form> 
                     </tr>
-                </thead>
-                <tbody class="bg-white">
-                    <?php foreach($listaCine as $cine) { ?>
-                        <tr>
-                            <td><?php echo $cine->getNombre()?></td>
-                            <td><?php echo $cine->getDireccion()?></td>
-                            <td class="text-center"><?php echo $cine->getHor_apertura()?></td>
-                            <td class="text-center"><?php echo $cine->getHor_cierre()?></td>
-                            <td class="text-center"><?php echo $cine->getCapacidad()?></td>
-                            <td class="text-center"><?php echo $cine->getValor_entrada()?></td>
-                            <form action="<?php echo FRONT_ROOT."Cine/Remove"?>" method="post">
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$cine->getId()?>">Editar</button>
-                                    <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $cine->getId()?>">Borrar</button>
-                                </td>
-                            </form> 
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
+                <?php } ?>
+            </tbody>
+        </table>
     </div>
 </div>
 
