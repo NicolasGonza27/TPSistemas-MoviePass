@@ -98,9 +98,11 @@ class MovieAPI
                     $vote_average = $contentArray["vote_average"];
                     $overview = $contentArray["overview"];
                     $release_date = date($contentArray["release_date"]);
+                    $runtime = $contentArray["runtime"];
+
                     
                     $movie = new Movie($popularity,$vote_count,$video,$poster_path,$id,$adult,$backdrop_path,$original_language,
-                    $original_title,$genre_ids,$title,$vote_average,$overview,$release_date);
+                    $original_title,$genre_ids,$title,$vote_average,$overview,$release_date, $runtime);
                     
                     return $movie;
                 }
@@ -134,9 +136,10 @@ class MovieAPI
                     $vote_average = $content["vote_average"];
                     $overview = $content["overview"];
                     $release_date = date($content["release_date"]);
-                    
+                    //$runtime = $content["runtime"];
+
                     $movie = new Movie($popularity,$vote_count,$video,$poster_path,$id,$adult,$backdrop_path,$original_language,
-                    $original_title,$genre_ids,$title,$vote_average,$overview,$release_date);
+                    $original_title,$genre_ids,$title,$vote_average,$overview,$release_date, 0);
 
                     array_push($this->movieList, $movie);
                 }

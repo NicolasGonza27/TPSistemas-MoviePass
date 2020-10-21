@@ -14,7 +14,7 @@
             </thead>
             <tbody>     
                             <tr>
-                                <td rowspan=5><img src="<?php echo $movie->getImage()?>" alt=""></td>
+                                <td rowspan=6><img src="<?php echo $movie->getImage()?>" alt=""></td>
                                 <td class="text-uppercase">Title</td>
                                 <td><?php echo $movie->getTitle()?></td>
                             </tr>
@@ -35,8 +35,13 @@
                             </tr>
 
                             <tr>
-                                <td>Overview</td>
+                                <td class="text-uppercase">Overview</td>
                                 <td><?php echo $movie->getOverview()?></td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-uppercase">Runtime</td>
+                                <td><?php echo $movie->getRuntime()?></td>
                             </tr>
                     </tbody>            
             </table>               

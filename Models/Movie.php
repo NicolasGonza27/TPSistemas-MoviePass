@@ -18,11 +18,12 @@
         private $vote_average;
         private $overview;
         private $release_date;
+        private $runtime;
 
 
         public function __construct($populariy,$vote_count,$video,$poster_path, $id, $adult, $backdrop_path,
                                     $original_language, $original_title,$genre_ids, $title,$vote_average, $overview,
-                                    $release_date)
+                                    $release_date,$runtime)
         {
             $this->popularity = $populariy;
             $this->vote_count = $vote_count;
@@ -38,6 +39,7 @@
             $this->vote_average = $vote_average;
             $this->overview = $overview;
             $this->release_date = $release_date;
+            $this->runtime = $runtime;
             
         }
 
@@ -203,4 +205,13 @@
                 return "https://image.tmdb.org/t/p/w500".$this->getPoster_path();
         }
 
+        public function getRuntime()
+        {
+                return $this->runtime;
+        }
+
+        public function setRuntime($runtime)
+        {
+                $this->runtime = $runtime;
+        }
 }   
