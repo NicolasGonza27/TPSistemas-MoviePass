@@ -1,0 +1,16 @@
+[
+    {
+        "id_funcion": 1,
+        "id_sala": "1",
+        "id_pelicula": "1",
+        "cant_asistentes": "50",
+        "fecha_hora": "20:20"
+    },
+    {
+        "id_funcion": 2,
+        "id_sala": "2",
+        "id_pelicula": "2",
+        "cant_asistentes": "50",
+        "fecha_hora": "20:20"
+    }
+]

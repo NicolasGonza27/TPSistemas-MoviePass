@@ -10,7 +10,7 @@
         private $cant_asistentes;
         private $fecha_hora;
 
-        public function __construct($id_funcion,$id_pelicula,$id_sala,$cant_asistentes,$fecha_hora)
+        public function __construct($id_funcion = null,$id_pelicula = null,$id_sala = null,$cant_asistentes = null,$fecha_hora='')
         {
             $this->id_funcion = $id_funcion;
             $this->id_pelicula = $id_pelicula;

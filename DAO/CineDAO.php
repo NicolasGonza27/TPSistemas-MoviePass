@@ -53,6 +53,21 @@
             }
         }
 
+        public function returnCine($id)
+        {
+            $this->RetrieveData();
+
+            foreach($this->$cineList as $key=>$cine)
+            {
+                if($cine->getId() == $id)
+                {
+                    return $cine;
+                }
+            }
+
+            return false;
+        }
+
         private function RetrieveData()
         {
             $this->cineList = array();

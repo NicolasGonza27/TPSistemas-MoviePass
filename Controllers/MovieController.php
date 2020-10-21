@@ -3,14 +3,19 @@
     namespace Controllers;
 
     use API\MovieAPI as MovieAPI;
+    use Controllers\FuncionController as FuncionController;
 
     class MovieController
     {
         private $movieAPI;
+        private $funcionController;
+        private $listFuncion;
         
         public function __construct()
         {
             $this->movieAPI = new MovieAPI();
+            $this->funcionController = new FuncionController();
+            $listFuncion=array();
         }
         
         public function GetAll()
@@ -41,6 +46,7 @@
         public function ShowContentViews($id)
         {
             $movie = $this->movieAPI->GetOne($id);
+            $listFuncion = $this->funcionController->GetAll();
             require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
         }
 
