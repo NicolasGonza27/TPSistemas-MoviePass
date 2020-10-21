@@ -24,7 +24,7 @@
             $cine = new Cine($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada);
             $this->cineDAO->Add($cine);
 
-            $this->ShowDashboardView();
+             /* $this->ShowDashboardView(); */
         }
 
         public function Remove($id)
@@ -34,12 +34,21 @@
             $this->ShowDashboardView();
         }
 
+        public function returnCine($id)
+        {
+           return $this->cineDAO->returnCine($id);
+        }
+
+        public function GetAll()
+        {
+            return $this->cineDAO->GetAll();
+        }
+
         
         public function Modify($id, Cine $cine)
         {
             $this->cineDAO->Modify($id, $cine);
 
-            
         }
 
         public function ModifyModal($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada)

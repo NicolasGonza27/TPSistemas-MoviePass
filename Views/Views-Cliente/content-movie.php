@@ -1,8 +1,7 @@
 <?php
    require_once("nav.php");
 ?>
-<div class="wrapper row4">
-    <main class="container clear espaciado-sup"> 
+    <div class="container clear espaciado-sup"> 
         
         <div class="text-left mb-2">
             <button class="btn btn-secondary"><a class="boton-atras" href="<?=$_SERVER["HTTP_REFERER"]?>/">&larr; Atras</a></button>
@@ -44,7 +43,39 @@
                                 <td><?php echo $movie->getRuntime()?></td>
                             </tr>
                     </tbody>            
-            </table>               
+            </table> 
+</div>  
+    <div class="container espaciado-sup">
+    <div class="content">
+        <div class="scrollable">
+            <h3 class="text-white mt-3 mb-3">
+                Listado de Funciones
+            </h3>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre Del Cine</th>
+                        <th>Dirección</th>
+                        <th class="text-center">Numero Sala</th>
+                        <th class="text-center">Butacas Disponibles</th>
+                        <th class="text-center">Hora</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    <?php foreach($listFuncion as $funcion) { ?>
+                        <tr>
+                            <td class="text-center"><?php echo $funcion->getId_funcion()?></td>
+                            <td class="text-center"><?php echo $funcion->getId_sala()?></td>
+                            <td class="text-center"><?php echo $funcion->getId_pelicula()?></td>
+                            <td class="text-center"><?php echo $funcion->getCant_asistentes()?></td>
+                            <td class="text-center"><?php echo $funcion->getFecha_hora()?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>  
 
-    </main>    
-</div>
+<!--Tabla de Funciones-->
+
