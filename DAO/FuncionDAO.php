@@ -57,7 +57,7 @@
             $this->RetrieveData();
             $funcionListXid = array();
 
-            foreach($this->$funcionList as $key=>$funcion)
+            foreach($this->funcionList as $key=>$funcion)
             {
                 if($funcion->getId_pelicula() == $idMovie)
                 {
