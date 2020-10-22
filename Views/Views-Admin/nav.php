@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="#">Movie-Pass</a>
 
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav  mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowDashboardView"?>">Lista de Cines</a>
                 </li>
@@ -12,8 +12,8 @@
                     Cartelera
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT."/"?>">Peliculas en Cartelera</a>
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT."/"?>">Peliculas sin funciones</a>
+                        <a class="dropdown-item" href="<?php echo FRONT_ROOT."Funcion/getMovieListConFuncion"?>">Peliculas en Cartelera</a>
+                        <a class="dropdown-item" href="<?php echo FRONT_ROOT."Funcion/getMovieListSinFuncion"?>">Peliculas sin funciones</a>
                     </div>
                 </li>
             </ul>

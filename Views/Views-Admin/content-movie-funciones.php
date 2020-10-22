@@ -2,9 +2,9 @@
    require_once("nav.php");
 ?>
 
-<div class="container content">
+<div class="container content espaciado-sup">
     <div class="text-left mb-2">
-        <button class="btn btn-secondary"><a class="boton-atras" href="<?=$_SERVER["HTTP_REFERER"]?>/">&larr; Atras</a></button>
+        <button class="btn btn-secondary"><a class="boton-atras" href="<?=$_SERVER["HTTP_REFERER"]?>">&larr; Atras</a></button>
     </div>
 
     <table class="table text-white" style="font-weight: bold;">
@@ -53,29 +53,29 @@
                 </tr>
             </thead>
             <tbody class="bg-white">
-                <!-- <?php foreach($listaCine as $cine) { ?>
+                <?php foreach($listFunciones as $funcion) { ?>
                     <tr>
                         <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td class="text-center"><?php echo $cine->getHor_apertura()?></td>
-                        <td class="text-center"><?php echo $cine->getHor_cierre()?></td>
+                        <td><?php echo $funcion->getId_sala()?></td>
+                        <td class="text-center"><?php echo $funcion->getCant_asistentes()?></td>
+                        <td class="text-center"><?php echo $funcion->getFecha_hora()?></td>
                         <form action="<?php echo FRONT_ROOT."Funcion/Remove"?>" method="post">
                             <td class="text-center">
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$cine->getId()?>">Editar</button>
-                                <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $cine->getId()?>">Borrar</button>
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$funcion->getId_funcion()?>">Editar</button>
+                                <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $funcion->getId_funcion()?>">Borrar</button>
                             </td>
                         </form> 
                     </tr>
-                <?php } ?> -->
+                <?php } ?>
             </tbody>
         </table>
     </div>
 
-    <!-- <?php foreach($listaCine as $cine) { ?>
-        <div class="modal fade" id="<?php echo "modal".$cine->getId()?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
+    <?php foreach($listFunciones as $funcion) { ?>
+        <div class="modal fade" id="<?php echo "modal".$funcion->getId_funcion()?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="<?php echo FRONT_ROOT."/"?>" method="post">
+                    <form action="<?php echo FRONT_ROOT."Funcion/ModifyModal"?>" method="post">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Edición de Funcion</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -83,33 +83,33 @@
                             </button>
                         </div>
                         <div class="modal-body pl-3 pr-3">
-                            <input type="numbre" name="id" class="hide" value="<?php ?>"/>
-                            <input type="numbre" name="id_pelicula" class="hide" value="<?php ?>"/>
+                            <input type="numbre" name="id_funcion" class="hide" value="<?php echo $funcion->getId_funcion()?>"/>
+                            <input type="numbre" name="id_pelicula" class="hide" value="<?php echo $funcion->getId_pelicula()?>"/>
                             <div class="row form-group pr-3">
                                 <label class="col-6">Cine</label>
-                                <select>
-                                    <?php foreach($listMovieGender as $movieGender) { ?>
+                                <select >
+                                    <!-- <?php foreach($listMovieGender as $movieGender) { ?>
                                         <option value="<?php  ?>"><?php  ?></option>
-                                    <?php } ?>
+                                    <?php } ?> -->
                                 </select>
                             </div>
 
                             <div class="row form-group pr-3">
                                 <label class="col-6">Sala</label>
                                 <select name="id_sala">
-                                    <?php foreach($listMovieGender as $movieGender) { ?>
+                                    <!-- <?php foreach($listMovieGender as $movieGender) { ?>
                                         <option value="<?php  ?>"><?php  ?></option>
-                                    <?php } ?>
+                                    <?php } ?> -->
                                 </select>
                             </div>
                             
                             <div class="row form-group pr-3">
                                 <label class="col-6">Fecha y Hora:</label>
-                                <input type="datetime-local" name="fecha-hora" class="col-6" value="<?php ?>" required/>
+                                <input type="datetime-local" name="fecha_hora" class="col-6" value="<?php echo $funcion->getFecha_hora()?>" required/>
                             </div>
 
                             <div class="row pr-3">
-                                <label class="col-12">Cantidad de asisitentes: <?php ?> personas.</label>
+                                <label class="col-12">Cantidad de asisitentes: <?php echo $funcion->getCant_asistentes()?> personas.</label>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -120,12 +120,12 @@
                 </div>
             </div>
         </div>
-    <?php } ?> -->
+    <?php } ?>
 
     <div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="<?php echo FRONT_ROOT.""?>" method="post">
+                <form action="<?php echo FRONT_ROOT."Funcion/Add"?>" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Agregar una Funcion</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -133,7 +133,8 @@
                         </button>
                     </div>
                     <div class="modal-body pl-3 pr-3">
-                        <input type="numbre" name="id_pelicula" class="hide" value="<?php ?>"/>
+                        <input type="numbre" name="id_funcion" class="hide" value="0"/>
+                        <input type="numbre" name="id_pelicula" class="hide" value="<?php echo $movie->getId()?>"/>
                         <div class="row form-group pr-3">
                             <label class="col-6">Cine</label>
                             <select>
@@ -144,6 +145,7 @@
                         </div>
                         <div class="row form-group pr-3">
                             <label class="col-6">Sala</label>
+                            <input type="numbre" name="id_sala" class="hide" value="3"/>
                             <select name="id_sala">
                                 <!-- <?php foreach($listMovieGender as $movieGender) { ?>
                                     <option value="<?php  ?>"><?php  ?></option>
@@ -152,7 +154,7 @@
                         </div>
                         <div class="row form-group pr-3">
                             <label class="col-6">Fecha y Hora:</label>
-                            <input type="datetime-local" name="fecha-hora" class="col-6" value="<?php ?>" required/>
+                            <input type="datetime-local" name="fecha-hora" class="col-6" value="" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
