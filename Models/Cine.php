@@ -5,17 +5,19 @@
 
         private $id;
         private $nombre;
-        private $direccion;
+        private $calle;
+        private $numero;
         private $capacidad;
         private $hor_apertura;
         private $hor_cierre;
         private $valor_entrada;
 
-        function __construct ($id = null, $nombre = '', $direccion = '', $capacidad = '', $hor_apertura = null, $hor_cierre = null, $valor_entrada = null){
+        function __construct ($id = null, $nombre = '', $calle = '', $numero  = '' , $capacidad = '', $hor_apertura = null, $hor_cierre = null, $valor_entrada = null){
 
           $this->id = $id;
           $this->nombre = $nombre;
-          $this->direccion = $direccion;
+          $this->calle = $calle;
+          $this->numero = $numero;
           $this->capacidad = $capacidad;
           $this->hor_apertura = $hor_apertura;
           $this->hor_cierre = $hor_cierre;
@@ -48,18 +50,46 @@
 
         }
 
-        public function getDireccion()
+                /**
+         * Get the value of calle
+         */ 
+        public function getCalle()
         {
-                return $this->direccion;
+                return $this->calle;
         }
 
-
-        public function setDireccion($direccion)
+        /**
+         * Set the value of calle
+         *
+         * @return  self
+         */ 
+        public function setCalle($calle)
         {
-                $this->direccion = $direccion;
+                $this->calle = $calle;
 
+                return $this;
         }
 
+        /**
+         * Get the value of numero
+         */ 
+        public function getNumero()
+        {
+                return $this->numero;
+        }
+
+        /**
+         * Set the value of numero
+         *
+         * @return  self
+         */ 
+        public function setNumero($numero)
+        {
+                $this->numero = $numero;
+
+                return $this;
+        }
+        
         /**
          * Get the value of hor_apertura
          */ 
@@ -107,8 +137,8 @@
                 $this->capacidad = $capacidad;
 
         }
-    }
 
+    }
     
 
 ?>

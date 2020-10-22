@@ -5,7 +5,7 @@
     <main class="container clear espaciado-sup"> 
         
         <div class="text-left mb-2">
-            <button class="btn btn-secondary"><a class="boton-atras" href="<?=$_SERVER["HTTP_REFERER"]?>/">&larr; Atras</a></button>
+            <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDate"?>">&larr; Atras</a></button>
         </div>
 
         <table class="table text-white" style="font-weight: bold;">
@@ -14,7 +14,7 @@
             </thead>
             <tbody>     
                             <tr>
-                                <td rowspan=6><img src="<?php echo $movie->getImage()?>" alt=""></td>
+                                <td rowspan=6><img src="<?php echo $movie->getImage()?>" alt=""> </td>
                                 <td class="text-uppercase">Title</td>
                                 <td><?php echo $movie->getTitle()?></td>
                             </tr>
@@ -28,12 +28,12 @@
                                 <td class="text-uppercase">Vote average</td>
                                 <td><?php echo $movie->getVote_average()?></td>
                             </tr>
-
+                            
                             <tr>
                                 <td class="text-uppercase">Original language</td>
                                 <td><?php echo $movie->getOriginal_language()?></td>
                             </tr>
-
+                                
                             <tr>
                                 <td class="text-uppercase">Overview</td>
                                 <td><?php echo $movie->getOverview()?></td>
