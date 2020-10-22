@@ -31,7 +31,7 @@
             $this->RetrieveData();
             
             $this->funcionList = array_filter($this->funcionList, function($funcion) use($id_funcion){                
-                return $funcion->getId_funcion() != $id;
+                return $funcion->getId_funcion() != $id_funcion;
             });
             
             $this->SaveData();
@@ -57,7 +57,7 @@
             $this->RetrieveData();
             $funcionListXid = array();
 
-            foreach($this->$funcionList as $key=>$funcion)
+            foreach($this->funcionList as $key=>$funcion)
             {
                 if($funcion->getId_pelicula() == $idMovie)
                 {

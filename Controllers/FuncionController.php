@@ -1,16 +1,19 @@
 <?php
     namespace Controllers;
 
+    use API\MovieAPI as MovieAPI;
     use DAO\FuncionDAO as FuncionDAO;
     use Models\Funcion as Funcion;
 
     class FuncionController
     {
         private $funcionDAO;
+        private $movieAPI;
 
         public function __construct()
         {
             $this->funcionDAO = new FuncionDAO();
+            $this->movieAPI = new MovieAPI();
         }
         
         
@@ -57,5 +60,53 @@
             $this->funcionDAO->Modify($id_funcion, $funcion);
             
             $this->ShowDashboardView();
+        }
+
+        public function ShowContentMovieFuncionesViews($id)
+        {
+            $movie = $this->movieAPI->GetOne($id);
+            $listFunciones = $this->funcionDAO->returnFuncionXid($id);
+            require_once(VIEWS_PATH."Views-Admin/content-movie-funciones.php");
+        }
+
+        public function ShowCarteleraViews()
+        {
+            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+        }
+
+        public function getMovieListConFuncion()
+        {
+            $movieList = $this->movieAPI->GetAll();
+            $funcionList = $this->funcionDAO->GetAll();
+            $movieListRta = array();
+
+            foreach($funcionList as $funcion) {
+                foreach($movieList as $movie) {
+                    if (($funcion->getId_pelicula() == $movie->getId()) && (!in_array($movie, $movieListRta))) {
+                        array_push($movieListRta, $movie);
+                    }
+                }
+            }
+
+            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+        }
+
+        public function getMovieListSinFuncion()
+        {
+            $movieList = $this->movieAPI->GetAll();
+            $funcionList = $this->funcionDAO->GetAll();
+            $movieListRta = array();
+
+            foreach($movieList as $movie) {
+                $flag = 0;
+                foreach($funcionList as $funcion) {
+                    if ($funcion->getId_pelicula() == $movie->getId()) {
+                        $flag = 1;
+                    }
+                }
+                if(!$flag) array_push($movieListRta, $movie);
+            }
+
+            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
         }
     }
