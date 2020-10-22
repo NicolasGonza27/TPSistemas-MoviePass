@@ -20,8 +20,8 @@
         } */
 
     
-        public function Add($id_funcion, $id_cine, $id_pelicula, $cant_asistentes, $fecha_hora) {
-            $funcion = new Funcion($id_funcion, $id_cine, $id_pelicula, $cant_asistentes, $fecha_hora);
+        public function Add($id_funcion, $id_sala, $id_pelicula, $cant_asistentes, $fecha_hora) {
+            $funcion = new Funcion($id_funcion, $id_sala, $id_pelicula, $cant_asistentes, $fecha_hora);
             $this->funcionDAO->Add($funcion);
 
             /* $this->ShowDashboardView(); */
@@ -34,9 +34,9 @@
             /* $this->ShowDashboardView(); */
         }
 
-        public function returnCine($id)
+        public function  returnFuncionXidPelicula($id)
         {
-           return $this->funcionDAO->returnCine($id);
+           return $this->funcionDAO-> returnFuncionXidPelicula($id);
         }
 
         public function GetAll()
@@ -47,13 +47,13 @@
         
         public function Modify($id_funcion, Funcion $funcion)
         {
-            $this->cineDAO->Modify($id_funcion, $funcion);
+            $this->funcionDAO->Modify($id_funcion, $funcion);
 
         }
 
-        public function ModifyModal($id_funcion, $id_cine, $id_pelicula, $cant_asistentes, $fecha_hora)
+        public function ModifyModal($id_funcion, $id_sala, $id_pelicula, $cant_asistentes, $fecha_hora)
         {
-            $funcion = new Funcion($id_funcion, $id_cine, $id_pelicula, $cant_asistentes, $fecha_hora);
+            $funcion = new Funcion($id_funcion, $id_sala, $id_pelicula, $cant_asistentes, $fecha_hora);
             $this->funcionDAO->Modify($id_funcion, $funcion);
             
             $this->ShowDashboardView();
