@@ -47,7 +47,7 @@
         public function ShowContentViews($id)
         {
 
-            $movie = $this->movieAPI->GetOne($id);
+            $movie = $this->movieDAO->GetOne($id);
             $listFuncion = $this->funcionController->GetAll();
             require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
         }
