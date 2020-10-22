@@ -24,4 +24,11 @@
 ?>
 
 
+<?php 
+/*
+$movieGenderDAO = new MovieGenderDAO();
+$movieGenderDAO->refresh();
 
+$movieDAO = new MovieDAO();
+$movieDAO->refresh();*/
+?>
