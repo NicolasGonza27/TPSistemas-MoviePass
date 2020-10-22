@@ -2,50 +2,52 @@
 
     namespace Controllers;
 
-    use API\MovieAPI as MovieAPI;
+
+
+    use DAObd\MovieDAO as MovieDAO;
     use Controllers\FuncionController as FuncionController;
 
     class MovieController
     {
-        private $movieAPI;
-        private $funcionController;
-        private $listFuncion;
+        private $movieDAO;
         
         public function __construct()
         {
-            $this->movieAPI = new MovieAPI();
+            $this->movieDAO = new MovieDAO();
             $this->funcionController = new FuncionController();
             $listFuncion=array();
+
         }
         
         public function GetAll()
         {
-            return $this->movieAPI->getAll();
+            return $this->movieDAO->getAll();
         }
         
         public function GetAllByGender($gender)
         {
-            return $this->movieAPI->GetAllByGender($gender);
+            return $this->movieDAO->GetAllByGender($gender);
         }
 
-        public function GetAllByDate($date)
+        public function GetAllByDate($id)
         { 
-            return $this->movieAPI->GetAllByDate($date);
+            return $this->movieDAO->GetAllByDate($id);
         }
 
-        public function GetByName($title)
+        public function Refresh()
         {
-            return $this->movieAPI->GetByName($title);
+            $this->movieDAO->refresh();
         }
 
         public function GetOne($id)
         {
-            return $this->movieAPI->GetOne($id);
+            return $this->movieDAO->GetOne($id);
         }
 
         public function ShowContentViews($id)
         {
-            $movie = $this->movieAPI->GetOne($id);
+
+            $movie = $this->movieDAO->GetOne($id);
             $listFuncion = $this->funcionController->GetAll();
             require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
         }

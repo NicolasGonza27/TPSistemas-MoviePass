@@ -93,7 +93,7 @@ class MovieAPI
                     $backdrop_path = $contentArray["backdrop_path"];
                     $original_language = $contentArray["original_language"];
                     $original_title = $contentArray["original_title"];
-                    $genre_ids = $contentArray["genre_ids"];
+                    $genre_ids = $contentArray["genres"];
                     $title = $contentArray["title"];
                     $vote_average = $contentArray["vote_average"];
                     $overview = $contentArray["overview"];
@@ -116,7 +116,7 @@ class MovieAPI
         {
             $this->movieList = array();
 
-            for($i = 1; $i < 25; $i++)
+            for($i = 1; $i < 2; $i++)
             {
                 $jsonContent = file_get_contents($this->fileName."&page=$i");
                 $contentArray = ($jsonContent) ? json_decode($jsonContent, true) : array();
