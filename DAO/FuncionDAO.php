@@ -31,7 +31,7 @@
             $this->RetrieveData();
             
             $this->funcionList = array_filter($this->funcionList, function($funcion) use($id_funcion){                
-                return $funcion->getId_funcion() != $id;
+                return $funcion->getId_funcion() != $id_funcion;
             });
             
             $this->SaveData();
@@ -52,7 +52,7 @@
             }
         }
 
-        public function returnFuncionXid($idMovie)
+        public function returnFuncionXidPelicula($idMovie)
         {
             $this->RetrieveData();
             $funcionListXid = array();
