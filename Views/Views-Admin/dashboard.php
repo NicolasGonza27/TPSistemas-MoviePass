@@ -118,7 +118,6 @@
                     </button>
                 </div>
                 <div class="modal-body pl-3 pr-3">
-                    <input type="numbre" name="id" class="hide"/>
                     <div class="row form-group pr-3">
                         <label class="col-6">Nombre:</label>
                         <input type="text" name="nombre" class="col-6" required/>

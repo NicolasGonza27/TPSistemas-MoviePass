@@ -1,7 +1,7 @@
 <?php
     namespace Controllers;
 
-    use DAO\cineDAO as CineDAO;
+    use DAObd\CineDAO as CineDAO;
     use Models\Cine as Cine;
 
     class CineController
@@ -21,8 +21,8 @@
         }
 
     
-        public function Add($id, $nombre, $calle, $numero, $capacidad, $apertura, $cierre, $valor_entrada) {
-            $cine = new Cine($id, $nombre, $calle, $numero, $capacidad, $apertura, $cierre, $valor_entrada);
+        public function Add($nombre, $calle, $numero, $capacidad, $apertura, $cierre, $valor_entrada) {
+            $cine = new Cine(null, $nombre, $calle, $numero, $capacidad, $apertura, $cierre, $valor_entrada);
             $this->cineDAO->Add($cine);
 
             $this->ShowDashboardView();
@@ -35,9 +35,9 @@
             $this->ShowDashboardView();
         }
 
-        public function returnCine($id)
+        public function GetOne($id)
         {
-           return $this->cineDAO->returnCine($id);
+           return $this->cineDAO->GetOne($id);
         }
 
         public function GetAll()

@@ -171,12 +171,12 @@
     $("#cine_select").change(
         function() {
             var cine = $(this).find("option:selected").val();
-            var salaList = <?php $salaDao->GetSalaListXCineId($cine)?>;
+            var salaList = <?php $salaDao->GetAllByMovie($cine)?>;
             var nuevoHtml;
 
             salaList.forEach(
-                function() {
-                    nuevoHtml += "<option value=""></option>"; 
+                function(e) {
+                    nuevoHtml += "<option value=".e."></option>"; 
                 }
             ) 
 

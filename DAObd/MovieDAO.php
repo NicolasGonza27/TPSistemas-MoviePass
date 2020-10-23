@@ -157,6 +157,32 @@
                 echo $e->getMessage();
             }
         }
+
+        public function GetAllHaveFunciones()
+        {
+            try 
+            {
+                $query = "SELECT 
+                *
+                FROM peliculas p
+                INNER JOIN funciones f
+                ON p.id = f.id_pelicula;";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+
+                $newResultSet =  $this->mapear($resultSet);
+
+                return  $newResultSet;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }            
+            
+        }
+
         
         public function GetOne($id_movie)
         {

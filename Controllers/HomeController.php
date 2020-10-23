@@ -1,7 +1,7 @@
 <?php
     namespace Controllers;
 
-    use DAO\CineDAO as CineDAO;
+    use DAObd\CineDAO as CineDAO;
     use DAO\UsuarioDAO as UsuarioDAO;
 
     class HomeController

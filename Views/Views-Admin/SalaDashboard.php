@@ -91,7 +91,6 @@
                     </button>
                 </div>
                 <div class="modal-body pl-3 pr-3">
-                    <input type="numbre" name="id_sala" class="hide"/>
                     <input type="numbre" name="id_cine" value="<?php echo $cine->getId()?>" class="hide"/>
                     <div class="row form-group pr-3">
                         <label class="col-6">Numero:</label>

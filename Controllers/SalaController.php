@@ -1,8 +1,8 @@
 <?php
     namespace Controllers;
 
-    use DAO\CineDAO as CineDAO;
-    use DAO\SalaDAO as SalaDAO;
+    use DAObd\CineDAO as CineDAO;
+    use DAObd\SalaDAO as SalaDAO;
     use Models\Sala as Sala;
 
     class SalaController
@@ -19,15 +19,15 @@
         
         public function ShowSalaDashboardView($id_cine)
         {
-            $cine = $this->cineDAO->returnCine($id_cine);
-            $listaSala = $this->GetSalaListXCineId($id_cine);
+            $cine = $this->cineDAO->GetOne($id_cine);
+            $listaSala = $this->GetAllByCine($id_cine);
             require_once(VIEWS_PATH."Views-Admin/SalaDashboard.php");
         }
 
     
-        public function Add($id_sala, $id_cine, $numero_sala, $nombre_sala, $cant_butacas)
+        public function Add($id_cine, $numero_sala, $nombre_sala, $cant_butacas)
         {
-            $sala = new Sala($id_sala, $id_cine, $numero_sala, $nombre_sala, $cant_butacas);
+            $sala = new Sala(null, $id_cine, $numero_sala, $nombre_sala, $cant_butacas);
             $this->salaDAO->Add($sala);
 
             $this->ShowSalaDashboardView($id_cine);
@@ -42,14 +42,8 @@
 
         public function returnCine($id_cine)
         {
-           return $this->cineDAO->returnCine($id_cine);
+           return $this->cineDAO->GetOne($id_cine);
         }
-
-        public function GetAll()
-        {
-            return $this->salaDAO->GetAll();
-        }
-
         
         public function Modify($id_sala, Sala $sala)
         {
@@ -65,8 +59,8 @@
             $this->ShowSalaDashboardView($id_cine);
         }
 
-        public function GetSalaListXCineId($id_cine)
+        public function GetAllByCine($id_cine)
         {
-            return $this->salaDAO->GetSalaListXCineId($id_cine);
+            return $this->salaDAO->GetAllByCine($id_cine);
         }
     }
