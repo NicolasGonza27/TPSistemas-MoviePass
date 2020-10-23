@@ -55,11 +55,9 @@ numero_sala int not null,
 nombre_sala varchar (20),
 cant_butacas int not null,
 constraint PK_salas primary key (id_sala),
-constraint FK_salas_cines foreign key (id_cine) references cines (id_cine) on delete restrict on update cascade,
+constraint FK_salas_cines foreign key (id_cine) references cines (id_cine) on delete cascade on update cascade,
 constraint unique_salas unique (id_cine,numero_sala)
 );
-
-describe salas;
 
 create table funciones(
 id_funcion int not null auto_increment,
@@ -68,11 +66,9 @@ id_sala int not null,
 cant_asistentes int not null,
 fecha_hora timestamp not null,
 constraint PK_funciones primary key (id_funcion),
-constraint FK_funciones_peliculas foreign key (id_pelicula) references peliculas (id) on delete restrict on update cascade,
-constraint FK_funciones_salas foreign key (id_sala) references salas (id_sala) on delete restrict on update cascade
+constraint FK_funciones_peliculas foreign key (id_pelicula) references peliculas (id) on delete cascade on update cascade,
+constraint FK_funciones_salas foreign key (id_sala) references salas (id_sala) on delete cascade on update cascade
 );
-
-
 
 select
 *
@@ -92,7 +88,7 @@ from cines;
 
 
 select 
-*
+count(*)
 from peliculas;
 
 select 
