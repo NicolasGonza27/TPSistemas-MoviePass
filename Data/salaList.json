@@ -1,0 +1,30 @@
+[
+    {
+        "id_sala": 1,
+        "id_cine": "12",
+        "numero_sala": "10",
+        "nombre_sala": "Sala Principal",
+        "cant_butacas": "300"
+    },
+    {
+        "id_sala": 2,
+        "id_cine": "12",
+        "numero_sala": "1",
+        "nombre_sala": "Sala 1",
+        "cant_butacas": "160"
+    },
+    {
+        "id_sala": 3,
+        "id_cine": "1",
+        "numero_sala": "1",
+        "nombre_sala": "Sala Principal",
+        "cant_butacas": "300"
+    },
+    {
+        "id_sala": "4",
+        "id_cine": "1",
+        "numero_sala": "2",
+        "nombre_sala": "Seginda Sala",
+        "cant_butacas": "320"
+    }
+]

@@ -16,15 +16,16 @@
         
         public function ShowDashboardView()
         {
+            $listaCine = $this->cineDAO->GetAll();
             require_once(VIEWS_PATH."Views-Admin/dashboard.php");
         }
 
     
-        public function Add($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada) {
-            $cine = new Cine($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada);
+        public function Add($id, $nombre, $calle, $numero, $capacidad, $apertura, $cierre, $valor_entrada) {
+            $cine = new Cine($id, $nombre, $calle, $numero, $capacidad, $apertura, $cierre, $valor_entrada);
             $this->cineDAO->Add($cine);
 
-             /* $this->ShowDashboardView(); */
+            $this->ShowDashboardView();
         }
 
         public function Remove($id)
@@ -51,12 +52,13 @@
 
         }
 
-        public function ModifyModal($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada)
+        public function ModifyModal($id, $nombre, $calle, $nunero, $capacidad, $apertura, $cierre, $valor_entrada)
         {
             $cine = new Cine();
             $cine->setId($id);
             $cine->setNombre($nombre);
-            $cine->setDireccion($direccion);
+            $cine->setCalle($calle);
+            $cine->setNumero($nunero);
             $cine->setCapacidad($capacidad);
             $cine->setHor_apertura($apertura);
             $cine->setHor_cierre($cierre);

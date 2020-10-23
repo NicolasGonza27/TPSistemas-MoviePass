@@ -1,15 +1,18 @@
 <?php
     namespace Controllers;
 
+    use DAO\CineDAO as CineDAO;
     use DAO\UsuarioDAO as UsuarioDAO;
 
     class HomeController
     {   
         private $usuarioDAO;
+        private $cineDAO;
 
         public function __construct()
         {
             $this->usuarioDAO = new UsuarioDAO();
+            $this->cineDAO = new CineDAO();
         }
            
         public function Index($message = "")
@@ -35,6 +38,7 @@
         
         public function ShowDashboardView()
         {
+            $listaCine = $this->cineDAO->GetAll();
             require_once(VIEWS_PATH."Views-Admin/dashboard.php");
         }
 

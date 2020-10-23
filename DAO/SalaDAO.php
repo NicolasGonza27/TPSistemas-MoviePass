@@ -8,6 +8,20 @@
         private $salaList = array();
         private $fileName = ROOT."Data/salaList.json";
 
+        public function GetSalaListXCineId($id_cine)
+        {
+            $this->RetrieveData();
+            $salaListRta = array();
+
+            foreach ($this->salaList as $sala) {
+                if ($sala->getId_cine() == $id_cine) {
+                    array_push($salaListRta, $sala);
+                }
+            }
+
+            return $salaListRta;
+        }
+
         public function Add(Sala $sala)
         {
             $this->RetrieveData();
@@ -86,7 +100,7 @@
             {
                 $valuesArray = array();
                 $valuesArray["id_sala"] = $sala->getId_sala();
-                $valuesArray["id_funcion"] = $sala->getId_funcion();
+                $valuesArray["id_cine"] = $sala->getId_cine();
                 $valuesArray["numero_sala"] = $sala->getNumero_sala();
                 $valuesArray["nombre_sala"] = $sala->getNombre_sala();
                 $valuesArray["cant_butacas"] = $sala->getCant_butacas();

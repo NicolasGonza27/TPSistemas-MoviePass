@@ -1,45 +1,48 @@
 <?php
     namespace Controllers;
 
+    use DAO\CineDAO as CineDAO;
     use DAO\SalaDAO as SalaDAO;
-    use Controllers\CineControllers as CineControllers;
     use Models\Sala as Sala;
 
     class SalaController
     {
         private $salaDAO;
-        private $CineControllers;
+        private $cineDAO;
         
         public function __construct()
         {
             $this->salaDAO = new SalaDAO();
-            $this->CineControllers = new CineControllers();
+            $this->cineDAO = new CineDAO();
         }
         
         
-       /*  public function ShowDashboardView()
+        public function ShowSalaDashboardView($id_cine)
         {
-            require_once(VIEWS_PATH."Views-Admin/dashboard.php");
-        } */
+            $cine = $this->cineDAO->returnCine($id_cine);
+            $listaSala = $this->GetSalaListXCineId($id_cine);
+            require_once(VIEWS_PATH."Views-Admin/SalaDashboard.php");
+        }
 
     
         public function Add($id_sala, $id_cine, $numero_sala, $nombre_sala, $cant_butacas)
+        {
             $sala = new Sala($id_sala, $id_cine, $numero_sala, $nombre_sala, $cant_butacas);
-            $this->funcionDAO->Add($sala);
+            $this->salaDAO->Add($sala);
 
-            /* $this->ShowDashboardView(); */
+            $this->ShowSalaDashboardView($id_cine);
         }
 
-        public function Remove($id)
+        public function Remove($id, $id_cine)
         {
             $this->salaDAO->Remove($id);
 
-            /* $this->ShowDashboardView(); */
+            $this->ShowSalaDashboardView($id_cine);
         }
 
         public function returnCine($id_cine)
         {
-           return $this->CineControllers->returnCine($id_cine);
+           return $this->cineDAO->returnCine($id_cine);
         }
 
         public function GetAll()
@@ -59,6 +62,11 @@
             $sala  = new Sala($id_sala, $id_cine, $numero_sala, $nombre_sala, $cant_butacas);
             $this->salaDAO->Modify($id_sala, $sala);
             
-            /* $this->ShowDashboardView(); */
+            $this->ShowSalaDashboardView($id_cine);
+        }
+
+        public function GetSalaListXCineId($id_cine)
+        {
+            return $this->salaDAO->GetSalaListXCineId($id_cine);
         }
     }
