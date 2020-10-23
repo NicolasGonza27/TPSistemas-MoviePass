@@ -87,19 +87,19 @@
                             <input type="numbre" name="id_pelicula" class="hide" value="<?php echo $funcion->getId_pelicula()?>"/>
                             <div class="row form-group pr-3">
                                 <label class="col-6">Cine</label>
-                                <select >
-                                    <!-- <?php foreach($listMovieGender as $movieGender) { ?>
-                                        <option value="<?php  ?>"><?php  ?></option>
-                                    <?php } ?> -->
+                                <select id="cine_select">
+                                    <?php foreach($listCines as $cine) { ?>
+                                        <option value="<?php echo $cine->getId()?>"><?php echo $cine->getNombre()?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
 
                             <div class="row form-group pr-3">
                                 <label class="col-6">Sala</label>
-                                <select name="id_sala">
-                                    <!-- <?php foreach($listMovieGender as $movieGender) { ?>
+                                <select id="sala_select" name="id_sala">
+                                    <?php foreach($listMovieGender as $movieGender) { ?>
                                         <option value="<?php  ?>"><?php  ?></option>
-                                    <?php } ?> -->
+                                    <?php } ?>
                                 </select>
                             </div>
                             
@@ -166,3 +166,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    $("#cine_select").change(
+        function() {
+            var cine = $(this).find("option:selected").val();
+            var salaList = <?php $salaDao->GetAllByMovie($cine)?>;
+            var nuevoHtml;
+
+            salaList.forEach(
+                function(e) {
+                    nuevoHtml += "<option value=".e."></option>"; 
+                }
+            ) 
+
+            $("#sala_select").innerHTML();
+        }
+    );
+</script>

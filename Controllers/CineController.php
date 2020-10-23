@@ -1,7 +1,7 @@
 <?php
     namespace Controllers;
 
-    use DAO\cineDAO as CineDAO;
+    use DAObd\CineDAO as CineDAO;
     use Models\Cine as Cine;
 
     class CineController
@@ -16,15 +16,16 @@
         
         public function ShowDashboardView()
         {
+            $listaCine = $this->cineDAO->GetAll();
             require_once(VIEWS_PATH."Views-Admin/dashboard.php");
         }
 
     
-        public function Add($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada) {
-            $cine = new Cine($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada);
+        public function Add($nombre, $calle, $numero, $capacidad, $apertura, $cierre, $valor_entrada) {
+            $cine = new Cine(null, $nombre, $calle, $numero, $capacidad, $apertura, $cierre, $valor_entrada);
             $this->cineDAO->Add($cine);
 
-             /* $this->ShowDashboardView(); */
+            $this->ShowDashboardView();
         }
 
         public function Remove($id)
@@ -34,9 +35,9 @@
             $this->ShowDashboardView();
         }
 
-        public function returnCine($id)
+        public function GetOne($id)
         {
-           return $this->cineDAO->returnCine($id);
+           return $this->cineDAO->GetOne($id);
         }
 
         public function GetAll()
@@ -51,12 +52,13 @@
 
         }
 
-        public function ModifyModal($id, $nombre, $direccion, $capacidad, $apertura, $cierre, $valor_entrada)
+        public function ModifyModal($id, $nombre, $calle, $nunero, $capacidad, $apertura, $cierre, $valor_entrada)
         {
             $cine = new Cine();
             $cine->setId($id);
             $cine->setNombre($nombre);
-            $cine->setDireccion($direccion);
+            $cine->setCalle($calle);
+            $cine->setNumero($nunero);
             $cine->setCapacidad($capacidad);
             $cine->setHor_apertura($apertura);
             $cine->setHor_cierre($cierre);

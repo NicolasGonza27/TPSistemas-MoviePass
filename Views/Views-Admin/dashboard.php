@@ -1,14 +1,6 @@
 <?php
     require_once(VIEWS_PATH."header.php");
     require_once("nav.php");
-
-    use Models\Cine as Cine;
-    use DAO\ICineDAO as ICineDAO;
-    use DAO\CineDAO as CineDAO;
-
-    $cineDao = new CineDAO();
-    $listaCine = $cineDao->GetAll();
-    
 ?>
 
 <div class="container espaciado-sup">
@@ -21,7 +13,8 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Nombre</th>
-                    <th>Dirección</th>
+                    <th>Calle</th>
+                    <th>Numero</th>
                     <th class="text-center">Horario Apertura</th>
                     <th class="text-center">Horario Cierre</th>
                     <th class="text-center">Capacidad</th>
@@ -33,7 +26,8 @@
                 <?php foreach($listaCine as $cine) { ?>
                     <tr>
                         <td><?php echo $cine->getNombre()?></td>
-                        <td><?php echo $cine->getDireccion()?></td>
+                        <td><?php echo $cine->getCalle()?></td>
+                        <td><?php echo $cine->getNumero()?></td>
                         <td class="text-center"><?php echo $cine->getHor_apertura()?></td>
                         <td class="text-center"><?php echo $cine->getHor_cierre()?></td>
                         <td class="text-center"><?php echo $cine->getCapacidad()?></td>
@@ -42,6 +36,7 @@
                             <td class="text-center">
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$cine->getId()?>">Editar</button>
                                 <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $cine->getId()?>">Borrar</button>
+                                <a class="btn btn-outline-primaty"  href="<?php echo FRONT_ROOT."Sala/ShowSalaDashboardView/".$cine->getId()?>" role="button">+</a>
                             </td>
                         </form> 
                     </tr>
@@ -71,8 +66,13 @@
                     </div>
 
                     <div class="row form-group pr-3">
-                        <label class="col-6">Dirección:</label>
-                        <input type="text" name="direccion" class="col-6" value="<?php echo $cine->getDireccion()?>" required/>
+                        <label class="col-6">Calle:</label>
+                        <input type="text" name="calle" class="col-6" value="<?php echo $cine->getCalle()?>" required/>
+                    </div>
+
+                    <div class="row form-group pr-3">
+                        <label class="col-6">Numero:</label>
+                        <input type="text" name="numero" class="col-6" value="<?php echo $cine->getNumero()?>" required/>
                     </div>
 
                     <input type="text" name="capacidad" class="hide" value="<?php echo $cine->getCapacidad()?>"/>
@@ -118,15 +118,19 @@
                     </button>
                 </div>
                 <div class="modal-body pl-3 pr-3">
-                    <input type="numbre" name="id" class="hide"/>
                     <div class="row form-group pr-3">
                         <label class="col-6">Nombre:</label>
                         <input type="text" name="nombre" class="col-6" required/>
                     </div>
 
                     <div class="row form-group pr-3">
-                        <label class="col-6">Dirección:</label>
-                        <input type="text" name="direccion" class="col-6" required/>
+                        <label class="col-6">Calle:</label>
+                        <input type="text" name="calle" class="col-6" required/>
+                    </div>
+
+                    <div class="row form-group pr-3">
+                        <label class="col-6">Numero:</label>
+                        <input type="text" name="numero" class="col-6" required/>
                     </div>
 
                     <input type="text" name="capacidad" class="hide"/>

@@ -64,6 +64,39 @@
             }
         }
 
+        public function GetAllByMovie($id_movie)
+        {
+            try 
+            {
+                $query = "SELECT 
+                *
+                FROM peliculas p
+                INNER JOIN funciones f
+                ON p.id = f.id_pelicula
+                WHERE id = :id;";
+
+                $parameters["id"] = $id_movie;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    $newResultSet =  $this->mapear($resultSet);
+                
+                    return  $newResultSet;
+                }
+
+                return  false;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+
         public function GetOne($id_funcion)
         {
             try 

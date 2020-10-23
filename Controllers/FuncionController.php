@@ -1,19 +1,25 @@
 <?php
     namespace Controllers;
 
-    use API\MovieAPI as MovieAPI;
-    use DAO\FuncionDAO as FuncionDAO;
+    use DAObd\MovieDAO as MovieDAO;
+    use DAObd\CineDAO as CineDAO;
+    use DAObd\FuncionDAO as FuncionDAO;
+    use DAObd\SalaDAO as SalaDAO;
     use Models\Funcion as Funcion;
 
     class FuncionController
     {
         private $funcionDAO;
-        private $movieAPI;
+        private $movieDAO;
+        private $cineDAO;
+        private $salaDAO;
 
         public function __construct()
         {
             $this->funcionDAO = new FuncionDAO();
-            $this->movieAPI = new MovieAPI();
+            $this->movieDAO = new MovieDAO();
+            $this->cineDAO = new CineDAO();
+            $this->salaDAO = new SalaDAO();
         }
         
         
@@ -23,8 +29,8 @@
         } */
 
     
-        public function Add($id_funcion, $id_sala, $id_pelicula, $cant_asistentes, $fecha_hora) {
-            $funcion = new Funcion($id_funcion, $id_sala, $id_pelicula, $cant_asistentes, $fecha_hora);
+        public function Add($id_sala, $id_pelicula, $cant_asistentes, $fecha_hora) {
+            $funcion = new Funcion(null, $id_sala, $id_pelicula, $cant_asistentes, $fecha_hora);
             $this->funcionDAO->Add($funcion);
 
             /* $this->ShowDashboardView(); */
@@ -35,11 +41,6 @@
             $this->funcionDAO->Remove($id);
 
             /* $this->ShowDashboardView(); */
-        }
-
-        public function  returnFuncionXidPelicula($id)
-        {
-           return $this->funcionDAO-> returnFuncionXidPelicula($id);
         }
 
         public function GetAll()
@@ -65,29 +66,21 @@
         public function ShowContentMovieFuncionesViews($id)
         {
             $movie = $this->movieAPI->GetOne($id);
-            $listFunciones = $this->funcionDAO->returnFuncionXid($id);
+            $listFunciones = $this->funcionDAO->GetAllByMovie($id);
+            $listCines = $this->cineDAO->GetAll();
+            $salaDao = $this->salaDAO;
             require_once(VIEWS_PATH."Views-Admin/content-movie-funciones.php");
         }
 
         public function ShowCarteleraViews()
         {
+
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");
         }
 
         public function getMovieListConFuncion()
         {
-            $movieList = $this->movieAPI->GetAll();
-            $funcionList = $this->funcionDAO->GetAll();
-            $movieListRta = array();
-
-            foreach($funcionList as $funcion) {
-                foreach($movieList as $movie) {
-                    if (($funcion->getId_pelicula() == $movie->getId()) && (!in_array($movie, $movieListRta))) {
-                        array_push($movieListRta, $movie);
-                    }
-                }
-            }
-
+            $movieListRta = $this->movieDAO->GetAllHaveFunciones();
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");
         }
 
@@ -108,5 +101,17 @@
             }
 
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+        }
+
+        public function GetArrayCineSalas()
+        {
+            $listCineSalas = array();
+            $listCine = $this->cineDAO->GetAll();
+
+            foreach ($listCine as $cine) {
+                $listCineSalas[$cine] = $this->salaDAO->GetAllByCine($cine->getId());
+            }
+
+            return $listCineSalas;
         }
     }
