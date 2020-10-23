@@ -25,9 +25,7 @@
                $parameters["hora_apertura"] = $cine->getHor_apertura();
                $parameters["hora_cierre"] = $cine->getHor_cierre();
                $parameters["valor_entrada"] = $cine->getValor_entrada();
-
-               var_dump($parameters);
-
+               
                $this->connection = Connection::GetInstance();
 
                return $this->connection->ExecuteNonQuery($query,$parameters);

@@ -42,7 +42,6 @@ class Connection
         {
             $this->Prepare($query);
             $this->BindParameters($parameters,$queryType);
-            var_dump($this->pdoStatement);
             $this->pdoStatement->execute();
 
             return $this->pdoStatement->fetchAll();
