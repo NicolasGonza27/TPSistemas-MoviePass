@@ -2,18 +2,24 @@
     namespace Controllers;
 
     use API\MovieAPI as MovieAPI;
+    use DAO\CineDAO as CineDAO;
     use DAO\FuncionDAO as FuncionDAO;
+    use DAO\SalaDAO as SalaDAO;
     use Models\Funcion as Funcion;
 
     class FuncionController
     {
         private $funcionDAO;
         private $movieAPI;
+        private $cineDAO;
+        private $salaDAO;
 
         public function __construct()
         {
             $this->funcionDAO = new FuncionDAO();
             $this->movieAPI = new MovieAPI();
+            $this->cineDAO = new CineDAO();
+            $this->salaDAO = new SalaDAO();
         }
         
         
@@ -35,11 +41,6 @@
             $this->funcionDAO->Remove($id);
 
             /* $this->ShowDashboardView(); */
-        }
-
-        public function  returnFuncionXidPelicula($id)
-        {
-           return $this->funcionDAO-> returnFuncionXidPelicula($id);
         }
 
         public function GetAll()
@@ -65,7 +66,9 @@
         public function ShowContentMovieFuncionesViews($id)
         {
             $movie = $this->movieAPI->GetOne($id);
-            $listFunciones = $this->funcionDAO->returnFuncionXid($id);
+            $listFunciones = $this->funcionDAO->returnFuncionXidPelicula($id);
+            $listCines = $this->cineDAO->GetAll();
+            $salaDao = $this->salaDAO;
             require_once(VIEWS_PATH."Views-Admin/content-movie-funciones.php");
         }
 
@@ -108,5 +111,17 @@
             }
 
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+        }
+
+        public function GetArrayCineSalas()
+        {
+            $listCineSalas = array();
+            $listCine = $this->cineDAO->GetAll();
+
+            foreach ($listCine as $cine) {
+                $listCineSalas[$cine] = $this->salaDAO->GetSalaListXCineId($cine->getId());
+            }
+
+            return $listCineSalas;
         }
     }

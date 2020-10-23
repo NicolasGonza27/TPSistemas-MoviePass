@@ -57,7 +57,7 @@
         {
             $this->RetrieveData();
 
-            foreach($this->$cineList as $key=>$cine)
+            foreach($this->cineList as $key=>$cine)
             {
                 if($cine->getId() == $id)
                 {
@@ -83,12 +83,13 @@
                     
                     $id = $content["id"]; 
                     $nombre = $content["nombre"];
-                    $direccion = $content["direccion"];
+                    $calle = $content["calle"];
+                    $numero = $content["numero"];
                     $capacidad = $content["capacidad"];
                     $hor_apertura = $content["hor_apertura"];
                     $hor_cierre = $content["hor_cierre"];
                     $valor_entrada = $content["valor_entrada"];
-                    $cineObj = new Cine($id, $nombre, $direccion, $capacidad ,$hor_apertura, $hor_cierre, $valor_entrada);
+                    $cineObj = new Cine($id, $nombre, $calle, $numero, $capacidad ,$hor_apertura, $hor_cierre, $valor_entrada);
                     array_push($this->cineList, $cineObj);
                 }
             }
@@ -103,7 +104,8 @@
                 $valuesArray = array();
                 $valuesArray["id"] = $cine->getId();
                 $valuesArray["nombre"] = $cine->getNombre();
-                $valuesArray["direccion"] = $cine->getDireccion();
+                $valuesArray["calle"] = $cine->getCalle();
+                $valuesArray["numero"] = $cine->getNumero();
                 $valuesArray["capacidad"] = $cine->getCapacidad();
                 $valuesArray["hor_apertura"] = $cine->getHor_apertura();
                 $valuesArray["hor_cierre"] = $cine->getHor_cierre();

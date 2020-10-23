@@ -2,7 +2,8 @@
     {
         "id": "1",
         "nombre": "Aldrey",
-        "direccion": "nueva calle",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "06:30",
         "hor_cierre": "12:59",
@@ -11,7 +12,8 @@
     {
         "id": 2,
         "nombre": "test",
-        "direccion": "test",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "18:31",
         "hor_cierre": "18:31",
@@ -20,7 +22,8 @@
     {
         "id": 3,
         "nombre": "test",
-        "direccion": "test",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "18:31",
         "hor_cierre": "18:31",
@@ -29,7 +32,8 @@
     {
         "id": 4,
         "nombre": "test",
-        "direccion": "test",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "18:31",
         "hor_cierre": "18:31",
@@ -38,7 +42,8 @@
     {
         "id": 5,
         "nombre": "test",
-        "direccion": "test",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "18:31",
         "hor_cierre": "18:31",
@@ -47,7 +52,8 @@
     {
         "id": 6,
         "nombre": "test",
-        "direccion": "test",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "18:31",
         "hor_cierre": "18:31",
@@ -56,7 +62,8 @@
     {
         "id": 7,
         "nombre": "test",
-        "direccion": "test",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "18:31",
         "hor_cierre": "18:31",
@@ -65,7 +72,8 @@
     {
         "id": 8,
         "nombre": "test",
-        "direccion": "test",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "18:31",
         "hor_cierre": "18:31",
@@ -74,7 +82,8 @@
     {
         "id": 9,
         "nombre": "test",
-        "direccion": "test",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "18:31",
         "hor_cierre": "18:31",
@@ -83,7 +92,8 @@
     {
         "id": 10,
         "nombre": "test",
-        "direccion": "test",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "18:31",
         "hor_cierre": "18:31",
@@ -92,10 +102,21 @@
     {
         "id": 11,
         "nombre": "estoesuntest",
-        "direccion": "eqweq",
+        "calle": null,
+        "numero": null,
         "capacidad": "",
         "hor_apertura": "07:03",
         "hor_cierre": "07:03",
         "valor_entrada": "123"
+    },
+    {
+        "id": 12,
+        "nombre": "nombre",
+        "calle": "calle",
+        "numero": "numero",
+        "capacidad": "",
+        "hor_apertura": "00:00",
+        "hor_cierre": "12:00",
+        "valor_entrada": "900"
     }
 ]
