@@ -29,11 +29,18 @@
         } */
 
     
-        public function Add($id_sala, $id_pelicula, $cant_asistentes, $fecha_hora) {
-            $funcion = new Funcion(null, $id_sala, $id_pelicula, $cant_asistentes, $fecha_hora);
-            $this->funcionDAO->Add($funcion);
+        public function Add($id_pelicula, $id_sala, $cant_asistentes, $fecha_hora) {
+            $funcion = new Funcion(null, $id_pelicula, $id_sala, $cant_asistentes, $fecha_hora);
+            var_dump($funcion);
+            $movie = $this->movieDAO->GetOne($id_pelicula);
+            if ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala)){
+                $this->funcionDAO->Add($funcion);    
+            }
+            else {
+                echo "<script>alert('Alert');</script>";
+            }
 
-            /* $this->ShowDashboardView(); */
+            $this->ShowContentMovieFuncionesViews($id_pelicula);
         }
 
         public function Remove($id)
@@ -65,7 +72,7 @@
 
         public function ShowContentMovieFuncionesViews($id)
         {
-            $movie = $this->movieAPI->GetOne($id);
+            $movie = $this->movieDAO->GetOne($id);
             $listFunciones = $this->funcionDAO->GetAllByMovie($id);
             $listCines = $this->cineDAO->GetAll();
             $salaDao = $this->salaDAO;
@@ -86,7 +93,7 @@
 
         public function getMovieListSinFuncion()
         {
-            $movieList = $this->movieAPI->GetAll();
+            $movieList = $this->movieDAO->GetAll();
             $funcionList = $this->funcionDAO->GetAll();
             $movieListRta = array();
 
@@ -114,4 +121,44 @@
 
             return $listCineSalas;
         }
+
+        public function VerifyTimeFuncion($time, $movie_runtime, $id_sala)
+        {
+            $listFunciones = $this->funcionDAO->GetAllFuncionesBySala($id_sala);
+            /* 2020-12-09 19:00:00 */
+            $fechaHora = explode("T", $time);
+            $fecha = explode("-", $fechaHora[0]);
+            $hora = explode(":", $fechaHora[1]);
+
+            $inicTime = $fecha[0] * $fecha[1] * $fecha[2] *  $hora[0] *  $hora[1];
+
+            var_dump($time);
+            var_dump($inicTime);
+            $finTime = $inicTime + (intval($movie_runtime)*60) + (15*60);
+            var_dump($finTime);
+            
+            foreach($listFunciones as $funcion) {
+
+                $inicFuncionTime = $funcion->getFecha_hora();
+                $fechaHora = explode(" ", $inicFuncionTime);
+                $fecha = explode("-", $fechaHora[0]);
+                $hora = explode(":", $fechaHora[1]);
+
+                $inicFuncion = $fecha[0] * $fecha[1] * $fecha[2] *  $hora[0] *  $hora[1];
+
+                var_dump($inicFuncionTime);
+                var_dump($inicFuncion);
+                $finFuncion = $inicFuncion + (intval($movie_runtime)*60) + (15*60);
+                var_dump($finFuncion);
+
+
+                if((($inicTime >= $inicFuncion) && ($inicTime <= $finFuncion)) ||
+                    (($finTime >= $inicFuncion) && ($finTime <= $finFuncion))) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
+?>

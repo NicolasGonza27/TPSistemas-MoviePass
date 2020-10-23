@@ -96,6 +96,43 @@
             }
         }
 
+        public function GetAllFuncionesBySala($id_sala)
+        {
+            try 
+            {
+                $query = "SELECT 
+                *
+                FROM salas s
+                INNER JOIN funciones f
+                ON s.id_sala = f.id_sala
+                WHERE s.id_sala = :id_sala;";
+
+                $parameters["id_sala"] = $id_sala;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    $newResultSet =  $this->mapear($resultSet);
+
+                    if(count($newResultSet) > 1) {
+                        return  $newResultSet;
+                    }
+                    else {
+                        return  $newResultSet[0];
+                    }
+                }
+
+                return  array();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
 
         public function GetOne($id_funcion)
         {
