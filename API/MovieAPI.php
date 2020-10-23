@@ -116,7 +116,7 @@ class MovieAPI
         {
             $this->movieList = array();
 
-            for($i = 1; $i < 2; $i++)
+            for($i = 1; $i < 10; $i++)
             {
                 $jsonContent = file_get_contents($this->fileName."&page=$i");
                 $contentArray = ($jsonContent) ? json_decode($jsonContent, true) : array();

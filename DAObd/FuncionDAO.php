@@ -19,17 +19,17 @@
 
             try 
             {
-               $query = "INSERT INTO ".$this->tableName."(id_pelicula,id_sala,cant_asistentes,fecha_hora) VALUES 
+               $query = "INSERT INTO ".$this->tableName." (id_pelicula,id_sala,cant_asistentes,fecha_hora) VALUES 
                (:id_pelicula,:id_sala,:cant_asistentes,:fecha_hora);";
                 
                $this->connection = Connection::GetInstance();
-
+               
                $parameters["id_pelicula"] = $funcion->getId_pelicula();
                $parameters["id_sala"] = $funcion->getId_sala();
                $parameters["cant_asistentes"] = $funcion->getCant_asistentes();
                $parameters["fecha_hora"] = $funcion->getFecha_hora();
 
-               $this->connection->ExecuteNonQuery($query,$parameters);
+               return $this->connection->ExecuteNonQuery($query,$parameters);
 
             }
             catch(PDOException $e)
@@ -53,7 +53,7 @@
                 {
                     $newResultSet =  $this->mapear($resultSet);
                 
-                    return  $newResultSet[0];
+                    return  $newResultSet;
                 }
 
                 return  false;
@@ -64,15 +64,15 @@
             }
         }
 
-        public function GetOne($id_cine)
+        public function GetOne($id_funcion)
         {
             try 
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE ".$this->tableName.".id_cine = :id_cine";
+                $query = "SELECT * FROM ".$this->tableName." WHERE ".$this->tableName.".id_funcion = :id_funcion";
 
                 $this->connection = Connection::GetInstance();
 
-                $parameters["id_cine"] = $id_cine;
+                $parameters["id_funcion"] = $id_funcion;
 
                 $resultSet = $this->connection->Execute($query,$parameters);
 
@@ -120,30 +120,22 @@
             }
         }
 
-        public function Modify($id,Funcion $newFuncion)
+        public function Modify($id_funcion,Funcion $newFuncion)
         {
             try
             {
-                $query = "UPDATE ".$this->tableName." SET nombre = :nombre, direccion = :direccion, capacidad  = :capacidad, hor_apertura = :hor_apertura, hor_cierre = :hor_cierre, valor_entrada = :valor_entrada
-                WHERE (id_cine = $id);";
+                $query = "UPDATE ".$this->tableName." SET id_pelicula = :id_pelicula, id_sala = :id_sala, cant_asistentes  = :cant_asistentes, fecha_hora = :fecha_hora
+                WHERE (id_funcion = :id_funcion);";
 
                 $this->connection = Connection::GetInstance();
 
+                $parameters["id_funcion"] = $id_funcion;
                 $parameters["id_pelicula"] = $newFuncion->getId_pelicula();
                 $parameters["id_sala"] = $newFuncion->getId_sala();
                 $parameters["cant_asistentes"] = $newFuncion->getCant_asistentes();
                 $parameters["fecha_hora"] = $newFuncion->getFecha_hora();
 
-                $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
-
-                if($cantRows)
-                {
-                    return true;
-                }
-                else 
-                {
-                    return false;
-                }
+                $return = $this->connection->ExecuteNonQuery($query,$parameters);
 
             }
             catch(PDOException $e)

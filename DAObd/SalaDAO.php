@@ -24,16 +24,7 @@
      
                     $this->connection = Connection::GetInstance();
             
-                    $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
-
-                    if($cantRows) 
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return $this->connection->ExecuteNonQuery($query,$parameters);
 
                 }
                 catch(PDOException $e)
@@ -133,10 +124,11 @@
                 try
                 {
                     $query = "UPDATE ".$this->tableName." SET id_cine = :id_cine, numero_sala = :numero_sala, nombre_sala  = :nombre_sala, cant_butacas = :cant_butacas
-                    WHERE (id_sala = $id_sala);";
+                    WHERE (id_sala = :id_sala);";
 
                     $this->connection = Connection::GetInstance();
 
+                    $parameters["id_sala"] = $id_sala;
                     $parameters["id_cine"] = $newSala->getId_cine();
                     $parameters["numero_sala"] = $newSala->getNumero_sala();
                     $parameters["nombre_sala"] = $newSala->getNombre_sala();

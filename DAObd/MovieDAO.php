@@ -21,6 +21,9 @@
                 $movieAPI = new MovieAPI();
                 $movieList = $movieAPI->GetAll();
                 
+                $movieGenderDAO = new MovieGenderDAO();
+                $movieGenderDAO->refresh();
+
                 foreach($movieList as $movie)
                 {   
 
@@ -95,20 +98,35 @@
             }
         }
 
-        public function GetAllByGender($id)
+        public function GetAllByGender($id_genero)
         {
             try 
             {
                 $query = "SELECT
-                *
+                p.popularity,
+                p.vote_count,
+                p.video,
+                p.poster_path,
+                p.id,
+                p.adult,
+                p.backdrop_path,
+                p.original_language,
+                p.original_title,
+                p.title,
+                p.vote_average,
+                p.overview,
+                p.release_date,
+                p.runtime
                 FROM peliculasXGenero pxq
                 INNER JOIN peliculas p
                 ON p.id = pxq.id_pelicula
-                WHERE pxq.id_genero = $id;";
+                WHERE pxq.id_genero = :id_genero;";
+                
+                $parameters["id_genero"] = $id_genero;
 
                 $this->connection = Connection::GetInstance();
 
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->connection->Execute($query,$parameters);
 
                 $newResultSet =  $this->mapear($resultSet);
 
