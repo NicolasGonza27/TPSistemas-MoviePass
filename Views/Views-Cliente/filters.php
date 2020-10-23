@@ -31,7 +31,7 @@
         <select name="gender" class="col">
           <option value="" disabled selected>Elija una opción</option>
           <?php foreach($listMovieGender as $movieGender) { ?>
-            <option value="<?php echo $movieGender->getName(); ?>"><?php echo $movieGender->getName(); ?></option>
+            <option value="<?php echo $movieGender->getId(); ?>"><?php echo $movieGender->getName(); ?></option>
           <?php } ?>
         </select>
       </div>

@@ -24,9 +24,9 @@
             return $this->movieDAO->getAll();
         }
         
-        public function GetAllByGender($gender)
+        public function GetAllByGender($id_gender)
         {
-            return $this->movieDAO->GetAllByGender($gender);
+            return $this->movieDAO->GetAllByGender($id_gender);
         }
 
         public function GetAllByDate($id)
@@ -52,18 +52,18 @@
             require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
         }
 
-        public function ShowListViewsByGender($gender = null)
+        public function ShowListViewsByGender($id_gender = null)
         {   
-            if(!$gender) 
+            if(!$id_gender) 
             {
                 if(isset($_SESSION["busqueda"]))
                 {   
-                    $gender = $_SESSION["busqueda"];
+                    $id_gender = $_SESSION["busqueda"];
                 }
             }
             
-            $listMovie = $this->GetAllByGender($gender);
-            $_SESSION["busqueda"] = $gender;
+            $listMovie = $this->GetAllByGender($id_gender);
+            $_SESSION["busqueda"] = $id_gender;
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
 

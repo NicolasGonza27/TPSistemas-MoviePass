@@ -3,15 +3,16 @@ use moviePass;
 #drop database moviePass;
 
 create table cines(
-id_cine int auto_increment,
-nombre_cine varchar(20),
-calle varchar(20),
-numero int,
-hora_apertura time,
-hora_cierre time,
-valor_entrada float(5),
+id_cine int not null auto_increment,
+nombre_cine varchar(20) not null,
+calle varchar(20) not null,
+numero int not null,
+hora_apertura time not null,
+hora_cierre time not null,
+valor_entrada float(5) not null,
 constraint PK_cines primary key (id_cine)
 );
+
 
 create table generos (
 id_genero int not null,
@@ -48,17 +49,20 @@ constraint unique_peliculasXGenero unique (id_pelicula,id_genero)
 );
 
 create table salas(
-id_sala int auto_increment,
+id_sala int not null auto_increment,
 id_cine int not null,
 numero_sala int not null,
 nombre_sala varchar (20),
 cant_butacas int not null,
 constraint PK_salas primary key (id_sala),
-constraint FK_salas_cines foreign key (id_cine) references cines (id_cine) on delete restrict on update cascade
+constraint FK_salas_cines foreign key (id_cine) references cines (id_cine) on delete restrict on update cascade,
+constraint unique_salas unique (id_cine,numero_sala)
 );
 
+describe salas;
+
 create table funciones(
-id_funcion int auto_increment,
+id_funcion int not null auto_increment,
 id_pelicula int not null,
 id_sala int not null,
 cant_asistentes int not null,
@@ -69,6 +73,7 @@ constraint FK_funciones_salas foreign key (id_sala) references salas (id_sala) o
 );
 
 
+
 select
 *
 from peliculasXGenero pxq
@@ -77,19 +82,33 @@ on p.id = pxq.id_pelicula
 where pxq.id_genero = 53;
 
 
+describe cines;
+
 
 
 select 
 *
 from cines;
 
+
+select 
+*
+from peliculas;
+
+select 
+*
+from funciones;
+
 select 
 *
 from generos;
 
+select 
+*
+from peliculasXGenero;
 
 
-
-
-
+select 
+*
+from salas;
 

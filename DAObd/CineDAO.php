@@ -12,14 +12,12 @@
         private $connection;
         private $tableName = "cines";
 
+
         public function Add(Cine $cine)
         {
             try 
             {
-               $query = "INSERT INTO ".$this->tableName." (nombre_cine,calle,numero,hora_apertura,hora_cierre,valor_entrada) 
-               VALUES (:nombre_cine, :calle, :numero, :hora_apertura, :hora_cierre, :valor_entrada);";
-
-               $this->connection = Connection::GetInstance();
+               $query = "INSERT INTO cines (nombre_cine,calle,numero,hora_apertura,hora_cierre,valor_entrada) VALUES (:nombre_cine,:calle,:numero,:hora_apertura,:hora_cierre,:valor_entrada);";
 
                $parameters["nombre_cine"] = $cine->getNombre();
                $parameters["calle"] = $cine->getCalle();
@@ -28,7 +26,11 @@
                $parameters["hora_cierre"] = $cine->getHor_cierre();
                $parameters["valor_entrada"] = $cine->getValor_entrada();
 
-               $this->connection->ExecuteNonQuery($query,$parameters);
+               var_dump($parameters);
+
+               $this->connection = Connection::GetInstance();
+
+               return $this->connection->ExecuteNonQuery($query,$parameters);
 
             }
             catch(PDOException $e)
@@ -66,7 +68,7 @@
         {
             try 
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE ".$this->tableName.".id_cine = $:id_cine";
+                $query = "SELECT * FROM ".$this->tableName." WHERE ".$this->tableName.".id_cine = :id_cine";
 
                 $this->connection = Connection::GetInstance();
 
@@ -122,7 +124,7 @@
         {
             try
             {
-                $query = "UPDATE ".$this->tableName." SET nombre_cine = :nombre_cine, calle = :calle,numero = :numero, hora_apertura = :hora_apertura, hora_cierre = :hora_cierre, valor_entrada = :valor_entrada
+                $query = "UPDATE ".$this->tableName." SET nombre_cine = :nombre_cine, calle = :calle, numero = :numero, hora_apertura = :hora_apertura, hora_cierre = :hora_cierre, valor_entrada = :valor_entrada
                 WHERE (id_cine = :id_cine);";
 
                 $this->connection = Connection::GetInstance();
@@ -131,11 +133,20 @@
                 $parameters["nombre_cine"] = $newCine->getNombre();
                 $parameters["calle"] = $newCine->getCalle();
                 $parameters["numero"] = $newCine->getNumero();
-                $parameters["hor_apertura"] = $newCine->getHor_apertura();
-                $parameters["hor_cierre"] = $newCine->getHor_cierre();
+                $parameters["hora_apertura"] = $newCine->getHor_apertura();
+                $parameters["hora_cierre"] = $newCine->getHor_cierre();
                 $parameters["valor_entrada"] = $newCine->getValor_entrada();
 
-                $this->connection->ExecuteNonQuery($query,$parameters);
+                $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
+
+                if($cantRows)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
 
             }
             catch(PDOException $e)

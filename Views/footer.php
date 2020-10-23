@@ -4,9 +4,7 @@
     <p >Copyright &copy; <?php echo date('Y'); ?> - All Rights Reserved - UTN Laboratorio IV</p>
   </div>
 </div>
-<!-- JAVASCRIPTS -->
-<script src="../js/bootstrap.min.js"></script> 
-<script src="../js/bootstrap.min.js.map"></script>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
