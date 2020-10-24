@@ -6,13 +6,9 @@
 
         private $popularity; 
         private $vote_count;
-        private $video;
         private $poster_path;
         private $id;
         private $adult;
-        private $backdrop_path;
-        private $original_language;
-        private $original_title;
         private $genre_ids;
         private $title;
         private $vote_average;
@@ -21,19 +17,14 @@
         private $runtime;
 
 
-        public function __construct($populariy,$vote_count,$video,$poster_path, $id, $adult, $backdrop_path,
-                                    $original_language, $original_title,$genre_ids, $title,$vote_average, $overview,
+        public function __construct($popularity,$vote_count,$poster_path, $id, $adult ,$genre_ids, $title,$vote_average, $overview,
                                     $release_date,$runtime)
         {
-            $this->popularity = $populariy;
+            $this->popularity = $popularity;
             $this->vote_count = $vote_count;
-            $this->video = $video;
             $this->poster_path = $poster_path;
             $this->id = $id;
             $this->adult = $adult;
-            $this->backdrop_path = $backdrop_path;
-            $this->original_language = $original_language;
-            $this->original_title = $original_title;
             $this->genre_ids = $genre_ids;
             $this->title = $title;
             $this->vote_average = $vote_average;
@@ -63,16 +54,6 @@
         {
                 $this->vote_count = $vote_count;
 
-        }
-
-        public function getVideo()
-        {
-                return $this->video;
-        }
-
-        public function setVideo($video)
-        {
-                $this->video = $video;
         }
 
         public function getPoster_path()
@@ -105,36 +86,6 @@
         {
                 $this->adult = $adult;
 
-        }
-
-        public function getBackdrop_path()
-        {
-                return $this->backdrop_path;
-        }
-
-        public function setBackdrop_path($backdrop_path)
-        {
-                $this->backdrop_path = $backdrop_path;
-        }
-
-        public function getOriginal_language()
-        {
-                return $this->original_language;
-        }
-
-        public function setOriginal_language($original_language)
-        {
-                $this->original_language = $original_language;
-        }
-
-        public function getOriginal_title()
-        {
-                return $this->original_title;
-        }
-
-        public function setOriginal_title($original_title)
-        {
-                $this->original_title = $original_title;
         }
 
         public function getAllGenre_ids()

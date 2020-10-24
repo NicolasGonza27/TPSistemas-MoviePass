@@ -28,6 +28,7 @@
                $parameters["id_sala"] = $funcion->getId_sala();
                $parameters["cant_asistentes"] = $funcion->getCant_asistentes();
                $parameters["fecha_hora"] = $funcion->getFecha_hora();
+               $parameters["eliminado"] = false;
 
                return $this->connection->ExecuteNonQuery($query,$parameters);
 
@@ -39,11 +40,11 @@
 
         }
 
-        public function GetAll()
+        public function GetAll(bool $eliminado = false)
         {
             try 
             {
-                $query = "SELECT * FROM ".$this->tableName;
+                $query = "SELECT * FROM ".$this->tableName." WHERE eliminado = $eliminado;";
 
                 $this->connection = Connection::GetInstance();
 
@@ -163,14 +164,17 @@
         }
 
         public function Remove($id_funcion)
-        {  
+        {     
             try 
             {
-                $query = "DELETE FROM ".$this->tableName." WHERE id_funcion = :id_funcion;";
+
+                $query = "UPDATE ".$this->tableName." SET eliminado = :eliminado
+                WHERE (id_funcion = :id_funcion);";
 
                 $this->connection = Connection::GetInstance();
 
                 $parameters['id_funcion'] = $id_funcion;
+                $parameters['eliminado'] = true;
 
                 $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
 

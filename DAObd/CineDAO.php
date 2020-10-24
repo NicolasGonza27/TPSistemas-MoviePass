@@ -25,7 +25,10 @@
                $parameters["hora_apertura"] = $cine->getHor_apertura();
                $parameters["hora_cierre"] = $cine->getHor_cierre();
                $parameters["valor_entrada"] = $cine->getValor_entrada();
+
+               $parameters["eliminado"] = false;
                
+
                $this->connection = Connection::GetInstance();
 
                return $this->connection->ExecuteNonQuery($query,$parameters);
@@ -37,11 +40,11 @@
             }
         }
 
-        public function GetAll()
+        public function GetAll(bool $eliminado = false)
         {
             try 
             {
-                $query = "SELECT * FROM ".$this->tableName;
+                $query = "SELECT * FROM ".$this->tableName." WHERE eliminado = $eliminado;";
 
                 $this->connection = Connection::GetInstance();
 
@@ -94,11 +97,14 @@
         {     
             try 
             {
-                $query = "DELETE FROM ".$this->tableName." WHERE id_cine = :id_cine;";
+
+                $query = "UPDATE ".$this->tableName." SET eliminado = :eliminado
+                WHERE (id_cine = :id_cine);";
 
                 $this->connection = Connection::GetInstance();
 
                 $parameters['id_cine'] = $id_cine;
+                $parameters['eliminado'] = true;
 
                 $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
 
