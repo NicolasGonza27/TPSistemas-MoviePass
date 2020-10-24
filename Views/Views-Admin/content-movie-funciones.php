@@ -4,7 +4,7 @@
 
 <div class="container content espaciado-sup">
     <div class="text-left mb-2">
-        <button class="btn btn-secondary"><a class="boton-atras" href="<?=$_SERVER["HTTP_REFERER"]?>">&larr; Atras</a></button>
+        <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Cine/ShowDashboardView"?>">&larr; Atras</a></button>
     </div>
 
     <table class="table text-white" style="font-weight: bold;">
@@ -61,7 +61,7 @@
                         <td class="text-center"><?php echo $funcion->getFecha_hora()?></td>
                         <form action="<?php echo FRONT_ROOT."Funcion/Remove"?>" method="post">
                             <td class="text-center">
-                                <button type="button" class="btn btn-outline-primary editar_funcion" data-toggle="modal" data-target="<?php echo "#modal".$funcion->getId_funcion()?>">Editar</button>
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$funcion->getId_funcion()?>">Editar</button>
                                 <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $funcion->getId_funcion()?>">Borrar</button>
                             </td>
                         </form> 
@@ -85,7 +85,6 @@
                         <div class="modal-body pl-3 pr-3">
                             <input type="numbre" name="id_funcion" class="hide" value="<?php echo $funcion->getId_funcion()?>"/>
                             <input type="numbre" name="id_pelicula" class="hide" value="<?php echo $funcion->getId_pelicula()?>"/>
-                            
                             <div class="row form-group pr-3">
                                 <label class="col-6">Sala</label>
                                 <select name="id_sala">
@@ -99,14 +98,10 @@
                                     <?php } ?>
                                 </select>
                             </div>
-                            
+                            <input type="numbre" name="cant_asistentes" class="hide" value="0"/>
                             <div class="row form-group pr-3">
                                 <label class="col-6">Fecha y Hora:</label>
                                 <input type="datetime-local" name="fecha_hora" class="col-6" value="<?php echo $funcion->getFecha_hora()?>" required/>
-                            </div>
-
-                            <div class="row pr-3">
-                                <label class="col-12">Cantidad de asisitentes: <?php echo $funcion->getCant_asistentes()?> personas.</label>
                             </div>
                         </div>
                         <div class="modal-footer">
