@@ -92,9 +92,26 @@
 
         public function getMovieListConFuncion()
         {
-            $movieListRta = $this->movieDAO->GetAllHaveFunciones();
+            $movieList = $this->movieDAO->GetAll();
+            $funcionList = $this->funcionDAO->GetAll();
+            $movieListRta = array();
+
+            foreach($funcionList as $funcion) {
+                foreach($movieList as $movie) {
+                    if (($funcion->getId_pelicula() == $movie->getId()) && (!in_array($movie, $movieListRta))) {
+                        array_push($movieListRta, $movie);
+                    }
+                }
+            }
+
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");
         }
+
+        /* public function getMovieListConFuncion()
+        {
+            $movieListRta = $this->movieDAO->GetAllHaveFunciones();
+            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+        } */
 
         public function getMovieListSinFuncion()
         {
