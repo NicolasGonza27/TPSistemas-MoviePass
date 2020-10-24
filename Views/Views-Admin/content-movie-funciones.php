@@ -4,7 +4,7 @@
 
 <div class="container content espaciado-sup">
     <div class="text-left mb-2">
-        <button class="btn btn-secondary"><a class="boton-atras" href="<?=$_SERVER["HTTP_REFERER"]?>">&larr; Atras</a></button>
+        <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Cine/ShowDashboardView"?>">&larr; Atras</a></button>
     </div>
 
     <table class="table text-white" style="font-weight: bold;">
