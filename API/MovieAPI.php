@@ -83,32 +83,25 @@ class MovieAPI
 
             if(!empty($contentArray)) 
             {
-                  
                     $popularity = $contentArray["popularity"]; 
                     $vote_count = $contentArray["vote_count"];
-                    $video = $contentArray["video"];
                     $poster_path = $contentArray["poster_path"];
                     $id = $contentArray["id"];
                     $adult = $contentArray["adult"];
-                    $backdrop_path = $contentArray["backdrop_path"];
-                    $original_language = $contentArray["original_language"];
-                    $original_title = $contentArray["original_title"];
                     $genre_ids = $contentArray["genres"];
                     $title = $contentArray["title"];
                     $vote_average = $contentArray["vote_average"];
                     $overview = $contentArray["overview"];
                     $release_date = date($contentArray["release_date"]);
                     $runtime = $contentArray["runtime"];
-
                     
-                    $movie = new Movie($popularity,$vote_count,$video,$poster_path,$id,$adult,$backdrop_path,$original_language,
-                    $original_title,$genre_ids,$title,$vote_average,$overview,$release_date, $runtime);
+                    $movie = new Movie($popularity,$vote_count,$poster_path,$id,$adult,$genre_ids,$title,$vote_average,$overview,$release_date, $runtime);
                     
                     return $movie;
-                }
+            }
 
             return false;
-            }
+        }
 
         
 
@@ -122,24 +115,18 @@ class MovieAPI
                 $contentArray = ($jsonContent) ? json_decode($jsonContent, true) : array();
                 foreach($contentArray["results"] as $content)
                 {     
-                    $popularity = $content["popularity"]; 
-                    $vote_count = $content["vote_count"];
-                    $video = $content["video"];
-                    $poster_path = $content["poster_path"];
-                    $id = $content["id"];
-                    $adult = $content["adult"];
-                    $backdrop_path = $content["backdrop_path"];
-                    $original_language = $content["original_language"];
-                    $original_title = $content["original_title"];
-                    $genre_ids = $content["genre_ids"];
-                    $title = $content["title"];
-                    $vote_average = $content["vote_average"];
-                    $overview = $content["overview"];
-                    $release_date = date($content["release_date"]);
-                    //$runtime = $content["runtime"];
-
-                    $movie = new Movie($popularity,$vote_count,$video,$poster_path,$id,$adult,$backdrop_path,$original_language,
-                    $original_title,$genre_ids,$title,$vote_average,$overview,$release_date, 0);
+                    $popularity = $contentArray["popularity"]; 
+                    $vote_count = $contentArray["vote_count"];
+                    $poster_path = $contentArray["poster_path"];
+                    $id = $contentArray["id"];
+                    $adult = $contentArray["adult"];
+                    $genre_ids = $contentArray["genres"];
+                    $title = $contentArray["title"];
+                    $vote_average = $contentArray["vote_average"];
+                    $overview = $contentArray["overview"];
+                    $release_date = date($contentArray["release_date"]);
+                    $runtime = 0;
+                    $movie = new Movie($popularity,$vote_count,$poster_path,$id,$adult,$genre_ids,$title,$vote_average,$overview,$release_date, $runtime);
 
                     array_push($this->movieList, $movie);
                 }
