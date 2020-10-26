@@ -4,6 +4,7 @@
 
     use Models\Movie as Movie;
     use API\MovieGenderAPI as MovieGenderAPI;
+    use DAObd\MovieDAO as MovieDAO;
 
 class MovieAPI
     {
@@ -19,6 +20,12 @@ class MovieAPI
         public function GetAll()
         {
             $this->RetrieveData();
+            return $this->movieList;
+        }
+
+        public function GetAllOutCartelera()
+        {   
+            $this->RetrieveDataOutCartelera();
             return $this->movieList;
         }
 
@@ -104,6 +111,58 @@ class MovieAPI
         }
 
         
+        public function RetrieveDataOutCartelera()
+        {
+            $this->movieList = array();
+            $movieDAO = new MovieDAO();
+
+            for($i = 1; $i < 10; $i++)
+            {
+                $jsonContent = file_get_contents($this->fileName."&page=$i");
+                $contentArray = ($jsonContent) ? json_decode($jsonContent, true) : array();
+                foreach($contentArray["results"] as $content)
+                {   
+                                 
+                    if($movieDAO->GetOne($content["id"], true))
+                    {
+                        $popularity = $content["popularity"]; 
+                        $vote_count = $content["vote_count"];
+                        $poster_path = $content["poster_path"];
+                        $id = $content["id"];
+                        $adult = $content["adult"];
+                        $genre_ids = $content["genre_ids"];
+                        $title = $content["title"];
+                        $vote_average = $content["vote_average"];
+                        $overview = $content["overview"];
+                        $release_date = date($content["release_date"]);
+                        $runtime = 0;
+                        $movie = new Movie($popularity,$vote_count,$poster_path,$id,$adult,$genre_ids,$title,$vote_average,$overview,$release_date, $runtime);
+
+                        array_push($this->movieList, $movie);
+                    }
+                    else 
+                    {
+                        if(!$movieDAO->GetOne($content["id"], false))
+                        {
+                            $popularity = $content["popularity"]; 
+                            $vote_count = $content["vote_count"];
+                            $poster_path = $content["poster_path"];
+                            $id = $content["id"];
+                            $adult = $content["adult"];
+                            $genre_ids = $content["genre_ids"];
+                            $title = $content["title"];
+                            $vote_average = $content["vote_average"];
+                            $overview = $content["overview"];
+                            $release_date = date($content["release_date"]);
+                            $runtime = 0;
+                            $movie = new Movie($popularity,$vote_count,$poster_path,$id,$adult,$genre_ids,$title,$vote_average,$overview,$release_date, $runtime);
+    
+                            array_push($this->movieList, $movie);
+                        }
+                    } 
+                }
+            }   
+        }
 
         public function RetrieveData()
         {
@@ -115,16 +174,16 @@ class MovieAPI
                 $contentArray = ($jsonContent) ? json_decode($jsonContent, true) : array();
                 foreach($contentArray["results"] as $content)
                 {     
-                    $popularity = $contentArray["popularity"]; 
-                    $vote_count = $contentArray["vote_count"];
-                    $poster_path = $contentArray["poster_path"];
-                    $id = $contentArray["id"];
-                    $adult = $contentArray["adult"];
-                    $genre_ids = $contentArray["genres"];
-                    $title = $contentArray["title"];
-                    $vote_average = $contentArray["vote_average"];
-                    $overview = $contentArray["overview"];
-                    $release_date = date($contentArray["release_date"]);
+                    $popularity = $content["popularity"]; 
+                    $vote_count = $content["vote_count"];
+                    $poster_path = $content["poster_path"];
+                    $id = $content["id"];
+                    $adult = $content["adult"];
+                    $genre_ids = $content["genres"];
+                    $title = $content["title"];
+                    $vote_average = $content["vote_average"];
+                    $overview = $content["overview"];
+                    $release_date = date($content["release_date"]);
                     $runtime = 0;
                     $movie = new Movie($popularity,$vote_count,$poster_path,$id,$adult,$genre_ids,$title,$vote_average,$overview,$release_date, $runtime);
 

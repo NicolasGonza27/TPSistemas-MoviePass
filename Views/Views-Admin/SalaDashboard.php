@@ -12,8 +12,9 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th>Numero</th>
-                    <th>Nombre</th>
+                    <th class="text-center">Numero</th>
+                    <th class="text-center">Tipo de sala</th>
+                    <th class="text-center">Nombre</th>
                     <th class="text-center">Cantidad de Butacas</th>
                     <th class="text-center">Opciones</th>
                 </tr>
@@ -21,9 +22,13 @@
             <tbody class="bg-white">
                 <?php foreach($listaSala as $sala) { ?>
                     <tr>
-                        <td><?php echo $sala->getNumero_sala()?></td>
-                        <td><?php echo $sala->getNombre_sala()?></td>
-                        <td><?php echo $sala->getCant_butacas()?></td>
+                        <td class="text-center"><?php echo $sala->getNumero_sala()?></td>
+                        <td class="text-center"><?php foreach($listTiposSalas as $tipoSala)
+                            {
+                                if($tipoSala->getId_tipo_sala() ==  $sala->getId_tipo_sala()) {echo $tipoSala->getNombre_tipo_sala();}
+                            } ?></td>
+                        <td class="text-center"><?php echo $sala->getNombre_sala()?></td>
+                        <td class="text-center"><?php echo $sala->getCant_butacas()?></td>
                         <form action="<?php echo FRONT_ROOT."Sala/Remove"?>" method="post">
                             <td class="text-center">
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$sala->getId_sala()?>">Editar</button>
@@ -52,11 +57,34 @@
                     </button>
                 </div>
                 <div class="modal-body pl-3 pr-3">
-                    <input type="numbre" name="id_sala" class="hide" value="<?php echo $sala->getId_sala()?>"/>
-                    <input type="numbre" name="id_cine" class="hide" value="<?php echo $sala->getId_cine()?>"/>
+                    <input type="number" name="id_sala" class="hide" value="<?php echo $sala->getId_sala()?>"/>
+                    <input type="number" name="id_cine" class="hide" value="<?php echo $sala->getId_cine()?>"/>
                     <div class="row form-group pr-3">
                         <label class="col-6">Numero:</label>
-                        <input type="number" name="numero_sala" class="col-6" value="<?php echo $sala->getNumero_sala()?>" required/>
+                        <input type="number" name="numero_sala" class="col-6" disabled value="<?php echo $sala->getNumero_sala()?>" required/>
+                        <!--Input necesario par el correcto envio de datos (con disabled value no se mandan) -->
+                        <input type="number" name="numero_sala" class="hide" value="<?php echo $sala->getNumero_sala()?>" required/>
+                    </div>
+
+                    <div class="row form-group pr-3">
+                    <label class="col-6">Tipo de Sala</label>
+                        <select name="tipo_sala" class="col-6" required>
+                            <?php foreach($listTiposSalas as $tipoSala) 
+                            { 
+                                    if($tipoSala->getId_tipo_sala() == $sala->getId_tipo_sala())
+                                    {
+                                    ?>
+                                    <option selected value="<?php echo $tipoSala->getId_tipo_sala(); ?>"><?php echo $tipoSala->getNombre_tipo_sala(); ?></option>
+                                    <?php
+                                    }
+                                    else
+                                    {
+                                    ?>
+                                    <option value="<?php echo $tipoSala->getId_tipo_sala(); ?>"><?php echo $tipoSala->getNombre_tipo_sala(); ?></option>
+                            <?php   }
+                            } ?>
+                            
+                        </select>
                     </div>
 
                     <div class="row form-group pr-3">
@@ -66,7 +94,7 @@
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Cantidad de butacas:</label>
-                        <input type="number" name="cant_butacas" class="col-6" value="<?php echo $sala->getCant_butacas()?>" required/>
+                        <input type="number" min=0 name="cant_butacas" class="col-6" value="<?php echo $sala->getCant_butacas()?>" required/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -91,12 +119,30 @@
                     </button>
                 </div>
                 <div class="modal-body pl-3 pr-3">
-                    <input type="numbre" name="id_cine" value="<?php echo $cine->getId()?>" class="hide"/>
+                    <input type="number" name="id_cine" value="<?php echo $cine->getId()?>" class="hide"/>
+                    
                     <div class="row form-group pr-3">
                         <label class="col-6">Numero:</label>
-                        <input type="number" name="numero_sala" class="col-6" required/>
+                        <input type="number" name="numero_sala" disabled value="<?php echo $lastIdOfSalaByCine + 1;?>" class="col-6" required/>
+                        <!--Input necesario par el correcto envio de datos (con disabled value no se mandan) -->
+                        <input type="number" name="numero_sala" value="<?php echo $lastIdOfSalaByCine + 1;?>" class="hide"/>
                     </div>
+                    
+                    <div class="row form-group pr-3">
 
+                    <label class="col-6">Tipo de Sala:</label>
+                        <select name="tipo_sala" class="col-6" required>
+
+                            <option value="" disabled selected>Elija una opción</option>
+                            
+                            <?php foreach($listTiposSalas as $tipoSala) { ?>
+                                <option value="<?php echo $tipoSala->getId_tipo_sala(); ?>"><?php echo $tipoSala->getNombre_tipo_sala(); ?></option>
+                            <?php } ?>
+                            
+                        </select>
+
+                    </div>
+  
                     <div class="row form-group pr-3">
                         <label class="col-6">Nombre:</label>
                         <input type="text" name="nombre_sala" class="col-6" required/>

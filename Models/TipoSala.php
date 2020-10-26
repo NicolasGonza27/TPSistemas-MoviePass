@@ -1,6 +1,6 @@
 <?php 
 
-    namespace TipoSala;
+    namespace Models;
 
     class TipoSala
     {

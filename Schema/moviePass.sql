@@ -10,13 +10,14 @@ numero int not null,
 hora_apertura time not null,
 hora_cierre time not null,
 valor_entrada float(5) not null,
-eliminado boolean not null,
+eliminado boolean not null default false,
 constraint PK_cines primary key (id_cine)
 );
 
 create table generos (
 id_genero int not null,				
 nombre_genero varchar(20),
+eliminado boolean not null default false,
 constraint PK_generos primary key (id_genero)
 );
 
@@ -26,13 +27,12 @@ vote_count int,
 poster_path varchar(50),
 id int not null,
 adult boolean,
-original_language varchar(15),
 title varchar(20),
 vote_average float,
 overview varchar(100),
 release_date date,
 runtime int,
-eliminado boolean,
+eliminado boolean not null default false,
 constraint PK_peliculas primary key (id)
 );
 
@@ -41,14 +41,15 @@ id_peliculasXGenero int auto_increment,
 id_pelicula int not null,
 id_genero int not null,
 constraint PK_peliculasXGenero primary key (id_peliculasXGenero),
-constraint FK_peliculasXGenero_peliculas foreign key (id_pelicula) references peliculas (id) on delete cascade on update cascade,
+constraint FK_peliculasXGenero_peliculas foreign key (id_pelicula) references peliculas_cartelera (id) on delete cascade on update cascade,
 constraint FK_peliculasXGenero_generos foreign key (id_genero) references generos (id_genero) on delete cascade on update cascade,
 constraint unique_peliculasXGenero unique (id_pelicula,id_genero)
 );
 
 create table tipos_sala(
 id_tipo_sala int auto_increment,
-nombre_tipo_sala varchar (30),
+nombre_tipo_sala varchar (30) not null,
+eliminado boolean not null default false,
 constraint PK_salas primary key (id_tipo_sala)
 );
 
@@ -59,7 +60,7 @@ id_cine int not null,
 numero_sala int not null,
 nombre_sala varchar (20),
 cant_butacas int not null,
-eliminado boolean not null,
+eliminado boolean not null default false,
 constraint PK_salas primary key (id_sala),
 constraint FK_salas_cines foreign key (id_cine) references cines (id_cine) on delete cascade on update cascade,
 constraint FK_salas_tipos_sala foreign key (id_tipo_sala) references tipos_sala (id_tipo_sala) on delete cascade on update cascade,
@@ -72,15 +73,16 @@ id_pelicula int not null,
 id_sala int not null,
 cant_asistentes int not null,
 fecha_hora timestamp not null,
-eliminado boolean not null,
+eliminado boolean not null default false,
 constraint PK_funciones primary key (id_funcion),
-constraint FK_funciones_peliculas foreign key (id_pelicula) references peliculas (id) on delete cascade on update cascade,
+constraint FK_funciones_peliculas foreign key (id_pelicula) references peliculas_cartelera (id) on delete cascade on update cascade,
 constraint FK_funciones_salas foreign key (id_sala) references salas (id_sala) on delete cascade on update cascade
 );
 
 create table tipos_usuario(
 id_tipo_usuario int not null auto_increment,
 nombre_tipo_usuario varchar (30),
+eliminado boolean not null default false,
 constraint PK_tipos_usuario primary key (id_tipo_usuario)
 );
 
@@ -93,6 +95,7 @@ dni varchar(30),
 email varchar(30),
 contraseña varchar(30),
 fecha_nac date,
+eliminado boolean not null default false,
 constraint PK_usuarios primary key (id_usuario),
 constraint FK_usuarios_tipos_usuario foreign key (id_tipo_usuario) references tipos_usuario (id_tipo_usuario) on delete cascade on update cascade
 );
@@ -102,6 +105,7 @@ id_politica_descuento int not null auto_increment,
 porcentaje_descuento float not null,
 dias_descuento varchar (20),
 descripcion varchar (20),
+eliminado boolean not null default false,
 constraint PK_politicas_descuento primary key (id_politica_descuento) 
 );
 
@@ -112,6 +116,7 @@ id_usuario int not null,
 id_politica_descuento int,
 cant_entradas int,
 monto float,
+eliminado boolean not null default false,
 constraint PK_compras primary key (id_compra),
 constraint PK_compras foreign key (id_usuario) references usuarios (id_usuario) on delete cascade on update cascade,
 constraint FK_compras_politicas_descuento foreign key (id_politica_descuento) references politicas_descuento (id_politica_descuento) on delete cascade on update cascade
@@ -122,6 +127,7 @@ id_entrada int not null auto_increment,
 id_compra int not null,
 id_funcion int not null,
 nro_entrada int not null,
+eliminado boolean not null default false,
 constraint PK_entradas primary key (id_entrada),
 constraint FK_entradas_funciones foreign key (id_funcion) references funciones (id_funcion) on delete cascade on update cascade,
 constraint FK_entradas_compras foreign key (id_compra) references compras (id_compra) on delete cascade on update cascade,
@@ -134,7 +140,7 @@ select
 f.id_funcion,
 p.id,
 p.title
-from peliculas p
+from peliculas_cartelera p
 inner join funciones f
 on p.id = f.id_pelicula;
 
@@ -142,14 +148,32 @@ on p.id = f.id_pelicula;
 select 
 f.id_funcion,
 p.title
-from peliculas p
+from peliculas_cartelera p
 inner join funciones f
 on p.id = f.id_pelicula
 where id = 425001;
 
+
+select 
+*
+from cines;
+
+select 
+*
+from generos;
+
+select 
+*
+from peliculas_cartelera;
+
+
 select 
 *
 from peliculasXGenero;
+
+select 
+*
+from tipos_sala;
 
 select 
 *

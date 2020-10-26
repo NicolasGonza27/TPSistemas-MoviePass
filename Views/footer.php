@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 10px;">
   <footer id="footer" class="clear"></footer>
   <div id="copyright" class="clear text-white text-center"> 
-    <p >Copyright &copy; <?php echo date('Y'); ?> - All Rights Reserved - NO ES UTN Laboratorio IV</p>
+    <p >Copyright &copy; <?php echo date('Y'); ?> - All Rights Reserved - UTN - Metodologia de Sitemas I - Laboratorio IV</p>
   </div>
 </div>
 
