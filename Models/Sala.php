@@ -5,14 +5,16 @@
     class Sala
     {
         private $id_sala;
+        private $id_tipo_sala;
         private $id_cine;
         private $numero_sala;
         private $nombre_sala;
         private $cant_butacas;
 
-        public function __construct($id_sala,$id_cine,$numero_sala,$nombre_sala,$cant_butacas)
+        public function __construct($id_sala = null,$id_tipo_sala,$id_cine,$numero_sala,$nombre_sala,$cant_butacas)
         {
             $this->id_sala = $id_sala;
+            $this->id_tipo_sala = $id_tipo_sala;
             $this->id_cine = $id_cine;
             $this->numero_sala = $numero_sala;
             $this->nombre_sala = $nombre_sala;
@@ -29,6 +31,16 @@
         {
                 $this->id_sala = $id_sala;
         }
+
+        public function getId_tipo_sala()
+        {
+                return $this->id_tipo_sala;
+        }
+ 
+        public function setId_tipo_sala($id_tipo_sala)
+        {
+                $this->id_tipo_sala = $id_tipo_sala;
+        } 
 
         public function getId_cine()
         {
@@ -70,7 +82,6 @@
                 $this->cant_butacas = $cant_butacas;
         }
 
-        
     }
     
 ?>

@@ -12,12 +12,14 @@
     {   
 
         private $connection;
-        private $tableName = "peliculas";
+        private $tableName = "peliculas_cartelera";
+
     
         public function refresh()
         {
             try 
             {
+
                 $movieAPI = new MovieAPI();
                 $movieList = $movieAPI->GetAll();
                 
@@ -73,46 +75,47 @@
             }
         }
 
-        public function Add($movie)
+        public function Add($id)
         {
             try 
             {
                 $movieAPI = new MovieAPI();
-                $newMovie = $movieAPI->GetOne($movie->getId());
+                $movie = $movieAPI->GetOne($id);
 
-                $query = "INSERT INTO ".$this->tableName."(popularity,vote_count,poster_path,id,adult,title,vote_average,overview,release_date,runtime) 
-                VALUES (:popularity,:vote_count,:poster_path,:id,:adult,:title,:vote_average,:overview,:release_date,:runtime);";
-                
-                $this->connection = Connection::GetInstance();
-
-                $parameters["popularity"] = $newMovie->getPopularity();
-                $parameters["vote_count"] = $newMovie->getVote_count();
-                $parameters["poster_path"] = $newMovie->getPoster_path();
-                $parameters["id"] = $newMovie->getId();
-                $parameters["adult"] = $newMovie->getAdult();
-                $parameters["title"] = $newMovie->getTitle();
-                $parameters["vote_average"] = $newMovie->getVote_average();
-                $parameters["overview"] = $newMovie->getOverview();
-                $parameters["release_date"] = $newMovie->getRelease_date();
-                $parameters["runtime"] = $newMovie->getRuntime();
-
-                $this->connection->ExecuteNonQuery($query,$parameters);
-                
-                $genders = $newMovie->getAllGenre_ids();
-
-                foreach($genders as $gender)
+                if($movie)
                 {
-
-                    $queryGender = "INSERT INTO peliculasXGenero (id_pelicula,id_genero) VALUES (:id_pelicula,:id_genero);";
-                
+                    $query = "INSERT INTO ".$this->tableName." (popularity,vote_count,poster_path,id,adult,title,vote_average,overview,release_date,runtime) 
+                    VALUES (:popularity,:vote_count,:poster_path,:id,:adult,:title,:vote_average,:overview,:release_date,:runtime);";
+                    
                     $this->connection = Connection::GetInstance();
 
-                    $parametersGender["id_pelicula"] = $newMovie->getId();
-                    $parametersGender["id_genero"] = $gender["id"];
-                    
-                    
+                    $parameters["popularity"] = $movie->getPopularity();
+                    $parameters["vote_count"] = $movie->getVote_count();
+                    $parameters["poster_path"] = $movie->getPoster_path();
+                    $parameters["id"] = $movie->getId();
+                    $parameters["adult"] = $movie->getAdult();
+                    $parameters["title"] = $movie->getTitle();
+                    $parameters["vote_average"] = $movie->getVote_average();
+                    $parameters["overview"] = $movie->getOverview();
+                    $parameters["release_date"] = $movie->getRelease_date();
+                    $parameters["runtime"] = $movie->getRuntime();
 
-                    $this->connection->ExecuteNonQuery($queryGender,$parametersGender);
+                    $this->connection->ExecuteNonQuery($query,$parameters);
+                    
+                    $genders = $movie->getAllGenre_ids();
+
+                    foreach($genders as $gender)
+                    {
+
+                        $queryGender = "INSERT INTO peliculasXGenero (id_pelicula,id_genero) VALUES (:id_pelicula,:id_genero);";
+                    
+                        $this->connection = Connection::GetInstance();
+
+                        $parametersGender["id_pelicula"] = $movie->getId();
+                        $parametersGender["id_genero"] = $gender["id"];
+
+                        $this->connection->ExecuteNonQuery($queryGender,$parametersGender);
+                    }
                 }
 
             }
@@ -127,11 +130,13 @@
         {
             try 
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE eliminado = $eliminado;";
+                $query = "SELECT * FROM ".$this->tableName." WHERE eliminado = :eliminado;";
+
+                $parameters["eliminado"] = false;
 
                 $this->connection = Connection::GetInstance();
 
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->connection->Execute($query,$parameters);
 
                 $newResultSet =  $this->mapear($resultSet);
 
@@ -143,18 +148,19 @@
             }
         }
 
-        public function GetAllByGender($id_genero)
+        public function GetAllByGender($id_genero,bool $eliminado = false)
         {
             try 
             {
                 $query = "SELECT
                 *
                 FROM peliculasXGenero pxq
-                INNER JOIN peliculas p
+                INNER JOIN peliculas_cartelera p
                 ON p.id = pxq.id_pelicula
-                WHERE pxq.id_genero = :id_genero;";
+                WHERE (pxq.id_genero = :id_genero) AND (p.eliminado = :eliminado);";
                 
                 $parameters["id_genero"] = $id_genero;
+                $parameters["eliminado"] = $eliminado;
 
                 $this->connection = Connection::GetInstance();
 
@@ -174,11 +180,19 @@
         {   
             try 
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE (".$this->tableName."release_date >= $date) AND (WHERE eliminado = $eliminado;)";
+                $query = "SELECT 
+                          * 
+                          FROM 
+                          ".$this->tableName." 
+                          WHERE (release_date >= :date) AND (eliminado = :eliminado); ";
 
+
+                $parameters["date"] = $date;
+                $parameters["eliminado"] = $eliminado;
+                
                 $this->connection = Connection::GetInstance();
 
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->connection->Execute($query,$parameters);
 
                 $newResultSet =  $this->mapear($resultSet);
 
@@ -190,26 +204,59 @@
             }
         }
 
-        public function GetOne($id_movie)
+        public function GetOne($id_movie, bool $eliminado = false)
         {
             try 
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE ".$this->tableName.".id = :id";
+                $query = "SELECT * FROM ".$this->tableName." WHERE (id = :id) AND (eliminado = :eliminado);";
 
                 $this->connection = Connection::GetInstance();
 
                 $parameters["id"] = $id_movie;
+                $parameters["eliminado"] = $eliminado;
 
                 $resultSet = $this->connection->Execute($query,$parameters);
 
                 $newResultSet =  $this->mapear($resultSet);
+                
+                if(!empty($newResultSet))
+                {
+                    return  $newResultSet[0];
+                }
 
-                return  $newResultSet[0];
+                return  false;
             }
             catch(PDOException $e)
             {
                 echo $e->getMessage();
             }
+        }
+
+
+
+        public function Remove($id_movie)
+        {
+            try 
+            {
+
+                $query = "UPDATE ".$this->tableName." SET eliminado = :eliminado
+                WHERE (id = :id);";
+
+                $this->connection = Connection::GetInstance();
+
+                $parameters['id'] = $id_movie;
+                $parameters['eliminado'] = true;
+
+                $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
+
+                return $cantRows;
+
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+
         }
 
         protected function mapear($movies)

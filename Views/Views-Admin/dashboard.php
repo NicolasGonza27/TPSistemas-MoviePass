@@ -46,7 +46,8 @@
     </div>
 </div>
 
-<?php foreach($listaCine as $cine) { ?>
+<?php 
+foreach($listaCine as $cine) { ?>
 <!-- This is the modal -->
 <div class="modal fade" id="<?php echo "modal".$cine->getId()?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
     <div class="modal-dialog">

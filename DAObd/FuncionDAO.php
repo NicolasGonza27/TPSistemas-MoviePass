@@ -19,8 +19,8 @@
 
             try 
             {
-               $query = "INSERT INTO ".$this->tableName." (id_pelicula,id_sala,cant_asistentes,fecha_hora) VALUES 
-               (:id_pelicula,:id_sala,:cant_asistentes,:fecha_hora);";
+               $query = "INSERT INTO ".$this->tableName." (id_pelicula,id_sala,cant_asistentes,fecha_hora,eliminado) VALUES 
+               (:id_pelicula,:id_sala,:cant_asistentes,:fecha_hora,:eliminado);";
                 
                $this->connection = Connection::GetInstance();
                
@@ -44,11 +44,13 @@
         {
             try 
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE eliminado = $eliminado;";
+                $query = "SELECT * FROM ".$this->tableName." WHERE eliminado = :eliminado;";
+
+                $parameters["eliminado"] = $eliminado;
 
                 $this->connection = Connection::GetInstance();
 
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->connection->Execute($query,$parameters);
 
                 if($resultSet) 
                 {
@@ -71,12 +73,13 @@
             {
                 $query = "SELECT 
                 *
-                FROM peliculas p
+                FROM peliculas_cartelera p
                 INNER JOIN funciones f
                 ON p.id = f.id_pelicula
-                WHERE id = :id;";
+                WHERE (id = :id) AND (f.eliminado = :eliminado);";
 
                 $parameters["id"] = $id_movie;
+                $parameters["eliminado"] = false;
 
                 $this->connection = Connection::GetInstance();
 
@@ -106,9 +109,10 @@
                 FROM salas s
                 INNER JOIN funciones f
                 ON s.id_sala = f.id_sala
-                WHERE s.id_sala = :id_sala;";
+                WHERE (s.id_sala = :id_sala) AND (f.eliminado = :eliminado);";
 
                 $parameters["id_sala"] = $id_sala;
+                $parameters["eliminado"] = false;
 
                 $this->connection = Connection::GetInstance();
 
@@ -178,14 +182,7 @@
 
                 $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
 
-                if($cantRows)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return $cantRows;
 
             }
             catch(PDOException $e)
@@ -209,7 +206,7 @@
                 $parameters["cant_asistentes"] = $newFuncion->getCant_asistentes();
                 $parameters["fecha_hora"] = $newFuncion->getFecha_hora();
 
-                $return = $this->connection->ExecuteNonQuery($query,$parameters);
+                return $this->connection->ExecuteNonQuery($query,$parameters);
 
             }
             catch(PDOException $e)
