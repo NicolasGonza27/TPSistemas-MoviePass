@@ -26,10 +26,6 @@
                 <td><?php echo $movie->getVote_average()?></td>
             </tr>
             <tr>
-                <td class="text-uppercase">Original language</td>
-                <td><?php echo $movie->getOriginal_language()?></td>
-            </tr>
-            <tr>
                 <td class="text-uppercase">Overview</td>
                 <td><?php echo $movie->getOverview()?></td>
             </tr>

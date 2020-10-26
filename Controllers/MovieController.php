@@ -1,37 +1,49 @@
 <?php 
 
     namespace Controllers;
-
-
-
+    use API\MovieAPI;
     use DAObd\MovieDAO as MovieDAO;
     use Controllers\FuncionController as FuncionController;
+    use Models\Movie;
 
-    class MovieController
+class MovieController
     {
         private $movieDAO;
+        private $movieAPI;
         
         public function __construct()
         {
             $this->movieDAO = new MovieDAO();
+            $this->movieAPI = new MovieAPI();
             $this->funcionController = new FuncionController();
             $listFuncion=array();
 
         }
         
-        public function GetAll()
+        public function AddCartelera($id_movie)
+        {
+            $this->movieDAO->Add($id_movie);
+            $this->GetMovieOutCartelera();
+        }
+
+        public function GetAllCartelera()
         {
             return $this->movieDAO->getAll();
         }
         
-        public function GetAllByGender($id_gender)
+        public function GetAllCarteleraByGender($id_gender)
         {
             return $this->movieDAO->GetAllByGender($id_gender);
         }
 
-        public function GetAllByDate($id)
+        public function GetAllCarteleraByDate($id)
         { 
             return $this->movieDAO->GetAllByDate($id);
+        }
+
+        public function GetAllOutCartelera()
+        {
+            return $this->movieAPI->GetAllOutCartelera();
         }
 
         public function Refresh()
@@ -62,7 +74,7 @@
                 }
             }
             
-            $listMovie = $this->GetAllByGender($id_gender);
+            $listMovie = $this->GetAllCarteleraByGender($id_gender);
             $_SESSION["busqueda"] = $id_gender;
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
@@ -77,10 +89,23 @@
                 }
             }
            
-            $listMovie = $this->GetAllByDate($date);
+            $listMovie = $this->GetAllCarteleraByDate($date);
             $_SESSION["busqueda"] = $date;
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
+
+        public function GetCartelera()
+        {
+            $movieListRta = $this->GetAllCartelera();
+            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+        }
+
+        public function GetMovieOutCartelera()
+        {
+            $movieListRta = $this->GetAllOutCartelera();
+            require_once(VIEWS_PATH."Views-Admin/movies-out-cartelera.php");
+        }
+
 
     }   
 

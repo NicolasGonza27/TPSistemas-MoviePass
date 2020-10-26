@@ -17,7 +17,7 @@
         {
             try 
             {
-               $query = "INSERT INTO cines (nombre_cine,calle,numero,hora_apertura,hora_cierre,valor_entrada) VALUES (:nombre_cine,:calle,:numero,:hora_apertura,:hora_cierre,:valor_entrada);";
+               $query = "INSERT INTO cines (nombre_cine,calle,numero,hora_apertura,hora_cierre,valor_entrada,eliminado) VALUES (:nombre_cine,:calle,:numero,:hora_apertura,:hora_cierre,:valor_entrada,:eliminado);";
 
                $parameters["nombre_cine"] = $cine->getNombre();
                $parameters["calle"] = $cine->getCalle();
@@ -25,7 +25,6 @@
                $parameters["hora_apertura"] = $cine->getHor_apertura();
                $parameters["hora_cierre"] = $cine->getHor_cierre();
                $parameters["valor_entrada"] = $cine->getValor_entrada();
-
                $parameters["eliminado"] = false;
                
 
@@ -44,11 +43,13 @@
         {
             try 
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE eliminado = $eliminado;";
+                $query = "SELECT * FROM ".$this->tableName." WHERE eliminado = :eliminado;";
+
+                $parameters["eliminado"] = $eliminado;
 
                 $this->connection = Connection::GetInstance();
 
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->connection->Execute($query,$parameters);
 
                 if($resultSet) 
                 {

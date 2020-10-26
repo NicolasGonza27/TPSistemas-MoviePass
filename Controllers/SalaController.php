@@ -3,33 +3,38 @@
 
     use DAObd\CineDAO as CineDAO;
     use DAObd\SalaDAO as SalaDAO;
-    use Models\Sala as Sala;
+use DAObd\TipoSalaDAO;
+use Models\Sala as Sala;
 
     class SalaController
     {
+
+        private $tipoSalaDao;
         private $salaDAO;
         private $cineDAO;
         
         public function __construct()
         {
+            $this->tipoSalaDao = new TipoSalaDAO();
             $this->salaDAO = new SalaDAO();
             $this->cineDAO = new CineDAO();
         }
         
         
         public function ShowSalaDashboardView($id_cine)
-        {
+        {   
             $cine = $this->cineDAO->GetOne($id_cine);
             $listaSala = $this->GetAllByCine($id_cine);
+            $listTiposSalas = $this->tipoSalaDao->GetAll();
+            $lastIdOfSalaByCine = $this->salaDAO->GetLastSalaNumberByCine($cine->GetId());
             require_once(VIEWS_PATH."Views-Admin/SalaDashboard.php");
         }
 
     
-        public function Add($id_cine, $numero_sala, $nombre_sala, $cant_butacas)
+        public function Add($id_cine,$numero_sala,$tipo_sala, $nombre_sala, $cant_butacas)
         {
-            $sala = new Sala(null, $id_cine, $numero_sala, $nombre_sala, $cant_butacas);
+            $sala = new Sala(null,$tipo_sala, $id_cine, $numero_sala, $nombre_sala, $cant_butacas);
             $this->salaDAO->Add($sala);
-
             $this->ShowSalaDashboardView($id_cine);
         }
 
@@ -51,9 +56,9 @@
 
         }
 
-        public function ModifyModal($id_sala, $id_cine, $numero_sala, $nombre_sala, $cant_butacas)
+        public function ModifyModal($id_sala, $id_cine, $numero_sala,$tipo_sala, $nombre_sala, $cant_butacas)
         {
-            $sala  = new Sala($id_sala, $id_cine, $numero_sala, $nombre_sala, $cant_butacas);
+            $sala  = new Sala($id_sala, $tipo_sala,$id_cine, $numero_sala, $nombre_sala, $cant_butacas);
             $this->salaDAO->Modify($id_sala, $sala);
             
             $this->ShowSalaDashboardView($id_cine);

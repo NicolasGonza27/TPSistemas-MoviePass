@@ -86,7 +86,6 @@
 
         public function ShowCarteleraViews()
         {
-
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");
         }
 

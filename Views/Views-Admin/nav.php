@@ -12,8 +12,8 @@
                     Cartelera
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT."Funcion/getMovieListConFuncion"?>">Peliculas en Cartelera</a>
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT."Funcion/getMovieListSinFuncion"?>">Peliculas sin funciones</a>
+                        <a class="dropdown-item" href="<?php echo FRONT_ROOT."Movie/GetCartelera"?>">Peliculas en Cartelera</a>
+                        <a class="dropdown-item" href="<?php echo FRONT_ROOT."Movie/GetMovieOutCartelera"?>">Peliculas fuera de Cartelera</a>
                     </div>
                 </li>
             </ul>
