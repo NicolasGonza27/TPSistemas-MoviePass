@@ -15,30 +15,41 @@
           </button>
         </div>
         <div class="modal-body">
+          
           <div class="row form-group pr-3">
-            <label class="col-6">Nombre Completo</label>
-            <input type="text" name="nombreYApellido" class="col-6" required/>
+            <label class="col-6">Nombre</label>
+            <input type="text" name="nombre" class="col-6" required/>
           </div>
+
+          <div class="row form-group pr-3">
+            <label class="col-6">Apellido</label>
+            <input type="text" name="apellido" class="col-6" required/>
+          </div>
+
           <div class="row form-group pr-3">
             <label class="col-6">Dni</label>
             <input type="text" name="dni" class="col-6" required/>
           </div>
+          
           <div class="row form-group pr-3">
             <label class="col-6">Email</label>
             <input type="email" name="email" class="col-6" required/>
           </div>
+          
           <div class="row form-group pr-3">
             <label class="col-6">Password</label>
             <input type="password" name="password" class="col-6" required/>
           </div>
+          
           <div class="row form-group pr-3">
             <label class="col-6">Fecha de Nacimiento </label>
             <input type="date" id="fecha_nac" name="fecha_nac" min="1910-01-01" max="<?php echo date("Y").'-'.date("m").'-'.(date("d")-1);?>" class="col-6" required/>
           </div>
+
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Inscribirse</button>
+          <button type="submit" class="btn btn-primary">Registrarme</button>
         </div>
       </form>  
     </div>

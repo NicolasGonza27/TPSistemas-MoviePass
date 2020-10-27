@@ -1,8 +1,6 @@
 <?php
     namespace DAO;
 
-    namespace DAO;
-
     use DAO\IUsuarioDAO as IUsuarioDAO;
     use Models\Usuario as Usuario;
 

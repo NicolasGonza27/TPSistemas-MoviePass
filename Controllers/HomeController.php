@@ -2,7 +2,7 @@
     namespace Controllers;
 
     use DAObd\CineDAO as CineDAO;
-    use DAO\UsuarioDAO as UsuarioDAO;
+    use DAObd\UsuarioDAO as UsuarioDAO;
 
     class HomeController
     {   
@@ -60,20 +60,25 @@
 
         public function Login($email,$password)
         {
-            $user = $this->usuarioDAO->SearchUser($email,$password);
+            $user = $this->usuarioDAO->GetOneByEmail($email);
 
             if($user)
             {
-                $_SESSION["userLogged"] = $user;
-
-                if($user->getIs_admin())
-                {   
-                    $this->ShowDashboardView();
-                }
-                else
-                {
-                    require_once(VIEWS_PATH ."Views-Cliente/home-client.php");
-                }
+                if($user->GetPassword() == $password)
+                    
+                    $_SESSION["userLogged"] = $user;
+                    
+                    if($user->getId_tipo_usuario() == 1)
+                    {   
+                        $this->ShowDashboardView();
+                    }
+                    else
+                    {
+                        if($user->getId_tipo_usuario() == 2) 
+                        {
+                            require_once(VIEWS_PATH ."Views-Cliente/home-client.php");
+                        }
+                    }
             }
             else
             {

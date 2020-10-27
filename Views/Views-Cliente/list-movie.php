@@ -9,7 +9,7 @@
         {
             foreach($listMovie as $movie) { ?>
                 <div class="col-2">
-                    <form action="<?php echo FRONT_ROOT.'Movie/ShowContentViews';?>" method="post">
+                    <form action="<?php echo FRONT_ROOT.'Funcion/ShowContentMovieFuncionesViewsCliente';?>" method="post">
                         <?php if( $movie->getPoster_path()) {?>
                         
                             <input class="hide" name="id" type="text" value="<?php echo $movie->getId(); ?>"></input>

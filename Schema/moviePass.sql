@@ -93,13 +93,13 @@ nombre_usuario varchar(30),
 apellido_usuario varchar(30),
 dni varchar(30),
 email varchar(30),
-contraseña varchar(30),
+pass_usuario varchar(30),
 fecha_nac date,
 eliminado boolean not null default false,
 constraint PK_usuarios primary key (id_usuario),
 constraint FK_usuarios_tipos_usuario foreign key (id_tipo_usuario) references tipos_usuario (id_tipo_usuario) on delete cascade on update cascade
 );
-
+alter table usuarios change column contraseña pass_usuario varchar(30);
 create table politicas_descuento(
 id_politica_descuento int not null auto_increment,
 porcentaje_descuento float not null,
@@ -166,7 +166,6 @@ select
 *
 from peliculas_cartelera;
 
-
 select 
 *
 from peliculasXGenero;
@@ -182,3 +181,12 @@ from salas;
 select 
 *
 from funciones;
+
+select 
+*
+from tipos_usuario;
+
+select
+*
+from usuarios;
+describe usuarios;
