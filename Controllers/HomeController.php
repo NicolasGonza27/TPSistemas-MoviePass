@@ -58,6 +58,16 @@
             require_once(VIEWS_PATH."Views-Cliente/filters.php");
         }  
 
+        public function ShowFiltersViewsAdminCartelera()
+        {
+            require_once(VIEWS_PATH."Views-Admin/filterCartelera.php");
+        }  
+        
+        public function ShowFiltersViewsAdminOutCartelera()
+        {
+            require_once(VIEWS_PATH."Views-Admin/filterOutCartelera.php");
+        }  
+
         public function Login($email,$password)
         {
             $user = $this->usuarioDAO->SearchUser($email,$password);

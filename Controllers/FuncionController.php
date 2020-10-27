@@ -155,6 +155,7 @@
 
             $inicTime = strtotime($fecha." ".$hora.":00");
             $finTime = strtotime($fecha." ".$hora.":00") + $runtimeEsper;
+            $midTime = $inicTime + (($finTime - $inicTime) / 2);
             
             foreach($listFunciones as $funcion) {
 
@@ -173,6 +174,7 @@
                 $finFuncion = strtotime($fecha." ".$hora) + $runtimeEsper;
 
                 if((($inicTime >= $inicFuncion) && ($inicTime <= $finFuncion)) ||
+                    (($midTime >= $inicFuncion) && ($midTime <= $finFuncion)) ||
                     (($finTime >= $inicFuncion) && ($finTime <= $finFuncion))) {
                     return false;
                 }

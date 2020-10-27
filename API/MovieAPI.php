@@ -29,6 +29,22 @@ class MovieAPI
             return $this->movieList;
         }
 
+        public function GetAllByTitle($title)
+        {
+            $this->RetrieveData();
+            $moviesByTitle = array();
+
+            foreach($this->movieList as $movie)
+            {   
+                if(strcasecmp($movie->getTitle(),$title) == 0)
+                {   
+                    array_push($moviesByTitle, $movie);
+                }
+            }
+        
+            return $moviesByTitle;
+        }
+
         public function GetAllByGender($name_gender)
         {
             $this->RetrieveData();
@@ -68,19 +84,62 @@ class MovieAPI
             return $moviesByDate;
         }
 
-        public function GetByName($title)
+        public function GetAllByTitleOutCartelera($title)
         {
-            $this->RetrieveData();
+            $this->RetrieveDataOutCartelera();
+            $moviesByTitle = array();
+
+            if($title) 
+            {
+                foreach($this->movieList as $movie)
+                {
+                    if(strcasecmp($movie->getTitle(),$title) == 0)
+                    {   
+                        array_push($moviesByTitle, $movie);
+                    }
+                }
+            }
+            
+            return $moviesByTitle;
+        }
+
+        public function GetAllByGenderOutCartelera($id)
+        {
+            $this->RetrieveDataOutCartelera();
+            $moviesByGender = array();
+
+            $movieGenderAPI = new MovieGenderAPI();
+
+            $gender = $movieGenderAPI->Get($id);
+            
+            if($gender) 
+            {
+                foreach($this->movieList as $movie)
+                {
+                    if($movie->exists_gender_id($gender->getId()))
+                    {
+                        array_push($moviesByGender,$movie);
+                    }
+                }
+            }
+            
+            return $moviesByGender;
+        }
+
+        public function GetAllByDateOutCartelera($date)
+        {   
+            $this->RetrieveDataOutCartelera();
+            $moviesByDate= array();
 
             foreach($this->movieList as $movie)
             {   
-                if(strcasecmp ( $movie->getTitle(),$title ))
+                if($movie->getRelease_date() >= $date)
                 {   
-                    return $movie;
+                    array_push($moviesByDate,$movie);
                 }
             }
         
-            return false;
+            return $moviesByDate;
         }
 
         public function GetOne($id)
@@ -179,7 +238,7 @@ class MovieAPI
                     $poster_path = $content["poster_path"];
                     $id = $content["id"];
                     $adult = $content["adult"];
-                    $genre_ids = $content["genres"];
+                    $genre_ids = $content["genre_ids"];
                     $title = $content["title"];
                     $vote_average = $content["vote_average"];
                     $overview = $content["overview"];

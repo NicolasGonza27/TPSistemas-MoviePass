@@ -22,18 +22,18 @@
                 return $this->movieGenderList;
             }
 
-            public function Get($name_gender)
+            public function Get($id)
             {   
                 $this->RetrieveData();
                 foreach($this->movieGenderList as $movieGender)
                 {   
 
-                    if($movieGender->getName() == $name_gender)
+                    if($movieGender->getId() == $id)
                     {
                         return $movieGender;
                     }
                 }
-            return false;
+                return false;
             }
 
             public function RetrieveData()
