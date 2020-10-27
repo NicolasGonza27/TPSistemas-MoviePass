@@ -84,6 +84,15 @@
             require_once(VIEWS_PATH."Views-Admin/content-movie-funciones.php");
         }
 
+        public function ShowContentMovieFuncionesViewsCliente($id)
+        {
+            $movie = $this->movieDAO->GetOne($id);
+            $listFunciones = $this->funcionDAO->GetAllByMovie($id);
+            $listCines = $this->cineDAO;
+            $salaDao = $this->salaDAO;
+            require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
+        }
+
         public function ShowCarteleraViews()
         {
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");

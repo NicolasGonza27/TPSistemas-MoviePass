@@ -36,6 +36,12 @@
 	use Models\Funcion as Funcion;
 	use Models\Sala as Sala;
 	use Models\TipoSala;
+	use Models\TipoUsuario as TipoUsuario;
+	use Models\Usuario as Usuario;  
+	use DAObd\TipoUsuarioDAO as TipoUsuarioDAO;
+	use DAObd\UsuarioDAO as UsuarioDAO;
+
+	
 
 
 	//CINES
@@ -90,7 +96,16 @@
 	$funcionDAO->Add(new Funcion(null,405177,5,120,"2020-12-12 19:00:00"));
 	$funcionDAO->Add(new Funcion(null,412546,6,100,"2020-12-11 19:00:00"));
 	$funcionDAO->Add(new Funcion(null,413518,7,110,"2020-12-15 19:00:00"));
-	$funcionDAO->Add(new Funcion(null,425001,8,105,"2020-12-14 19:00:00"));*/
+	$funcionDAO->Add(new Funcion(null,425001,8,105,"2020-12-14 19:00:00"));
+
+	$tiposDeUsuarioDAO = new TipoUsuarioDAO();
+	$tiposDeUsuarioDAO->Add(new TipoUsuario(null,"Administrador"));
+	$tiposDeUsuarioDAO->Add(new TipoUsuario(null,"Cliente"));
+
+	$usuariosDAO = new UsuarioDAO();
+	$usuariosDAO->Add(new Usuario(null,1,"Nicolas","Gonzalez","42456123","niclausegonzalez@gmail.com","123",'2000-06-22'));
+	$usuariosDAO->Add(new Usuario(null,2,"Lucas","Zelaya","42456123","lu@lu","123",'2000-06-22'));*/
+
 
 
 ?>

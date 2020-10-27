@@ -92,7 +92,7 @@
                     return  $newResultSet;
                 }
 
-                return  false;
+                return  array();
             }
             catch(PDOException $e)
             {
