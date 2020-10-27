@@ -5,44 +5,66 @@
     class Usuario
     {
 
-        private $id;
-        private $nombreYApellido;
+        private $id_usuario;
+        private $id_tipo_usuario;
+        private $nombre_usuario;
+        private $apellido_usuario;
         private $dni;
         private $email;
         private $password;
         private $fecha_nac;
-        private $is_admin;
         
-        public function __construct(int $id = null, String $nombreYApellido = "", String $dni = "", String $email = "", String $password = "", String $fecha_nac = "", $is_admin = false)
+        public function __construct($id_usuario = null,$id_tipo_usuario,$nombre_usuario,$apellido_usuario,$dni,$email,$password,$fecha_nac)
         {
-            $this->id = $id;
-            $this->nombreYApellido = $nombreYApellido;
-            $this->dni = $dni;
-            $this->email = $email;
-            $this->password = $password;
-            $this->fecha_nac = $fecha_nac;
-            $this->is_admin = $is_admin; 
+                $this->id_usuario = $id_usuario;
+                $this->id_tipo_usuario = $id_tipo_usuario;
+                $this->nombre_usuario = $nombre_usuario;
+                $this->apellido_usuario = $apellido_usuario;
+                $this->dni = $dni;
+                $this->email = $email;
+                $this->password = $password; 
+                $this->fecha_nac = $fecha_nac; 
         }
 
 
-        public function getId()
+        public function getId_usuario()
         {
-                return $this->id;
+                return $this->id_usuario;
         }
 
-        public function setId($id)
+        public function setId_usuario($id_usuario)
         {
-                $this->id = $id;
+                $this->id_usuario = $id_usuario;
         }
 
-        public function getNombreYApellido()
+        public function getId_tipo_usuario()
         {
-                return $this->nombreYApellido;
+                return $this->id_tipo_usuario;
         }
 
-        public function setNombreYApellido($nombreYApellido)
+        public function setId_tipo_usuario($id_tipo_usuario)
         {
-                $this->nombreYApellido = $nombreYApellido;
+                $this->id_tipo_usuario = $id_tipo_usuario;
+        }
+
+        public function getNombre_usuario()
+        {
+                return $this->nombre_usuario;
+        }
+
+        public function setNombre_usuario($nombre_usuario)
+        {
+                $this->nombre_usuario = $nombre_usuario;
+        }
+
+        public function getApellido_usuario()
+        {
+                return $this->apellido_usuario;
+        }
+
+        public function setApellido_usuario($apellido_usuario)
+        {
+                $this->apellido_usuario = $apellido_usuario;
         }
 
         public function getDni()
@@ -73,7 +95,6 @@
         public function setPassword($password)
         {
                 $this->password = $password;
-
         }
 
         public function getFecha_nac()
@@ -85,17 +106,13 @@
         {
                 $this->fecha_nac = $fecha_nac;
         }
+        
 
-        public function getIs_admin()
-        {
-                return $this->is_admin;
+
         }
 
-        public function setIs_admin($is_admin)
-        {
-                $this->is_admin = $is_admin;
-        }
-    }
+
+      
 
 
 

@@ -36,9 +36,9 @@ class MovieController
             return $this->movieDAO->GetAllByGender($id_gender);
         }
 
-        public function GetAllCarteleraByDate($id)
+        public function GetAllCarteleraByDate($date)
         { 
-            return $this->movieDAO->GetAllByDate($id);
+            return $this->movieDAO->GetAllByDate($date);
         }
 
         public function GetAllOutCartelera()
@@ -68,14 +68,14 @@ class MovieController
         {   
             if(!$id_gender) 
             {
-                if(isset($_SESSION["busqueda"]))
+                if(isset($_SESSION["busquedaGender"]))
                 {   
-                    $id_gender = $_SESSION["busqueda"];
+                    $id_gender = $_SESSION["busquedaGender"];
                 }
             }
             
             $listMovie = $this->GetAllCarteleraByGender($id_gender);
-            $_SESSION["busqueda"] = $id_gender;
+            $_SESSION["busquedaGender"] = $id_gender;
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
 
@@ -83,14 +83,14 @@ class MovieController
         {   
             if(!$date)
             {
-                if(isset($_SESSION["busqueda"]))
+                if(isset($_SESSION["busquedaDate"]))
                 {   
-                    $date = $_SESSION["busqueda"];
+                    $date = $_SESSION["busquedaDate"];
                 }
             }
            
             $listMovie = $this->GetAllCarteleraByDate($date);
-            $_SESSION["busqueda"] = $date;
+            $_SESSION["busquedaDate"] = $date;
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
 

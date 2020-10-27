@@ -2,7 +2,7 @@
     
     namespace Controllers;
 
-    use DAO\UsuarioDAO as UsuarioDAO;
+    use DAObd\UsuarioDAO as UsuarioDAO;
     use Models\Usuario as Usuario;
 
     class UsuarioController
@@ -25,16 +25,11 @@
             require_once(VIEWS_PATH."Views-Cliente/home-client.php");
         }
 
-        public function AddNuevoUsuario($nombreYApellido, $dni, $email, $password, $fecha_nac)
+        public function AddNuevoUsuario($nombre,$apellido, $dni, $email, $password, $fecha_nac)
         {
-            $user = new Usuario();
-            $user->setNombreYApellido($nombreYApellido);
-            $user->setDni($dni);
-            $user->setEmail($email);
-            $user->setPassword($password);
-            $user->setFecha_nac($fecha_nac);
+            $usuario = new Usuario(null,2,$nombre,$apellido,$dni,$email,$password,$fecha_nac);
             
-            if ($this->usuarioDAO->SearchUserBoolean($email)) 
+            if($this->usuarioDAO->GetOneByEmail($email)) 
             {
                 echo'<script type="text/javascript">
                         alert("El correo electronico no esta disponible");
@@ -42,7 +37,7 @@
             }
             else 
             {
-                $this->usuarioDAO->Add($user);
+                $this->usuarioDAO->Add($usuario);
             }
             require_once("Views/home.php");
             
@@ -50,7 +45,7 @@
 
         public function Delete($id)
         {
-            $this->usuarioDAO->Delete($id);
+            $this->usuarioDAO->Remove($id);
         }
        
     }
