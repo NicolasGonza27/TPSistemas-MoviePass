@@ -5,17 +5,12 @@
         
         <div class="text-left mb-2">
             <?php if(isset($_SESSION["busquedaDate"])) { ?>
-
                 <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDate"?>">&larr; Atras</a></button>
-            
             <?php } else { 
-                  
-                    if(isset($_SESSION["busquedaGender"])) { ?>
-                
-                <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGender"?>">&larr; Atras</a></button>
-            
-            <?php } }?>
-
+                if(isset($_SESSION["busquedaGender"])) { ?>
+                    <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGender"?>">&larr; Atras</a></button>
+                <?php } ?>
+            <?php } ?>
         </div>
 
         <table class="table text-white" style="font-weight: bold;">

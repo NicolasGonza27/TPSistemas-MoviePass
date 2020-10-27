@@ -21,13 +21,17 @@
             {
                 $user = $_SESSION["userLogged"];
                 
-                if($user->getIs_admin())
+                if($user->getId_tipo_usuario() == 1)
                 {   
                     $this->ShowDashboardView();
                 }
-                else
+                elseif($user->getId_tipo_usuario() == 2)
                 {
                     $this->ShowHomeClientViews();
+                }
+                else
+                {
+                    require_once(VIEWS_PATH."home.php");
                 }
             }
             else
