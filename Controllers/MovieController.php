@@ -30,6 +30,11 @@ class MovieController
         {
             return $this->movieDAO->getAll();
         }
+
+        public function GetAllCarteleraByTitle($title)
+        {
+            return $this->movieAPI->GetAllByTitle($title);
+        }
         
         public function GetAllCarteleraByGender($id_gender)
         {
@@ -44,6 +49,21 @@ class MovieController
         public function GetAllOutCartelera()
         {
             return $this->movieAPI->GetAllOutCartelera();
+        }
+
+        public function GetAllOutCarteleraByTitle($title)
+        {
+            return $this->movieAPI->GetAllByTitleOutCartelera($title);
+        }
+
+        public function GetAllOutCarteleraByGender($id_gender)
+        {
+            return $this->movieAPI->GetAllByGenderOutCartelera($id_gender);
+        }
+
+        public function GetAllOutCarteleraByDate($id)
+        { 
+            return $this->movieAPI->GetAllByDateOutCartelera($id);
         }
 
         public function Refresh()
@@ -92,6 +112,96 @@ class MovieController
             $listMovie = $this->GetAllCarteleraByDate($date);
             $_SESSION["busquedaDate"] = $date;
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
+        }
+
+        public function ShowListViewsByTituloAdminCartelera($title = null)
+        {   
+            if(!$title) 
+            {
+                if(isset($_SESSION["busqueda"]))
+                {   
+                    $title = $_SESSION["busqueda"];
+                }
+            }
+            
+            $movieListRta = $this->GetAllCarteleraByTitle($title);
+            $_SESSION["busqueda"] = $title;
+            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+        }
+
+        public function ShowListViewsByGenderAdminCartelera($id_gender = null)
+        {   
+            if(!$id_gender) 
+            {
+                if(isset($_SESSION["busqueda"]))
+                {   
+                    $id_gender = $_SESSION["busqueda"];
+                }
+            }
+            
+            $movieListRta = $this->GetAllCarteleraByGender($id_gender);
+            $_SESSION["busqueda"] = $id_gender;
+            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+        }
+
+        public function ShowListViewsByDateAdminCartelera($date = null)
+        {   
+            if(!$date)
+            {
+                if(isset($_SESSION["busqueda"]))
+                {   
+                    $date = $_SESSION["busqueda"];
+                }
+            }
+           
+            $movieListRta = $this->GetAllCarteleraByDate($date);
+            $_SESSION["busqueda"] = $date;
+            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+        }
+
+        public function ShowListViewsByTitleAdminOutCartelera($title = null)
+        {   
+            if(!$title) 
+            {
+                if(isset($_SESSION["busqueda"]))
+                {   
+                    $title = $_SESSION["busqueda"];
+                }
+            }
+            
+            $movieListRta = $this->GetAllOutCarteleraByTitle($title);
+            $_SESSION["busqueda"] = $title;
+            require_once(VIEWS_PATH."Views-Admin/movies-out-cartelera.php");
+        }
+
+        public function ShowListViewsByGenderAdminOutCartelera($id_gender = null)
+        {   
+            if(!$id_gender) 
+            {
+                if(isset($_SESSION["busqueda"]))
+                {   
+                    $id_gender = $_SESSION["busqueda"];
+                }
+            }
+            
+            $movieListRta = $this->GetAllOutCarteleraByGender($id_gender);
+            $_SESSION["busqueda"] = $id_gender;
+            require_once(VIEWS_PATH."Views-Admin/movies-out-cartelera.php");
+        }
+
+        public function ShowListViewsByDateAdminOutCartelera($date = null)
+        {   
+            if(!$date)
+            {
+                if(isset($_SESSION["busqueda"]))
+                {   
+                    $date = $_SESSION["busqueda"];
+                }
+            }
+           
+            $movieListRta = $this->GetAllOutCarteleraByDate($date);
+            $_SESSION["busqueda"] = $date;
+            require_once(VIEWS_PATH."Views-Admin/movies-out-cartelera.php");
         }
 
         public function GetCartelera()

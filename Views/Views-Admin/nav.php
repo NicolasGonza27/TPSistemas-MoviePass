@@ -12,8 +12,15 @@
                     Cartelera
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT."Movie/GetCartelera"?>">Peliculas en Cartelera</a>
-                        <a class="dropdown-item" href="<?php echo FRONT_ROOT."Movie/GetMovieOutCartelera"?>">Peliculas fuera de Cartelera</a>
+                        <a class="dropdown-item font-weight-bold" href="<?php echo FRONT_ROOT."Movie/GetCartelera"?>">Peliculas en Cartelera</a>
+                        <div class="text-small">
+                            <a class="dropdown-item text-muted" href="<?php echo FRONT_ROOT."Home/ShowFiltersViewsAdminCartelera"?>">Filtrar Cartelera</a>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item font-weight-bold" href="<?php echo FRONT_ROOT."Movie/GetMovieOutCartelera"?>">Peliculas fuera de Cartelera</a>
+                        <div class="text-small">
+                            <a class="dropdown-item text-muted" href="<?php echo FRONT_ROOT."Home/ShowFiltersViewsAdminOutCartelera"?>">Filtrar Peliculas</a>
+                        </div>
                     </div>
                 </li>
             </ul>
