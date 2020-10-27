@@ -4,7 +4,19 @@
 
 <div class="container content espaciado-sup">
     <div class="text-left mb-2">
-        <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Cine/ShowDashboardView"?>">&larr; Atras</a></button>
+        <?php if(isset($_SESSION["busquedaTitleCartelera"])) { ?>
+            <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTituloAdminCartelera"?>">&larr; Atras</a></button>
+        <?php } elseif(isset($_SESSION["busquedaGenderCartelera"])) { ?>
+            <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderAdminCartelera"?>">&larr; Atras</a></button>
+        <?php } elseif(isset($_SESSION["busquedaDateCartelera"])) { ?>
+            <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminCartelera"?>">&larr; Atras</a></button>
+        <?php } elseif(isset($_SESSION["busquedaTitleOutCartelera"])) { ?>
+            <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTitleAdminOutCartelera"?>">&larr; Atras</a></button>
+        <?php } elseif(isset($_SESSION["busquedaGenderOutCartelera"])) { ?>
+            <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderAdminOutCartelera"?>">&larr; Atras</a></button>
+        <?php } elseif(isset($_SESSION["busquedaDateOutCartelera"])) { ?>
+            <button class="btn btn-secondary"><a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminOutCartelera"?>">&larr; Atras</a></button>
+        <?php } ?>
     </div>
 
     <table class="table text-white" style="font-weight: bold;">

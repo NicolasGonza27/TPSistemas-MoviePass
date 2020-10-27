@@ -175,14 +175,14 @@ use PDOException;
             }
 
         protected function mapear($usuarios)
-            {   
-                $resp = array_map(function($p)
+        {   
+            $resp = array_map(function($p)
             {
-                return new Usuario($p['id_usuario'],$p['id_tipo_usuario'],$p['nombre_usuario'],$p['apellido_usuario'],$p['dni'],$p['email'],$p['contraseña'],$p['fecha_nac']);
+                return new Usuario($p['id_usuario'],$p['id_tipo_usuario'],$p['nombre_usuario'],$p['apellido_usuario'],$p['dni'],$p['email'],$p['pass_usuario'],$p['fecha_nac']);
             }, $usuarios);
 
             return $resp;
-            }
+        }
 
     }
 

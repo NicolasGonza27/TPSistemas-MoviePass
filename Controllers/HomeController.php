@@ -21,13 +21,17 @@
             {
                 $user = $_SESSION["userLogged"];
                 
-                if($user->getIs_admin())
+                if($user->getId_tipo_usuario() == 1)
                 {   
                     $this->ShowDashboardView();
                 }
-                else
+                elseif($user->getId_tipo_usuario() == 2)
                 {
                     $this->ShowHomeClientViews();
+                }
+                else
+                {
+                    require_once(VIEWS_PATH."home.php");
                 }
             }
             else
@@ -56,6 +60,16 @@
         public function ShowFiltersViews()
         {
             require_once(VIEWS_PATH."Views-Cliente/filters.php");
+        }  
+
+        public function ShowFiltersViewsAdminCartelera()
+        {
+            require_once(VIEWS_PATH."Views-Admin/filterCartelera.php");
+        }  
+        
+        public function ShowFiltersViewsAdminOutCartelera()
+        {
+            require_once(VIEWS_PATH."Views-Admin/filterOutCartelera.php");
         }  
 
         public function Login($email,$password)
