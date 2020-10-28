@@ -12,6 +12,8 @@
                 <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
             <?php } elseif($backButton == "busquedaDateCartelera") { ?>
                 <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+            <?php } elseif($backButton == "cartelera") { ?>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/GetCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
             <?php } ?>
         <?php } ?>
     </div>
@@ -122,7 +124,7 @@
                             <input type="number" name="cant_asistentes" class="hide" value="0"/>
                             <div class="row form-group pr-3">
                                 <label class="col-6">Fecha y Hora:</label>
-                                <input type="datetime-local" name="fecha_hora" class="col-6" value="<?php echo $funcion["fecha_hora"];?>" required/>
+                                <input type="datetime-local" min="<?php echo date("Y").'-'.date("m").'-'.date("d").'T00:00:00';?>" name="fecha_hora" class="col-6" value="<?php echo $funcion["fecha_hora"];?>" required/>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -163,7 +165,7 @@
                         <input type="numbre" name="cant_asistentes" class="hide" value="0"/>
                         <div class="row form-group pr-3">
                             <label class="col-6">Fecha y Hora:</label>
-                            <input type="datetime-local" name="fecha-hora" class="col-6" value="" required/>
+                            <input type="datetime-local" min="<?php echo date("Y").'-'.date("m").'-'.date("d").'T00:00:00';?>" name="fecha-hora" class="col-6" value="" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
