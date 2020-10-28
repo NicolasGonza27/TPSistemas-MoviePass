@@ -3,18 +3,26 @@
 ?>
 
 <div class="container content espaciado-sup">
-    <div class="text-left mb-2">
-        <?php if(isset($_SESSION["backbutton"])) { ?>
-            <?php $backButton = $_SESSION["backbutton"];?>
-            <?php if($backButton == "busquedaTitleCartelera") { ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTituloAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
-            <?php } elseif($backButton == "busquedaGenderCartelera") { ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
-            <?php } elseif($backButton == "busquedaDateCartelera") { ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+    <div class="md-2 d-flex">
+        <div class="text-left">
+            <?php if(isset($_SESSION["backbutton"])) { ?>
+                <?php $backButton = $_SESSION["backbutton"];?>
+                <?php if($backButton == "busquedaTitleCartelera") { ?>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTituloAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                <?php } elseif($backButton == "busquedaGenderCartelera") { ?>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                <?php } elseif($backButton == "busquedaDateCartelera") { ?>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                <?php } ?>
             <?php } ?>
-        <?php } ?>
+        </div>
+
+    
+        <div class="ml-auto">
+            <button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar de Cartelera</button>
+        </div>
     </div>
+
 
     <table class="table text-white" style="font-weight: bold;">
             <thead class="thead-dark">
@@ -72,7 +80,8 @@
                 </tr>
             </thead>
             <tbody class="bg-white">
-                <?php foreach($infoFunciones as $funcion) { ?>
+                <?php 
+                    if($infoFunciones) { foreach($infoFunciones as $funcion) { ?>
                     <tr>
                         <td class="text-center"><?php echo $funcion["nombre_cine"];?></td>
                         <td class="text-center"><?php echo $funcion["calle"]." ".$funcion["numero"];?></td>
@@ -87,7 +96,11 @@
                             </form> 
                         </td>
                     </tr>
-                <?php } ?>
+                <?php } } else { ?>
+                    
+                            <td colspan = 6 class="text-center"> <strong>ESTA PELICULA NO TIENE FUNCIONES DISPONIBLES</strong></td>
+
+                        <?php  } ?>
             </tbody>
         </table>
     </div>
@@ -172,6 +185,36 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Remove de Cartelera-->
+
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <form action="<?php echo FRONT_ROOT.'Movie/RemoveMovieCartelera'?>" method="post">
+                
+                <div class="modal-header">
+                    
+                    <div class="modal-title" id="exampleModalLabel">¿Desea eliminar la pelicula <strong><?php echo $movie->getTitle();?></strong> a cartelera? </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <div class="modal-body pl-3 pr-3">
+                    <input type="number" name="id" value="<?php echo $movie->getId(); ?>" class="hide">
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger" onclick="this.form.submit(); this.disabled=true; this.value='Sending…';" >Eliminar</button>
+                </div>
+
+            </form>
         </div>
     </div>
 </div>

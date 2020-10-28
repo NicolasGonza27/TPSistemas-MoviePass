@@ -83,6 +83,12 @@ class MovieController
             require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
         }
 
+        public function Remove($id)
+        {
+            $this->movieDAO->Remove($id);
+        }
+
+
         public function ShowListViewsByGender($id_gender = null)
         {   
             if(!$id_gender) 
@@ -220,6 +226,12 @@ class MovieController
             require_once(VIEWS_PATH."Views-Admin/movies-out-cartelera.php");
         }
 
+        public function RemoveMovieCartelera($id)
+        {
+            $this->Remove($id);
+            
+            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+        }
 
     }   
 
