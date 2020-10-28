@@ -1,14 +1,19 @@
 <?php require_once(VIEWS_PATH."Views-Cliente/nav.php"); ?>
     
 <div class="container content espaciado-sup">
-    <div class="row">
+<table class="table text-white" style="font-weight: bold;">
+            <thead class="thead-dark">
+                <th colspan = 3 class="text-center ">Cartelera Movie-Pass</th>
+            </thead>
+    </table>  
+    <div class="cart-fondo">
         
         <?php 
 
         if(!empty($listMovie))
         {
             foreach($listMovie as $movie) { ?>
-                <div class="col-2">
+                <div class="col-3">
                     <form action="<?php echo FRONT_ROOT.'Funcion/ShowContentMovieFuncionesViewsCliente';?>" method="post">
                         <?php if( $movie->getPoster_path()) {?>
                         

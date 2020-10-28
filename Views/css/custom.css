@@ -124,8 +124,8 @@ body {
  
 .centrado{
     position: absolute;
-    color: red;
-    top: 30%;
+    color: blanchedalmond;
+    top: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-weight: bold;
@@ -141,4 +141,17 @@ body {
 .boton-atras:hover{
     text-decoration: none;
     color: white;
+}
+
+.cart-fondo{
+    background-color: #212529;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    text-align:center;
+    display:flex;
+    flex-wrap: wrap;
+    margin-left:0px;
+    margin-right:0px;
+    border-radius:20px;
 }
