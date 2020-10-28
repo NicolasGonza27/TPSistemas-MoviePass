@@ -47,7 +47,7 @@
             <h5 class="genero" id="exampleModalLabel">Seleccione una fecha de estreno</h5>
           </div>
           <div class="modal-body">
-            <input type="date" name="date" class="col" >
+            <input type="date" name="date" class="col" max="<?php echo date("Y").'-'.date("m").'-'.date("d");?>">
           </div>
           <div  style= "text-align:center">
             <button type="submit" class="btn btn-primary">Filtrar</button>
