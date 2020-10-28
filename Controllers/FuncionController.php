@@ -42,11 +42,10 @@
             $this->ShowContentMovieFuncionesViews($id_pelicula);
         }
 
-        public function Remove($id)
+        public function Remove($id,$id_movie)
         {
             $this->funcionDAO->Remove($id);
-
-            /* $this->ShowDashboardView(); */
+            $this->ShowContentMovieFuncionesViews($id_movie); 
         }
 
         public function GetAll()
@@ -81,15 +80,14 @@
             $listFunciones = $this->funcionDAO->GetAllByMovie($id);
             $listCines = $this->cineDAO->GetAll();
             $salaDao = $this->salaDAO;
+            $infoFunciones = $this->funcionDAO->GetAllByMovieInfo($id);
             require_once(VIEWS_PATH."Views-Admin/content-movie-funciones.php");
         }
 
         public function ShowContentMovieFuncionesViewsCliente($id)
         {
             $movie = $this->movieDAO->GetOne($id);
-            $listFunciones = $this->funcionDAO->GetAllByMovie($id);
-            $listCines = $this->cineDAO;
-            $salaDao = $this->salaDAO;
+            $infoFunciones = $this->funcionDAO->GetAllByMovieInfo($id);
             require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
         }
 
