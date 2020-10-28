@@ -24,7 +24,7 @@
         <div class="tab-pane active" id="title" role="tabpanel">
             <div  style="text-align:center" class="black-box">
                 <form action="<?php echo FRONT_ROOT."Movie/ShowListViewsByTituloAdminCartelera"?>" method="post">
-                    <h5 class="text-white">Introdusca el Titula</h5>
+                    <h5 class="text-white">Introduzca el Titulo</h5>
                     <div class="modal-body">
                         <input type="text" name="title" class="col" >
                     </div>
