@@ -1,10 +1,10 @@
 <?php require_once("nav.php"); ?>
     
 <div class="container content espaciado-sup">
-<table class="table text-white" style="font-weight: bold;">
-            <thead class="thead-dark">
-                <th colspan = 3 class="text-center ">Cartelera Movie-Pass</th>
-            </thead>
+    <table class="table text-white" style="font-weight: bold;">
+        <thead class="thead-dark">
+            <th colspan = 3 class="text-center ">Cartelera Movie-Pass</th>
+        </thead>
     </table>  
     <div class="cart-fondo">
         <?php if(!empty($movieListRta)) {
@@ -14,7 +14,7 @@
                         <?php if($movie->getPoster_path()) {?>
                         
                             <input class="hide" name="id" type="text" value="<?php echo $movie->getId(); ?>"></input>
-                            <input type="image" class="img-movies" src="<?php echo $movie->getImage();?>" alt="" width="80%" height="80%" title="<?php echo $movie->getTitle();?>">
+                            <input type="image" class="img-movies" src="<?php echo $movie->getImage();?>" alt="" width="200px" height="300px" title="<?php echo $movie->getTitle();?>">
                         
                         <?php } else { ?>
                         <div>
