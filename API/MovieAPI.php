@@ -226,6 +226,7 @@ class MovieAPI
         public function RetrieveData()
         {
             $this->movieList = array();
+            $movieDAO = new MovieDAO();
 
             for($i = 1; $i < 10; $i++)
             {
@@ -233,20 +234,23 @@ class MovieAPI
                 $contentArray = ($jsonContent) ? json_decode($jsonContent, true) : array();
                 foreach($contentArray["results"] as $content)
                 {     
-                    $popularity = $content["popularity"]; 
-                    $vote_count = $content["vote_count"];
-                    $poster_path = $content["poster_path"];
-                    $id = $content["id"];
-                    $adult = $content["adult"];
-                    $genre_ids = $content["genre_ids"];
-                    $title = $content["title"];
-                    $vote_average = $content["vote_average"];
-                    $overview = $content["overview"];
-                    $release_date = date($content["release_date"]);
-                    $runtime = 0;
-                    $movie = new Movie($popularity,$vote_count,$poster_path,$id,$adult,$genre_ids,$title,$vote_average,$overview,$release_date, $runtime);
+                    if($movieDAO->GetOne($content["id"], false))
+                    {
+                        $popularity = $content["popularity"]; 
+                        $vote_count = $content["vote_count"];
+                        $poster_path = $content["poster_path"];
+                        $id = $content["id"];
+                        $adult = $content["adult"];
+                        $genre_ids = $content["genre_ids"];
+                        $title = $content["title"];
+                        $vote_average = $content["vote_average"];
+                        $overview = $content["overview"];
+                        $release_date = date($content["release_date"]);
+                        $runtime = 0;
+                        $movie = new Movie($popularity,$vote_count,$poster_path,$id,$adult,$genre_ids,$title,$vote_average,$overview,$release_date, $runtime);
 
-                    array_push($this->movieList, $movie);
+                        array_push($this->movieList, $movie);
+                    }
                 }
             
             }   
