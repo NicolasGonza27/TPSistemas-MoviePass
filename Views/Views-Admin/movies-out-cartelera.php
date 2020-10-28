@@ -25,7 +25,7 @@
             }
             else {
                 echo "<script> if(confirm('No hay peliculas con  los requisitos especificados'));";
-                echo "window.location = '/dashboard/TPSistemas-MoviePass/Home/ShowDashboardView';
+                echo "window.location = '/dashboard/TPSistemas-MoviePass/Home/ShowFiltersViewsAdminOutCartelera';
                     </script>";
             } ?>
         </div>
