@@ -6,7 +6,9 @@
         <div class="text-left mb-2">
             <?php if(isset($_SESSION["backbutton"])) { ?>
                 <?php $backButton = $_SESSION["backbutton"];?>
-                <?php if($backButton == "busquedaDate") { ?>
+                <?php if($backButton == "busquedaTitle") { ?>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTitle"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                <?php } elseif($backButton == "busquedaDate") { ?>
                     <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDate"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
                 <?php } elseif($backButton == "busquedaGender") { ?>
                     <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGender"?>"><button class="btn btn-secondary">&larr; Atras</button></a>

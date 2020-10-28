@@ -83,6 +83,22 @@ class MovieController
             require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
         }
 
+        public function ShowListViewsByTitle($title = null)
+        {   
+            if(!$title) 
+            {
+                if(isset($_SESSION["busquedaTitle"]))
+                {   
+                    $title = $_SESSION["busquedaTitle"];
+                }
+            }
+            
+            $listMovie = $this->GetAllCarteleraByTitle($title);
+            $_SESSION["busquedaTitle"] = $title;
+            $_SESSION["backbutton"] = "busquedaTitle";
+            require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
+        }
+
         public function ShowListViewsByGender($id_gender = null)
         {   
             if(!$id_gender) 
