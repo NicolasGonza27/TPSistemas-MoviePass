@@ -6,11 +6,19 @@
 <div class="container espaciado-sup">
     <div class="content">
         <h3 class="text-white mt-3 mb-3">
-            Listado de Salas del Cine <?php echo $cine->getNombre()?>
-            <button type="button" class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
+
+
+            
+            
         </h3>
         <table class="table">
             <thead class="thead-dark">
+                <tr>
+                <th class="h3" colspan="4">Listado de Salas del Cine <?php echo $cine->getNombre()?></th>
+                <th class="text-center " colspan="1"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalAgregar">Agregar</button></th>
+
+                </tr>
+            
                 <tr>
                     <th class="text-center">Numero</th>
                     <th class="text-center">Tipo de sala</th>

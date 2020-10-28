@@ -5,19 +5,19 @@
 
 <div class="container espaciado-sup">
     <div class="content">
-        <h3 class="text-white mt-3 mb-3">
-            Listado de Cines
-            <button type="button" class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
-        </h3>
+       
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th>Nombre</th>
-                    <th>Calle</th>
-                    <th>Numero</th>
+                    <th class="h3" colspan="6">Listado de cines</th>
+                    <th class="text-center" colspan="1"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalAgregar">Agregar</button></th>
+                </tr>
+                <tr>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Calle</th>
+                    <th class="text-center">Numero</th>
                     <th class="text-center">Horario Apertura</th>
                     <th class="text-center">Horario Cierre</th>
-                    <th class="text-center">Capacidad</th>
                     <th class="text-center">Valor Entrada</th>
                     <th class="text-center">Opciones</th>
                 </tr>
@@ -25,18 +25,22 @@
             <tbody class="bg-white">
                 <?php foreach($listaCine as $cine) { ?>
                     <tr>
-                        <td><?php echo $cine->getNombre()?></td>
-                        <td><?php echo $cine->getCalle()?></td>
-                        <td><?php echo $cine->getNumero()?></td>
+                        <td class="text-center"><?php echo $cine->getNombre()?></td>
+                        <td class="text-center"><?php echo $cine->getCalle()?></td>
+                        <td class="text-center"><?php echo $cine->getNumero()?></td>
                         <td class="text-center"><?php echo $cine->getHor_apertura()?></td>
                         <td class="text-center"><?php echo $cine->getHor_cierre()?></td>
-                        <td class="text-center"><?php echo $cine->getCapacidad()?></td>
                         <td class="text-center"><?php echo $cine->getValor_entrada()?></td>
                         <form action="<?php echo FRONT_ROOT."Cine/Remove"?>" method="post">
                             <td class="text-center">
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$cine->getId()?>">Editar</button>
                                 <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $cine->getId()?>">Borrar</button>
-                                <a class="btn btn-outline-primaty"  href="<?php echo FRONT_ROOT."Sala/ShowSalaDashboardView/".$cine->getId()?>" role="button">+</a>
+                                <a type="button" class="btn btn-outline-sucess"  href="<?php echo FRONT_ROOT."Sala/ShowSalaDashboardView/".$cine->getId()?>" role="button">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-receipt-cutoff" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v13h-1V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51L2 2.118V15H1V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zM0 15.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
+                                    <path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-8a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
+                                </a>
                             </td>
                         </form> 
                     </tr>
