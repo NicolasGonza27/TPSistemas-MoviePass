@@ -95,6 +95,7 @@ class MovieController
             
             $listMovie = $this->GetAllCarteleraByGender($id_gender);
             $_SESSION["busquedaGender"] = $id_gender;
+            $_SESSION["backbutton"] = "busquedaGender";
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
 
@@ -110,6 +111,7 @@ class MovieController
            
             $listMovie = $this->GetAllCarteleraByDate($date);
             $_SESSION["busquedaDate"] = $date;
+            $_SESSION["backbutton"] = "busquedaDate";
             require_once(VIEWS_PATH."Views-Cliente/list-movie.php");
         }
 
@@ -125,6 +127,7 @@ class MovieController
             
             $movieListRta = $this->GetAllCarteleraByTitle($title);
             $_SESSION["busquedaTitleCartelera"] = $title;
+            $_SESSION["backbutton"] = "busquedaTitleCartelera";
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");
         }
 
@@ -140,6 +143,7 @@ class MovieController
             
             $movieListRta = $this->GetAllCarteleraByGender($id_gender);
             $_SESSION["busquedaGenderCartelera"] = $id_gender;
+            $_SESSION["backbutton"] = "busquedaGenderCartelera";
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");
         }
 
@@ -155,6 +159,7 @@ class MovieController
            
             $movieListRta = $this->GetAllCarteleraByDate($date);
             $_SESSION["busquedaDateCartelera"] = $date;
+            $_SESSION["backbutton"] = "busquedaDateCartelera";
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");
         }
 
