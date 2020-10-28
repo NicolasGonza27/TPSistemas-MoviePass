@@ -189,4 +189,27 @@ from tipos_usuario;
 select
 *
 from usuarios;
-describe usuarios;
+
+select
+p.title,c.nombre_cine, c.calle, c.numero, s.numero_sala, s.cant_butacas - f.cant_asistentes as "butacas_disp", f.fecha_hora
+from funciones f 
+inner join peliculas_cartelera p
+on f.id_pelicula = p.id
+inner join salas s
+on f.id_sala = s.id_sala
+inner join cines c
+on s.id_cine = c.id_cine
+;
+
+select
+c.nombre_cine, c.calle, c.numero, s.numero_sala, s.cant_butacas , f.cant_asistentes, f.fecha_hora
+from funciones f 
+inner join peliculas_cartelera p
+on f.id_pelicula = p.id
+inner join salas s
+on f.id_sala = s.id_sala
+inner join cines c
+on s.id_cine = c.id_cine
+where p.id = 340102;
+
+                                   

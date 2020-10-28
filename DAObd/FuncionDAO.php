@@ -100,6 +100,43 @@
             }
         }
 
+        public function GetAllByMovieInfo($id_movie, bool $eliminado = false)
+        {
+            try 
+            {
+                $query = "SELECT
+                c.nombre_cine, c.calle, c.numero, s.numero_sala, s.cant_butacas - f.cant_asistentes as 'butacas_disp', f.fecha_hora, f.id_funcion, p.id as id_pelicula
+                FROM funciones f 
+                INNER JOIN peliculas_cartelera p
+                ON f.id_pelicula = p.id
+                INNER JOIN salas s
+                ON f.id_sala = s.id_sala
+                INNER JOIN cines c
+                ON s.id_cine = c.id_cine
+                WHERE (p.id = :id) AND (f.eliminado = :eliminado);";
+
+                $parameters["id"] = $id_movie;
+                $parameters["eliminado"] =  $eliminado;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    return  $resultSet;
+                }
+
+                return  array();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+
+
         public function GetAllFuncionesBySala($id_sala)
         {
             try 

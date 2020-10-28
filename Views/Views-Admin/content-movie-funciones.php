@@ -20,67 +20,83 @@
     </div>
 
     <table class="table text-white" style="font-weight: bold;">
-        <thead>
-            <th colspan = 3 class="text-center">Movie</th>
-        </thead>
-        <tbody>     
-            <tr>
-                <td rowspan=6><img src="<?php echo $movie->getImage()?>" alt=""></td>
-                <td class="text-uppercase">Title</td>
-                <td><?php echo $movie->getTitle()?></td>
-            </tr>
-            <tr>
-                <td class="text-uppercase">Popularity</td>
-                <td><?php echo $movie->getPopularity()?></td>
-            </tr>
-            <tr>
-                <td class="text-uppercase">Vote average</td>
-                <td><?php echo $movie->getVote_average()?></td>
-            </tr>
-            <tr>
-                <td class="text-uppercase">Overview</td>
-                <td><?php echo $movie->getOverview()?></td>
-            </tr>
-            <tr>
-                <td class="text-uppercase">Runtime</td>
-                <td><?php echo $movie->getRuntime()?></td>
-            </tr>
-        </tbody>            
-    </table> 
-    
+            <thead class="thead-dark">
+                <th colspan = 3 class="text-center">MOVIE</th>
+            </thead>
+            <tbody>     
+                            <tr>
+                                <td  class="text-center bg-dark" rowspan=6><img src="<?php echo $movie->getImage()?>" alt="" width=70% height=70%> </td>
+                                <td class="text-uppercase bg-bordo">Title</td>
+                                <td class="bg-bordo"><?php echo $movie->getTitle()?></td>
+                            </tr>
+                            
+                            <tr  class="bg-bordo">
+                                <td class="text-uppercase">Popularity</td>
+                                <td><?php echo $movie->getPopularity()?></td>
+                            </tr >
+                            
+                            <tr  class="bg-bordo">
+                                <td class="text-uppercase">Vote average</td>
+                                <td>
+                                    <div>
+                                        <input class="range" disabled value="<?php echo $movie->getVote_average()?>" type="range" min="0" max="10" step="0.01">
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr  class="bg-bordo">
+                                <td class="text-uppercase">Overview</td>
+                                <td><?php echo $movie->getOverview()?></td>
+                            </tr>
+
+                            <tr  style="background-color: #6F1E1E;">
+                                <td class="text-uppercase">Runtime</td>
+                                <td><?php echo $movie->getRuntime()?></td>
+                            </tr>
+                    </tbody>            
+        </table> 
+
     <div class="espaciado-sup">
-        <button type="button" class="btn btn-outline-primary my-2 my-sm-0 push-rigth" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th>Cine</th>
-                    <th>Sala</th>
-                    <th class="text-center">Cantidad de Asistentes</th>
-                    <th class="text-center">Fecha y Hora</th>
-                    <th class="text-center">Opciones</th>
+                    <tr>
+                        <th colspan=5 > LISTADO DE FUNCIONES </th>
+                        <th colspan=1 class="text-center"><button type="button" class="btn btn-outline-primary my-2 my-sm-0 push-rigth" data-toggle="modal" data-target="#modalAgregar">Agregar</button></th>
+                    </tr>
+                    <tr>
+                        <th class="text-center">Nombre Del Cine</th>
+                        <th class="text-center">Dirección</th>
+                        <th class="text-center">Numero Sala</th>
+                        <th class="text-center">Butacas Disponibles</th>
+                        <th class="text-center">Fecha y</th>
+                        <th class="text-center">Opciones</th>
+                    </tr>
                 </tr>
             </thead>
             <tbody class="bg-white">
-                <?php foreach($listFunciones as $funcion) { ?>
+                <?php foreach($infoFunciones as $funcion) { ?>
                     <tr>
-                        <td><?php ?></td>
-                        <td><?php echo $funcion->getId_sala()?></td>
-                        <td class="text-center"><?php echo $funcion->getCant_asistentes()?></td>
-                        <td class="text-center"><?php echo $funcion->getFecha_hora()?></td>
-                        <form action="<?php echo FRONT_ROOT."Funcion/Remove"?>" method="post">
-                            <td class="text-center">
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$funcion->getId_funcion()?>">Editar</button>
-                                <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $funcion->getId_funcion()?>">Borrar</button>
-                            </td>
-                        </form> 
+                        <td class="text-center"><?php echo $funcion["nombre_cine"];?></td>
+                        <td class="text-center"><?php echo $funcion["calle"]." ".$funcion["numero"];?></td>
+                        <td class="text-center"><?php echo $funcion["numero_sala"];?></td>
+                        <td class="text-center"><?php echo $funcion["butacas_disp"];?></td>
+                        <td class="text-center"><?php echo $funcion["fecha_hora"];?></td>
+                        <td class="text-center">
+                            <form action="<?php echo FRONT_ROOT."Funcion/Remove"?>" method="post">
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$funcion["id_funcion"];?>">Editar</button>
+                                <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $funcion["id_funcion"];?>">Borrar</button>
+                                <input type="number" name="id_movie" value="<?php echo $funcion["id_pelicula"];?>" class="hide">
+                            </form> 
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
     </div>
 
-    <?php foreach($listFunciones as $funcion) { ?>
-        <div class="modal fade" id="<?php echo "modal".$funcion->getId_funcion()?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
+    <?php foreach($infoFunciones as $funcion) { ?>
+        <div class="modal fade" id="<?php echo "modal".$funcion["id_funcion"]?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form action="<?php echo FRONT_ROOT."Funcion/ModifyModal"?>" method="post">
@@ -91,8 +107,8 @@
                             </button>
                         </div>
                         <div class="modal-body pl-3 pr-3">
-                            <input type="numbre" name="id_funcion" class="hide" value="<?php echo $funcion->getId_funcion()?>"/>
-                            <input type="numbre" name="id_pelicula" class="hide" value="<?php echo $funcion->getId_pelicula()?>"/>
+                            <input type="number" name="id_funcion" class="hide" value="<?php echo $funcion["id_funcion"]?>"/>
+                            <input type="number" name="id_pelicula" class="hide" value="<?php echo $funcion["id_pelicula"]?>"/>
                             <div class="row form-group pr-3">
                                 <label class="col-6">Sala</label>
                                 <select name="id_sala">
@@ -100,16 +116,16 @@
                                         <optgroup label="<?php echo $cine->getNombre()?>"> 
                                             <?php $listSala = $salaDao->GetAllByCine($cine->getId());
                                             foreach($listSala as $sala) { ?>
-                                                <option value="<?php echo $sala->getId_sala()?>"><?php echo $sala->getNombre_sala()?></option>
+                                                <option value="<?php echo $sala->getId_sala()?>"><?php  echo  "Sala N°".$sala->getNumero_sala();?></option>
                                             <?php } ?>
                                         </optgroup> 
                                     <?php } ?>
                                 </select>
                             </div>
-                            <input type="numbre" name="cant_asistentes" class="hide" value="0"/>
+                            <input type="number" name="cant_asistentes" class="hide" value="0"/>
                             <div class="row form-group pr-3">
                                 <label class="col-6">Fecha y Hora:</label>
-                                <input type="datetime-local" name="fecha_hora" class="col-6" value="<?php echo $funcion->getFecha_hora()?>" required/>
+                                <input type="datetime-local" name="fecha_hora" class="col-6" value="<?php echo $funcion["fecha_hora"];?>" required/>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -138,10 +154,10 @@
                             <label class="col-6">Sala</label>
                             <select name="id_sala">
                                 <?php foreach($listCines as $cine) { ?>
-                                    <optgroup label="<?php echo $cine->getNombre()?>"> 
+                                    <optgroup label="<?php echo $cine->getNombre();?>"> 
                                         <?php $listSala = $salaDao->GetAllByCine($cine->getId());
                                         foreach($listSala as $sala) { ?>
-                                            <option value="<?php echo $sala->getId_sala()?>"><?php echo $sala->getNombre_sala()?></option>
+                                            <option value="<?php echo $sala->getId_sala();?>"><?php echo "Sala N°".$sala->getNumero_sala();?></option>
                                         <?php } ?>
                                     </optgroup> 
                                 <?php } ?>
