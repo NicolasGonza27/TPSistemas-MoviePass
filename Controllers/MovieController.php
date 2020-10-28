@@ -211,6 +211,7 @@ class MovieController
         public function GetCartelera()
         {
             $movieListRta = $this->GetAllCartelera();
+            $_SESSION["backbutton"] = "cartelera";
             require_once(VIEWS_PATH."Views-Admin/cartelera.php");
         }
 
