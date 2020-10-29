@@ -81,40 +81,48 @@
             {
                 $movieAPI = new MovieAPI();
                 $movie = $movieAPI->GetOne($id);
+                $movieInDAO = $this->GetOne($id);
 
                 if($movie)
                 {
-                    $query = "INSERT INTO ".$this->tableName." (popularity,vote_count,poster_path,id,adult,title,vote_average,overview,release_date,runtime) 
-                    VALUES (:popularity,:vote_count,:poster_path,:id,:adult,:title,:vote_average,:overview,:release_date,:runtime);";
-                    
-                    $this->connection = Connection::GetInstance();
-
-                    $parameters["popularity"] = $movie->getPopularity();
-                    $parameters["vote_count"] = $movie->getVote_count();
-                    $parameters["poster_path"] = $movie->getPoster_path();
-                    $parameters["id"] = $movie->getId();
-                    $parameters["adult"] = $movie->getAdult();
-                    $parameters["title"] = $movie->getTitle();
-                    $parameters["vote_average"] = $movie->getVote_average();
-                    $parameters["overview"] = $movie->getOverview();
-                    $parameters["release_date"] = $movie->getRelease_date();
-                    $parameters["runtime"] = $movie->getRuntime();
-
-                    $this->connection->ExecuteNonQuery($query,$parameters);
-                    
-                    $genders = $movie->getAllGenre_ids();
-
-                    foreach($genders as $gender)
+                    if(!$movieInDAO)
                     {
-
-                        $queryGender = "INSERT INTO peliculasXGenero (id_pelicula,id_genero) VALUES (:id_pelicula,:id_genero);";
-                    
+                        $query = "INSERT INTO ".$this->tableName." (popularity,vote_count,poster_path,id,adult,title,vote_average,overview,release_date,runtime) 
+                        VALUES (:popularity,:vote_count,:poster_path,:id,:adult,:title,:vote_average,:overview,:release_date,:runtime);";
+                        
                         $this->connection = Connection::GetInstance();
-
-                        $parametersGender["id_pelicula"] = $movie->getId();
-                        $parametersGender["id_genero"] = $gender["id"];
-
-                        $this->connection->ExecuteNonQuery($queryGender,$parametersGender);
+    
+                        $parameters["popularity"] = $movie->getPopularity();
+                        $parameters["vote_count"] = $movie->getVote_count();
+                        $parameters["poster_path"] = $movie->getPoster_path();
+                        $parameters["id"] = $movie->getId();
+                        $parameters["adult"] = $movie->getAdult();
+                        $parameters["title"] = $movie->getTitle();
+                        $parameters["vote_average"] = $movie->getVote_average();
+                        $parameters["overview"] = $movie->getOverview();
+                        $parameters["release_date"] = $movie->getRelease_date();
+                        $parameters["runtime"] = $movie->getRuntime();
+    
+                        $this->connection->ExecuteNonQuery($query,$parameters);
+                        
+                        $genders = $movie->getAllGenre_ids();
+    
+                        foreach($genders as $gender)
+                        {
+    
+                            $queryGender = "INSERT INTO peliculasXGenero (id_pelicula,id_genero) VALUES (:id_pelicula,:id_genero);";
+                        
+                            $this->connection = Connection::GetInstance();
+    
+                            $parametersGender["id_pelicula"] = $movie->getId();
+                            $parametersGender["id_genero"] = $gender["id"];
+    
+                            $this->connection->ExecuteNonQuery($queryGender,$parametersGender);
+                        }
+                    }
+                    else
+                    {
+                        $this->UpdateEliminado($id);
                     }
                 }
 
@@ -123,6 +131,29 @@
             {
                 echo $e->getMessage();
             }
+        }
+
+        public function UpdateEliminado($id_movie)
+        {   
+            try 
+            {
+                $query = "UPDATE ".$this->tableName." SET eliminado = :eliminado
+                WHERE (id = :id);";
+
+                $this->connection = Connection::GetInstance();
+
+                $parameters['id'] = $id_movie;
+                $parameters['eliminado'] = false;
+
+                $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
+
+                return $cantRows;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+
         }
 
 
@@ -231,7 +262,6 @@
                 echo $e->getMessage();
             }
         }
-
 
 
         public function Remove($id_movie)
