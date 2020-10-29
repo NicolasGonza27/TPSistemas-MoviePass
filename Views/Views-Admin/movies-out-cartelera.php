@@ -53,9 +53,7 @@
                     </button>
                 </div>
                 
-                <div class="modal-body pl-3 pr-3">
-                    <input type="number" name="id" value="<?php echo $movie->getId(); ?>" class="hide">
-                </div>
+                <input type="number" name="id" value="<?php echo $movie->getId(); ?>" class="hide">
 
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

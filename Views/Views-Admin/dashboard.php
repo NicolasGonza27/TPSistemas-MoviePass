@@ -77,7 +77,7 @@ foreach($listaCine as $cine) { ?>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Numero:</label>
-                        <input type="text" name="numero" class="col-6" value="<?php echo $cine->getNumero()?>" required/>
+                        <input type="number" name="numero" class="col-6" value="<?php echo $cine->getNumero()?>" required/>
                     </div>
 
                     <input type="text" name="capacidad" class="hide" value="<?php echo $cine->getCapacidad()?>"/>
@@ -135,7 +135,7 @@ foreach($listaCine as $cine) { ?>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Numero:</label>
-                        <input type="text" name="numero" class="col-6" required/>
+                        <input type="number" name="numero" class="col-6" required/>
                     </div>
 
                     <input type="text" name="capacidad" class="hide"/>

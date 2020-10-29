@@ -4,7 +4,7 @@
 
 <div class="container content espaciado-sup">
 
-    <div class="md-2 d-flex">
+    <div class="mb-2 d-flex">
         <div class="text-left">
             <?php if(isset($_SESSION["backbutton"])) { ?>
                 <?php $backButton = $_SESSION["backbutton"];?>
@@ -16,51 +16,49 @@
                     <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
                 <?php } elseif($backButton == "cartelera") { ?>
                     <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/GetCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
-                <?php } } ?>        
+                <?php } ?> 
+            <?php } ?>        
         </div>
-   
-    
         <div class="ml-auto">
             <button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar de Cartelera</button>
         </div>
     </div>
-
 
     <table class="table text-white" style="font-weight: bold;">
             <thead class="thead-dark">
                 <th colspan = 3 class="text-center">MOVIE</th>
             </thead>
             <tbody>     
-                            <tr>
-                                <td  class="text-center bg-dark" rowspan=6><img src="<?php echo $movie->getImage()?>" alt="" width=70% height=70%> </td>
-                                <td class="text-uppercase bg-bordo">Title</td>
-                                <td class="bg-bordo"><?php echo $movie->getTitle()?></td>
-                            </tr>
-                            
-                            <tr  class="bg-bordo">
-                                <td class="text-uppercase">Popularity</td>
-                                <td><?php echo $movie->getPopularity()?></td>
-                            </tr >
-                            
-                            <tr  class="bg-bordo">
-                                <td class="text-uppercase">Vote average</td>
-                                <td>
-                                    <div>
-                                        <input class="range" disabled value="<?php echo $movie->getVote_average()?>" type="range" min="0" max="10" step="0.01">
-                                    </div>
-                                </td>
-                                
-                            </tr>
-                            <tr  class="bg-bordo">
-                                <td class="text-uppercase">Overview</td>
-                                <td><?php echo $movie->getOverview()?></td>
-                            </tr>
+                <tr>
+                    <td  class="text-center bg-dark" rowspan=6><img src="<?php echo $movie->getImage()?>" alt="" width=70% height=70%> </td>
+                    <td class="text-uppercase bg-bordo">Title</td>
+                    <td class="bg-bordo"><?php echo $movie->getTitle()?></td>
+                </tr>
+                
+                <tr  class="bg-bordo">
+                    <td class="text-uppercase">Popularity</td>
+                    <td><?php echo $movie->getPopularity()?></td>
+                </tr >
+                
+                <tr  class="bg-bordo">
+                    <td class="text-uppercase">Vote average</td>
+                    <td>
+                        <div>
+                            <input class="range" disabled value="<?php echo $movie->getVote_average()?>" type="range" min="0" max="10" step="0.01">
+                        </div>
+                    </td>
+                    
+                </tr>
+                <tr  class="bg-bordo">
+                    <td class="text-uppercase">Overview</td>
+                    <td><?php echo $movie->getOverview()?></td>
+                </tr>
 
-                            <tr  style="background-color: #6F1E1E;">
-                                <td class="text-uppercase">Runtime</td>
-                                <td><?php echo $movie->getRuntime()?></td>
-                            </tr>
-                    </tbody>            
+                <tr  style="background-color: #6F1E1E;">
+                    <td class="text-uppercase">Runtime</td>
+                    <td><?php echo $movie->getRuntime()?></td>
+                </tr>
+            </tbody>            
         </table> 
 
     <div class="espaciado-sup">
@@ -76,7 +74,7 @@
                         <th class="text-center">Dirección</th>
                         <th class="text-center">Numero Sala</th>
                         <th class="text-center">Butacas Disponibles</th>
-                        <th class="text-center">Fecha y</th>
+                        <th class="text-center">Fecha y Hora</th>
                         <th class="text-center">Opciones</th>
                     </tr>
                 </tr>
@@ -99,10 +97,8 @@
                         </td>
                     </tr>
                 <?php } } else { ?>
-                    
-                            <td colspan = 6 class="text-center"> <strong>ESTA PELICULA NO TIENE FUNCIONES DISPONIBLES</strong></td>
-
-                        <?php  } ?>
+                    <td colspan = 6 class="text-center"> <strong>ESTA PELICULA NO TIENE FUNCIONES DISPONIBLES</strong></td>
+                <?php  } ?>
             </tbody>
         </table>
     </div>
@@ -207,9 +203,7 @@
                     </button>
                 </div>
                 
-                <div class="modal-body pl-3 pr-3">
-                    <input type="number" name="id" value="<?php echo $movie->getId(); ?>" class="hide">
-                </div>
+                <input type="number" name="id" value="<?php echo $movie->getId(); ?>" class="hide">
 
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
