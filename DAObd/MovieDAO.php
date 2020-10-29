@@ -81,7 +81,7 @@
             {
                 $movieAPI = new MovieAPI();
                 $movie = $movieAPI->GetOne($id);
-                $movieInDAO = $this->GetOne($id);
+                $movieInDAO = $this->GetOne($id, true);
 
                 if($movie)
                 {

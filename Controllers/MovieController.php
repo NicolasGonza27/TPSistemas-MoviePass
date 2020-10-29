@@ -248,8 +248,18 @@ class MovieController
         public function RemoveMovieCartelera($id)
         {
             $this->Remove($id);
-            
-            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+            if(isset($_SESSION["backbutton"])) { 
+                $backButton = $_SESSION["backbutton"];
+                if($backButton == "busquedaTitleCartelera") { 
+                    $this->ShowListViewsByTituloAdminCartelera();
+                } elseif($backButton == "busquedaGenderCartelera") { 
+                    $this->ShowListViewsByGenderAdminCartelera();
+                } elseif($backButton == "busquedaDateCartelera") { 
+                    $this->ShowListViewsByDateAdminCartelera();
+                } elseif($backButton == "cartelera") { 
+                    $this->GetCartelera();
+                } 
+            }
         }
 
     }   
