@@ -89,21 +89,24 @@
             $error = 0;
             if($user)
             {
-                if($user->GetPassword() == $password)
-                    
+                if($user->GetPassword() == $password) 
+                {                    
                     $_SESSION["userLogged"] = $user;
                     
                     if($user->getId_tipo_usuario() == 1)
                     {   
                         $this->ShowDashboardView();
                     }
-                    else
+                    elseif($user->getId_tipo_usuario() == 2) 
                     {
-                        if($user->getId_tipo_usuario() == 2) 
-                        {
-                            require_once(VIEWS_PATH ."Views-Cliente/home-client.php");
-                        }
+                        require_once(VIEWS_PATH ."Views-Cliente/home-client.php");
                     }
+                }
+                else
+                {
+                    $error = 1;
+                    require_once(VIEWS_PATH."home.php");
+                }
             }
             else
             {
