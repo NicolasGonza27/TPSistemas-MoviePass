@@ -1,13 +1,6 @@
 <?php
-
-require_once(VIEWS_PATH . "header.php");
-require_once("nav.php");
-
-use API\MovieGenderAPI as MovieGenderAPI;
-
-$movieGenderAPI = new MovieGenderAPI();
-$listMovieGender = $movieGenderAPI->GetAll();
-
+   require_once(VIEWS_PATH."header.php");
+   require_once("nav.php");
 ?>
 
 <br>
@@ -72,7 +65,7 @@ $listMovieGender = $movieGenderAPI->GetAll();
                     <div class="modal-body">
                         <input type="text" name="title" class="col form-control form-control-sm">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg"">Filter</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Filter</button>
                 </form>
             </div>
         </div>

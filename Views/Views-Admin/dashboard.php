@@ -23,25 +23,26 @@ require_once("nav.php");
                 </tr>
             </thead>
             <tbody class="bg-white">
-                <?php foreach ($listaCine as $cine) { ?>
+                <?php if($listaCine){ foreach ($listaCine as $cine) { ?>
                     <tr>
                         <td class="text-center"><?php echo $cine->getNombre() ?></td>
                         <td class="text-center"><?php echo $cine->getCalle() ?></td>
                         <td class="text-center"><?php echo $cine->getNumero() ?></td>
-                        <td class="text-center"><?php echo $cine->getHor_apertura() ?></td>
-                        <td class="text-center"><?php echo $cine->getHor_cierre() ?></td>
+                        <td class="text-center"><?php $ape = explode(":", $cine->getHor_apertura()); echo $ape[0].":".$ape[1]; ?> </td>
+                        <td class="text-center"><?php $close = explode(":", $cine->getHor_cierre()); echo $close[0].":".$close[1];?> </td>
                         <td class="text-center"><?php echo $cine->getValor_entrada() ?></td>
                         <td class="text-center row">
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal" . $cine->getId(); ?>">Edit</button>
-                                <button type="button" class="btn btn-outline-danger" style="margin-left: 3px;"  data-toggle="modal" data-target="<?php echo "#modalEliminar" .  $cine->getId();?>">Remove</button>
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal" . $cine->getId(); ?>">Edit</button>
+                            <button type="button" class="btn btn-outline-danger" style="margin-left: 3px;"  data-toggle="modal" data-target="<?php echo "#modalEliminar" .  $cine->getId();?>">Remove</button>
                             <form action="<?php echo FRONT_ROOT . "Sala/ShowSalaDashboardView" ?>" method="post">
                                 <input type="text" class="hide" name="id" value="<?php echo $cine->getId() ?>">
                                 <button type="submit" class="btn btn-outline-success" style="margin-left: 3px;">Rooms</button>
                             </form>
                         </td>
-
                     </tr>
-                <?php } ?>
+                <?php } } else { ?>
+                    <td colspan = 7 class="text-center"> <strong>NO CINEMA SAVED IN FILES</strong></td>
+                <?php  } ?>
             </tbody>
         </table>
     </div>
@@ -74,7 +75,7 @@ foreach ($listaCine as $cine) { ?>
 
                         <div class="row form-group pr-3">
                             <label class="col-6">Number:</label>
-                            <input type="number" name="numero" class="col-6" value="<?php echo $cine->getNumero() ?>" required />
+                            <input type="number" name="numero" min="1" class="col-6" value="<?php echo $cine->getNumero() ?>" required />
                         </div>
 
                         <input type="text" name="capacidad" class="hide" value="<?php echo $cine->getCapacidad() ?>" />
@@ -83,7 +84,7 @@ foreach ($listaCine as $cine) { ?>
                             <label class="col-6">Opening Hours:</label>
                             <input type="time" name="apertura" class="col-6" value="<?php echo $cine->getHor_apertura() ?>" required />
                         </div>
-
+                        
                         <div class="row form-group pr-3">
                             <label class="col-6">Closing hours:</label>
                             <input type="time" name="cierre" class="col-6" value="<?php echo $cine->getHor_cierre() ?>" required />
@@ -91,7 +92,7 @@ foreach ($listaCine as $cine) { ?>
 
                         <div class="row form-group pr-3">
                             <label class="col-6">Cinema ticket price:</label>
-                            <input type="number" name="valor_entrada" class="col-6" step="0.50" value="<?php echo $cine->getValor_entrada() ?>" required />
+                            <input type="number" name="valor_entrada" min="1" class="col-6" step="0.50" value="<?php echo $cine->getValor_entrada() ?>" required />
                         </div>
 
                         <div class="row pr-3">
@@ -163,7 +164,7 @@ foreach ($listaCine as $cine) { ?>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Number:</label>
-                        <input type="number" name="numero" class="col-6" required />
+                        <input type="number" name="numero" min="1" class="col-6" required />
                     </div>
 
                     <input type="text" name="capacidad" class="hide" />
@@ -180,7 +181,7 @@ foreach ($listaCine as $cine) { ?>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Cinema ticket price:</label>
-                        <input type="number" name="valor_entrada" step="0.50" class="col-6" required />
+                        <input type="number" name="valor_entrada" min="1" step="0.50" class="col-6" required />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -192,9 +193,13 @@ foreach ($listaCine as $cine) { ?>
     </div>
 </div>
 
-
-
-
 <?php
-require_once("Views/footer.php");
+    require_once("Views/footer.php");
 ?>
+
+<script>
+    $("input[type=text]").keyup(function(){
+        leters = $(this).val().replace("  ", "");
+        $(this).val(leters);
+    });
+</script>

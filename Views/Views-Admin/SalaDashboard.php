@@ -9,8 +9,7 @@
         <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowDashboardView" ?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
     </div>
     <div class="content">
-        <h3 class="text-white mt-3 mb-3">
-        </h3>
+        <h3 class="text-white mt-3 mb-3"></h3>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -28,7 +27,7 @@
                 </tr>
             </thead>
             <tbody class="bg-white">
-                <?php foreach($listaSala as $sala) { ?>
+                <?php if($listaSala) { foreach($listaSala as $sala) { ?>
                     <tr>
                         <td class="text-center"><?php echo $sala->getNumero_sala()?></td>
                         <td class="text-center"><?php foreach($listTiposSalas as $tipoSala)
@@ -44,7 +43,9 @@
                                 <button type="button" class="btn btn-outline-danger"  data-toggle="modal" data-target="<?php echo "#modalEliminar".$sala->getId_sala()?>">Remove</button>
                             </td>
                     </tr>
-                <?php } ?>
+                <?php } } else { ?>
+                    <td colspan = 5 class="text-center"> <strong>NO ROOMS ASIGNED TO THIS CINEMA</strong></td>
+                <?php  } ?>
             </tbody>
         </table>
     </div>
@@ -105,19 +106,12 @@ foreach ($listaSala as $sala) { ?>
                     <div class="row form-group pr-3">
                     <label class="col-6">Room type</label>
                         <select name="tipo_sala" class="col-6" required>
-                            <?php foreach($listTiposSalas as $tipoSala) 
-                            { 
-                                    if($tipoSala->getId_tipo_sala() == $sala->getId_tipo_sala())
-                                    {
-                                    ?>
+                            <?php foreach($listTiposSalas as $tipoSala) { 
+                                if($tipoSala->getId_tipo_sala() == $sala->getId_tipo_sala()) { ?>
                                     <option selected value="<?php echo $tipoSala->getId_tipo_sala(); ?>"><?php echo $tipoSala->getNombre_tipo_sala(); ?></option>
-                                    <?php
-                                    }
-                                    else
-                                    {
-                                    ?>
+                                <?php } else { ?>
                                     <option value="<?php echo $tipoSala->getId_tipo_sala(); ?>"><?php echo $tipoSala->getNombre_tipo_sala(); ?></option>
-                            <?php   }
+                                <?php }
                             } ?>
                             
                         </select>
@@ -130,7 +124,7 @@ foreach ($listaSala as $sala) { ?>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Number of seats:</label>
-                        <input type="number" min=0 name="cant_butacas" class="col-6" value="<?php echo $sala->getCant_butacas()?>" required/>
+                        <input type="number" min="1" name="cant_butacas" class="col-6" value="<?php echo $sala->getCant_butacas()?>" required/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -186,7 +180,7 @@ foreach ($listaSala as $sala) { ?>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Number of seats:</label>
-                        <input type="number" name="cant_butacas" class="col-6" required/>
+                        <input type="number" min="1" name="cant_butacas" class="col-6" required/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -198,8 +192,13 @@ foreach ($listaSala as $sala) { ?>
     </div>
 </div>
 
-
-
 <?php
     require_once("Views/footer.php");
 ?>
+
+<script>
+    $("input[type=text]").keyup(function(){
+        leters = $(this).val().replace("  ", "");
+        $(this).val(leters);
+    });
+</script>

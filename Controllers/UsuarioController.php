@@ -28,12 +28,10 @@
         public function AddNuevoUsuario($nombre,$apellido, $dni, $email, $password, $fecha_nac)
         {
             $usuario = new Usuario(null,2,$nombre,$apellido,$dni,$email,$password,$fecha_nac);
-            
+            $error = 0;
             if($this->usuarioDAO->GetOneByEmail($email)) 
             {
-                echo'<script type="text/javascript">
-                        alert("El correo electronico no esta disponible");
-                    </script>';     
+                $error = 2;   
             }
             else 
             {

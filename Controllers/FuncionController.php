@@ -32,14 +32,15 @@
         public function Add($id_pelicula, $id_sala, $cant_asistentes, $fecha_hora) {
             $funcion = new Funcion(null, $id_pelicula, $id_sala, $cant_asistentes, $fecha_hora);
             $movie = $this->movieDAO->GetOne($id_pelicula);
+            $error = 0;
             if ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala)){
                 $this->funcionDAO->Add($funcion);    
             }
             else {
-                echo "<script>alert('La fecha y hora de la sala que ha indicado no estan disponibles para programaresta funcion, verifique los horarios e intente nuevamente');</script>";
+                $error = 1;
             }
 
-            $this->ShowContentMovieFuncionesViews($id_pelicula);
+            $this->ShowContentMovieFuncionesViews($id_pelicula, $error);
         }
 
         public function Remove($id,$id_movie)
@@ -64,18 +65,20 @@
         {
             $funcion = new Funcion($id_funcion, $id_pelicula, $id_sala, $cant_asistentes, $fecha_hora);
             $movie = $this->movieDAO->GetOne($id_pelicula);
+            $error = 0;
             if ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala, $id_funcion)){
                 $this->funcionDAO->Modify($id_funcion, $funcion);  
             }
             else {
-                echo "<script>alert('La fecha y hora de la sala que ha indicado no estan disponibles para programaresta funcion, verifique los horarios e intente nuevamente');</script>";
+                $error = 1;
             }
 
-            $this->ShowContentMovieFuncionesViews($id_pelicula);
+            $this->ShowContentMovieFuncionesViews($id_pelicula, $error);
         }
 
-        public function ShowContentMovieFuncionesViews($id)
+        public function ShowContentMovieFuncionesViews($id, $error = 0)
         {
+            var_dump($error);
             $movie = $this->movieDAO->GetOne($id);
             $listFunciones = $this->funcionDAO->GetAllByMovie($id);
             $listCines = $this->cineDAO->GetAll();
@@ -150,7 +153,7 @@
             return $listCineSalas;
         }
 
-        public function VerifyTimeFuncion($time, $movie_runtime, $id_sala, $if_funcion = null)
+        public function VerifyTimeFuncion($time, $movie_runtime, $id_sala, $id_funcion = null)
         {
             $listFunciones = $this->funcionDAO->GetAllFuncionesBySala($id_sala);
 
@@ -166,7 +169,7 @@
             
             foreach($listFunciones as $funcion) {
 
-                if($funcion->getId_funcion() == $if_funcion) {
+                if($funcion->getId_funcion() == $id_funcion) {
                     continue;
                 }
 
@@ -183,6 +186,28 @@
                 if((($inicTime >= $inicFuncion) && ($inicTime <= $finFuncion)) ||
                     (($midTime >= $inicFuncion) && ($midTime <= $finFuncion)) ||
                     (($finTime >= $inicFuncion) && ($finTime <= $finFuncion))) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public function VerifyCineFuncion($time, $id_sala, $id_movie, $id_funcion = null)
+        {
+            $listFunciones = $this->funcionDAO->GetAll();
+            $fechaHora = explode("T", $time);
+            $fechaFuncion = $fechaHora[0];
+
+            foreach($listFunciones as $funcion) {
+                if($funcion->getId_funcion() == $id_funcion) {
+                    continue;
+                }
+
+                $fechaHora = explode(" ", $funcion->getFecha_hora());
+                $fecha = $fechaHora[0];
+
+                if (($funcion->getId_pelicula == $id_movie) && ($fechaFuncion == $fecha)) {
                     return false;
                 }
             }
