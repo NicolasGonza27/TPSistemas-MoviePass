@@ -1,8 +1,10 @@
 <?php
     namespace Controllers;
 
-    use DAObd\CineDAO as CineDAO;
-    use DAObd\UsuarioDAO as UsuarioDAO;
+use API\MovieAPI;
+use DAObd\CineDAO as CineDAO;
+use DAObd\MovieDAO;
+use DAObd\UsuarioDAO as UsuarioDAO;
 
     class HomeController
     {   
@@ -59,16 +61,22 @@
 
         public function ShowFiltersViews()
         {
+            $movieDAO = new MovieDAO();
+            $listMovie = $movieDAO->GetAllMostPopularity(500);
             require_once(VIEWS_PATH."Views-Cliente/filters.php");
         }  
 
         public function ShowFiltersViewsAdminCartelera()
         {
+            $movieDAO = new MovieDAO();
+            $listMovie = $movieDAO->GetAllMostPopularity(500);
             require_once(VIEWS_PATH."Views-Admin/filterCartelera.php");
         }  
         
         public function ShowFiltersViewsAdminOutCartelera()
         {
+            $movieAPI = new MovieAPI();
+            $listMovie = $movieAPI->GetAllMostPopularityOutCartelera();
             require_once(VIEWS_PATH."Views-Admin/filterOutCartelera.php");
         }  
 

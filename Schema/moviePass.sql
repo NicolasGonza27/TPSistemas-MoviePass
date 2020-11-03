@@ -99,16 +99,31 @@ eliminado boolean not null default false,
 constraint PK_usuarios primary key (id_usuario),
 constraint FK_usuarios_tipos_usuario foreign key (id_tipo_usuario) references tipos_usuario (id_tipo_usuario) on delete cascade on update cascade
 );
+
 alter table usuarios change column contraseña pass_usuario varchar(30);
+
 create table politicas_descuento(
 id_politica_descuento int not null auto_increment,
 porcentaje_descuento float not null,
-dias_descuento varchar (20),
 descripcion varchar (20),
 eliminado boolean not null default false,
-constraint PK_politicas_descuento primary key (id_politica_descuento) 
+constraint PK_politicas_descuento primary key (id_politica_descuento)
 );
 
+/*EJECUTAR LAS TRES LINEAS*/
+alter table politicas_descuento drop column dia_de_semana_descuento;
+alter table politicas_descuento add constraint ckq_porcentaje_politicas_descuento check ((porcentaje_descuento >= 0) and (porcentaje_descuento <= 100));
+alter table politicas_descuento change column descripcion descripcion varchar(100);
+
+create table politica_de_descuento_x_dia(
+id_politica_de_descuento_x_dia int auto_increment,
+id_politica_descuento int not null,
+dia_de_la_semana int not null,
+eliminado boolean not null default false,
+constraint PK_dias_politica_descuento primary key (id_politica_de_descuento_x_dia),
+constraint FK_id_politica_descuento foreign key (id_politica_descuento) references politicas_descuento (id_politica_descuento) on delete cascade on update cascade,
+constraint ckq_dia_de_la_semana check ((dia_de_la_semana >= 0) and (dia_de_la_semana <= 6))
+);
 
 create table compras(
 id_compra int not null auto_increment,
@@ -121,6 +136,9 @@ constraint PK_compras primary key (id_compra),
 constraint PK_compras foreign key (id_usuario) references usuarios (id_usuario) on delete cascade on update cascade,
 constraint FK_compras_politicas_descuento foreign key (id_politica_descuento) references politicas_descuento (id_politica_descuento) on delete cascade on update cascade
 );
+
+/*EJECUTAR ESTA LINEA*/
+alter table compras change column id_politica_descuento id_politica_descuento int default null;
 
 create table entradas(
 id_entrada int not null auto_increment,
@@ -190,6 +208,26 @@ select
 *
 from usuarios;
 
+select 
+*
+from
+politicas_descuento;
+
+select 
+*
+from
+politica_de_descuento_x_dia;
+
+select 
+*
+from
+compras;
+
+select
+*
+from
+entradas;
+
 select
 p.title,c.nombre_cine, c.calle, c.numero, s.numero_sala, s.cant_butacas - f.cant_asistentes as "butacas_disp", f.fecha_hora
 from funciones f 
@@ -212,4 +250,5 @@ inner join cines c
 on s.id_cine = c.id_cine
 where p.id = 340102;
 
+describe compras;
                                    

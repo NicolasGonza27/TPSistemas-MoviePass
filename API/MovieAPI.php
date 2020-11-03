@@ -84,6 +84,22 @@ class MovieAPI
             return $moviesByDate;
         }
 
+        public function GetAllMostPopularityOutCartelera($popularity = 300)
+        {
+            $this->RetrieveData();
+            $moviesMostPopularity= array();
+
+            foreach($this->movieList as $movie)
+            {   
+                if($movie->getPopularity() >= $popularity)
+                {   
+                    array_push($moviesMostPopularity,$movie);
+                }
+            }
+        
+            return $moviesMostPopularity;
+        }
+
         public function GetAllByTitleOutCartelera($title)
         {
             $this->RetrieveDataOutCartelera();

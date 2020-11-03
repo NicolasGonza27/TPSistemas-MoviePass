@@ -40,7 +40,14 @@
 	use Models\Usuario as Usuario;  
 	use DAObd\TipoUsuarioDAO as TipoUsuarioDAO;
 	use DAObd\UsuarioDAO as UsuarioDAO;
-
+	use Models\PoliticaDescuento as PoliticaDescuento;
+	use DAObd\PoliticaDescuentoDAO as PoliticaDescuentoDAO;
+	use Models\Compra as Compra;
+	use DAObd\CompraDAO as CompraDAO;
+	use Models\Entrada as Entrada;
+	use DAObd\EntradaDAO as EntradaDAO;
+	*/
+	/*
 	
 
 
@@ -98,6 +105,7 @@
 	$funcionDAO->Add(new Funcion(null,413518,7,110,"2020-12-15 19:00:00"));
 	$funcionDAO->Add(new Funcion(null,425001,8,105,"2020-12-14 19:00:00"));
 
+	//USUARIOS
 	$tiposDeUsuarioDAO = new TipoUsuarioDAO();
 	$tiposDeUsuarioDAO->Add(new TipoUsuario(null,"Administrador"));
 	$tiposDeUsuarioDAO->Add(new TipoUsuario(null,"Cliente"));
@@ -105,6 +113,29 @@
 	$usuariosDAO = new UsuarioDAO();
 	$usuariosDAO->Add(new Usuario(null,1,"Nicolas","Gonzalez","42456123","niclausegonzalez@gmail.com","123",'2000-06-22'));
 	$usuariosDAO->Add(new Usuario(null,2,"Lucas","Zelaya","42456123","lu@lu","123",'2000-06-22'));*/
+
+	//POLITICAS DE DESCUENTO
+	/*$politicaDescuento = new PoliticaDescuento(null,20,array(1,2),"Dias de descuento los dias martes y miercoles");
+	$politicaDescuentoDAO = new PoliticaDescuentoDAO();*/
+
+	/*$compra = new Compra(null,4,null,5,500);
+	$compraTwo = new Compra(null,5,1,5,500);
+
+	$compraDAO = new CompraDAO();
+	$compraDAO->Add($compra);
+	$compraDAO->Add($compraTwo);*/
+	
+	/*$entradaOne = new Entrada(null,3,1,55);
+	$entradaTwo = new Entrada(null,4,1,56);
+	$entradaThree = new Entrada(null,4,1,57);
+
+	$entradaDAO = new EntradaDAO();
+
+	$entradaDAO->Add($entradaOne);
+	$entradaDAO->Add($entradaTwo);
+	$entradaDAO->Add($entradaThree);*/
+	
+
 
 
 

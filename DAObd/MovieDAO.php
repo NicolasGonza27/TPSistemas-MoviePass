@@ -263,6 +263,31 @@
             }
         }
 
+        public function GetAllMostPopularity($popularityMin,bool $eliminado = false)
+        {
+            try 
+            {
+                $query = "SELECT
+                *
+                FROM peliculas_cartelera p
+                WHERE (p.popularity >= :popularity) AND (p.eliminado = :eliminado);";
+                
+                $parameters["popularity"] = $popularityMin;
+                $parameters["eliminado"] = $eliminado;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                $newResultSet =  $this->mapear($resultSet);
+
+                return  $newResultSet;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
 
         public function Remove($id_movie)
         {

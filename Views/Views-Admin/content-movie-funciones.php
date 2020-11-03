@@ -9,18 +9,18 @@
             <?php if(isset($_SESSION["backbutton"])) { ?>
                 <?php $backButton = $_SESSION["backbutton"];?>
                 <?php if($backButton == "busquedaTitleCartelera") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTituloAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTituloAdminCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } elseif($backButton == "busquedaGenderCartelera") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderAdminCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } elseif($backButton == "busquedaDateCartelera") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } elseif($backButton == "cartelera") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/GetCartelera"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/GetCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } ?> 
             <?php } ?>        
         </div>
         <div class="ml-auto">
-            <button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar de Cartelera</button>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Remove of billboard</button>
         </div>
     </div>
 
@@ -66,16 +66,16 @@
             <thead class="thead-dark">
                 <tr>
                     <tr>
-                        <th colspan=5 > LISTADO DE FUNCIONES </th>
+                        <th colspan=5 > FUNCTION LIST </th>
                         <th colspan=1 class="text-center"><button type="button" class="btn btn-outline-primary my-2 my-sm-0 push-rigth" data-toggle="modal" data-target="#modalAgregar">Agregar</button></th>
                     </tr>
                     <tr>
-                        <th class="text-center">Nombre Del Cine</th>
-                        <th class="text-center">Dirección</th>
-                        <th class="text-center">Numero Sala</th>
-                        <th class="text-center">Butacas Disponibles</th>
-                        <th class="text-center">Fecha y Hora</th>
-                        <th class="text-center">Opciones</th>
+                        <th class="text-center">Name by cinema</th>
+                        <th class="text-center">Address</th>
+                        <th class="text-center">Number room</th>
+                        <th class="text-center">Seats available</th>
+                        <th class="text-center">Date and Time</th>
+                        <th class="text-center">Options</th>
                     </tr>
                 </tr>
             </thead>
@@ -90,14 +90,14 @@
                         <td class="text-center"><?php echo $funcion["fecha_hora"];?></td>
                         <td class="text-center">
                             <form action="<?php echo FRONT_ROOT."Funcion/Remove"?>" method="post">
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$funcion["id_funcion"];?>">Editar</button>
-                                <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $funcion["id_funcion"];?>">Borrar</button>
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$funcion["id_funcion"];?>">Edit</button>
+                                <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $funcion["id_funcion"];?>">Remove</button>
                                 <input type="number" name="id_movie" value="<?php echo $funcion["id_pelicula"];?>" class="hide">
                             </form> 
                         </td>
                     </tr>
                 <?php } } else { ?>
-                    <td colspan = 6 class="text-center"> <strong>ESTA PELICULA NO TIENE FUNCIONES DISPONIBLES</strong></td>
+                    <td colspan = 6 class="text-center"> <strong>THIS MOVIE HAS NO FUNCTION AVAILABLE</strong></td>
                 <?php  } ?>
             </tbody>
         </table>
@@ -109,7 +109,7 @@
                 <div class="modal-content">
                     <form action="<?php echo FRONT_ROOT."Funcion/ModifyModal"?>" method="post">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edición de Funcion</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Function Edit</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -118,7 +118,7 @@
                             <input type="number" name="id_funcion" class="hide" value="<?php echo $funcion["id_funcion"]?>"/>
                             <input type="number" name="id_pelicula" class="hide" value="<?php echo $funcion["id_pelicula"]?>"/>
                             <div class="row form-group pr-3">
-                                <label class="col-6">Sala</label>
+                                <label class="col-6">Room</label>
                                 <select name="id_sala">
                                     <?php foreach($listCines as $cine) { ?>
                                         <optgroup label="<?php echo $cine->getNombre()?>"> 
@@ -132,13 +132,13 @@
                             </div>
                             <input type="number" name="cant_asistentes" class="hide" value="0"/>
                             <div class="row form-group pr-3">
-                                <label class="col-6">Fecha y Hora:</label>
+                                <label class="col-6">Date and time:</label>
                                 <input type="datetime-local" min="<?php echo date("Y").'-'.date("m").'-'.date("d").'T00:00:00';?>" name="fecha_hora" class="col-6" value="<?php echo $funcion["fecha_hora"];?>" required/>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </form>
                 </div>
@@ -151,7 +151,7 @@
             <div class="modal-content">
                 <form action="<?php echo FRONT_ROOT."Funcion/Add"?>" method="post">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Agregar una Funcion</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add a function</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -159,7 +159,7 @@
                     <div class="modal-body pl-3 pr-3">
                         <input type="numbre" name="id_pelicula" class="hide" value="<?php echo $movie->getId()?>"/>
                         <div class="row form-group pr-3">
-                            <label class="col-6">Sala</label>
+                            <label class="col-6">Room</label>
                             <select name="id_sala">
                                 <?php foreach($listCines as $cine) { ?>
                                     <optgroup label="<?php echo $cine->getNombre();?>"> 
@@ -173,13 +173,13 @@
                         </div>
                         <input type="numbre" name="cant_asistentes" class="hide" value="0"/>
                         <div class="row form-group pr-3">
-                            <label class="col-6">Fecha y Hora:</label>
+                            <label class="col-6">Date and time</label>
                             <input type="datetime-local" min="<?php echo date("Y").'-'.date("m").'-'.date("d").'T00:00:00';?>" name="fecha-hora" class="col-6" value="" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Agregar</button>
+                        <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
                     </div>
                 </form>
             </div>
@@ -197,7 +197,7 @@
                 
                 <div class="modal-header">
                     
-                    <div class="modal-title" id="exampleModalLabel">¿Desea eliminar la pelicula <strong><?php echo $movie->getTitle();?></strong> a cartelera? </div>
+                    <div class="modal-title" id="exampleModalLabel">¿Do you want to remove the movie <strong><?php echo $movie->getTitle();?></strong>  to the billboard? </div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -206,8 +206,8 @@
                 <input type="number" name="id" value="<?php echo $movie->getId(); ?>" class="hide">
 
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-danger" onclick="this.form.submit(); this.disabled=true; this.value='Sending…';" >Eliminar</button>
+                    <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger" onclick="this.form.submit(); this.disabled=true; this.value='Sending…';" >Remove</button>
                 </div>
 
             </form>
