@@ -1,11 +1,15 @@
 <?php require_once("nav.php"); ?>
     
 <div class="container content espaciado-sup">
+    <div class="text-left mb-2">
+        <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowFiltersViewsAdminCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+    </div>
     <table class="table text-white" style="font-weight: bold;">
         <thead class="thead-dark">
-            <th colspan = 3 class="text-center ">Cartelera Movie-Pass</th>
+            <th colspan = 3 class="text-center ">Billboard Movie-Pass</th>
         </thead>
-    </table>  
+    </table>
+    <i class="fas fa-arrow-circle-left">Back</i>  
     <div class="cart-fondo">
         <?php if(!empty($movieListRta)) {
             foreach($movieListRta as $movie) { ?>

@@ -36,20 +36,26 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class = "nav-item">
-              <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowHomeClientViews"?>"> Inicio </a>
+              <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowHomeClientViews"?>"> Index </a>
             </li>
             <li class = "nav-item">  
               <a class="nav-link"  href= "<?php echo FRONT_ROOT."Home/ShowFiltersViews"?>" id="navbarDropdownMenuLink" role="button">
-                Filtrar Por
+                Billboard
               </a>
             </li>
+
             <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class= "dropdown-item  bg-secondary text-white" href= "<?php echo FRONT_ROOT."Home/form"?>">Genero</a>           
             <a class= "dropdown-item  bg-secondary text-white">Fecha</a>  
             </div>-->  
         </ul>
+
+        <form class="form-inline my-2 my-lg-0" action="<?php echo FRONT_ROOT."Movie/ShowListViewsByTitle"?>" method="post">
+          <input class="form-control mr-sm-2" type="search" placeholder="Title of movie" name="title" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
         <a class="nav-link text-white"> Welcome <span class="font-weight-bold"><?php if(isset($user))echo ucfirst($user->getNombre_usuario())."!";?></span></a>
-        <a class="nav-link text-white"  href= "<?php echo FRONT_ROOT."Home/Logout"?>" >Cerrar Sesion</a>
+        <a class="nav-link text-white"  href= "<?php echo FRONT_ROOT."Home/Logout"?>" >Log out</a>
     </div>
 </nav>
 

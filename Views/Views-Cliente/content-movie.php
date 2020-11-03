@@ -7,12 +7,15 @@
             <?php if(isset($_SESSION["backbutton"])) { ?>
                 <?php $backButton = $_SESSION["backbutton"];?>
                 <?php if($backButton == "busquedaTitle") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTitle"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTitle"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } elseif($backButton == "busquedaDate") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDate"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDate"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } elseif($backButton == "busquedaGender") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGender"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGender"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } ?>
+            <?php } else {  ?>
+
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowFiltersViews"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
             <?php } ?>
         </div>
 
@@ -36,7 +39,7 @@
                                 <td class="text-uppercase">Vote average</td>
                                 <td>
                                     <div>
-                                        <input class="range" disabled value="<?php echo $movie->getVote_average()?>" type="range" step="0.1" min="0" max="10" step="0.01">
+                                        <input class="range form-control-range" disabled value="<?php echo $movie->getVote_average()?>" type="range" step="0.1" min="0" max="10" step="0.01">
                                     </div>
                                 </td>
                             </tr>
@@ -62,14 +65,14 @@
             <table class="table" >
                 <thead class="thead-dark">
                     <tr>
-                        <th colspan=5 class="text-center"> LISTADO DE FUNCIONES </th>
+                        <th colspan=5 class="text-center"> List of functions </th>
                     </tr>
                     <tr>
-                    <th class="text-center">Nombre Del Cine</th>
-                        <th class="text-center">Dirección</th>
-                        <th class="text-center">Numero Sala</th>
-                        <th class="text-center">Butacas Disponibles</th>
-                        <th class="text-center">Fecha y Hora</th>
+                    <th class="text-center">Name</th>
+                        <th class="text-center">Address</th>
+                        <th class="text-center">Number room</th>
+                        <th class="text-center">Seats available</th>
+                        <th class="text-center">Date and Time</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -82,11 +85,11 @@
                             {     
                             ?>
                                 <tr>
-                                    <td class="text-center"><?php echo $funcion["nombre_cine"];?></td>
-                                    <td class="text-center"><?php echo $funcion["calle"]." ".$funcion["numero"];?></td>
-                                    <td class="text-center"><?php echo $funcion["numero_sala"];?></td>
-                                    <td class="text-center"><?php echo $funcion["butacas_disp"];?></td>
-                                    <td class="text-center"><?php echo $funcion["fecha_hora"];?></td>
+                                    <td class="text-center table-secondary"><?php echo $funcion["nombre_cine"];?></td>
+                                    <td class="text-center table-secondary"><?php echo $funcion["calle"]." ".$funcion["numero"];?></td>
+                                    <td class="text-center table-secondary"><?php echo $funcion["numero_sala"];?></td>
+                                    <td class="text-center table-secondary"><?php echo $funcion["butacas_disp"];?></td>
+                                    <td class="text-center table-secondary"><?php echo $funcion["fecha_hora"];?></td>
                                 </tr>
 
                     <?php   } 
@@ -94,7 +97,7 @@
                         else
                         {
                             ?>
-                            <td colspan = 5 class="text-center"> <strong>ESTA PELICULA NO TIENE FUNCIONES DISPONIBLES</strong></td>
+                            <td colspan = 5 class="text-center"> <strong>THIS MOVIE HAS NO FUNCTION AVAILABLE</strong></td>
                             <?php
                         }
                     ?>

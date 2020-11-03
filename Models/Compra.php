@@ -6,15 +6,15 @@
     {
         private $id_compra;
         private $id_usuario;
-        private $id_polica_usuario;
+        private $id_politica_descuento;
         private $cant_entradas;
         private $monto;
 
-        public function __construct($id_compra,$id_usuario,$id_polica_usuario,$cant_entradas,$monto)
+        public function __construct($id_compra,$id_usuario,$id_politica_descuento,$cant_entradas,$monto)
         {
             $this->id_compra = $id_compra;
             $this->id_usuario = $id_usuario;
-            $this->id_polica_usuario = $id_polica_usuario;
+            $this->id_politica_descuento = $id_politica_descuento;
             $this->cant_entradas = $cant_entradas;
             $this->monto = $monto;
         }
@@ -43,14 +43,14 @@
                 return $this;
         }
 
-        public function getId_polica_usuario()
+        public function getId_politica_descuento()
         {
-                return $this->id_polica_usuario;
+                return $this->id_politica_descuento;
         }
 
-        public function setId_polica_usuario($id_polica_usuario)
+        public function setId_politica_descuento($id_politica_descuento)
         {
-                $this->id_polica_usuario = $id_polica_usuario;
+                $this->id_politica_descuento = $id_politica_descuento;
 
                 return $this;
         }
