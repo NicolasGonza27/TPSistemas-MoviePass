@@ -23,28 +23,27 @@
                 </tr>
             </thead>
             <tbody class="bg-white">
-                <?php foreach($listaCine as $cine) { ?>
+                <?php if($listaCine){ foreach($listaCine as $cine) { ?>
                     <tr>
                         <td class="text-center"><?php echo $cine->getNombre()?></td>
                         <td class="text-center"><?php echo $cine->getCalle()?></td>
                         <td class="text-center"><?php echo $cine->getNumero()?></td>
-                        <td class="text-center"><?php echo $cine->getHor_apertura()?></td>
-                        <td class="text-center"><?php echo $cine->getHor_cierre()?></td>
+                        <td class="text-center"><?php $ape = explode(":", $cine->getHor_apertura()); echo $ape[0].":".$ape[1]; ?> </td>
+                        <td class="text-center"><?php $close = explode(":", $cine->getHor_cierre()); echo $close[0].":".$close[1];?> </td>
                         <td class="text-center"><?php echo $cine->getValor_entrada()?></td>
                         <form action="<?php echo FRONT_ROOT."Cine/Remove"?>" method="post">
                             <td class="text-center">
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal".$cine->getId()?>">Editar</button>
                                 <button type="submit" class="btn btn-outline-danger" name="id" value="<?php echo $cine->getId()?>">Borrar</button>
-                                <a type="button" class="btn btn-outline-sucess"  href="<?php echo FRONT_ROOT."Sala/ShowSalaDashboardView/".$cine->getId()?>" role="button">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-receipt-cutoff" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v13h-1V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51L2 2.118V15H1V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zM0 15.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
-                                    <path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-8a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
-                                    </svg>
+                                <a href="<?php echo FRONT_ROOT."Sala/ShowSalaDashboardView/".$cine->getId()?>">
+                                    <button type="button" class="btn btn-outline-dark">Salas</button>
                                 </a>
                             </td>
                         </form> 
                     </tr>
-                <?php } ?>
+                <?php } } else { ?>
+                    <td colspan = 7 class="text-center"> <strong>NO TIENE CINES EN EL REGISTRO</strong></td>
+                <?php  } ?>
             </tbody>
         </table>
     </div>
@@ -77,7 +76,7 @@ foreach($listaCine as $cine) { ?>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Numero:</label>
-                        <input type="number" name="numero" class="col-6" value="<?php echo $cine->getNumero()?>" required/>
+                        <input type="number" name="numero" min="1" class="col-6" value="<?php echo $cine->getNumero()?>" required/>
                     </div>
 
                     <input type="text" name="capacidad" class="hide" value="<?php echo $cine->getCapacidad()?>"/>
@@ -94,7 +93,7 @@ foreach($listaCine as $cine) { ?>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Valor de Entrada:</label>
-                        <input type="number" name="valor_entrada" class="col-6" step="0.50" value="<?php echo $cine->getValor_entrada()?>" required/>
+                        <input type="number" name="valor_entrada" min="1" class="col-6" step="0.50" value="<?php echo $cine->getValor_entrada()?>" required/>
                     </div>
 
                     <div class="row pr-3">
@@ -135,7 +134,7 @@ foreach($listaCine as $cine) { ?>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Numero:</label>
-                        <input type="number" name="numero" class="col-6" required/>
+                        <input type="number" name="numero" min="1" class="col-6" required/>
                     </div>
 
                     <input type="text" name="capacidad" class="hide"/>
@@ -152,7 +151,7 @@ foreach($listaCine as $cine) { ?>
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Valor de Entrada:</label>
-                        <input type="number" name="valor_entrada" step="0.50" class="col-6" required/>
+                        <input type="number" name="valor_entrada" min="1" step="0.50" class="col-6" required/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -167,3 +166,10 @@ foreach($listaCine as $cine) { ?>
 <?php
     require_once("Views/footer.php");
 ?>
+
+<script>
+    $("input[type=text]").keyup(function(){
+        leters = $(this).val().replace("  ", "");
+        $(this).val(leters);
+    });
+</script>

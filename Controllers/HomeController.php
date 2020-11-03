@@ -1,6 +1,7 @@
 <?php
     namespace Controllers;
 
+    use API\MovieGenderAPI as MovieGenderAPI;
     use DAObd\CineDAO as CineDAO;
     use DAObd\UsuarioDAO as UsuarioDAO;
 
@@ -8,11 +9,13 @@
     {   
         private $usuarioDAO;
         private $cineDAO;
+        private $movieGenderAPI;
 
         public function __construct()
         {
             $this->usuarioDAO = new UsuarioDAO();
             $this->cineDAO = new CineDAO();
+            $this->movieGenderAPI = new MovieGenderAPI();
         }
            
         public function Index($message = "")
@@ -29,13 +32,10 @@
                 {
                     $this->ShowHomeClientViews();
                 }
-                else
-                {
-                    require_once(VIEWS_PATH."home.php");
-                }
             }
             else
             {
+                $error = 0;
                 require_once(VIEWS_PATH."home.php");
             }
         }        
@@ -59,23 +59,26 @@
 
         public function ShowFiltersViews()
         {
+            $listMovieGender = $this->movieGenderAPI->GetAll();
             require_once(VIEWS_PATH."Views-Cliente/filters.php");
         }  
 
         public function ShowFiltersViewsAdminCartelera()
         {
+            $listMovieGender = $this->movieGenderAPI->GetAll();
             require_once(VIEWS_PATH."Views-Admin/filterCartelera.php");
         }  
         
         public function ShowFiltersViewsAdminOutCartelera()
         {
+            $listMovieGender = $this->movieGenderAPI->GetAll();
             require_once(VIEWS_PATH."Views-Admin/filterOutCartelera.php");
         }  
 
         public function Login($email,$password)
         {
             $user = $this->usuarioDAO->GetOneByEmail($email);
-
+            $error = 0;
             if($user)
             {
                 if($user->GetPassword() == $password)
@@ -96,8 +99,8 @@
             }
             else
             {
-                echo "<script> if(confirm('Los datos que ingreso no corresponden a nungun usuario registrado.'));";
-                echo "window.location = '/dashboard/TPSistemas-MoviePass/Home'; </script>";
+                $error = 1;
+                require_once(VIEWS_PATH."home.php");
             }
         
         }

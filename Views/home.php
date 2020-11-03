@@ -1,5 +1,11 @@
 <?php
     require_once("header.php");
+    if ($error == 1) {
+        echo "<script> if(confirm('Los datos que ingresó no corresponden a nungun usuario registrado.')); </script>";
+    }
+    elseif ($error == 2) {
+        echo'<script type="text/javascript"> alert("El correo electronico no esta disponible"); </script>'; 
+    }
 ?>
 <form class="container text-center" action="<?php echo FRONT_ROOT."Home/Login"?>" method="post">
     <h1 class="mt-5 text-white">MOVIE-PASS</h1>
@@ -11,7 +17,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">Correo</span>
                     </div>
-                    <input type="text" class="userName form-control"  name="userName" required>
+                    <input type="text" class="userName form-control" name="userName" required>
                 </div>
             </div>
             <div class="col-6 mb-3 mt-3">
@@ -28,7 +34,16 @@
         </div>
     </div>
 </form>
+
 <?php
+
     require_once("signUp.php");
     require_once("footer.php");
 ?>
+
+<script>
+    $("input[type=text]").keyup(function(){
+        leters = $(this).val().replace(" ", "");
+        $(this).val(leters);
+    });
+</script>

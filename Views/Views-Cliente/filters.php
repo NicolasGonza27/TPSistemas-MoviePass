@@ -1,14 +1,7 @@
 
 <?php
-   
    require_once(VIEWS_PATH."header.php");
    require_once(VIEWS_PATH."Views-Cliente/nav.php");
-   
-   use API\MovieGenderAPI as MovieGenderAPI;
-
-   $movieGenderAPI = new MovieGenderAPI();
-   $listMovieGender = $movieGenderAPI->GetAll();
-
 ?>
 
 <br>

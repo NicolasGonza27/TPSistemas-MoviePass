@@ -1,5 +1,8 @@
 <?php
-   require_once("nav.php");
+    require_once("nav.php");
+    if ($error == 1) {
+        echo "<script>alert('La fecha y hora de la sala que ha indicado no estan disponibles para programaresta funcion, verifique los horarios e intente nuevamente');</script>";
+    }
 ?>
 
 <div class="container content espaciado-sup">
@@ -25,41 +28,41 @@
     </div>
 
     <table class="table text-white" style="font-weight: bold;">
-            <thead class="thead-dark">
-                <th colspan = 3 class="text-center">MOVIE</th>
-            </thead>
-            <tbody>     
-                <tr>
-                    <td  class="text-center bg-dark" rowspan=6><img src="<?php echo $movie->getImage()?>" alt="" width=70% height=70%> </td>
-                    <td class="text-uppercase bg-bordo">Title</td>
-                    <td class="bg-bordo"><?php echo $movie->getTitle()?></td>
-                </tr>
+        <thead class="thead-dark">
+            <th colspan = 3 class="text-center">MOVIE</th>
+        </thead>
+        <tbody>     
+            <tr>
+                <td  class="text-center bg-dark" rowspan=6><img src="<?php echo $movie->getImage()?>" alt="" width=70% height=70%> </td>
+                <td class="text-uppercase bg-bordo">Title</td>
+                <td class="bg-bordo"><?php echo $movie->getTitle()?></td>
+            </tr>
+            
+            <tr  class="bg-bordo">
+                <td class="text-uppercase">Popularity</td>
+                <td><?php echo $movie->getPopularity()?></td>
+            </tr >
+            
+            <tr  class="bg-bordo">
+                <td class="text-uppercase">Vote average</td>
+                <td>
+                    <div>
+                        <input class="range" disabled value="<?php echo $movie->getVote_average()?>" type="range" min="0" max="10" step="0.01">
+                    </div>
+                </td>
                 
-                <tr  class="bg-bordo">
-                    <td class="text-uppercase">Popularity</td>
-                    <td><?php echo $movie->getPopularity()?></td>
-                </tr >
-                
-                <tr  class="bg-bordo">
-                    <td class="text-uppercase">Vote average</td>
-                    <td>
-                        <div>
-                            <input class="range" disabled value="<?php echo $movie->getVote_average()?>" type="range" min="0" max="10" step="0.01">
-                        </div>
-                    </td>
-                    
-                </tr>
-                <tr  class="bg-bordo">
-                    <td class="text-uppercase">Overview</td>
-                    <td><?php echo $movie->getOverview()?></td>
-                </tr>
+            </tr>
+            <tr  class="bg-bordo">
+                <td class="text-uppercase">Overview</td>
+                <td><?php echo $movie->getOverview()?></td>
+            </tr>
 
-                <tr  style="background-color: #6F1E1E;">
-                    <td class="text-uppercase">Runtime</td>
-                    <td><?php echo $movie->getRuntime()?></td>
-                </tr>
-            </tbody>            
-        </table> 
+            <tr  style="background-color: #6F1E1E;">
+                <td class="text-uppercase">Runtime</td>
+                <td><?php echo $movie->getRuntime()?></td>
+            </tr>
+        </tbody>            
+    </table> 
 
     <div class="espaciado-sup">
         <table class="table">

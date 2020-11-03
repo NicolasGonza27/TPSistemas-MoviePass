@@ -5,12 +5,9 @@
 
 <div class="container espaciado-sup">
     <div class="content">
-        <h3 class="text-white mt-3 mb-3">
-
-
-            
-            
-        </h3>
+        <div class="text-left mb-2">
+            <a class="boton-atras" href="<?php echo FRONT_ROOT."Cine/ShowDashboardView"?>"><button class="btn btn-secondary">&larr; Atras</button></a>
+        </div>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -28,7 +25,7 @@
                 </tr>
             </thead>
             <tbody class="bg-white">
-                <?php foreach($listaSala as $sala) { ?>
+                <?php if($listaSala) { foreach($listaSala as $sala) { ?>
                     <tr>
                         <td class="text-center"><?php echo $sala->getNumero_sala()?></td>
                         <td class="text-center"><?php foreach($listTiposSalas as $tipoSala)
@@ -46,7 +43,9 @@
                             </td>
                         </form> 
                     </tr>
-                <?php } ?>
+                <?php } } else { ?>
+                    <td colspan = 5 class="text-center"> <strong>NO TIENE SALAS REGISTRADAS EN ESTE CINE</strong></td>
+                <?php  } ?>
             </tbody>
         </table>
     </div>
@@ -77,19 +76,12 @@
                     <div class="row form-group pr-3">
                     <label class="col-6">Tipo de Sala</label>
                         <select name="tipo_sala" class="col-6" required>
-                            <?php foreach($listTiposSalas as $tipoSala) 
-                            { 
-                                    if($tipoSala->getId_tipo_sala() == $sala->getId_tipo_sala())
-                                    {
-                                    ?>
+                            <?php foreach($listTiposSalas as $tipoSala) { 
+                                if($tipoSala->getId_tipo_sala() == $sala->getId_tipo_sala()) { ?>
                                     <option selected value="<?php echo $tipoSala->getId_tipo_sala(); ?>"><?php echo $tipoSala->getNombre_tipo_sala(); ?></option>
-                                    <?php
-                                    }
-                                    else
-                                    {
-                                    ?>
+                                <?php } else { ?>
                                     <option value="<?php echo $tipoSala->getId_tipo_sala(); ?>"><?php echo $tipoSala->getNombre_tipo_sala(); ?></option>
-                            <?php   }
+                                <?php }
                             } ?>
                             
                         </select>
@@ -102,7 +94,7 @@
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Cantidad de butacas:</label>
-                        <input type="number" min=0 name="cant_butacas" class="col-6" value="<?php echo $sala->getCant_butacas()?>" required/>
+                        <input type="number" min="1" name="cant_butacas" class="col-6" value="<?php echo $sala->getCant_butacas()?>" required/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -158,7 +150,7 @@
 
                     <div class="row form-group pr-3">
                         <label class="col-6">Cantidad de butacas:</label>
-                        <input type="number" name="cant_butacas" class="col-6" required/>
+                        <input type="number" min="1" name="cant_butacas" class="col-6" required/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -173,3 +165,10 @@
 <?php
     require_once("Views/footer.php");
 ?>
+
+<script>
+    $("input[type=text]").keyup(function(){
+        leters = $(this).val().replace("  ", "");
+        $(this).val(leters);
+    });
+</script>
