@@ -1,20 +1,23 @@
 <?php
     namespace Controllers;
 
-use API\MovieAPI;
-use DAObd\CineDAO as CineDAO;
-use DAObd\MovieDAO;
-use DAObd\UsuarioDAO as UsuarioDAO;
+    use API\MovieAPI as MovieAPI;
+    use API\MovieGenderAPI as MovieGenderAPI;
+    use DAObd\CineDAO as CineDAO;
+    use DAObd\MovieDAO as MovieDAO;
+    use DAObd\UsuarioDAO as UsuarioDAO;
 
     class HomeController
     {   
         private $usuarioDAO;
         private $cineDAO;
+        private $movieGenderAPI;
 
         public function __construct()
         {
             $this->usuarioDAO = new UsuarioDAO();
             $this->cineDAO = new CineDAO();
+            $this->movieGenderAPI = new MovieGenderAPI();
         }
            
         public function Index($message = "")
@@ -31,13 +34,10 @@ use DAObd\UsuarioDAO as UsuarioDAO;
                 {
                     $this->ShowHomeClientViews();
                 }
-                else
-                {
-                    require_once(VIEWS_PATH."home.php");
-                }
             }
             else
             {
+                $error = 0;
                 require_once(VIEWS_PATH."home.php");
             }
         }        
@@ -63,6 +63,7 @@ use DAObd\UsuarioDAO as UsuarioDAO;
         {
             $movieDAO = new MovieDAO();
             $listMovie = $movieDAO->GetAllMostPopularity(500);
+            $listMovieGender = $this->movieGenderAPI->GetAll();
             require_once(VIEWS_PATH."Views-Cliente/filters.php");
         }  
 
@@ -70,6 +71,7 @@ use DAObd\UsuarioDAO as UsuarioDAO;
         {
             $movieDAO = new MovieDAO();
             $listMovie = $movieDAO->GetAllMostPopularity(500);
+            $listMovieGender = $this->movieGenderAPI->GetAll();
             require_once(VIEWS_PATH."Views-Admin/filterCartelera.php");
         }  
         
@@ -77,35 +79,39 @@ use DAObd\UsuarioDAO as UsuarioDAO;
         {
             $movieAPI = new MovieAPI();
             $listMovie = $movieAPI->GetAllMostPopularityOutCartelera();
+            $listMovieGender = $this->movieGenderAPI->GetAll();
             require_once(VIEWS_PATH."Views-Admin/filterOutCartelera.php");
         }  
 
         public function Login($email,$password)
         {
             $user = $this->usuarioDAO->GetOneByEmail($email);
-
+            $error = 0;
             if($user)
             {
-                if($user->GetPassword() == $password)
-                    
+                if($user->GetPassword() == $password) 
+                {                    
                     $_SESSION["userLogged"] = $user;
                     
                     if($user->getId_tipo_usuario() == 1)
                     {   
                         $this->ShowDashboardView();
                     }
-                    else
+                    elseif($user->getId_tipo_usuario() == 2) 
                     {
-                        if($user->getId_tipo_usuario() == 2) 
-                        {
-                            require_once(VIEWS_PATH ."Views-Cliente/home-client.php");
-                        }
+                        require_once(VIEWS_PATH ."Views-Cliente/home-client.php");
                     }
+                }
+                else
+                {
+                    $error = 1;
+                    require_once(VIEWS_PATH."home.php");
+                }
             }
             else
             {
-                echo "<script> if(confirm('Los datos que ingreso no corresponden a nungun usuario registrado.'));";
-                echo "window.location = '/dashboard/TPSistemas-MoviePass/Home'; </script>";
+                $error = 1;
+                require_once(VIEWS_PATH."home.php");
             }
         
         }

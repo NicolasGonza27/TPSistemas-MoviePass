@@ -36,7 +36,7 @@ class MovieAPI
 
             foreach($this->movieList as $movie)
             {   
-                if(strcasecmp($movie->getTitle(),$title) == 0)
+                if(substr_compare(strtolower($movie->getTitle()), strtolower($title), 0, strlen($title)) === 0)
                 {   
                     array_push($moviesByTitle, $movie);
                 }
@@ -109,7 +109,7 @@ class MovieAPI
             {
                 foreach($this->movieList as $movie)
                 {
-                    if(strcasecmp($movie->getTitle(),$title) == 0)
+                    if(substr_compare(strtolower($movie->getTitle()), strtolower($title), 0, strlen($title)) === 0)
                     {   
                         array_push($moviesByTitle, $movie);
                     }
