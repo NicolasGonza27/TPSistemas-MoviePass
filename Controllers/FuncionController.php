@@ -81,7 +81,7 @@
             var_dump($error);
             $movie = $this->movieDAO->GetOne($id);
             $listFunciones = $this->funcionDAO->GetAllByMovie($id);
-            $listCines = $this->cineDAO->GetAll();
+            $listCines = $this->cineDAO->GetAllWithCapacity();
             $salaDao = $this->salaDAO;
             $infoFunciones = $this->funcionDAO->GetAllByMovieInfo($id);
             require_once(VIEWS_PATH."Views-Admin/content-movie-funciones.php");
@@ -144,7 +144,7 @@
         public function GetArrayCineSalas()
         {
             $listCineSalas = array();
-            $listCine = $this->cineDAO->GetAll();
+            $listCine = $this->cineDAO->GetAllWithCapacity();
 
             foreach ($listCine as $cine) {
                 $listCineSalas[$cine] = $this->salaDAO->GetAllByCine($cine->getId());

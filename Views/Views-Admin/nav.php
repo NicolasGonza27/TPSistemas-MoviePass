@@ -28,6 +28,15 @@
                         </div>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sales
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item font-weight-bold" href="<?php echo FRONT_ROOT."Home/CantidadTickets"?>">Check quantities sold and remnants</a>
+                        <a class="dropdown-item font-weight-bold" href="<?php echo FRONT_ROOT."Home/CantidadTicketsPesos"?>">Ckeck totals sold in pesos</a>
+                    </div>
+                </li>
             </ul>
             <a class="nav-link text-white"> Welcome <span class="font-weight-bold"><?php if(isset($user))echo ucfirst($user->getNombre_usuario())."!";?></span></a>
             <a class="nav-link text-white"  href="<?php echo FRONT_ROOT."Home/Logout"?>" role="button">Log out</a>

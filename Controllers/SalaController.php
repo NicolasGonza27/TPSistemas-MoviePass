@@ -3,8 +3,8 @@
 
     use DAObd\CineDAO as CineDAO;
     use DAObd\SalaDAO as SalaDAO;
-use DAObd\TipoSalaDAO;
-use Models\Sala as Sala;
+    use DAObd\TipoSalaDAO;
+    use Models\Sala as Sala;
 
     class SalaController
     {
@@ -23,7 +23,7 @@ use Models\Sala as Sala;
         
         public function ShowSalaDashboardView($id_cine)
         {   
-            $cine = $this->cineDAO->GetOne($id_cine);
+            $cine = $this->cineDAO->GetOnewithCapacity($id_cine);
             $listaSala = $this->GetAllByCine($id_cine);
             $listTiposSalas = $this->tipoSalaDao->GetAll();
             $lastIdOfSalaByCine = $this->salaDAO->GetLastSalaNumberByCine($cine->GetId());
@@ -47,7 +47,7 @@ use Models\Sala as Sala;
 
         public function returnCine($id_cine)
         {
-           return $this->cineDAO->GetOne($id_cine);
+           return $this->cineDAO->GetOneWithCapacity($id_cine);
         }
         
         public function Modify($id_sala, Sala $sala)

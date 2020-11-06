@@ -63,6 +63,13 @@ body {
     padding-left: 600px;  
 }
 
+.col_58 {
+    margin:auto;
+    width: 690px;
+    padding-right: 50px;
+    padding-left: 50px;  
+}
+
 .titulo {
     background: none;
     background-size:cover ;
