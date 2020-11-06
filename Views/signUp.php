@@ -5,50 +5,6 @@
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <!--<div class="modal-dialog">
-    <div class="modal-content">
-      <form action="<?php //echo FRONT_ROOT."Usuario/AddNuevoUsuario"
-                    ?>" method="post">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Creando Cuenta</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">-->
-
-  <!--<div class="row form-group pr-3">
-            <label class="col-6">Nombre</label>
-            <input type="text" name="nombre" class="col-6" required/>
-          </div>
-
-          <div class="row form-group pr-3">
-            <label class="col-6">Apellido</label>
-            <input type="text" name="apellido" class="col-6" required/>
-          </div>
-
-          <div class="row form-group pr-3">
-            <label class="col-6">Dni</label>
-            <input type="text" name="dni" class="col-6" required/>
-          </div>
-          
-          <div class="row form-group pr-3">
-            <label class="col-6">Email</label>
-            <input type="email" name="email" class="col-6" required/>
-          </div>
-          
-          <div class="row form-group pr-3">
-            <label class="col-6">Password</label>
-            <input type="password" name="password" class="col-6" required/>
-          </div>
-          
-          <div class="row form-group pr-3">
-            <label class="col-6">Fecha de Nacimiento </label>
-            <input type="date" id="fecha_nac" name="fecha_nac" min="1910-01-01" max="<?php echo date("Y") . '-' . date("m") . '-' . (date("d") - 1); ?>" class="col-6" required/>
-          </div>
-
-        </div>-->
-
   <div class="signup-form">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -93,11 +49,4 @@
     </div>
   </div>
 
-  <!--<div class="modal-footer">
-        <button class="btn btn-secondary " data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Registrarme</button>
-        </div>
-      </form>  
-    </div>
-  </div>-->
 </div>

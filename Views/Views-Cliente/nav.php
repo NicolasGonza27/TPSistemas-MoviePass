@@ -43,6 +43,9 @@
                 Billboard
               </a>
             </li>
+            <li class = "nav-item">
+              <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowMyPurcheses"?>">My purchases </a>
+            </li>
 
             <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class= "dropdown-item  bg-secondary text-white" href= "<?php echo FRONT_ROOT."Home/form"?>">Genero</a>           

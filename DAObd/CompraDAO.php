@@ -90,6 +90,46 @@
             }
         }
 
+        public function GetAllByUser($id_usuario,bool $eliminado = false)
+        {
+
+            try 
+            {
+                $query = "SELECT
+                          c.id_compra as  id_compra,
+                          c.id_usuario as id_usuario,
+                          ifnull(p.porcentaje_descuento,0) as porcentaje_descuento,
+                          c.cant_entradas as cant_entradas,
+                          c.monto as monto
+                          FROM compras c
+                          INNER JOIN politicas_descuento p
+                          ON c.id_politica_descuento = p.id_politica_descuento
+                          WHERE ( (c.eliminado = :eliminado) AND (c.id_usuario = :id_usuario) );";
+
+                $parameters["eliminado"] = $eliminado;
+                $parameters["id_usuario"] = $id_usuario;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    return $resultSet;
+                }
+
+                return  false;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+
+
+        }
+
+        
+
         public function Remove($id_compra)
         {     
             try 

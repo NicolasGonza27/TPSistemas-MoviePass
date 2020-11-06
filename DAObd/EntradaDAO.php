@@ -89,6 +89,50 @@
             }
         }
 
+        public function GetAllByCompra($id_compra,bool $eliminado = false)
+        {
+            try 
+            {
+                $query = "SELECT 
+                p.title AS titulo_pelicula,
+                ci.nombre_cine AS nombre_cine,
+                s.numero_sala AS numero_sala,
+                e.nro_entrada AS numero_entrada
+                FROM 
+                compras c 
+                INNER JOIN entradas e
+                ON c.id_compra = e.id_compra
+                INNER JOIN funciones f
+                ON f.id_funcion = e.id_funcion
+                INNER JOIN peliculas_cartelera p
+                ON p.id = f.id_pelicula
+                INNER JOIN salas s
+                ON s.id_sala = f.id_sala
+                INNER JOIN cines ci
+                ON s.id_cine = ci.id_cine
+                WHERE ( (c.id_compra = :id_compra) AND (c.eliminado = :eliminado) );
+                ";
+
+                $parameters["id_compra"] = $id_compra;
+                $parameters["eliminado"] = $eliminado;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {                
+                    return  $resultSet;
+                }
+
+                return  false;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
         public function Remove($id_entrada)
         {     
             try 
