@@ -64,7 +64,7 @@
             }
             catch(PDOException $e)
             {
-                echo $e->getMessage();
+                throw new PDOException();
             }
         }
 

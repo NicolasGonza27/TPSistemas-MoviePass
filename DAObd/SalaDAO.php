@@ -67,12 +67,11 @@
             {
                 try 
                 {
-                    $query = "SELECT max(numero_sala) as maximo_id FROM ".$this->tableName." WHERE (id_cine = :id_cine) AND (eliminado = :eliminado);";
+                    $query = "SELECT max(numero_sala) as maximo_id FROM ".$this->tableName." WHERE (id_cine = :id_cine);";
     
                     $this->connection = Connection::GetInstance();
     
                     $parameters['id_cine'] = $idCine;
-                    $parameters['eliminado'] = $eliminado;
 
                     $resultSet = $this->connection->Execute($query,$parameters);
                     

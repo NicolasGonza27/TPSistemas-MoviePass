@@ -393,4 +393,41 @@ on s.id_cine = c.id_cine;
 
 
 describe compras;
+
+SELECT
+c.id_compra as  id_compra,
+c.id_usuario as id_usuario,
+ifnull(p.porcentaje_descuento,0) as porcentaje_descuento,
+c.cant_entradas as cant_entradas,
+c.monto as monto
+FROM compras c
+LEFT JOIN politicas_descuento p
+ON c.id_politica_descuento = p.id_politica_descuento
+WHERE ((c.eliminado = 0) AND (c.id_usuario = 4));
                                    
+select 
+*
+from
+compras;
+
+select 
+p.title as titulo_pelicula,
+ci.nombre_cine as nombre_cine,
+s.numero_sala as numero_sala,
+e.nro_entrada as numero_entrada
+from 
+compras c 
+inner join entradas e
+on c.id_compra = e.id_compra
+inner join funciones f
+on f.id_funcion = e.id_funcion
+inner join peliculas_cartelera p
+on p.id = f.id_pelicula
+inner join salas s
+on s.id_sala = f.id_sala
+inner join cines ci
+on s.id_cine = ci.id_cine
+where c.id_compra = 4;
+
+select * from compras;
+
