@@ -26,14 +26,11 @@
             </div>
             <div class="clearfix">
                 <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
-                <a href="#" class="float-right">Forgot Password?</a>
             </div>
             <div class="or-seperator"></div>
             <p class="text-center">Login with your social media account</p>
             <div class="text-center social-btn">
-                <a href="#" class="btn btn-secondary"><div class="fa fa-facebook"></div>&nbsp; Facebook</a>
-                <a href="#" class="btn btn-info"><div class="fa fa-twitter"></div>&nbsp; Twitter</a>
-                <a href="#" class="btn btn-danger"><div class="fa fa-google"></div>&nbsp; Google</a>
+                <a href="#" class="btn btn-secondary btn-block"><div class="fa fa-facebook"></div>&nbsp; Facebook</a>
             </div>
         </form>
     </div>

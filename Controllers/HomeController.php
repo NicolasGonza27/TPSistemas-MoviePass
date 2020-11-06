@@ -4,6 +4,8 @@
     use API\MovieAPI as MovieAPI;
     use API\MovieGenderAPI as MovieGenderAPI;
     use DAObd\CineDAO as CineDAO;
+use DAObd\CompraDAO;
+use DAObd\FuncionDAO as FuncionDAO;
     use DAObd\MovieDAO as MovieDAO;
     use DAObd\UsuarioDAO as UsuarioDAO;
 
@@ -57,6 +59,14 @@
         public function ShowHomeClientViews()
         {
             require_once(VIEWS_PATH."Views-Cliente/home-client.php");
+        }
+
+        public function ShowMyPurcheses()
+        {
+            $user = $_SESSION["userLogged"];
+            $comprasDAO = new CompraDAO();
+            $listCompras = $comprasDAO->GetAllByUser($user->getId_usuario());
+            require_once(VIEWS_PATH."Views-Cliente\list-compras.php");
         }
 
         public function ShowFiltersViews()
@@ -124,6 +134,11 @@
             $this->Index();
         }
 
+        public function DescargarImage($Views,$temp,$fileName)
+        {
+            header("Content-type: image/png");
+            header("Location: http://localhost/dashboard/TPSistemas-MoviePass/$Views/$temp/$fileName");
+        }
 
     }
 ?>

@@ -1,8 +1,5 @@
 <?php require_once(VIEWS_PATH . "Views-Cliente/nav.php"); ?>
 
-
-
-
     <div class="container content espaciado-sup">
     <div class="text-left mb-2">
         <a class="boton-atras" href="<?php echo FRONT_ROOT . "Home/ShowFiltersViews" ?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
