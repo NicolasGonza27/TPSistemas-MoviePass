@@ -3,21 +3,24 @@
 
     use API\MovieAPI as MovieAPI;
     use API\MovieGenderAPI as MovieGenderAPI;
-    use DAObd\CineDAO as CineDAO;
     use DAObd\MovieDAO as MovieDAO;
     use DAObd\UsuarioDAO as UsuarioDAO;
+    use DAObd\FuncionDAO as FuncionDAO;
+    use DAObd\CineDAO as CineDAO;
 
     class HomeController
     {   
         private $usuarioDAO;
         private $cineDAO;
         private $movieGenderAPI;
+        private $funcionDAO;
 
         public function __construct()
         {
             $this->usuarioDAO = new UsuarioDAO();
             $this->cineDAO = new CineDAO();
             $this->movieGenderAPI = new MovieGenderAPI();
+            $this->funcionDAO = new FuncionDAO();
         }
            
         public function Index($message = "")
@@ -44,7 +47,7 @@
         
         public function ShowDashboardView()
         {
-            $listaCine = $this->cineDAO->GetAll();
+            $listaCines = $this->cineDAO->GetAllWithCapacity();
             require_once(VIEWS_PATH."Views-Admin/dashboard.php");
         }
 
@@ -74,7 +77,30 @@
             $listMovieGender = $this->movieGenderAPI->GetAll();
             require_once(VIEWS_PATH."Views-Admin/filterCartelera.php");
         }  
-        
+
+        public function CantidadTickets()
+        {
+                $listaCine = $this->cineDAO->GetAllWithCapacity();
+                $movieDAO = new MovieDAO();
+                $listMovie = $movieDAO->GetAll();
+                $listFunciones = $this->funcionDAO->GetAllInfoFunctions();
+                $entradasVendidasXcine = $this->funcionDAO->GetAllEntradasXcine();
+                $entradasVendidasXfuncion = $this->funcionDAO->GetAllEntradasXfuncion();
+                $entradasVendidasXpeliculas = $this->funcionDAO->GetAllEntradasXpelicula();
+                require_once(VIEWS_PATH."Views-Admin/quantityTickets.php"); 
+        }
+
+        public function CantidadTicketsPesos()
+        {
+                $listaCine = $this->cineDAO->GetAllWithCapacity();
+                $movieDAO = new MovieDAO();
+                $listMovie = $movieDAO->GetAll();
+                $listFunciones = $this->funcionDAO->GetAllInfoFunctions();
+                $entradasVendidasXcine = $this->funcionDAO->GetAllEntradasXcine();
+                $entradasVendidasXfuncion = $this->funcionDAO->GetAllEntradasXfuncion();
+                $entradasVendidasXpeliculas = $this->funcionDAO->GetAllEntradasXpelicula();
+                require_once(VIEWS_PATH."Views-Admin/ticketSales.php"); 
+        }
         public function ShowFiltersViewsAdminOutCartelera()
         {
             $movieAPI = new MovieAPI();

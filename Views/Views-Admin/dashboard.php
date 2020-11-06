@@ -23,7 +23,7 @@ require_once("nav.php");
                 </tr>
             </thead>
             <tbody class="bg-white">
-                <?php if($listaCine){ foreach ($listaCine as $cine) { ?>
+                <?php if($listaCines){ foreach ($listaCines as $cine) { ?>
                     <tr>
                         <td class="text-center"><?php echo $cine->getNombre() ?></td>
                         <td class="text-center"><?php echo $cine->getCalle() ?></td>
@@ -49,7 +49,7 @@ require_once("nav.php");
 </div>
 
 <?php
-foreach ($listaCine as $cine) { ?>
+foreach ($listaCines as $cine) { ?>
     <!-- This is the modal -->
     <div class="modal fade" id="<?php echo "modal" . $cine->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
         <div class="modal-dialog">
@@ -112,7 +112,7 @@ foreach ($listaCine as $cine) { ?>
 
 <!-- Modal del boton Remove -->
 <?php
-foreach ($listaCine as $cine) { ?>
+foreach ($listaCines as $cine) { ?>
 <div class="modal fade" id="<?php echo "modalEliminar" .  $cine->getId();?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">

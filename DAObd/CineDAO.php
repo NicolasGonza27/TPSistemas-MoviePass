@@ -5,6 +5,7 @@
 
     use Models\Cine as Cine;
     use PDOException;
+    use DAObd\SalaDAO as SalaDAO;
 
     class CineDAO
     {
@@ -17,11 +18,12 @@
         {
             try 
             {
-               $query = "INSERT INTO cines (nombre_cine,calle,numero,hora_apertura,hora_cierre,valor_entrada,eliminado) VALUES (:nombre_cine,:calle,:numero,:hora_apertura,:hora_cierre,:valor_entrada,:eliminado);";
+               $query = "INSERT INTO cines (nombre_cine,calle,numero,hora_apertura,hora_cierre,valor_entrada,eliminado,capacidad) VALUES (:nombre_cine,:calle,:numero,:hora_apertura,:hora_cierre,:valor_entrada,:eliminado,:capacidad);";
 
                $parameters["nombre_cine"] = $cine->getNombre();
                $parameters["calle"] = $cine->getCalle();
                $parameters["numero"] = $cine->getNumero();
+               $parameters["capacidad"] = $cine->getCapacidad();
                $parameters["hora_apertura"] = $cine->getHor_apertura();
                $parameters["hora_cierre"] = $cine->getHor_cierre();
                $parameters["valor_entrada"] = $cine->getValor_entrada();
@@ -65,6 +67,8 @@
                 echo $e->getMessage();
             }
         }
+
+        
 
         public function GetOne($id_cine)
         {
@@ -164,11 +168,45 @@
         {
             $resp = array_map(function($p)
             {
-                return new Cine($p['id_cine'],$p['nombre_cine'],$p['calle'],$p['numero'],0,$p['hora_apertura'],$p['hora_cierre'],$p['valor_entrada']);
+                return new Cine($p['id_cine'],$p['nombre_cine'],$p['calle'],$p['numero'],$p['capacidad'],$p['hora_apertura'],$p['hora_cierre'],$p['valor_entrada']);
 
             }, $cines);
 
             return $resp;
+        }
+
+        public function getCapacityByCine($id_cine) 
+        {   
+
+            $salaDAO =  new SalaDAO();
+            $listSalas = $salaDAO->GetAllByCine($id_cine);
+            $capacity = 0;
+            foreach($listSalas as $sala)
+            {
+              $capacity += $sala->getCant_butacas();
+            }
+            
+            return $capacity;
+
+        }
+
+        public function GetAllWithCapacity()
+        {
+            $listCines = $this->GetAll();
+            foreach($listCines as $cine)
+            {
+                $cine->setCapacidad($this->getCapacityByCine($cine->getId()));
+            }
+            
+            return $listCines;
+        }
+
+        public function GetOneWithCapacity($id)
+        {
+            $cine = $this->GetOne($id);
+            $cine->setCapacidad($this->getCapacityByCine($cine->getId()));
+
+            return $cine;
         }
 
     }

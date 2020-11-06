@@ -134,6 +134,16 @@
 	$entradaDAO->Add($entradaOne);
 	$entradaDAO->Add($entradaTwo);
 	$entradaDAO->Add($entradaThree);*/
+
+	/* $compraThree = new Compra(null,2,1,3,500);
+	$compraDAO = new CompraDAO();
+	$compraDAO->Add($compraThree);
+
+	$entradaFour = new Entrada(null,9,2,58);
+	$entradaDAO = new EntradaDAO();
+
+	$entradaDAO->Add($entradaFour); */
+
 	
 
 

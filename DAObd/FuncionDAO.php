@@ -135,6 +135,158 @@
             }
         }
 
+        public function GetAllEntradasXcine(bool $eliminado = false)
+        {
+            try 
+            {
+                $query = "SELECT cines.id_cine, ifnull(cantidad,0) as cantidad
+                from cines as cines
+                left join (select cines.id_cine, sum(c.cant_entradas) as cantidad
+                from compras c
+                inner join entradas e
+                on c.id_compra = e.id_compra
+                inner join funciones f
+                on e.id_funcion = f.id_funcion
+                inner join salas s
+                on s.id_sala = f.id_sala
+                inner join cines cines
+                on s.id_cine = cines.id_cine
+                where (c.eliminado = :eliminado) and (e.eliminado = :eliminado) and (f.eliminado = :eliminado) and (s.eliminado = :eliminado) and (cines.eliminado = :eliminado)
+                group by cines.id_cine
+                ) as cantidad2
+                on cines.id_cine = cantidad2.id_cine
+                where (cines.eliminado = :eliminado);";
+                
+
+                $parameters["eliminado"] =  $eliminado;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    return  $resultSet;
+                }
+
+                return  array();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+        public function GetAllEntradasXfuncion(bool $eliminado = false)
+        {
+            try 
+            {
+                $query = "SELECT f.id_funcion, ifnull(entradas,0) as entradas
+                from funciones f
+                left join (select e.id_funcion, sum(c.cant_entradas) as entradas
+                from compras c
+                inner join entradas e
+                on c.id_compra = e.id_compra
+                inner join funciones f
+                on e.id_funcion = f.id_funcion
+                where (c.eliminado = :eliminado) and (f.eliminado= :eliminado) and(e.eliminado = :eliminado)
+                group by e.id_funcion) as cantidad
+                on f.id_funcion = cantidad.id_funcion
+                where f.eliminado = false;";
+                
+
+                $parameters["eliminado"] =  $eliminado;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    return  $resultSet;
+                }
+
+                return  array();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+        public function GetAllEntradasXpelicula(bool $eliminado = false)
+        {
+            try 
+            {
+                $query = "SELECT cine.id_cine, s.id_sala, e.id_funcion, f.id_pelicula, ifnull(sum(c.cant_entradas),0) as entradas, s.cant_butacas
+                from cines cine
+                left join salas s
+                on cine.id_cine = s.id_cine
+                left join funciones f
+                on s.id_sala = f.id_sala
+                left join entradas e
+                on f.id_funcion = e.id_funcion
+                left join compras c
+                on c.id_compra = e.id_compra
+                left join peliculas_cartelera p
+                on p.id = f.id_pelicula
+                where (p.eliminado = :eliminado)
+                group by cine.id_cine, s.id_sala, e.id_funcion, f.id_pelicula;";
+                
+
+                $parameters["eliminado"] =  $eliminado;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    return  $resultSet;
+                }
+
+                return  array();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+        public function GetAllInfoFunctions( bool $eliminado = false)
+        {
+            try 
+            {
+                $query = "SELECT
+                c.id_cine, c.nombre_cine, c.calle, c.numero, p.title, s.numero_sala, s.cant_butacas - f.cant_asistentes as 'butacas_disp', f.fecha_hora, f.id_funcion, p.id as id_pelicula
+                FROM funciones f 
+                INNER JOIN peliculas_cartelera p
+                ON f.id_pelicula = p.id
+                INNER JOIN salas s
+                ON f.id_sala = s.id_sala
+                INNER JOIN cines c
+                ON s.id_cine = c.id_cine
+                WHERE (f.eliminado = :eliminado);";
+
+                $parameters["eliminado"] =  $eliminado;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    return  $resultSet;
+                }
+
+                return  array();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
 
 
         public function GetAllFuncionesBySala($id_sala)
