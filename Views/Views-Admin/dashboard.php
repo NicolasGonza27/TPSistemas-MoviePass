@@ -121,7 +121,7 @@ foreach ($listaCines as $cine) { ?>
 
 <!-- Modal del boton Remove -->
 <?php
-foreach ($listaCine as $cine) { ?>
+foreach ($listaCines as $cine) { ?>
     <div class="modal fade" id="<?php echo "modalEliminar" .  $cine->getId(); ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -152,7 +152,7 @@ foreach ($listaCine as $cine) { ?>
 
 <!-- Modal del boton Remove -->
     <?php
-    foreach ($listaCine as $cine) { ?>
+    foreach ($listaCines as $cine) { ?>
     <div class="modal fade" id="<?php echo "modalEliminar" .  $cine->getId();?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">

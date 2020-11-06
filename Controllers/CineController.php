@@ -55,13 +55,14 @@
 
         }
 
-        public function ModifyModal($id, $nombre, $calle, $nunero, $apertura, $cierre, $valor_entrada)
+        public function ModifyModal($id, $nombre, $calle, $nunero, $capacidad, $apertura, $cierre, $valor_entrada)
         {
             $cine = new Cine();
             $cine->setId($id);
             $cine->setNombre($nombre);
             $cine->setCalle($calle);
             $cine->setNumero($nunero);
+            $cine->setCapacidad($capacidad);
             $cine->setHor_apertura($apertura);
             $cine->setHor_cierre($cierre);
             $cine->setValor_entrada($valor_entrada);
