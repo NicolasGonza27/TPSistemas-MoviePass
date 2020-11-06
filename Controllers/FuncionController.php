@@ -33,7 +33,8 @@
             $funcion = new Funcion(null, $id_pelicula, $id_sala, $cant_asistentes, $fecha_hora);
             $movie = $this->movieDAO->GetOne($id_pelicula);
             $error = 0;
-            if ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala)){
+            if ( ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala)) &&
+                ($this->VerifyCineFuncion($fecha_hora, $id_pelicula)) ){
                 $this->funcionDAO->Add($funcion);    
             }
             else {
@@ -66,7 +67,8 @@
             $funcion = new Funcion($id_funcion, $id_pelicula, $id_sala, $cant_asistentes, $fecha_hora);
             $movie = $this->movieDAO->GetOne($id_pelicula);
             $error = 0;
-            if ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala, $id_funcion)){
+            if ( ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala, $id_funcion)) &&
+                ($this->VerifyCineFuncion($fecha_hora, $id_pelicula, $id_funcion)) ){
                 $this->funcionDAO->Modify($id_funcion, $funcion);  
             }
             else {
@@ -78,7 +80,6 @@
 
         public function ShowContentMovieFuncionesViews($id, $error = 0)
         {
-            var_dump($error);
             $movie = $this->movieDAO->GetOne($id);
             $listFunciones = $this->funcionDAO->GetAllByMovie($id);
             $listCines = $this->cineDAO->GetAllWithCapacity();
@@ -153,6 +154,17 @@
             return $listCineSalas;
         }
 
+        public function ShowBuyTicketsView($id_funcion, $quantity = 1)
+        {
+            $funcion = $this->funcionDAO->GetOne($id_funcion);
+            $movie = $this->movieDAO->GetOne($funcion->getId_pelicula());
+            $infoUnaFuncion = $this->funcionDAO->GetOneByMovieInfo($funcion->getId_pelicula());
+            $cine = $this->cineDAO->GetOne($infoUnaFuncion["id_cine"]);
+            require_once(ROOT.'mercadoPago.php');
+
+            require_once(VIEWS_PATH."Views-Cliente/compra-ticket-user.php");
+        }
+
         public function VerifyTimeFuncion($time, $movie_runtime, $id_sala, $id_funcion = null)
         {
             $listFunciones = $this->funcionDAO->GetAllFuncionesBySala($id_sala);
@@ -193,7 +205,7 @@
             return true;
         }
 
-        public function VerifyCineFuncion($time, $id_sala, $id_movie, $id_funcion = null)
+        public function VerifyCineFuncion($time, $id_movie, $id_funcion = null)
         {
             $listFunciones = $this->funcionDAO->GetAll();
             $fechaHora = explode("T", $time);
@@ -206,8 +218,7 @@
 
                 $fechaHora = explode(" ", $funcion->getFecha_hora());
                 $fecha = $fechaHora[0];
-
-                if (($funcion->getId_pelicula == $id_movie) && ($fechaFuncion == $fecha)) {
+                if (($funcion->getId_pelicula() == $id_movie) && ($fechaFuncion == $fecha)) {
                     return false;
                 }
             }

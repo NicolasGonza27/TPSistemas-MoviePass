@@ -7,7 +7,10 @@
 			{
                 $classPath = ucwords(str_replace("\\", "/", ROOT.$className).".php");
                 
-				include_once($classPath);
+                if(explode("\\", $className)[0] != 'MercadoPago')
+                {
+                    include_once($classPath);
+                }
 			});
         }
     }
