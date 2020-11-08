@@ -144,7 +144,7 @@ class HomeController
 
     }
 
-    public function CantidadTickets()
+    public function ShowQuantityTickets()
     {
         try
         {
@@ -155,7 +155,7 @@ class HomeController
             $entradasVendidasXcine = $this->funcionDAO->GetAllEntradasXcine();
             $entradasVendidasXfuncion = $this->funcionDAO->GetAllEntradasXfuncion();
             $entradasVendidasXpeliculas = $this->funcionDAO->GetAllEntradasXpelicula();
-            require_once(VIEWS_PATH . "Views-Admin/quantityTickets.php");
+            require_once(VIEWS_PATH."Views-Admin/quantityTickets.php"); 
         }
         catch(Exception $e)
         {
@@ -163,7 +163,7 @@ class HomeController
         }
     }
 
-    public function CantidadTicketsPesos()
+    public function ShowTicketsPrice()
     {
         try
         {
@@ -171,10 +171,9 @@ class HomeController
             $movieDAO = new MovieDAO();
             $listMovie = $movieDAO->GetAll();
             $listFunciones = $this->funcionDAO->GetAllInfoFunctions();
-            $entradasVendidasXcine = $this->funcionDAO->GetAllEntradasXcine();
-            $entradasVendidasXfuncion = $this->funcionDAO->GetAllEntradasXfuncion();
-            $entradasVendidasXpeliculas = $this->funcionDAO->GetAllEntradasXpelicula();
-            require_once(VIEWS_PATH . "Views-Admin/ticketSales.php");
+            $entradasVendidasXcinePesos = $this->funcionDAO->GetAllEntradasXcinePesos();
+            $entradasVendidasXpeliculasPesos = $this->funcionDAO->GetAllEntradasXpeliculaPesos();
+            require_once(VIEWS_PATH."Views-Admin/ticketSales.php"); 
         }
         catch(Exception $e)
         {
@@ -182,6 +181,8 @@ class HomeController
         }
 
     }
+
+
 
     public function ShowFiltersViewsAdminOutCartelera()
     {

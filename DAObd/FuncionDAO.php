@@ -176,12 +176,53 @@
                 throw new PDOException($e->getMessage());
             }
         }
+        public function GetAllEntradasXcinePesos(bool $eliminado = false)
+        {
+            try 
+            {
+                $query = "SELECT cines.id_cine, ifnull(monto,0) as monto
+                from cines as cines
+                left join (select cines.id_cine, sum(c.monto) as monto
+                from compras c
+                inner join entradas e
+                on c.id_compra = e.id_compra
+                inner join funciones f
+                on e.id_funcion = f.id_funcion
+                inner join salas s
+                on s.id_sala = f.id_sala
+                inner join cines cines
+                on s.id_cine = cines.id_cine
+                where (c.eliminado = :eliminado) and (e.eliminado = :eliminado) and (f.eliminado = :eliminado) and (s.eliminado = :eliminado) and (cines.eliminado = :eliminado)
+                group by cines.id_cine
+                ) as cantidad2
+                on cines.id_cine = cantidad2.id_cine
+                where (cines.eliminado = :eliminado);";
+                
+
+                $parameters["eliminado"] =  $eliminado;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    return  $resultSet;
+                }
+
+                return  array();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
 
         public function GetAllEntradasXfuncion(bool $eliminado = false)
         {
             try 
             {
-                $query = "SELECT f.id_funcion, ifnull(entradas,0) as entradas
+                $query = "SELECT f.id_funcion, ifnull(entradas,0) as entradas, ifnull(s.cant_butacas-entradas, s.cant_butacas) as disponible
                 from funciones f
                 left join (select e.id_funcion, sum(c.cant_entradas) as entradas
                 from compras c
@@ -192,7 +233,9 @@
                 where (c.eliminado = :eliminado) and (f.eliminado= :eliminado) and(e.eliminado = :eliminado)
                 group by e.id_funcion) as cantidad
                 on f.id_funcion = cantidad.id_funcion
-                where f.eliminado = false;";
+                left join salas s
+                on f.id_sala = s.id_sala
+                where (f.eliminado = :eliminado);";
                 
 
                 $parameters["eliminado"] =  $eliminado;
@@ -218,7 +261,7 @@
         {
             try 
             {
-                $query = "SELECT cine.id_cine, s.id_sala, e.id_funcion, f.id_pelicula, ifnull(sum(c.cant_entradas),0) as entradas, s.cant_butacas
+                $query = "SELECT cine.id_cine,f.id_pelicula, ifnull(sum(c.cant_entradas),0) as entradas, s.cant_butacas
                 from cines cine
                 left join salas s
                 on cine.id_cine = s.id_cine
@@ -231,7 +274,8 @@
                 left join peliculas_cartelera p
                 on p.id = f.id_pelicula
                 where (p.eliminado = :eliminado)
-                group by cine.id_cine, s.id_sala, e.id_funcion, f.id_pelicula;";
+                group by cine.id_cine, f.id_pelicula;";
+
                 
 
                 $parameters["eliminado"] =  $eliminado;
@@ -250,6 +294,44 @@
             catch(PDOException $e)
             {
                 throw new PDOException($e->getMessage());
+            }
+        }
+
+        public function GetAllEntradasXpeliculaPesos(bool $eliminado = false)
+        {
+            try 
+            {
+                $query = "SELECT cine.id_cine,f.id_pelicula, ifnull(sum(c.monto),0) as monto, s.cant_butacas
+                from cines cine
+                left join salas s
+                on cine.id_cine = s.id_cine
+                left join funciones f
+                on s.id_sala = f.id_sala
+                left join entradas e
+                on f.id_funcion = e.id_funcion
+                left join compras c
+                on c.id_compra = e.id_compra
+                left join peliculas_cartelera p
+                on p.id = f.id_pelicula
+                where (p.eliminado = :eliminado)
+                group by cine.id_cine, f.id_pelicula;";
+
+                $parameters["eliminado"] =  $eliminado;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    return  $resultSet;
+                }
+
+                return  array();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
             }
         }
 

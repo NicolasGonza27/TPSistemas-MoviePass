@@ -117,7 +117,7 @@
                               <td class="text-center table-secondary"><?php echo $funcion["numero_sala"];?></td>
                               <td class="text-center table-secondary"><?php echo $funcion["nombre_cine"];?></td>
                               <td class="text-center table-secondary"><?php echo $funcion["calle"]." ".$funcion["numero"];?></td>
-                              <td class="text-center table-secondary"><?php echo $funcion["butacas_disp"];?></td>
+                              <td class="text-center table-secondary"><?php echo $funcion["butacas_disp"]-$funcion['entradas'];?></td>
                               <td class="text-center table-secondary"><?php echo $funcion["fecha_hora"];?></td>
                               <td class="text-center table-secondary">
                               <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modalFuncion".$funcion['id_funcion'] ?>">Select</button></td>
@@ -198,7 +198,7 @@ foreach($listaCine as $cine){
                         
                         <div class="row form-group pr-3">
                             <label class="col-6">Quantity of tickets without sales:</label>
-                            <input type="text" name="nombre" class="col-6" disabled value="<?php echo $funcion['butacas_disp']?>" required />
+                            <input type="text" name="nombre" class="col-6" disabled value="<?php echo $entradasFuncion['disponible']?>" required />
                         </div>
                     </div>
         
@@ -218,6 +218,7 @@ foreach($listaCine as $cine){
    foreach($listMovie as $movie){
     foreach($entradasVendidasXpeliculas as $entradasPelicula){
         if($movie->getId() == $entradasPelicula['id_pelicula']){
+            $cine = $this->cineDAO->GetOneWithCapacity($entradasPelicula['id_cine']);
     ?>
     
     <div class="modal fade" id="<?php echo "modalMovie". $entradasPelicula['id_pelicula'] ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
@@ -241,7 +242,7 @@ foreach($listaCine as $cine){
                         
                         <div class="row form-group pr-3">
                             <label class="col-6">Quantity of tickets without sales:</label>
-                            <input type="text" name="nombre" class="col-6" disabled value="<?php echo $entradasPelicula['cant_butacas']- $entradasPelicula['entradas'] ?>"/>
+                            <input type="text" name="nombre" class="col-6" disabled value="<?php echo $cine->getCapacidad()-$entradasPelicula['entradas'] ?>"/>
                         </div>
                     </div>
         
