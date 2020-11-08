@@ -3,6 +3,7 @@ namespace Controllers;
 
     use DAObd\EntradaDAO as EntradaDAO;
     use Models\Entrada as Entrada;
+    use Exception;
 
     class EntradaController
     {
@@ -14,42 +15,91 @@ namespace Controllers;
         }
 
         public function Add($id_compra, $id_funcion, $nro_entrada) 
-        {
-            $entrada = new Entrada(null,$id_compra,$id_funcion,$nro_entrada);
-            $this->entradaDAO->Add($entrada);
+        {   
+            try
+            {
+                $entrada = new Entrada(null,$id_compra,$id_funcion,$nro_entrada);
+                $this->entradaDAO->Add($entrada);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function Remove($id)
         {
-            $this->entradaDAO->Remove($id);
+            try
+            {
+                $this->entradaDAO->Remove($id);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function GetOne($id)
         {
-           return $this->entradaDAO->GetOne($id);
+            try
+            {
+                return $this->entradaDAO->GetOne($id);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function GetAll()
         {
-            return $this->entradaDAO->GetAll();
+            try
+            {
+                return $this->entradaDAO->GetAll();
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         
         public function Modify($id, Entrada $entrada)
-        {
-            $this->cineDAO->Modify($id, $entrada);
+        {   
+            try
+            {
+                $this->cineDAO->Modify($id, $entrada);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
 
         }
 
         public function GetAllByCompra($id_compra)
-        {
-            return $this->entradaDAO->GetAllByCompra($id_compra);
+        {   
+            try
+            {
+                return $this->entradaDAO->GetAllByCompra($id_compra);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function ShowContentsCompraViews($id_compra)
         {
-            $listEntradas = $this->GetAllByCompra($id_compra);
-            require_once(VIEWS_PATH."Views-Cliente/content-compra.php");
+            try
+            {
+                $listEntradas = $this->GetAllByCompra($id_compra);
+                require_once(VIEWS_PATH."Views-Cliente/content-compra.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
     }

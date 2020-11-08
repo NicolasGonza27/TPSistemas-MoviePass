@@ -5,6 +5,7 @@
     use DAObd\SalaDAO as SalaDAO;
     use DAObd\TipoSalaDAO;
     use Models\Sala as Sala;
+    use Exception;
 
     class SalaController
     {
@@ -23,49 +24,98 @@
         
         public function ShowSalaDashboardView($id_cine)
         {   
-            $cine = $this->cineDAO->GetOnewithCapacity($id_cine);
-            $listaSala = $this->GetAllByCine($id_cine);
-            $listTiposSalas = $this->tipoSalaDao->GetAll();
-            $lastIdOfSalaByCine = $this->salaDAO->GetLastSalaNumberByCine($cine->GetId());
-            require_once(VIEWS_PATH."Views-Admin/SalaDashboard.php");
+            try
+            {
+                $cine = $this->cineDAO->GetOnewithCapacity($id_cine);
+                $listaSala = $this->GetAllByCine($id_cine);
+                $listTiposSalas = $this->tipoSalaDao->GetAll();
+                $lastIdOfSalaByCine = $this->salaDAO->GetLastSalaNumberByCine($cine->GetId());
+                require_once(VIEWS_PATH."Views-Admin/SalaDashboard.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
     
         public function Add($id_cine,$numero_sala,$tipo_sala, $nombre_sala, $cant_butacas)
         {
-            $sala = new Sala(null,$tipo_sala, $id_cine, $numero_sala, $nombre_sala, $cant_butacas);
-            $this->salaDAO->Add($sala);
-            $this->ShowSalaDashboardView($id_cine);
+            try
+            {
+                $sala = new Sala(null,$tipo_sala, $id_cine, $numero_sala, $nombre_sala, $cant_butacas);
+                $this->salaDAO->Add($sala);
+                $this->ShowSalaDashboardView($id_cine);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function Remove($id, $id_cine)
         {
-            $this->salaDAO->Remove($id);
+            try
+            {
+                $this->salaDAO->Remove($id);
 
-            $this->ShowSalaDashboardView($id_cine);
+                $this->ShowSalaDashboardView($id_cine);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function returnCine($id_cine)
         {
-           return $this->cineDAO->GetOneWithCapacity($id_cine);
+            try
+            {
+                return $this->cineDAO->GetOneWithCapacity($id_cine);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
         
         public function Modify($id_sala, Sala $sala)
         {
-            $this->salaDAO->Modify($id_sala, $sala);
-
+            try
+            {
+                $this->salaDAO->Modify($id_sala, $sala);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function ModifyModal($id_sala, $id_cine, $numero_sala,$tipo_sala, $nombre_sala, $cant_butacas)
         {
-            $sala  = new Sala($id_sala, $tipo_sala,$id_cine, $numero_sala, $nombre_sala, $cant_butacas);
-            $this->salaDAO->Modify($id_sala, $sala);
-            
-            $this->ShowSalaDashboardView($id_cine);
+            try
+            {
+                $sala  = new Sala($id_sala, $tipo_sala,$id_cine, $numero_sala, $nombre_sala, $cant_butacas);
+                $this->salaDAO->Modify($id_sala, $sala);
+                
+                $this->ShowSalaDashboardView($id_cine);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function GetAllByCine($id_cine)
         {
-            return $this->salaDAO->GetAllByCine($id_cine);
+            try
+            {
+                return $this->salaDAO->GetAllByCine($id_cine);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
+            
         }
     }

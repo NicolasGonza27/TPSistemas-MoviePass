@@ -37,7 +37,7 @@
             }
             catch(PDOException $e)
             {
-                echo $e->getMessage();
+                throw new PDOException($e->getMessage());
             }
         }
 
@@ -64,7 +64,7 @@
             }
             catch(PDOException $e)
             {
-                throw new PDOException();
+                throw new PDOException($e->getMessage());
             }
         }
 
@@ -94,7 +94,7 @@
             }
             catch(PDOException $e)
             {
-                echo $e->getMessage();
+                throw new PDOException($e->getMessage());
             }
         }
 
@@ -125,7 +125,7 @@
             }
             catch(PDOException $e)
             {
-                echo $e->getMessage();
+                throw new PDOException($e->getMessage());
             }
         }
 
@@ -148,19 +148,12 @@
 
                 $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
 
-                if($cantRows)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return $cantRows;
 
             }
             catch(PDOException $e)
             {
-                echo $e->getMessage();
+                throw new PDOException($e->getMessage());
             }
         }   
 
@@ -177,36 +170,56 @@
 
         public function getCapacityByCine($id_cine) 
         {   
-
-            $salaDAO =  new SalaDAO();
-            $listSalas = $salaDAO->GetAllByCine($id_cine);
-            $capacity = 0;
-            foreach($listSalas as $sala)
+            try
             {
-              $capacity += $sala->getCant_butacas();
+                $salaDAO =  new SalaDAO();
+                $listSalas = $salaDAO->GetAllByCine($id_cine);
+                $capacity = 0;
+                foreach($listSalas as $sala)
+                {
+                $capacity += $sala->getCant_butacas();
+                }
+                
+                return $capacity;
             }
-            
-            return $capacity;
+            catch(PDOException $e)
+            {
+                throw new PDOException($e->getMessage());
+            }
 
         }
 
         public function GetAllWithCapacity()
         {
-            $listCines = $this->GetAll();
-            foreach($listCines as $cine)
+            try
             {
-                $cine->setCapacidad($this->getCapacityByCine($cine->getId()));
+                $listCines = $this->GetAll();
+                foreach($listCines as $cine)
+                {
+                    $cine->setCapacidad($this->getCapacityByCine($cine->getId()));
+                }
+                
+                return $listCines;
             }
-            
-            return $listCines;
+            catch(PDOException $e)
+            {
+                throw new PDOException($e->getMessage());
+            }
         }
 
         public function GetOneWithCapacity($id)
         {
-            $cine = $this->GetOne($id);
-            $cine->setCapacidad($this->getCapacityByCine($cine->getId()));
+            try
+            {
+                $cine = $this->GetOne($id);
+                $cine->setCapacidad($this->getCapacityByCine($cine->getId()));
 
-            return $cine;
+                return $cine;
+            }
+            catch(PDOException $e)
+            {
+                throw new PDOException($e->getMessage());
+            }
         }
 
     }

@@ -6,6 +6,7 @@
     use DAObd\FuncionDAO as FuncionDAO;
     use DAObd\SalaDAO as SalaDAO;
     use Models\Funcion as Funcion;
+    use Exception;
 
     class FuncionController
     {
@@ -21,100 +22,185 @@
             $this->cineDAO = new CineDAO();
             $this->salaDAO = new SalaDAO();
         }
-        
-        
-       /*  public function ShowDashboardView()
-        {
-            require_once(VIEWS_PATH."Views-Admin/dashboard.php");
-        } */
 
     
-        public function Add($id_pelicula, $id_sala, $cant_asistentes, $fecha_hora) {
+        public function Add($id_pelicula, $id_sala, $cant_asistentes, $fecha_hora) 
+        {
             $funcion = new Funcion(null, $id_pelicula, $id_sala, $cant_asistentes, $fecha_hora);
             $movie = $this->movieDAO->GetOne($id_pelicula);
             $error = 0;
-            if ( ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala)) &&
-                ($this->VerifyCineFuncion($fecha_hora, $id_pelicula)) ){
-                $this->funcionDAO->Add($funcion);    
-            }
-            else {
-                $error = 1;
-            }
 
-            $this->ShowContentMovieFuncionesViews($id_pelicula, $error);
+                try
+                {
+                    if ( ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala)) &&
+                    ($this->VerifyCineFuncion($fecha_hora, $id_pelicula)) )
+                    {
+                        $this->funcionDAO->Add($funcion);    
+                    }
+                    else 
+                    {
+                        $error = 1;
+                    }
+
+                    $this->ShowContentMovieFuncionesViews($id_pelicula, $error);
+                }
+                catch(Exception $e)
+                {
+                    echo $e->getMessage();
+                }
         }
 
         public function Remove($id,$id_movie)
         {
-            $this->funcionDAO->Remove($id);
-            $this->ShowContentMovieFuncionesViews($id_movie); 
+            try
+            {
+                $this->funcionDAO->Remove($id);
+                $this->ShowContentMovieFuncionesViews($id_movie);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function GetAll()
         {
-            return $this->funcionDAO->GetAll();
+            try
+            {
+                return $this->funcionDAO->GetAll();
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         
         public function Modify($id_funcion, Funcion $funcion)
         {
-            $this->funcionDAO->Modify($id_funcion, $funcion);
+
+            try
+            {
+                $this->funcionDAO->Modify($id_funcion, $funcion);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
 
         }
 
         public function ModifyModal($id_funcion, $id_pelicula, $id_sala, $cant_asistentes, $fecha_hora)
         {
-            $funcion = new Funcion($id_funcion, $id_pelicula, $id_sala, $cant_asistentes, $fecha_hora);
-            $movie = $this->movieDAO->GetOne($id_pelicula);
-            $error = 0;
-            if ( ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala, $id_funcion)) &&
-                ($this->VerifyCineFuncion($fecha_hora, $id_pelicula, $id_funcion)) ){
-                $this->funcionDAO->Modify($id_funcion, $funcion);  
+            
+            try
+            {
+                $funcion = new Funcion($id_funcion, $id_pelicula, $id_sala, $cant_asistentes, $fecha_hora);
+                $movie = $this->movieDAO->GetOne($id_pelicula);
+                $error = 0;
+
+                if ( ($this->VerifyTimeFuncion($fecha_hora, $movie->getRuntime(), $id_sala, $id_funcion)) &&
+                    ($this->VerifyCineFuncion($fecha_hora, $id_pelicula, $id_funcion)) )
+                {
+                    $this->funcionDAO->Modify($id_funcion, $funcion);  
+                }
+                else 
+                {
+                    $error = 1;
+                }
+
+                $this->ShowContentMovieFuncionesViews($id_pelicula, $error);
+
             }
-            else {
-                $error = 1;
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
             }
 
-            $this->ShowContentMovieFuncionesViews($id_pelicula, $error);
         }
 
         public function ShowContentMovieFuncionesViews($id, $error = 0)
-        {
-            $movie = $this->movieDAO->GetOne($id);
-            $listFunciones = $this->funcionDAO->GetAllByMovie($id);
-            $listCines = $this->cineDAO->GetAllWithCapacity();
-            $salaDao = $this->salaDAO;
-            $infoFunciones = $this->funcionDAO->GetAllByMovieInfo($id);
-            require_once(VIEWS_PATH."Views-Admin/content-movie-funciones.php");
+        {   
+            try
+            {
+                $movie = $this->movieDAO->GetOne($id);
+                $listFunciones = $this->funcionDAO->GetAllByMovie($id);
+                $listCines = $this->cineDAO->GetAllWithCapacity();
+                $salaDao = $this->salaDAO;
+                $infoFunciones = $this->funcionDAO->GetAllByMovieInfo($id);
+                require_once(VIEWS_PATH."Views-Admin/content-movie-funciones.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function ShowContentMovieFuncionesViewsCliente($id)
         {
-            $movie = $this->movieDAO->GetOne($id);
-            $infoFunciones = $this->funcionDAO->GetAllByMovieInfo($id);
-            require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
+            try
+            {
+                $movie = $this->movieDAO->GetOne($id);
+                $infoFunciones = $this->funcionDAO->GetAllByMovieInfo($id);
+                require_once(VIEWS_PATH."Views-Cliente/content-movie.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+        public function ShowContentMovieFuncionesViewsNotLogin($id)
+        {
+            try
+            {
+                $movie = $this->movieDAO->GetOne($id);
+                $infoFunciones = $this->funcionDAO->GetAllByMovieInfo($id);
+                require_once(VIEWS_PATH."/content-movie-not-login.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function ShowCarteleraViews()
         {
-            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+            try
+            {
+                require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function getMovieListConFuncion()
         {
-            $movieList = $this->movieDAO->GetAll();
-            $funcionList = $this->funcionDAO->GetAll();
-            $movieListRta = array();
+            try
+            {
+                $movieList = $this->movieDAO->GetAll();
+                $funcionList = $this->funcionDAO->GetAll();
+                $movieListRta = array();
 
-            foreach($funcionList as $funcion) {
-                foreach($movieList as $movie) {
-                    if (($funcion->getId_pelicula() == $movie->getId()) && (!in_array($movie, $movieListRta))) {
-                        array_push($movieListRta, $movie);
+                foreach($funcionList as $funcion) 
+                {
+                    foreach($movieList as $movie) 
+                    {
+                        if (($funcion->getId_pelicula() == $movie->getId()) && (!in_array($movie, $movieListRta))) 
+                        {
+                            array_push($movieListRta, $movie);
+                        }
                     }
                 }
-            }
 
-            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+                require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         /* public function getMovieListConFuncion()
@@ -125,105 +211,141 @@
 
         public function getMovieListSinFuncion()
         {
-            $movieList = $this->movieDAO->GetAll();
-            $funcionList = $this->funcionDAO->GetAll();
-            $movieListRta = array();
+            try
+            {
+                $movieList = $this->movieDAO->GetAll();
+                $funcionList = $this->funcionDAO->GetAll();
+                $movieListRta = array();
 
-            foreach($movieList as $movie) {
-                $flag = 0;
-                foreach($funcionList as $funcion) {
-                    if ($funcion->getId_pelicula() == $movie->getId()) {
-                        $flag = 1;
+                foreach($movieList as $movie) {
+                    $flag = 0;
+                    foreach($funcionList as $funcion) {
+                        if ($funcion->getId_pelicula() == $movie->getId()) {
+                            $flag = 1;
+                        }
                     }
+                    if(!$flag) array_push($movieListRta, $movie);
                 }
-                if(!$flag) array_push($movieListRta, $movie);
-            }
 
-            require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+                require_once(VIEWS_PATH."Views-Admin/cartelera.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function GetArrayCineSalas()
         {
-            $listCineSalas = array();
-            $listCine = $this->cineDAO->GetAllWithCapacity();
+            try
+            {
+                $listCineSalas = array();
+                $listCine = $this->cineDAO->GetAllWithCapacity();
 
-            foreach ($listCine as $cine) {
-                $listCineSalas[$cine] = $this->salaDAO->GetAllByCine($cine->getId());
+                foreach ($listCine as $cine) {
+                    $listCineSalas[$cine] = $this->salaDAO->GetAllByCine($cine->getId());
+                }
+
+                return $listCineSalas;
             }
-
-            return $listCineSalas;
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function ShowBuyTicketsView($id_funcion, $quantity = 1)
         {
-            $funcion = $this->funcionDAO->GetOne($id_funcion);
-            $movie = $this->movieDAO->GetOne($funcion->getId_pelicula());
-            $infoUnaFuncion = $this->funcionDAO->GetOneByMovieInfo($funcion->getId_pelicula());
-            $cine = $this->cineDAO->GetOne($infoUnaFuncion["id_cine"]);
-            require_once(ROOT.'mercadoPago.php');
+            try
+            {
+                $funcion = $this->funcionDAO->GetOne($id_funcion);
+                $movie = $this->movieDAO->GetOne($funcion->getId_pelicula());
+                $infoUnaFuncion = $this->funcionDAO->GetOneByMovieInfo($funcion->getId_pelicula());
+                $cine = $this->cineDAO->GetOne($infoUnaFuncion["id_cine"]);
+                require_once(ROOT.'mercadoPago.php');
 
-            require_once(VIEWS_PATH."Views-Cliente/compra-ticket-user.php");
+                require_once(VIEWS_PATH."Views-Cliente/compra-ticket-user.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function VerifyTimeFuncion($time, $movie_runtime, $id_sala, $id_funcion = null)
         {
-            $listFunciones = $this->funcionDAO->GetAllFuncionesBySala($id_sala);
-
-            $fechaHora = explode("T", $time);
-            $fecha = $fechaHora[0];
-            $hora = $fechaHora[1];
-
-            $runtimeEsper = (intval($movie_runtime) + 15) * 60;
-
-            $inicTime = strtotime($fecha." ".$hora.":00");
-            $finTime = strtotime($fecha." ".$hora.":00") + $runtimeEsper;
-            $midTime = $inicTime + (($finTime - $inicTime) / 2);
-            
-            foreach($listFunciones as $funcion) {
-
-                if($funcion->getId_funcion() == $id_funcion) {
-                    continue;
-                }
-
-                $inicFuncionTime = $funcion->getFecha_hora();
-                $fechaHora = explode(" ", $inicFuncionTime);
+            try
+            {
+                $listFunciones = $this->funcionDAO->GetAllFuncionesBySala($id_sala);
+                $fechaHora = explode("T", $time);
                 $fecha = $fechaHora[0];
                 $hora = $fechaHora[1];
 
                 $runtimeEsper = (intval($movie_runtime) + 15) * 60;
+
+                $inicTime = strtotime($fecha." ".$hora.":00");
+                $finTime = strtotime($fecha." ".$hora.":00") + $runtimeEsper;
+                $midTime = $inicTime + (($finTime - $inicTime) / 2);
                 
-                $inicFuncion = strtotime($inicFuncionTime);
-                $finFuncion = strtotime($fecha." ".$hora) + $runtimeEsper;
+                foreach($listFunciones as $funcion) 
+                {
 
-                if((($inicTime >= $inicFuncion) && ($inicTime <= $finFuncion)) ||
-                    (($midTime >= $inicFuncion) && ($midTime <= $finFuncion)) ||
-                    (($finTime >= $inicFuncion) && ($finTime <= $finFuncion))) {
-                    return false;
+                    if($funcion->getId_funcion() == $id_funcion) 
+                    {
+                        continue;
+                    }
+
+                    $inicFuncionTime = $funcion->getFecha_hora();
+                    $fechaHora = explode(" ", $inicFuncionTime);
+                    $fecha = $fechaHora[0];
+                    $hora = $fechaHora[1];
+
+                    $runtimeEsper = (intval($movie_runtime) + 15) * 60;
+                    
+                    $inicFuncion = strtotime($inicFuncionTime);
+                    $finFuncion = strtotime($fecha." ".$hora) + $runtimeEsper;
+
+                    if((($inicTime >= $inicFuncion) && ($inicTime <= $finFuncion)) ||
+                        (($midTime >= $inicFuncion) && ($midTime <= $finFuncion)) ||
+                        (($finTime >= $inicFuncion) && ($finTime <= $finFuncion))) {
+                        return false;
+                    }
                 }
-            }
 
-            return true;
+                return true;
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function VerifyCineFuncion($time, $id_movie, $id_funcion = null)
         {
-            $listFunciones = $this->funcionDAO->GetAll();
-            $fechaHora = explode("T", $time);
-            $fechaFuncion = $fechaHora[0];
+            try
+            {
+                $listFunciones = $this->funcionDAO->GetAll();
+                $fechaHora = explode("T", $time);
+                $fechaFuncion = $fechaHora[0];
 
-            foreach($listFunciones as $funcion) {
-                if($funcion->getId_funcion() == $id_funcion) {
-                    continue;
+                foreach($listFunciones as $funcion) {
+                    if($funcion->getId_funcion() == $id_funcion) {
+                        continue;
+                    }
+
+                    $fechaHora = explode(" ", $funcion->getFecha_hora());
+                    $fecha = $fechaHora[0];
+                    if (($funcion->getId_pelicula() == $id_movie) && ($fechaFuncion == $fecha)) {
+                        return false;
+                    }
                 }
 
-                $fechaHora = explode(" ", $funcion->getFecha_hora());
-                $fecha = $fechaHora[0];
-                if (($funcion->getId_pelicula() == $id_movie) && ($fechaFuncion == $fecha)) {
-                    return false;
-                }
+                return true;
             }
-
-            return true;
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
     }
 ?>

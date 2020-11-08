@@ -15,34 +15,39 @@
           <h2>Sign Up</h2>
           <p>Please fill in this form to create an account!</p>
           <hr>
+          
           <div class="form-group">
             <div class="row">
               <div class="col"><input type="text" class="form-control" name="nombre" placeholder="First Name" required="required"></div>
               <div class="col"><input type="text" class="form-control" name="apellido" placeholder="Last Name" required="required"></div>
             </div>
           </div>
+          
           <div class="form-group">
             <input type="text" class="form-control" name="dni" placeholder="DNI" required="required">
           </div>
+          
+          <div class="form-group">
+            <input type="email" class="form-control" name="email" placeholder="Email" required="required">
+          </div>
+
+          <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+          </div>
+
           <div class="form-group">
             <label id="fecha_nac" style="color: #737373;">Birthday</label>
             <input class="form-control" type="date" id="fecha_nac" name="fecha_nac" min="1910-01-01" max="<?php echo date("Y") . '-' . date("m") . '-' . (date("d") - 1); ?>" class="col-6" required />
           </div>
 
-          <div class="form-group">
-            <input type="email" class="form-control" name="email" placeholder="Email" required="required">
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-          </div>
-
-
-          <div class="form-group">
+          <!--<div class="form-group">
             <label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-          </div>
+          </div>-->
+          
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
           </div>
+        
         </form>
 
       </div>

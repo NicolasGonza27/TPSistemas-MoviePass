@@ -33,7 +33,7 @@ use PDOException;
             }
             catch(PDOException $e)
             {   
-                echo $e->getMessage();
+                throw new PDOException($e->getMessage());
             }
 
         }   
@@ -62,7 +62,7 @@ use PDOException;
             }
             catch(PDOException $e)
             {
-                echo $e->getMessage();
+                throw new PDOException($e->getMessage());
             }
         }
 
@@ -90,7 +90,7 @@ use PDOException;
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
 
@@ -118,7 +118,7 @@ use PDOException;
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
         
@@ -140,7 +140,7 @@ use PDOException;
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
 
@@ -170,7 +170,7 @@ use PDOException;
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
 
