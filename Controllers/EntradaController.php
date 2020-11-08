@@ -120,46 +120,53 @@
         public function comprarEntradas($cant_entradas, $monto_compra, $id_funcion, $numero_tarjeta) 
         {
             //Compra : id_usuario, id_politica_descuento, cant_entradas, monto Entradas: $id_compra, $id_funcion, $nro_entrada
-            $error = 0;
-            var_dump($numero_tarjeta);
-            if(($numero_tarjeta[0] == "4") || ($numero_tarjeta[0] == "5")) {
-                $user = $_SESSION["userLogged"];
-                $compra = new Compra(null, $user->getId_usuario(), 1, $cant_entradas, $monto_compra, date("Y") .'-'.date("m").'-'.date("d"));
-                $this->compraDAO->Add($compra);
-                $rta = $this->compraDAO->GetAll();
-                $pasar_compra = $rta[array_key_last($rta)];
-                
-                for( $i=0 ; $i<$cant_entradas ; $i++) {
-                    $this->Add($pasar_compra->getId_compra(), $id_funcion, 7);
+            try
+            {
+                $error = 0;
+                var_dump($numero_tarjeta);
+                if(($numero_tarjeta[0] == "4") || ($numero_tarjeta[0] == "5")) {
+                    $user = $_SESSION["userLogged"];
+                    $compra = new Compra(null, $user->getId_usuario(), 1, $cant_entradas, $monto_compra, date("Y") .'-'.date("m").'-'.date("d"));
+                    $this->compraDAO->Add($compra);
+                    $rta = $this->compraDAO->GetAll();
+                    $pasar_compra = $rta[array_key_last($rta)];
+                    
+                    for( $i=0 ; $i<$cant_entradas ; $i++) {
+                        $this->Add($pasar_compra->getId_compra(), $id_funcion, 7);
+                    }
+
+                }
+                else {
+                    $error = 1;
                 }
 
-            }
-            else {
-                $error = 1;
-            }
+                if($error == 0){
+                    $funcionNuevaCant = $this->funcionDAO->GetOne($id_funcion);
+                    $adidtentes_restar = $funcionNuevaCant->getCant_asistentes();
+                    $funcionNuevaCant->setCant_asistentes($adidtentes_restar + $cant_entradas);
+                    $this->funcionDAO->Modify($id_funcion, $funcionNuevaCant);
+                    $this->ShowContentsCompraViews($pasar_compra->getId_compra());
+    /* 
+                    $para      = 'niclausegonzalez@gmail.com';
+                    $titulo    = 'El título';
+                    $mensaje   = 'Hola';
 
-            if($error == 0){
-                $funcionNuevaCant = $this->funcionDAO->GetOne($id_funcion);
-                $adidtentes_restar = $funcionNuevaCant->getCant_asistentes();
-                $funcionNuevaCant->setCant_asistentes($adidtentes_restar - $cant_entradas);
-                $this->funcionDAO->Modify($id_funcion, $funcionNuevaCant);
-                $this->ShowContentsCompraViews($pasar_compra->getId_compra());
-/* 
-                $para      = 'niclausegonzalez@gmail.com';
-                $titulo    = 'El título';
-                $mensaje   = 'Hola';
+                    mail($para, $titulo, $mensaje); */
+                }
+                else {
+                    $quantity = $cant_entradas;
+                    $funcion = $this->funcionDAO->GetOne($id_funcion);
+                    $movie = $this->movieDAO->GetOne($funcion->getId_pelicula());
+                    $infoUnaFuncion = $this->funcionDAO->GetOneByMovieInfo($funcion->getId_pelicula());
+                    $cine = $this->cineDAO->GetOne($infoUnaFuncion["id_cine"]);
+                    require_once(ROOT.'mercadoPago.php');
 
-                mail($para, $titulo, $mensaje); */
+                    require_once(VIEWS_PATH."Views-Cliente/compra-ticket-user.php");
+                }
             }
-            else {
-                $quantity = $cant_entradas;
-                $funcion = $this->funcionDAO->GetOne($id_funcion);
-                $movie = $this->movieDAO->GetOne($funcion->getId_pelicula());
-                $infoUnaFuncion = $this->funcionDAO->GetOneByMovieInfo($funcion->getId_pelicula());
-                $cine = $this->cineDAO->GetOne($infoUnaFuncion["id_cine"]);
-                require_once(ROOT.'mercadoPago.php');
-
-                require_once(VIEWS_PATH."Views-Cliente/compra-ticket-user.php");
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
             }
         }
 

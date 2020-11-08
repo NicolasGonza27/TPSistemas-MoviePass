@@ -1,17 +1,6 @@
 <?php
-<<<<<<< HEAD
-require_once(VIEWS_PATH . "header.php");
-require_once(VIEWS_PATH . "nav-not-login.php");
-
-=======
-    require_once("header.php");
-    if ($error == 1) {
-        echo "<script> if(confirm('The data you have enter does not exist, try again or create another user.')); </script>";
-    }
-    elseif ($error == 2) {
-        echo'<script type="text/javascript"> alert("The email is not available"); </script>'; 
-    }
->>>>>>> 1106_MercadoPago
+    require_once(VIEWS_PATH . "header.php");
+    require_once(VIEWS_PATH . "nav-not-login.php");
 ?>
 
 
@@ -119,18 +108,7 @@ require_once(VIEWS_PATH . "nav-not-login.php");
         $('#myList a:last-child').tab('show')
 
     })
-</script>
 
-<<<<<<< HEAD
-=======
-<?php
-    require_once("signUp.php");
-    require_once("footer.php");
-?>
->>>>>>> 1106_MercadoPago
-
-
-<script>
     $("input[type=text]").keyup(function() {
         leters = $(this).val().replace(" ", "");
         $(this).val(leters);
@@ -140,8 +118,4 @@ require_once(VIEWS_PATH . "nav-not-login.php");
         number = $(this).val().replace("-", "");
         $(this).val(number);
     });
-<<<<<<< HEAD
 </script>
-=======
-</script>
->>>>>>> 1106_MercadoPago
