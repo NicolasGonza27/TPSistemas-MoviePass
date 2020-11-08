@@ -33,8 +33,8 @@
                     Sales
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item font-weight-bold" href="<?php echo FRONT_ROOT."Home/CantidadTickets"?>">Check quantities sold and remnants</a>
-                        <a class="dropdown-item font-weight-bold" href="<?php echo FRONT_ROOT."Home/CantidadTicketsPesos"?>">Ckeck totals sold in pesos</a>
+                        <a class="dropdown-item font-weight-bold" href="<?php echo FRONT_ROOT."Home/ShowQuantityTickets"?>">Check quantities sold and remnants</a>
+                        <a class="dropdown-item font-weight-bold" href="<?php echo FRONT_ROOT."Home/ShowTicketsPrice"?>">Ckeck totals sold in pesos</a>
                     </div>
                 </li>
             </ul>
