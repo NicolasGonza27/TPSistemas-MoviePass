@@ -51,8 +51,7 @@ require_once("nav.php");
 </div>
 
 
-<?php
-foreach ($listaCines as $cine) { ?>
+<?php foreach ($listaCines as $cine) { ?>
     <!-- This is the modal -->
     <div class="modal fade" id="<?php echo "modal" . $cine->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
         <div class="signup-form">
@@ -79,7 +78,7 @@ foreach ($listaCines as $cine) { ?>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col"><label for="">Street</label><input type="text" class="form-control" name="calle" value="<?php echo $cine->getCalle() ?>" required="required"></div>
-                                <div class="col"><label for="">Number</label><input type="text" class="form-control" name="numero" value="<?php echo $cine->getNumero() ?>" required="required"></div>
+                                <div class="col"><label for="">Number</label><input type="number" class="form-control" name="numero" max="9999" value="<?php echo $cine->getNumero() ?>" required="required"></div>
                             </div>
                         </div>
 
@@ -148,44 +147,6 @@ foreach ($listaCines as $cine) { ?>
     </div>
 <?php } ?>
 
-
-
-<!-- Modal del boton Remove -->
-    <?php
-    foreach ($listaCines as $cine) { ?>
-    <div class="modal fade" id="<?php echo "modalEliminar" .  $cine->getId();?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                
-            <form action="<?php echo FRONT_ROOT . "Cine/Remove" ?>" method="post">
-
-                    <div class="modal-header">
-                        <div class="modal-title" id="exampleModalLabel">¿Are you sure to remove <strong><?php echo $cine->getNombre();?></strong> Cinema? </div>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    
-                    <input type="number" name="id" value="<?php echo $cine->getId(); ?>" class="hide">
-
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger" onclick="this.form.submit(); this.disabled=true; this.value='Sending…';" >Remove</button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
-    <?php } ?>
-
-
-
-
-
-
-
-
 <!-- Modal del boton Agregar -->
 <div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="modalAgregarLabel">
     <div class="signup-form">
@@ -209,7 +170,7 @@ foreach ($listaCines as $cine) { ?>
                     <div class="form-group">
                         <div class="row">
                             <div class="col"><input type="text" class="form-control" name="calle" placeholder="Street" required="required"></div>
-                            <div class="col"><input type="text" class="form-control" name="numero" placeholder="Number" required="required"></div>
+                            <div class="col"><input type="number" class="form-control" name="numero" placeholder="Number" max="9999" required="required"></div>
                         </div>
                     </div>
 
@@ -239,59 +200,18 @@ foreach ($listaCines as $cine) { ?>
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="signup-form">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <form action="<?php echo FRONT_ROOT . "Usuario/AddNuevoUsuario" ?>" method="post">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h2>Edit cinema</h2>
-                    <p>Please fill in this form to create an account!</p>
-                    <hr>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="dni" placeholder="DNI" required="required">
-                    </div>
-
-                    <div class="form-group">
-                        <label id="fecha_nac" style="color: #737373;">Birthday</label>
-                        <input class="form-control" type="date" id="fecha_nac" name="fecha_nac" min="1910-01-01" max="<?php echo date("Y") . '-' . date("m") . '-' . (date("d") - 1); ?>" class="col-6" required />
-                    </div>
-
-                    <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email" required="required">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-                    </div>
-
-
-                    <div class="form-group">
-                        <label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-
 <?php
-require_once("Views/footer.php");
+    require_once("Views/footer.php");
 ?>
 
 <script>
     $("input[type=text]").keyup(function() {
         leters = $(this).val().replace("  ", "");
         $(this).val(leters);
+    });
+
+    $("input[type=number]").keyup(function() {
+        number = $(this).val().replace("-", "");
+        $(this).val(number);
     });
 </script>
