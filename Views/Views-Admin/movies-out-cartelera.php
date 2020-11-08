@@ -29,7 +29,7 @@
                 </div>
         <?php }
         } else {
-            echo "<script> if(confirm('No hay peliculas con  los requisitos especificados'));";
+            echo "<script> if(confirm('There are no movies with the specified elements'));";
             echo "window.location = '/dashboard/TPSistemas-MoviePass/Home/ShowFiltersViewsAdminOutCartelera';
                     </script>";
         } ?>

@@ -1,7 +1,6 @@
 <?php
-require_once(VIEWS_PATH . "header.php");
-require_once(VIEWS_PATH . "nav-not-login.php");
-
+    require_once(VIEWS_PATH . "header.php");
+    require_once(VIEWS_PATH . "nav-not-login.php");
 ?>
 
 
@@ -109,10 +108,7 @@ require_once(VIEWS_PATH . "nav-not-login.php");
         $('#myList a:last-child').tab('show')
 
     })
-</script>
 
-
-<script>
     $("input[type=text]").keyup(function() {
         leters = $(this).val().replace(" ", "");
         $(this).val(leters);
