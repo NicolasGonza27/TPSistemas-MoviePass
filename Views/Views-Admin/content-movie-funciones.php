@@ -1,7 +1,7 @@
 <?php
     require_once("nav.php");
     if ($error == 1) {
-        echo "<script>alert('La fecha y hora de la sala que ha indicado no estan disponibles para programar esta funcion, verifique los horarios e intente nuevamente');</script>";
+        echo "<script>alert('The date and time of the room you have indicated are not available to program this function, check the hours and try again');</script>";
     }
 ?>
 

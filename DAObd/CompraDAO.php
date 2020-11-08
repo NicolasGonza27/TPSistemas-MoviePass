@@ -16,12 +16,13 @@
         {
             try 
             {
-               $query = "INSERT INTO compras (id_usuario,id_politica_descuento,cant_entradas,monto,eliminado) VALUES (:id_usuario,:id_politica_descuento,:cant_entradas,:monto,:eliminado);";
+               $query = "INSERT INTO compras (id_usuario,id_politica_descuento,cant_entradas,monto,fecha_compra,eliminado) VALUES (:id_usuario,:id_politica_descuento,:cant_entradas,:monto,:fecha_compra,:eliminado);";
 
                $parameters["id_usuario"] = $compra->getId_usuario();
                $parameters["id_politica_descuento"] = $compra->getId_politica_descuento();
                $parameters["cant_entradas"] = $compra->getCant_entradas();
                $parameters["monto"] = $compra->getMonto();
+               $parameters["fecha_compra"] = $compra->getFecha_compra();
                $parameters["eliminado"] = false;
                
                $this->connection = Connection::GetInstance();
@@ -100,7 +101,8 @@
                           c.id_usuario as id_usuario,
                           ifnull(p.porcentaje_descuento,0) as porcentaje_descuento,
                           c.cant_entradas as cant_entradas,
-                          c.monto as monto
+                          c.monto as monto,
+                          c.fecha_compra as fecha_compra
                           FROM compras c
                           INNER JOIN politicas_descuento p
                           ON c.id_politica_descuento = p.id_politica_descuento
@@ -159,7 +161,7 @@
         {
             try
             {
-                $query = "UPDATE ".$this->tableName." SET nombre_cine = :nombre_cine, calle = :calle, numero = :numero, hora_apertura = :hora_apertura, hora_cierre = :hora_cierre, valor_entrada = :valor_entrada
+                $query = "UPDATE ".$this->tableName." SET id_usuario = :id_usuario, id_politica_descuento = :id_politica_descuento, cant_entradas = :cant_entradas, monto = :monto, fecha_compra = :fecha_compra
                 WHERE (id_compra = :id_compra);";
 
                 $this->connection = Connection::GetInstance();
@@ -168,6 +170,7 @@
                 $parameters["id_politica_descuento"] = $newCompra->getId_politica_descuento();
                 $parameters["cant_entradas"] = $newCompra->getCant_entradas();
                 $parameters["monto"] = $newCompra->getMonto();
+                $parameters["fecha_compra"] = $newCompra->getFecha_compra();
 
                 $parameters["id_compra"] = $id;
                 
@@ -186,7 +189,7 @@
         {
             $resp = array_map(function($p)
             {
-                return new Compra($p['id_compra'],$p['id_usuario'],$p['id_politica_descuento'],$p['cant_entradas'],$p['monto']);
+                return new Compra($p['id_compra'],$p['id_usuario'],$p['id_politica_descuento'],$p['cant_entradas'],$p['monto'],$p['fecha_compra']);
             }, $compras);
 
             return $resp;

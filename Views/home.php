@@ -1,10 +1,10 @@
 <?php
     require_once("header.php");
     if ($error == 1) {
-        echo "<script> if(confirm('Los datos que ingresó no corresponden a nungun usuario registrado.')); </script>";
+        echo "<script> if(confirm('The data you have enter does not exist, try again or create another user.')); </script>";
     }
     elseif ($error == 2) {
-        echo'<script type="text/javascript"> alert("El correo electronico no esta disponible"); </script>'; 
+        echo'<script type="text/javascript"> alert("The email is not available"); </script>'; 
     }
 ?>
 
@@ -37,13 +37,19 @@
 </body>
 
 <?php
-require_once("signUp.php");
-require_once("footer.php");
+    require_once("signUp.php");
+    require_once("footer.php");
 ?>
+
 
 <script>
     $("input[type=text]").keyup(function(){
         leters = $(this).val().replace(" ", "");
         $(this).val(leters);
+    });
+
+    $("input[type=number]").keyup(function() {
+        number = $(this).val().replace("-", "");
+        $(this).val(number);
     });
 </script>

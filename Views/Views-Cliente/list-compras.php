@@ -16,6 +16,7 @@
                         <th class="text-center">Number of tickets</th>
                         <th class="text-center">Discount obtained</th>
                         <th class="text-center">Total amount</th>
+                        <th class="text-center">Date of purchace</th>
                         <th class="text-center">Options</th>
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                                     <td class="text-center table-secondary"><?php echo $compra["cant_entradas"]; ?></td>
                                     <td class="text-center table-secondary"><?php echo $compra["porcentaje_descuento"]; ?></td>
                                     <td class="text-center table-secondary"><?php echo $compra["monto"]; ?></td>
+                                    <td class="text-center table-secondary"><?php echo $compra["fecha_compra"]; ?></td>
                                     <td class="text-center table-secondary"><button type="submit" name="id_compra" class="btn btn-success btn-lg" value="<?php echo $compra["id_compra"];?>">Tickets</button></td>
                                 </tr>
 

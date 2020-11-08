@@ -22,7 +22,7 @@
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="dni" placeholder="DNI" required="required">
+            <input type="number" class="form-control" name="dni" placeholder="DNI" required="required">
           </div>
           <div class="form-group">
             <label id="fecha_nac" style="color: #737373;">Birthday</label>

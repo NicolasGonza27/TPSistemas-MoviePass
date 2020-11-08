@@ -9,14 +9,16 @@
         private $id_politica_descuento;
         private $cant_entradas;
         private $monto;
+        private $fecha_compra;
 
-        public function __construct($id_compra,$id_usuario,$id_politica_descuento,$cant_entradas,$monto)
+        public function __construct($id_compra,$id_usuario,$id_politica_descuento,$cant_entradas,$monto,$fecha_compra)
         {
             $this->id_compra = $id_compra;
             $this->id_usuario = $id_usuario;
             $this->id_politica_descuento = $id_politica_descuento;
             $this->cant_entradas = $cant_entradas;
             $this->monto = $monto;
+            $this->fecha_compra = $fecha_compra;
         }
 
         public function getId_compra()
@@ -75,6 +77,18 @@
         public function setMonto($monto)
         {
                 $this->monto = $monto;
+
+                return $this;
+        }
+
+        public function getFecha_compra()
+        {
+                return $this->fecha_compra;
+        }
+
+        public function setFecha_compra($fecha_compra)
+        {
+                $this->fecha_compra = $fecha_compra;
 
                 return $this;
         }

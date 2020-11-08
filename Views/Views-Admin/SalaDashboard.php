@@ -214,9 +214,14 @@ require_once("nav.php");
     require_once("Views/footer.php");
     ?>
 
-    <script>
-        $("input[type=text]").keyup(function() {
-            leters = $(this).val().replace("  ", "");
-            $(this).val(leters);
-        });
-    </script>
+<script>
+    $("input[type=text]").keyup(function() {
+        leters = $(this).val().replace("  ", "");
+        $(this).val(leters);
+    });
+
+    $("input[type=number]").keyup(function() {
+        number = $(this).val().replace("-", "");
+        $(this).val(number);
+    });
+</script>
