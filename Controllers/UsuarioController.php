@@ -4,6 +4,7 @@
 
     use DAObd\UsuarioDAO as UsuarioDAO;
     use Models\Usuario as Usuario;
+    use Exception;
 
     class UsuarioController
     {
@@ -17,33 +18,66 @@
 
         public function Add(Usuario $user)
         {
-            $this->usuarioDAO->Add($user);
+            try
+            {
+                $this->usuarioDAO->Add($user);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
         
         public function ShowHomeClientViews()
         {
-            require_once(VIEWS_PATH."Views-Cliente/home-client.php");
+            try
+            {
+                require_once(VIEWS_PATH."Views-Cliente/home-client.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
         }
 
         public function AddNuevoUsuario($nombre,$apellido, $dni, $email, $password, $fecha_nac)
         {
-            $usuario = new Usuario(null,2,$nombre,$apellido,$dni,$email,$password,$fecha_nac);
-            $error = 0;
-            if($this->usuarioDAO->GetOneByEmail($email)) 
+            try
             {
-                $error = 2;   
+                $usuario = new Usuario(null,2,$nombre,$apellido,$dni,$email,$password,$fecha_nac);
+                $error = 0;
+                if($this->usuarioDAO->GetOneByEmail($email)) 
+                {
+                    $_SESSION["error"] = 2;   
+                }
+                else 
+                {
+                    $this->usuarioDAO->Add($usuario);
+                }
+                $this->StartLogin();
             }
-            else 
+            catch(Exception $e)
             {
-                $this->usuarioDAO->Add($usuario);
+                echo $e->getMessage();
             }
-            require_once("Views/home.php");
-            
         }
+            
 
         public function Delete($id)
         {
-            $this->usuarioDAO->Remove($id);
+            try
+            {
+                $this->usuarioDAO->Remove($id);
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+        public function StartLogin()
+        {
+            require_once(VIEWS_PATH."/login.php");
         }
        
     }

@@ -26,7 +26,7 @@ class TipoSalaDAO
             }
             catch(PDOException $e)
             {   
-                echo $e->getMessage();
+                throw new PDOException($e->getMessage());
             }
         }
 
@@ -54,7 +54,7 @@ class TipoSalaDAO
             }
             catch(PDOException $e)
             {
-                echo $e->getMessage();
+                throw new PDOException($e->getMessage());
             }
         }
 
@@ -82,7 +82,7 @@ class TipoSalaDAO
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
 
@@ -105,7 +105,7 @@ class TipoSalaDAO
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
 
@@ -127,7 +127,7 @@ class TipoSalaDAO
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
     

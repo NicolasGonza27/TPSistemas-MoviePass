@@ -87,7 +87,7 @@
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
 
@@ -115,7 +115,7 @@
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
 
@@ -132,19 +132,12 @@
 
                     $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
 
-                    if($cantRows)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }   
+                    return $cantRows;
 
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
 
@@ -166,19 +159,12 @@
 
                     $cantRows = $this->connection->ExecuteNonQuery($query,$parameters);
 
-                    if($cantRows) 
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return $cantRows;
 
                 }
                 catch(PDOException $e)
                 {
-                    echo $e->getMessage();
+                    throw new PDOException($e->getMessage());
                 }
             }
 

@@ -21,7 +21,7 @@ class Connection
         }
         catch(PDOException $e)
         {
-            echo $e->getMessage();
+            throw new PDOException();
         }
     }
 
@@ -49,7 +49,7 @@ class Connection
         }
         catch(PDOException $e)
         {
-            echo $e->getMessage();
+            throw new PDOException($e->getMessage());
         }
 
     }
@@ -68,7 +68,7 @@ class Connection
         }
         catch(PDOException $e)
         {
-            echo $e->getMessage();
+            throw new PDOException($e->getMessage());
         }
 
     }
@@ -81,7 +81,7 @@ class Connection
         }
         catch(PDOException $e)
         {
-            echo $e->getMessage();
+            throw new PDOException($e->getMessage());
         }
     }
 

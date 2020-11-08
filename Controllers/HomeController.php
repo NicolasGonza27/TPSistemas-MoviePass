@@ -13,6 +13,7 @@ use DAObd\MovieDAO as MovieDAO;
 use DAObd\UsuarioDAO as UsuarioDAO;
 use DAObd\FuncionDAO as FuncionDAO;
 use DAObd\CineDAO as CineDAO;
+use Exception;
 
 class HomeController
 {
@@ -31,113 +32,230 @@ class HomeController
 
     public function Index($message = "")
     {
-        if (isset($_SESSION["userLogged"])) {
-            $user = $_SESSION["userLogged"];
 
-            if ($user->getId_tipo_usuario() == 1) {
-                $this->ShowDashboardView();
-            } elseif ($user->getId_tipo_usuario() == 2) {
-                $this->ShowHomeClientViews();
+        try
+        {
+            if (isset($_SESSION["userLogged"])) 
+            {
+                $user = $_SESSION["userLogged"];
+
+                if ($user->getId_tipo_usuario() == 1) 
+                {
+                    $this->ShowDashboardView();
+                } elseif ($user->getId_tipo_usuario() == 2) 
+                {
+                    $this->ShowHomeClientViews();
+                }
+            } 
+            else 
+            {
+                $this->ShowFiltersNotLogin();
             }
-        } else {
-            $error = 0;
-            require_once(VIEWS_PATH . "home.php");
         }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+
     }
 
     public function ShowDashboardView()
     {
-        $listaCines = $this->cineDAO->GetAllWithCapacity();
-        require_once(VIEWS_PATH . "Views-Admin/dashboard.php");
+        try
+        {
+            $listaCines = $this->cineDAO->GetAllWithCapacity();
+            require_once(VIEWS_PATH . "Views-Admin/dashboard.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
     }
 
     public function ShowListMovieView()
-    {
-        $listMovie =
+    {   
+        try
+        {
+            $listMovie =
             require_once(VIEWS_PATH . "Views-Cliente/list-movie.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
     }
 
     public function ShowHomeClientViews()
     {
-        require_once(VIEWS_PATH . "Views-Cliente/home-client.php");
+        try
+        {
+            require_once(VIEWS_PATH . "Views-Cliente/home-client.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
     }
 
     public function ShowMyPurcheses()
     {
-        $user = $_SESSION["userLogged"];
-        $comprasDAO = new CompraDAO();
-        $listCompras = $comprasDAO->GetAllByUser($user->getId_usuario());
-        require_once(VIEWS_PATH . "Views-Cliente\list-compras.php");
+        try
+        {
+            $user = $_SESSION["userLogged"];
+            $comprasDAO = new CompraDAO();
+            $listCompras = $comprasDAO->GetAllByUser($user->getId_usuario());
+            require_once(VIEWS_PATH . "Views-Cliente\list-compras.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
     }
 
     public function ShowFiltersViews()
     {
-        $movieDAO = new MovieDAO();
-        $listMovie = $movieDAO->GetAllMostPopularity(500);
-        $listMovieGender = $this->movieGenderAPI->GetAll();
-        require_once(VIEWS_PATH . "Views-Cliente/filters.php");
+        try
+        {
+            $movieDAO = new MovieDAO();
+            $listMovie = $movieDAO->GetAllMostPopularity(500);
+            $listMovieGender = $this->movieGenderAPI->GetAll();
+            require_once(VIEWS_PATH . "Views-Cliente/filters.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+
     }
 
     public function ShowFiltersViewsAdminCartelera()
     {
-        $movieDAO = new MovieDAO();
-        $listMovie = $movieDAO->GetAllMostPopularity(500);
-        $listMovieGender = $this->movieGenderAPI->GetAll();
-        require_once(VIEWS_PATH . "Views-Admin/filterCartelera.php");
+        try
+        {
+            $movieDAO = new MovieDAO();
+            $listMovie = $movieDAO->GetAllMostPopularity(500);
+            $listMovieGender = $this->movieGenderAPI->GetAll();
+            require_once(VIEWS_PATH . "Views-Admin/filterCartelera.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+
     }
 
     public function CantidadTickets()
     {
-        $listaCine = $this->cineDAO->GetAllWithCapacity();
-        $movieDAO = new MovieDAO();
-        $listMovie = $movieDAO->GetAll();
-        $listFunciones = $this->funcionDAO->GetAllInfoFunctions();
-        $entradasVendidasXcine = $this->funcionDAO->GetAllEntradasXcine();
-        $entradasVendidasXfuncion = $this->funcionDAO->GetAllEntradasXfuncion();
-        $entradasVendidasXpeliculas = $this->funcionDAO->GetAllEntradasXpelicula();
-        require_once(VIEWS_PATH . "Views-Admin/quantityTickets.php");
+        try
+        {
+            $listaCine = $this->cineDAO->GetAllWithCapacity();
+            $movieDAO = new MovieDAO();
+            $listMovie = $movieDAO->GetAll();
+            $listFunciones = $this->funcionDAO->GetAllInfoFunctions();
+            $entradasVendidasXcine = $this->funcionDAO->GetAllEntradasXcine();
+            $entradasVendidasXfuncion = $this->funcionDAO->GetAllEntradasXfuncion();
+            $entradasVendidasXpeliculas = $this->funcionDAO->GetAllEntradasXpelicula();
+            require_once(VIEWS_PATH . "Views-Admin/quantityTickets.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
     }
 
     public function CantidadTicketsPesos()
     {
-        $listaCine = $this->cineDAO->GetAllWithCapacity();
-        $movieDAO = new MovieDAO();
-        $listMovie = $movieDAO->GetAll();
-        $listFunciones = $this->funcionDAO->GetAllInfoFunctions();
-        $entradasVendidasXcine = $this->funcionDAO->GetAllEntradasXcine();
-        $entradasVendidasXfuncion = $this->funcionDAO->GetAllEntradasXfuncion();
-        $entradasVendidasXpeliculas = $this->funcionDAO->GetAllEntradasXpelicula();
-        require_once(VIEWS_PATH . "Views-Admin/ticketSales.php");
+        try
+        {
+            $listaCine = $this->cineDAO->GetAllWithCapacity();
+            $movieDAO = new MovieDAO();
+            $listMovie = $movieDAO->GetAll();
+            $listFunciones = $this->funcionDAO->GetAllInfoFunctions();
+            $entradasVendidasXcine = $this->funcionDAO->GetAllEntradasXcine();
+            $entradasVendidasXfuncion = $this->funcionDAO->GetAllEntradasXfuncion();
+            $entradasVendidasXpeliculas = $this->funcionDAO->GetAllEntradasXpelicula();
+            require_once(VIEWS_PATH . "Views-Admin/ticketSales.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+
     }
+
     public function ShowFiltersViewsAdminOutCartelera()
     {
-        $movieAPI = new MovieAPI();
-        $listMovie = $movieAPI->GetAllMostPopularityOutCartelera();
-        $listMovieGender = $this->movieGenderAPI->GetAll();
-        require_once(VIEWS_PATH . "Views-Admin/filterOutCartelera.php");
+        try
+        {
+            $movieAPI = new MovieAPI();
+            $listMovie = $movieAPI->GetAllMostPopularityOutCartelera();
+            $listMovieGender = $this->movieGenderAPI->GetAll();
+            require_once(VIEWS_PATH . "Views-Admin/filterOutCartelera.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    public function ShowFiltersNotLogin()
+    {
+        try
+        {
+            $movieAPI = new MovieAPI();
+            $_SESSION["backbutton"] = "BusquedaMostPopularity";
+            $listMovie = $movieAPI->GetAllMostPopularityOutCartelera();
+            $listMovieGender = $this->movieGenderAPI->GetAll();
+            require_once(VIEWS_PATH."/home.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
     }
 
     public function Login($email, $password)
     {
-        $user = $this->usuarioDAO->GetOneByEmail($email);
-        $error = 0;
-        if ($user) {
-            if ($user->GetPassword() == $password) {
-                $_SESSION["userLogged"] = $user;
+        try
+        {
+            $user = $this->usuarioDAO->GetOneByEmail($email);
 
-                if ($user->getId_tipo_usuario() == 1) {
-                    $this->ShowDashboardView();
-                } elseif ($user->getId_tipo_usuario() == 2) {
-                    require_once(VIEWS_PATH . "Views-Cliente/home-client.php");
+            if ($user) 
+            {
+                if ($user->GetPassword() == $password) 
+                {
+                    $_SESSION["userLogged"] = $user;
+
+                    if ($user->getId_tipo_usuario() == 1) 
+                    {
+                        $this->ShowDashboardView();
+                    } 
+                    elseif ($user->getId_tipo_usuario() == 2) 
+                    {
+                        require_once(VIEWS_PATH . "Views-Cliente/home-client.php");
+                    }
+                } 
+                else 
+                {
+                    $_SESSION["error"] = 1;
+                    $this->StartLogin();
                 }
-            } else {
-                $error = 1;
-                require_once(VIEWS_PATH . "home.php");
+            } 
+            else 
+            {
+                $_SESSION["error"] = 1;
+                $this->StartLogin();
             }
-        } else {
-            $error = 1;
-            require_once(VIEWS_PATH . "home.php");
         }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    public function StartLogin()
+    {
+        require_once(VIEWS_PATH."/login.php");
     }
 
     public function Logout()
