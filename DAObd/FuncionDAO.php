@@ -374,8 +374,9 @@
         {
             try 
             {
-                $query = "SELECT
-                c.id_cine, c.nombre_cine, c.calle, c.numero, p.title, s.numero_sala, s.cant_butacas - f.cant_asistentes as 'butacas_disp', f.fecha_hora, f.id_funcion, p.id as id_pelicula
+                $query = "SELECT funcion.id_cine, funcion.nombre_cine, funcion.calle, funcion.numero, funcion.title, funcion.id_sala, funcion.numero_sala, funcion.fecha_hora, funcion.id_funcion, funcion.id_pelicula, funcion.butacas_disp, ifnull(sum(cant_entradas),0) as entradas
+                from funciones fun
+                right join (select c.id_cine, c.nombre_cine, c.calle, c.numero, p.title, s.id_sala, s.numero_sala, s.cant_butacas as butacas_disp, f.fecha_hora, f.id_funcion, p.id as id_pelicula
                 FROM funciones f 
                 INNER JOIN peliculas_cartelera p
                 ON f.id_pelicula = p.id
@@ -383,7 +384,14 @@
                 ON f.id_sala = s.id_sala
                 INNER JOIN cines c
                 ON s.id_cine = c.id_cine
-                WHERE (f.eliminado = :eliminado);";
+                WHERE (f.eliminado = false)) as funcion
+                on fun.id_funcion = funcion.id_funcion
+                left join entradas e
+                on e.id_funcion = fun.id_funcion
+                left join compras com
+                on e.id_compra = com.id_compra
+                group by funcion.id_cine, funcion.nombre_cine, funcion.calle, funcion.numero, funcion.title, funcion.id_sala, funcion.numero_sala, funcion.fecha_hora, funcion.id_funcion, funcion.id_pelicula, funcion.butacas_disp;
+                ";
 
                 $parameters["eliminado"] =  $eliminado;
 
@@ -402,8 +410,7 @@
             {
                 throw new PDOException($e->getMessage());
             }
-        }   
-
+        }
         public function GetAllFuncionesBySala($id_sala)
         {
             try 

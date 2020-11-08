@@ -146,11 +146,15 @@ constraint PK_compras foreign key (id_usuario) references usuarios (id_usuario) 
 constraint FK_compras_politicas_descuento foreign key (id_politica_descuento) references politicas_descuento (id_politica_descuento) on delete cascade on update cascade
 );
 
+<<<<<<< HEAD
 /*Agregado*/
 alter table compras add fecha_compra timestamp not null after monto;
 alter table compras change column fecha_compra fecha_compra date not null default("2020-01-01") after monto;
 
 /*EJECUTAR ESTA LINEA*/
+=======
+alter table compras add column fecha_compra date not null default('2020-01-01') after monto;
+>>>>>>> RamaEntradas
 alter table compras change column id_politica_descuento id_politica_descuento int default null;
 
 create table entradas(
@@ -165,32 +169,7 @@ constraint FK_entradas_compras foreign key (id_compra) references compras (id_co
 constraint unique_entradas unique (id_funcion,nro_entrada)
 );
 
-
-/*query funcion x compra*/
-select f.id_funcion, e.id_compra
-from entradas e
-inner join funciones f
-on f.id_funcion = e.id_funcion;
-
-/*Query cartelera*/
-select 
-f.id_funcion,
-p.id,
-p.title
-from peliculas_cartelera p
-inner join funciones f
-on p.id = f.id_pelicula;
-
-/*Query funciones de una pelicula*/
-select 
-f.id_funcion,
-p.title
-from peliculas_cartelera p
-inner join funciones f
-on p.id = f.id_pelicula
-where id = 425001;
-
-
+/*Select * from of all tables*/
 select 
 *
 from cines;
@@ -247,6 +226,31 @@ select
 from
 entradas;
 
+
+/*query funcion x compra*/
+select f.id_funcion, e.id_compra
+from entradas e
+inner join funciones f
+on f.id_funcion = e.id_funcion;
+
+/*Query cartelera*/
+select 
+f.id_funcion,
+p.id,
+p.title
+from peliculas_cartelera p
+inner join funciones f
+on p.id = f.id_pelicula;
+
+/*Query funciones de una pelicula*/
+select 
+f.id_funcion,
+p.title
+from peliculas_cartelera p
+inner join funciones f
+on p.id = f.id_pelicula
+where id = 425001;
+
 select
 p.title,c.nombre_cine, c.calle, c.numero, s.numero_sala, s.cant_butacas - f.cant_asistentes as "butacas_disp", f.fecha_hora
 from funciones f 
@@ -278,7 +282,11 @@ FROM compras c
 LEFT JOIN politicas_descuento p
 ON c.id_politica_descuento = p.id_politica_descuento
 WHERE ((c.eliminado = 0) AND (c.id_usuario = 4));
+<<<<<<< HEAD
                                    
+=======
+
+>>>>>>> RamaEntradas
 select 
 p.title as titulo_pelicula,
 ci.nombre_cine as nombre_cine,
@@ -299,7 +307,10 @@ on s.id_cine = ci.id_cine
 where c.id_compra = 4;
 
 /*query cantidad vendida por funcion */
+<<<<<<< HEAD
 
+=======
+>>>>>>> RamaEntradas
 select e.id_funcion, sum(c.monto) as monto
 from compras c
 inner join entradas e
@@ -307,6 +318,7 @@ on c.id_compra = e.id_compra
 inner join funciones f
 on e.id_funcion = f.id_funcion
 group by e.id_funcion;
+<<<<<<< HEAD
 
 /*query con subconsulta que devuelve la cantidad de entradas por funcion*/
 select f.id_funcion, ifnull(entradas,0) as entradas
@@ -421,4 +433,114 @@ on s.id_cine = cines.id_cine
 group by cines.id_cine,f.id_sala,f.id_pelicula) as cantidad
 on pelis.id = cantidad.id_pelicula;
 
+=======
+>>>>>>> RamaEntradas
 
+/*query con subconsulta que devuelve la cantidad de entradas por funcion*/
+select f.id_funcion, ifnull(entradas,0) as entradas
+from funciones f
+left join (select e.id_funcion, sum(c.cant_entradas) as entradas
+from compras c
+inner join entradas e
+on c.id_compra = e.id_compra
+inner join funciones f
+on e.id_funcion = f.id_funcion
+where (c.eliminado = false) and (f.eliminado= false) and(e.eliminado = false)
+group by e.id_funcion) as cantidad
+on f.id_funcion = cantidad.id_funcion
+where f.eliminado = false;
+
+/*query cantidad vendida por pelicula  1*
+select cine.id_cine, s.id_sala, e.id_funcion, f.id_pelicula, sum(c.cant_entradas) as monto
+from compras c
+inner join entradas e
+on c.id_compra = e.id_compra
+inner join funciones f
+on e.id_funcion = f.id_funcion
+inner join peliculas_cartelera p
+on p.id = f.id_pelicula
+inner join salas s
+on s.id_sala = f.id_sala
+inner join cines cine
+on cine.id_cine = s.id_cine
+group by f.id_pelicula;*/
+select*from salas;
+select*from entradas;
+
+/*query definitiva para cantidad de entradas por peliculas*/
+select cine.id_cine, s.id_sala, e.id_funcion, f.id_pelicula, ifnull(sum(c.cant_entradas),0) as entradas, s.cant_butacas
+from cines cine
+left join salas s
+on cine.id_cine = s.id_cine
+left join funciones f
+on s.id_sala = f.id_sala
+left join entradas e
+on f.id_funcion = e.id_funcion
+left join compras c
+on c.id_compra = e.id_compra
+left join peliculas_cartelera p
+on p.id = f.id_pelicula
+where (p.eliminado = false)
+group by cine.id_cine, s.id_sala, e.id_funcion, f.id_pelicula, p.eliminado;
+
+/*query cantidad vendida por cine */
+select cines.id_cine, sum(c.cant_entradas) as monto
+from compras c
+inner join entradas e
+on c.id_compra = e.id_compra
+inner join funciones f
+on e.id_funcion = f.id_funcion
+inner join salas s
+on s.id_sala = f.id_sala
+inner join cines cines
+on s.id_cine = cines.id_cine
+group by cines.id_cine;
+
+/*query que devuelve la cantidad de entradas vendidas x cine*/
+select cines.id_cine, sum(c.cant_entradas) as cantidad
+from compras c
+inner join entradas e
+on c.id_compra = e.id_compra
+inner join funciones f
+on e.id_funcion = f.id_funcion
+inner join salas s
+on s.id_sala = f.id_sala
+inner join cines cines
+on s.id_cine = cines.id_cine
+where c.eliminado = false
+group by cines.id_cine;
+
+/*query con subconsulta definitiva para cantidad de entradas cines*/
+select cines.id_cine, ifnull(cantidad,0) as cantidad
+from cines as cines
+left join (select cines.id_cine, sum(c.cant_entradas) as cantidad
+from compras c
+inner join entradas e
+on c.id_compra = e.id_compra
+inner join funciones f
+on e.id_funcion = f.id_funcion
+inner join salas s
+on s.id_sala = f.id_sala
+inner join cines cines
+on s.id_cine = cines.id_cine
+where (c.eliminado = false) and (e.eliminado = false) and (f.eliminado = false) and (s.eliminado = false) and (cines.eliminado = false)
+group by cines.id_cine
+) as cantidad2
+on cines.id_cine = cantidad2.id_cine
+where cines.eliminado= false;
+
+/*query con subconsulta para cantidad de entradas por pelicula*/
+select cantidad.id_cine as cines,pelis.id, ifnull(entradas,0) as entradas
+from peliculas_cartelera pelis
+left join(select cines.id_cine,f.id_sala,f.id_pelicula,sum(c.cant_entradas) as entradas
+from compras c
+inner join entradas e
+on c.id_compra = e.id_compra
+inner join funciones f
+on e.id_funcion = f.id_funcion
+inner join salas s
+on s.id_sala = f.id_sala
+inner join cines cines
+on s.id_cine = cines.id_cine
+group by cines.id_cine,f.id_sala,f.id_pelicula) as cantidad
+on pelis.id = cantidad.id_pelicula;
