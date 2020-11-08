@@ -98,7 +98,7 @@
 <!--Modal Cines x Entradas -->
 <?php
 foreach($listaCine as $cine){
-    foreach($entradasVendidasXcine as $entradas) {
+    foreach($entradasVendidasXcinePesos as $entradas) {
         if($cine->getId() == $entradas['id_cine']){
         ?>
          <div class="modal fade" id="<?php echo "modal" . $entradas['id_cine'] ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">  
@@ -112,12 +112,8 @@ foreach($listaCine as $cine){
                     </div>
                     <div class="modal-body pl-3 pr-3">
                         <div class="row form-group pr-3">
-                            <label class="col-6">Quantity of tickets</label>
-                            <input type="text" name="nombre" class="col-6" disabled value="<?php echo $entradas['cantidad'] ?>" />
-                        </div>
-                        <div class="row form-group pr-3">
-                            <label class="col-6">Quantity without sales </label>
-                            <input type="text" name="nombre" class="col-6" disabled value="<?php echo $cine->getCapacidad()-$entradas['cantidad'] ?>" />
+                            <label class="col-6">Sales amount</label>
+                            <input type="text" name="nombre" class="col-6" disabled value="<?php echo $entradas['monto'] ?>" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -134,7 +130,7 @@ foreach($listaCine as $cine){
 <!-- Modal funcion x pelicula -->
 <?php
    foreach($listMovie as $movie){
-    foreach($entradasVendidasXpeliculas as $entradasPelicula){
+    foreach($entradasVendidasXpeliculasPesos as $entradasPelicula){
         if($movie->getId() == $entradasPelicula['id_pelicula']){
     ?>
     
@@ -150,16 +146,8 @@ foreach($listaCine as $cine){
                     <div class="modal-body pl-3 pr-3">
                         
                         <div class="row form-group pr-3">
-                            <label class="col-6">Quantity of tickets:</label>
-                            <input type="text" name="nombre" class="col-6" disabled value="<?php echo $entradasPelicula['entradas'] ?>" />
-                        </div>
-                    </div>
-
-                    <div class="modal-body pl-3 pr-3">
-                        
-                        <div class="row form-group pr-3">
-                            <label class="col-6">Quantity of tickets without sales:</label>
-                            <input type="text" name="nombre" class="col-6" disabled value="<?php echo $entradasPelicula['cant_butacas']- $entradasPelicula['entradas'] ?>"/>
+                            <label class="col-6">Sales amount:</label>
+                            <input type="text" name="nombre" class="col-6" disabled value="<?php echo $entradasPelicula['monto'] ?>" />
                         </div>
                     </div>
         
