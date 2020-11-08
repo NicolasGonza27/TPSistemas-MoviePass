@@ -115,6 +115,40 @@
 
         }
 
+        public function GetOnePorcentajeDeDescuentoPorDia($dia_de_la_semana)
+        {
+            try 
+            {
+                $query = "SELECT
+                p_d.id_politica_descuento AS id_politica_descuento,
+                p_dxdia.dia_de_la_semana AS dia_de_la_semana, 
+                p_d.porcentaje_descuento AS porcentaje_descuento
+                FROM
+                politicas_descuento p_d
+                INNER JOIN politica_de_descuento_x_dia p_dxdia
+                ON p_d.id_politica_descuento = p_dxdia.id_politica_descuento
+                WHERE p_dxdia.dia_de_la_semana = :dia_de_la_semana;";
+
+                $parameters["dia_de_la_semana"] = $dia_de_la_semana;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                if($resultSet) 
+                {
+                    return  $resultSet[0];
+                }
+
+                return  array();
+            }
+            catch(PDOException $e)
+            {
+                throw new PDOException($e->getMessage());
+            }
+        }
+
+
         public function GetOne($id_politica_descuento)
         {
             try 

@@ -4,6 +4,7 @@
     use DAObd\MovieDAO as MovieDAO;
     use DAObd\CineDAO as CineDAO;
     use DAObd\FuncionDAO as FuncionDAO;
+    use DAObd\PoliticaDescuentoDAO as PoliticaDescuentoDAO;
     use DAObd\SalaDAO as SalaDAO;
     use Models\Funcion as Funcion;
     use Exception;
@@ -14,6 +15,7 @@
         private $movieDAO;
         private $cineDAO;
         private $salaDAO;
+        private $politicaDescuentoDAO;
 
         public function __construct()
         {
@@ -21,6 +23,8 @@
             $this->movieDAO = new MovieDAO();
             $this->cineDAO = new CineDAO();
             $this->salaDAO = new SalaDAO();
+            $this->politicaDescuentoDAO = new PoliticaDescuentoDAO();
+
         }
 
     
@@ -258,10 +262,25 @@
         {
             try
             {
+                $error = 0;
                 $funcion = $this->funcionDAO->GetOne($id_funcion);
                 $movie = $this->movieDAO->GetOne($funcion->getId_pelicula());
                 $infoUnaFuncion = $this->funcionDAO->GetOneByMovieInfo($funcion->getId_pelicula());
                 $cine = $this->cineDAO->GetOne($infoUnaFuncion["id_cine"]);
+                /* date('N')-1 
+                p_d.id_politica_descuento AS id_politica_descuento,
+                p_dxdia.dia_de_la_semana AS dia_de_la_semana, 
+                p_d.porcentaje_descuento AS porcentaje_descuento*/
+                $porcentaje_descuento = $this->politicaDescuentoDAO->GetOnePorcentajeDeDescuentoPorDia(date('N')-1);
+                $porcentaje = $porcentaje_descuento["porcentaje_descuento"];
+                $politica_descuento_id = null;
+                if(isset($porcentaje_descuento["id_politica_descuento"])){
+                    $politica_descuento_id = $porcentaje_descuento["id_politica_descuento"];
+                }
+                
+                if(!$porcentaje){
+                    $porcentaje = 0;
+                }
                 require_once(ROOT.'mercadoPago.php');
 
                 require_once(VIEWS_PATH."Views-Cliente/compra-ticket-user.php");
