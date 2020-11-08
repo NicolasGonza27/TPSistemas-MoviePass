@@ -7,6 +7,7 @@
     use DAObd\EntradaDAO as EntradaDAO;
     use DAObd\FuncionDAO as FuncionDAO;
     use DAObd\MovieDAO as MovieDAO;
+    use DAObd\PoliticaDescuentoDAO as PoliticaDescuentoDAO;
     use Models\Entrada as Entrada;
     use Exception;
 
@@ -20,6 +21,7 @@
         private $funcionDAO;
         private $movieDAO;
         private $cineDAO;
+        private $politicaDescuentoDAO;
 
         public function __construct()
         {
@@ -28,6 +30,7 @@
             $this->funcionDAO = new FuncionDAO();
             $this->movieDAO = new MovieDAO();
             $this->cineDAO = new CineDAO();
+            $this->politicaDescuentoDAO = new PoliticaDescuentoDAO();
         }
 
         public function Add($id_compra, $id_funcion, $nro_entrada) 
@@ -117,24 +120,27 @@
             }
         }
 
-        public function comprarEntradas($cant_entradas, $monto_compra, $id_funcion, $numero_tarjeta) 
+        public function comprarEntradas($cant_entradas, $monto_compra, $id_funcion, $politica_descuento, $numero_tarjeta) 
         {
             //Compra : id_usuario, id_politica_descuento, cant_entradas, monto Entradas: $id_compra, $id_funcion, $nro_entrada
             try
             {
                 $error = 0;
-                var_dump($numero_tarjeta);
                 if(($numero_tarjeta[0] == "4") || ($numero_tarjeta[0] == "5")) {
                     $user = $_SESSION["userLogged"];
-                    $compra = new Compra(null, $user->getId_usuario(), 1, $cant_entradas, $monto_compra, date("Y") .'-'.date("m").'-'.date("d"));
+
+                    if($politica_descuento == ""){
+                        $politica_descuento = null;
+                    }
+                    $compra = new Compra(null, $user->getId_usuario(), $politica_descuento, $cant_entradas, $monto_compra, date("Y") .'-'.date("m").'-'.date("d"));
                     $this->compraDAO->Add($compra);
                     $rta = $this->compraDAO->GetAll();
                     $pasar_compra = $rta[array_key_last($rta)];
                     
                     for( $i=0 ; $i<$cant_entradas ; $i++) {
-                        $this->Add($pasar_compra->getId_compra(), $id_funcion, 7);
+                        $numero_entrada = $this->entradaDAO->AutoincrementalNumEntradaXFuncion($id_funcion);
+                        $this->Add($pasar_compra->getId_compra(), $id_funcion, $numero_entrada);
                     }
-
                 }
                 else {
                     $error = 1;
@@ -146,8 +152,7 @@
                     $funcionNuevaCant->setCant_asistentes($adidtentes_restar + $cant_entradas);
                     $this->funcionDAO->Modify($id_funcion, $funcionNuevaCant);
                     $this->ShowContentsCompraViews($pasar_compra->getId_compra());
-    /* 
-                    $para      = 'niclausegonzalez@gmail.com';
+                    /*$para   = 'niclausegonzalez@gmail.com';
                     $titulo    = 'El título';
                     $mensaje   = 'Hola';
 
@@ -159,6 +164,16 @@
                     $movie = $this->movieDAO->GetOne($funcion->getId_pelicula());
                     $infoUnaFuncion = $this->funcionDAO->GetOneByMovieInfo($funcion->getId_pelicula());
                     $cine = $this->cineDAO->GetOne($infoUnaFuncion["id_cine"]);
+                    $porcentaje_descuento = $this->politicaDescuentoDAO->GetOnePorcentajeDeDescuentoPorDia(date('N')-1);
+                    $porcentaje = $porcentaje_descuento["porcentaje_descuento"];
+                    $politica_descuento_id = null;
+                    if(isset($porcentaje_descuento["id_politica_descuento"])){
+                        $politica_descuento_id = $porcentaje_descuento["id_politica_descuento"];
+                    }
+                    
+                    if(!$porcentaje){
+                        $porcentaje = 0;
+                    }
                     require_once(ROOT.'mercadoPago.php');
 
                     require_once(VIEWS_PATH."Views-Cliente/compra-ticket-user.php");

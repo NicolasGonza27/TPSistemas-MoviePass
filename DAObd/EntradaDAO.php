@@ -183,6 +183,41 @@
             }
         }   
 
+        public function AutoincrementalNumEntradaXFuncion($id_funcion)
+        {
+            try 
+            {
+                $query = "SELECT
+                ifnull(max(e.nro_entrada),0) + 1 as 'max_entrada_por_funcion'
+                from 
+                entradas e
+                inner join funciones f
+                on e.id_funcion = f.id_funcion
+                where f.id_funcion = :id_funcion;";
+
+                $this->connection = Connection::GetInstance();
+
+                $parameters["id_funcion"] = $id_funcion;
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+                
+                if($resultSet["0"]["max_entrada_por_funcion"])
+                {
+                    return $resultSet["0"]["max_entrada_por_funcion"];
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+            catch(PDOException $e)
+            {
+                throw new PDOException($e->getMessage());
+            }
+        }
+
+
         protected function mapear($entradas)
         {
             $resp = array_map(function($p)

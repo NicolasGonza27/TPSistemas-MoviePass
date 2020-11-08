@@ -3,9 +3,18 @@
     if($error) {
         echo "<script> alert('The card number you have enterd is not from Visa, nor Mastercard, try again.'); </script>";
     }
-?>
 
-<div class="container espaciado-sup">
+
+    if($porcentaje) { ?>
+        <div class="col_57 espaciado-sup">
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Today you have a discount!</h4>
+                <p> You discount is <?=$porcentaje?> percent of your total purchace.</p>
+            </div>
+        </div>
+    <?php } ?>
+
+<div class="container <?=$porcentaje ? "" : "espaciado-sup"?>">
     <table class="table text-white" style="font-weight: bold;">
         <thead class="thead-dark">
             <tr><th colspan="3" class="text-center h3">Buying Tikets</th>
@@ -46,20 +55,26 @@
         <input id="valor_entrada" class="hide" value="<?=$cine->getValor_entrada()?>"> 
         <div class="d-flex">
             <div class="flex-fill">
+                <span>Tikets:</span>
                 <input id="cant_tiket" class="number text-right" min="1" value="<?=$quantity?>" 
                     onkeyup="number = $(this).val().replace('-', '');
                             $(this).val(number);
                             if(($(this).val() < 1) || ($(this).val() > <?=$infoUnaFuncion['butacas_disp']?>))
                             {$(this).val(1);}
                             $('#subtotal_precio').text($(this).val() * $('#valor_entrada').val());
-                            $('#monto_compra').val($(this).val() * $('#valor_entrada').val());
+                            reduc = 0;
+                            if (<?=$porcentaje?>){
+                            reduc = ($(this).val() * $('#valor_entrada').val()) * (<?=$porcentaje?>/100);
+                            }
+                            $('#total_precio').text(($(this).val() * $('#valor_entrada').val()) - reduc);
+                            $('#monto_compra').val(($(this).val() * $('#valor_entrada').val()) - reduc);
                             $('#cant_entradas').val($(this).val());">
             </div>
             <div class="flex-fill">
                 Subtotal: $<span id="subtotal_precio" class="text-right"><?=$cine->getValor_entrada()?></span>
             </div>
             <div class="flex-fill">
-                Total price: $<span class="text-right"><?=$cine->getValor_entrada()?></span>
+                Total price: $<span id="total_precio" class="text-right"><?=$porcentaje ? $cine->getValor_entrada() - ($cine->getValor_entrada() * ($porcentaje/100)) : $cine->getValor_entrada()?></span>
             </div>
             <div class="flex-fill text-right">
                 <button class="btn btn-success" data-toggle="modal" data-target="#modalPagar">Purchace</button>
@@ -78,8 +93,9 @@
                 <!--Compra : id_usuario, id_politica_descuento, ->cant_entradas, ->monto
                     Entradas: $id_compra, ->$id_funcion, $nro_entrada-->
                     <input class="hide" id="cant_entradas" name="cant_entradas" value="1"/>
-                    <input class="hide" id="monto_compra" name="monto_compra" value="<?=$cine->getValor_entrada()?>"/>
+                    <input class="hide" id="monto_compra" name="monto_compra" value="<?=$porcentaje ? $cine->getValor_entrada() - ($cine->getValor_entrada() * ($porcentaje/100)) : $cine->getValor_entrada()?>"/>
                     <input class="hide" name="id_funcion" value="<?=$funcion->getId_funcion()?>"/>
+                    <input class="hide" name="politica_descuento" value="<?=$politica_descuento_id?>"/>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
