@@ -272,7 +272,10 @@
                 p_dxdia.dia_de_la_semana AS dia_de_la_semana, 
                 p_d.porcentaje_descuento AS porcentaje_descuento*/
                 $porcentaje_descuento = $this->politicaDescuentoDAO->GetOnePorcentajeDeDescuentoPorDia(date('N')-1);
-                $porcentaje = $porcentaje_descuento["porcentaje_descuento"];
+                $porcentaje = null;
+                if(isset($porcentaje_descuento["porcentaje_descuento"])){
+                    $porcentaje = $porcentaje_descuento["porcentaje_descuento"];
+                }
                 $politica_descuento_id = null;
                 if(isset($porcentaje_descuento["id_politica_descuento"])){
                     $politica_descuento_id = $porcentaje_descuento["id_politica_descuento"];
