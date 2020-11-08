@@ -14,8 +14,8 @@
     $preference->items = array($item);
     $preference->back_urls = array(
         "success" => "localhost/dashboard/TPSistemas-MoviePass/Views/Views-Cliente/home-client.php",
-        "failure" => "localhost/dashboard/TPSistemas-MoviePass/Funcion/ShowBuyTicketsView?id_function=".$id_funcion,
-        "pending" => "localhost/dashboard/TPSistemas-MoviePass/Funcion/ShowBuyTicketsView?id_function=".$id_funcion
+        "failure" => "localhost/dashboard/TPSistemas-MoviePass/Funcion/ShowBuyTicketsView?id_function=".$id_funcion."&quantity=".$quantity,
+        "pending" => "localhost/dashboard/TPSistemas-MoviePass/Funcion/ShowBuyTicketsView?id_function=".$id_funcion."&quantity=".$quantity
     );
     $preference->payment_methods = array(
         "excluded_payment_types" => array(

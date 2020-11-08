@@ -165,7 +165,10 @@
                     $infoUnaFuncion = $this->funcionDAO->GetOneByMovieInfo($funcion->getId_pelicula());
                     $cine = $this->cineDAO->GetOne($infoUnaFuncion["id_cine"]);
                     $porcentaje_descuento = $this->politicaDescuentoDAO->GetOnePorcentajeDeDescuentoPorDia(date('N')-1);
-                    $porcentaje = $porcentaje_descuento["porcentaje_descuento"];
+                    $porcentaje = null;
+                    if(isset($porcentaje_descuento["porcentaje_descuento"])){
+                        $porcentaje = $porcentaje_descuento["porcentaje_descuento"];
+                    }
                     $politica_descuento_id = null;
                     if(isset($porcentaje_descuento["id_politica_descuento"])){
                         $politica_descuento_id = $porcentaje_descuento["id_politica_descuento"];
