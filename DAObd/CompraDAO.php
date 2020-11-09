@@ -104,7 +104,7 @@
                           c.monto as monto,
                           c.fecha_compra as fecha_compra
                           FROM compras c
-                          INNER JOIN politicas_descuento p
+                          LEFT JOIN politicas_descuento p
                           ON c.id_politica_descuento = p.id_politica_descuento
                           WHERE ( (c.eliminado = :eliminado) AND (c.id_usuario = :id_usuario) );";
 
