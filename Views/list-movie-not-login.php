@@ -2,7 +2,7 @@
 
 <div class="container content espaciado-sup">
     <div class="text-left mb-2">
-        <a class="boton-atras" href="<?php echo FRONT_ROOT . "Home/ShowFiltersNotLogin" ?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+        <a class="boton-atras" href="<?php echo FRONT_ROOT . "Home/ShowHomeNotLogin" ?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
     </div>
 
     <table class="table text-white" style="font-weight: bold;">
@@ -38,7 +38,7 @@
         } else {
 
             echo "<script> if(confirm('No hay peliculas con  los requisitos especificados'));";
-            echo "window.location = '/dashboard/TPSistemas-MoviePass/Home/ShowFiltersNotLogin';
+            echo "window.location = '". FRONT_ROOT ."Home/ShowHomeNotLogin';
                 </script>";
         }
         ?>

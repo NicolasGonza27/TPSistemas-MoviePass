@@ -3,7 +3,7 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class = "nav-item">  
-              <a class="nav-link"  href= "<?php echo FRONT_ROOT."Home/ShowFiltersNotLogin"?>" id="navbarDropdownMenuLink" role="button">
+              <a class="nav-link"  href= "<?php echo FRONT_ROOT."Home/ShowHomeNotLogin"?>" id="navbarDropdownMenuLink" role="button">
                 Billboard
               </a>
             </li>

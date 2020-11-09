@@ -2,7 +2,7 @@
 
     <div class="container content espaciado-sup">
     <div class="text-left mb-2">
-        <a class="boton-atras" href="<?php echo FRONT_ROOT . "Home/ShowFiltersViews" ?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+        <a class="boton-atras" href="<?php echo FRONT_ROOT . "Home/ShowHomeClientViews" ?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
     </div>
 
         <table class="table text-white" style="font-weight: bold;">
@@ -16,7 +16,8 @@
 
             if (!empty($listMovie)) {
                 foreach ($listMovie as $movie) { ?>
-                    <div class="col-3">
+                    <div class="col-3" style="display:block;
+margin:auto;">
                         <form action="<?php echo FRONT_ROOT . 'Funcion/ShowContentMovieFuncionesViewsCliente'; ?>" method="post">
                             <?php if ($movie->getPoster_path()) { ?>
 
@@ -38,7 +39,7 @@
             } else {
 
                 echo "<script> if(confirm('There are no movies with the specified elements'));";
-                echo "window.location = '/dashboard/TPSistemas-MoviePass/Home/ShowFiltersViews';
+                echo "window.location = ' ". FRONT_ROOT ."Home/ShowHomeClientViews';
                 </script>";
             }
             ?>

@@ -13,7 +13,7 @@
             <?php } elseif($backButton == "busquedaGender") { ?>
                 <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderNotLogin"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
             <?php }  elseif($backButton == "BusquedaMostPopularity") {  ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowFiltersNotLogin"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowHomeNotLogin"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
         <?php } }?>
     </div>
 
