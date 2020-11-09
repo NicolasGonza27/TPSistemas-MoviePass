@@ -13,10 +13,10 @@ if(isset($_SESSION["error"]))
     elseif ($error == 2) {
         echo'<script type="text/javascript"> alert("The email is not available"); </script>';
         $_SESSION["error"] = 0; 
-    }
-    
+    }   
 }
 
+require_once(ROOT.'FacebookLogin.php');
 
 ?>
 <div class="container content espaciado-sup">
@@ -43,9 +43,11 @@ if(isset($_SESSION["error"]))
                 <div class="or-seperator"></div>
                 <p class="text-center">Login with your social media account</p>
                 <div class="text-center social-btn">
-                    <a href="#" class="btn btn-secondary btn-block">
-                        <div class="fa fa-facebook"></div>&nbsp; Facebook
-                    </a>
+
+                    <a href="<?php echo htmlspecialchars($loginUrl); ?>" class="btn btn-primary btn-block"
+                    ><div class="fa fa-facebook"></div>&nbsp; Log in with Facebook</a>
+                </div>
+
                 </div>
             </form>
         </div>

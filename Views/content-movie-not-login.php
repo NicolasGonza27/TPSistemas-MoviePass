@@ -1,5 +1,6 @@
 <?php
    require_once(VIEWS_PATH."nav-not-login.php");
+
 ?>
 <div class="container clear espaciado-sup"> 
         
