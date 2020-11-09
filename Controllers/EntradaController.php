@@ -132,7 +132,7 @@
                     if($politica_descuento == ""){
                         $politica_descuento = null;
                     }
-                    $compra = new Compra(null, $user->getId_usuario(), $politica_descuento, $cant_entradas, $monto_compra, date("Y") .'-'.date("m").'-'.date("d"));
+                    $compra = new Compra(null, $user->getId_usuario(), $politica_descuento, $cant_entradas, $monto_compra, date("Y") .'-'.date("m").'-'.(date("d")-1));
                     $this->compraDAO->Add($compra);
                     $rta = $this->compraDAO->GetAll();
                     $pasar_compra = $rta[array_key_last($rta)];
