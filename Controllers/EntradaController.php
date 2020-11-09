@@ -178,7 +178,6 @@
                         $porcentaje = 0;
                     }
                     require_once(ROOT.'mercadoPago.php');
-
                     require_once(VIEWS_PATH."Views-Cliente/compra-ticket-user.php");
                 }
             }
@@ -186,6 +185,12 @@
             {
                 echo $e->getMessage();
             }
+        
+        }
+
+        public function ShowPagoDeTarjetaViews($cant_entradas, $monto_compra, $id_funcion, $politica_descuento)
+        {
+            require_once(VIEWS_PATH."Views-Cliente/pago-tarjeta.php");
         }
 
     }
