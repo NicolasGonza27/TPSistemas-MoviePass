@@ -12,11 +12,12 @@
                 <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDate"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
             <?php } elseif($backButton == "busquedaGender") { ?>
                 <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGender"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
-            <?php } ?>
-        <?php } else {  ?>
+            <?php } elseif($backButton == "BusquedaMostPopularity") { ?>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowHomeClientViews"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+        <?php } }  ?>
 
-            <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowFiltersViews"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
-        <?php } ?>
+
+       
     </div>
 
     <table class="table text-white" style="font-weight: bold;">
@@ -74,7 +75,9 @@
                         <th class="text-center">Number room</th>
                         <th class="text-center">Seats available</th>
                         <th class="text-center">Date and Time</th>
+                        <?php if(!empty($infoFunciones)) { ?>
                         <th class="text-center"></th>
+                        <?php } ?>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
