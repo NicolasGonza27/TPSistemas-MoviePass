@@ -146,15 +146,15 @@ constraint PK_compras foreign key (id_usuario) references usuarios (id_usuario) 
 constraint FK_compras_politicas_descuento foreign key (id_politica_descuento) references politicas_descuento (id_politica_descuento) on delete cascade on update cascade
 );
 
-<<<<<<< HEAD
+
 /*Agregado*/
 alter table compras add fecha_compra timestamp not null after monto;
 alter table compras change column fecha_compra fecha_compra date not null default("2020-01-01") after monto;
 
 /*EJECUTAR ESTA LINEA*/
-=======
+
 alter table compras add column fecha_compra date not null default('2020-01-01') after monto;
->>>>>>> RamaEntradas
+
 alter table compras change column id_politica_descuento id_politica_descuento int default null;
 
 create table entradas(
@@ -544,3 +544,13 @@ inner join cines cines
 on s.id_cine = cines.id_cine
 group by cines.id_cine,f.id_sala,f.id_pelicula) as cantidad
 on pelis.id = cantidad.id_pelicula;
+/*EJECUTAR ESTE CODIGO*/
+create table facebook(
+  id int not null,
+  name_user varchar(30) not null,
+  email varchar(50) not null,
+  constraint PK_facebook primary key (id)
+ );
+ alter table facebook add column id_usuario int not null;
+ alter table facebook add constraint fk_idUsuario foreign key (id_usuario) references usuarios(id_usuario) on delete cascade on update cascade;
+ 
