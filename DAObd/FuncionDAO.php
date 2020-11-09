@@ -182,7 +182,7 @@
             {
                 $query = "SELECT cines.id_cine, ifnull(monto,0) as monto
                 from cines as cines
-                left join (select cines.id_cine, sum(c.monto) as monto
+                left join (select cines.id_cine, sum(c.cant_entradas*c.monto) as monto
                 from compras c
                 inner join entradas e
                 on c.id_compra = e.id_compra
@@ -301,7 +301,7 @@
         {
             try 
             {
-                $query = "SELECT cine.id_cine,f.id_pelicula, ifnull(sum(c.monto),0) as monto, s.cant_butacas
+                $query = "SELECT cine.id_cine,f.id_pelicula, ifnull(sum(c.cant_entradas*c.monto),0) as monto, s.cant_butacas
                 from cines cine
                 left join salas s
                 on cine.id_cine = s.id_cine

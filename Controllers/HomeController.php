@@ -251,6 +251,7 @@ class HomeController
             else 
             {
                 $_SESSION["error"] = 1;
+                require_once(ROOT.'FacebookLogin.php');
                 $this->StartLogin();
             }
         }
