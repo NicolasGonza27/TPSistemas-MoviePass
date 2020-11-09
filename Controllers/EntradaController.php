@@ -10,9 +10,7 @@
     use DAObd\PoliticaDescuentoDAO as PoliticaDescuentoDAO;
     use Models\Entrada as Entrada;
     use Exception;
-
     use Models\Usuario as Usuario;
-
 
     class EntradaController
     {
@@ -137,10 +135,16 @@
                     $rta = $this->compraDAO->GetAll();
                     $pasar_compra = $rta[array_key_last($rta)];
                     
+                    $arrayEntradas = array();
                     for( $i=0 ; $i<$cant_entradas ; $i++) {
                         $numero_entrada = $this->entradaDAO->AutoincrementalNumEntradaXFuncion($id_funcion);
                         $this->Add($pasar_compra->getId_compra(), $id_funcion, $numero_entrada);
+                        $rta = $this->entradaDAO->GetAll();
+                        $pasar_entrada = $rta[array_key_last($rta)];
+                        array_push($arrayEntradas, $pasar_entrada);
                     }
+
+                    require_once(ROOT.'enviarMensaje.php');
                 }
                 else {
                     $error = 1;
@@ -152,11 +156,6 @@
                     $funcionNuevaCant->setCant_asistentes($adidtentes_restar + $cant_entradas);
                     $this->funcionDAO->Modify($id_funcion, $funcionNuevaCant);
                     $this->ShowContentsCompraViews($pasar_compra->getId_compra());
-                    /*$para   = 'niclausegonzalez@gmail.com';
-                    $titulo    = 'El título';
-                    $mensaje   = 'Hola';
-
-                    mail($para, $titulo, $mensaje); */
                 }
                 else {
                     $quantity = $cant_entradas;
