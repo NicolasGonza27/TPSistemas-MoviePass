@@ -49,7 +49,7 @@ class HomeController
             } 
             else 
             {
-                $this->ShowFiltersNotLogin();
+                $this->ShowHomeNotLogin();
             }
         }
         catch(Exception $e)
@@ -85,17 +85,6 @@ class HomeController
         }
     }
 
-    public function ShowHomeClientViews()
-    {
-        try
-        {
-            require_once(VIEWS_PATH . "Views-Cliente/home-client.php");
-        }
-        catch(Exception $e)
-        {
-            echo $e->getMessage();
-        }
-    }
 
     public function ShowMyPurcheses()
     {
@@ -199,7 +188,7 @@ class HomeController
         }
     }
 
-    public function ShowFiltersNotLogin()
+    public function ShowHomeNotLogin()
     {
         try
         {
@@ -207,13 +196,30 @@ class HomeController
             $_SESSION["backbutton"] = "BusquedaMostPopularity";
             $listMovie = $movieAPI->GetAllMostPopularityOutCartelera();
             $listMovieGender = $this->movieGenderAPI->GetAll();
-            require_once(VIEWS_PATH."/home.php");
+            require_once(VIEWS_PATH."home.php");
         }
         catch(Exception $e)
         {
             echo $e->getMessage();
         }
     }
+
+    public function ShowHomeClientViews()
+    {
+        try
+        {   
+            $movieDAO = new MovieDAO();
+            $_SESSION["backbutton"] = "BusquedaMostPopularity";
+            $listMovie = $movieDAO->GetAllMostPopularity(500);
+            $listMovieGender = $this->movieGenderAPI->GetAll();
+            require_once(VIEWS_PATH . "Views-Cliente/home-client.php");
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
 
     public function Login($email, $password)
     {
@@ -233,7 +239,7 @@ class HomeController
                     } 
                     elseif ($user->getId_tipo_usuario() == 2) 
                     {
-                        require_once(VIEWS_PATH . "Views-Cliente/home-client.php");
+                        $this->ShowHomeClientViews();
                     }
                 } 
                 else 

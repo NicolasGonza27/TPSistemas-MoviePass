@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div class="col_57 espaciado-sup">
+<div class="col_57">
     <div valign="middle" class="text-center">
 
         <div class="btn-group btn-group-toggle list-group" id="myList" role="tablist" data-toggle="buttons">

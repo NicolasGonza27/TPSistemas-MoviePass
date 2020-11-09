@@ -36,21 +36,11 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class = "nav-item">
-              <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowHomeClientViews"?>"> Index </a>
-            </li>
-            <li class = "nav-item">  
-              <a class="nav-link"  href= "<?php echo FRONT_ROOT."Home/ShowFiltersViews"?>" id="navbarDropdownMenuLink" role="button">
-                Billboard
-              </a>
+              <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowHomeClientViews"?>"> Billboard </a>
             </li>
             <li class = "nav-item">
               <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowMyPurcheses"?>">My purchases </a>
             </li>
-
-            <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class= "dropdown-item  bg-secondary text-white" href= "<?php echo FRONT_ROOT."Home/form"?>">Genero</a>           
-            <a class= "dropdown-item  bg-secondary text-white">Fecha</a>  
-            </div>-->  
         </ul>
 
         <form class="form-inline my-2 my-lg-0" action="<?php echo FRONT_ROOT."Movie/ShowListViewsByTitle"?>" method="post">
