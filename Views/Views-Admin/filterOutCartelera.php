@@ -1,10 +1,21 @@
 <?php
-   require_once(VIEWS_PATH."header.php");
-   require_once("nav.php");
+require_once(VIEWS_PATH . "header.php");
+require_once("nav.php");
 ?>
 
-<br>
 <div class="col_57 espaciado-sup">
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">You are administrator</h4>
+        <p> This section is for adding movies to the billboard. You can filter for search movies</p>
+        <hr>
+        <p class="mb-0">Below you will find the most popular movies out the billboard.</p>
+    </div>
+</div>
+
+<div class="col_57">
     <div valign="middle" class="text-center">
 
         <div class="btn-group btn-group-toggle list-group" id="myList" role="tablist" data-toggle="buttons">
@@ -73,24 +84,32 @@
 
     </div>
 </div>
-
-    <div class="container content espaciado-sup">
-    <table class="table text-white" style="font-weight: bold;">
-        <thead class="thead-dark">
-            <th colspan=3 class="text-center h3">Some of the most popular movies that you could add to the billboard</th>
+<br>
+<div class="container content">
+    <table class="">
+        <thead class="">
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="alert-heading">Some of the most popular movies that you could add to the billboard</h4>
+                <p> Click on the movie that you want add</p>
+                <hr>
+            </div>
         </thead>
     </table>
 
     <div class="cart-fondo">
         <?php if (!empty($listMovie)) {
             foreach ($listMovie as $movie) { ?>
-                <div class="col-3">
+                <div class="col-3" style="display:block;
+margin:auto;">
 
                     <?php if ($movie->getPoster_path()) { ?>
                         <input type="image" class="img-movies" src="<?php echo $movie->getImage(); ?>" alt="" width="200px" height="300px" title="<?php echo $movie->getTitle(); ?>" data-toggle="modal" data-target="<?php echo "#modal" . $movie->getId() ?>">
 
                     <?php } else { ?>
-                        
+
                         <div>
                             <input type="image" class="img-movies img-without-movie" src="\dashboard\TPSistemas-MoviePass\Views\img\sin-Imagen-disponible.jpg" alt="" width="200px" height="300px" title="<?php echo $movie->getTitle(); ?>" data-toggle="modal" data-target="<?php echo "#modal" . $movie->getId() ?>">
                             <div class="centrado bg-dark"><?php echo $movie->getTitle(); ?></div>
@@ -98,7 +117,8 @@
                     <?php } ?>
 
                 </div>
-        <?php } }  ?>
+        <?php }
+        }  ?>
     </div>
 </div>
 

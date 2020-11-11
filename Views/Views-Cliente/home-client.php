@@ -5,6 +5,9 @@ require_once(VIEWS_PATH . "Views-Cliente/nav.php");
 
 <div class="col_57 espaciado-sup">
   <div class="alert alert-success" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
     <h4 class="alert-heading">Welcome to MoviePass!</h4>
     <p> Welcome to our personalized movie page, we invite you to use the filters to see all the options for you and have a good night.</p>
     <hr>
@@ -35,8 +38,8 @@ require_once(VIEWS_PATH . "Views-Cliente/nav.php");
 
   <div class="tab-content">
     <div class="tab-pane active" id="genre" role="tabpanel">
-      
-    <div style="text-align:center" class="black-box">
+
+      <div style="text-align:center" class="black-box">
         <form action="<?php echo FRONT_ROOT . "Movie/ShowListViewsByGender" ?>" method="post">
           <h5 class="text-white">Select a gender</h5>
           <div class="modal-body">
@@ -51,7 +54,7 @@ require_once(VIEWS_PATH . "Views-Cliente/nav.php");
         </form>
       </div>
     </div>
-    
+
     <div class="tab-pane" id="date" role="tabpanel">
       <div style="text-align:center" class="black-box">
         <form action="<?php echo FRONT_ROOT . "Movie/ShowListViewsByDate" ?>" method="post">

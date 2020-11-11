@@ -16,7 +16,7 @@
 
         if (!empty($listMovie)) {
             foreach ($listMovie as $movie) { ?>
-                <div class="col-3">
+                <div class="col-3" style="display:block; margin:auto;">
                     <form action="<?php echo FRONT_ROOT . 'Funcion/ShowContentMovieFuncionesViewsNotLogin'; ?>" method="post">
                         <?php if ($movie->getPoster_path()) { ?>
 
