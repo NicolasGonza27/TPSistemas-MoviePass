@@ -1,11 +1,14 @@
 <?php
-    require_once(VIEWS_PATH . "header.php");
-    require_once(VIEWS_PATH . "nav-not-login.php");
+require_once(VIEWS_PATH . "header.php");
+require_once(VIEWS_PATH . "nav-not-login.php");
 ?>
 
 
 <div class="col_57 espaciado-sup">
     <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
         <h4 class="alert-heading">Welcome to MoviePass!</h4>
         <p> Welcome to our personalized movie page, we invite you to use the filters to see all the options for you and have a good night.</p>
         <hr>
@@ -77,7 +80,7 @@
 
         if (!empty($listMovie)) {
             foreach ($listMovie as $movie) { ?>
-                <div class="col-3">
+                <div class="col-3" style="display:block; margin:auto;">
                     <form action="<?php echo FRONT_ROOT . 'Funcion/ShowContentMovieFuncionesViewsNotLogin'; ?>" method="post">
                         <?php if ($movie->getPoster_path()) { ?>
 
