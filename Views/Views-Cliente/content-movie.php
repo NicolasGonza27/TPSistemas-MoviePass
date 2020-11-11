@@ -98,7 +98,8 @@
                                     <td class="text-center table-secondary">
                                         <form action="<?php echo FRONT_ROOT . "Funcion/ShowBuyTicketsView" ?>" method="post">
                                             <input type="text" class="hide" name="id" value="<?php echo $funcion["id_funcion"];?>">
-                                            <button type="submit" class="btn btn-outline-success">Buy Tiket</button>
+                                            <button type="submit" class="<?= $funcion["butacas_disp"] ? 'btn btn-outline-success' : 'hide' ?>">Buy Ticket</button>
+                                            <label class="<?= $funcion["butacas_disp"] ? 'hide' : '' ?>">No Tickets Available</label>
                                         </form>
                                     </td>
                                 </tr>
