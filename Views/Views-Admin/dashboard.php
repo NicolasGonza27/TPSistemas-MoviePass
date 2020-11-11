@@ -32,10 +32,10 @@ require_once("nav.php");
                         <td class="text-center"><?php $ape = explode(":", $cine->getHor_apertura()); echo $ape[0].":".$ape[1]; ?> </td>
                         <td class="text-center"><?php $close = explode(":", $cine->getHor_cierre()); echo $close[0].":".$close[1];?> </td>
                         <td class="text-center"><?php echo $cine->getValor_entrada() ?></td>
-                        <td class="text-center row">
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal" . $cine->getId(); ?>">Edit</button>
-                            <button type="button" class="btn btn-outline-danger" style="margin-left: 3px;"  data-toggle="modal" data-target="<?php echo "#modalEliminar" .  $cine->getId();?>">Remove</button>
+                        <td class="text-center">
                             <form action="<?php echo FRONT_ROOT . "Sala/ShowSalaDashboardView" ?>" method="post">
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="<?php echo "#modal" . $cine->getId(); ?>">Edit</button>
+                                <button type="button" class="btn btn-outline-danger" style="margin-left: 3px;"  data-toggle="modal" data-target="<?php echo "#modalEliminar" .  $cine->getId();?>">Remove</button>
                                 <input type="text" class="hide" name="id" value="<?php echo $cine->getId() ?>">
                                 <button type="submit" class="btn btn-outline-success" style="margin-left: 3px;">Rooms</button>
                             </form>

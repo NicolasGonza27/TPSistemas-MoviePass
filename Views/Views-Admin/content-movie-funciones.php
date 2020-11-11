@@ -70,7 +70,7 @@
                 <tr>
                     <tr>
                         <th colspan=5 > FUNCTION LIST </th>
-                        <th colspan=1 class="text-center"><button type="button" class="btn btn-outline-primary my-2 my-sm-0 push-rigth" data-toggle="modal" data-target="#modalAgregar">Agregar</button></th>
+                        <th colspan=1 class="text-center"><button type="button" class="btn btn-outline-primary my-2 my-sm-0 push-rigth" data-toggle="modal" data-target="#modalAgregar">Add</button></th>
                     </tr>
                     <tr>
                         <th class="text-center">Name by cinema</th>

@@ -49,7 +49,7 @@
 
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = "Purchace confirmation";
+        $mail->Subject = "Purchase confirmation";
         $mail->Body = "You just paied tiket/s for a function in the Movie-Pass web page" ;
 
         $mail->send();

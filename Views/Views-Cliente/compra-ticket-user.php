@@ -9,7 +9,7 @@ if ($porcentaje) { ?>
     <div class="col_57 espaciado-sup">
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">Today you have a discount!</h4>
-            <p> You discount is <?= $porcentaje ?> percent of your total purchace.</p>
+            <p> You discount is <?= $porcentaje ?> percent of your total purchase.</p>
         </div>
     </div>
 <?php } ?>
@@ -80,7 +80,7 @@ if ($porcentaje) { ?>
                 Total price: $<span id="total_precio" class="text-right"><?= $porcentaje ? $cine->getValor_entrada() - ($cine->getValor_entrada() * ($porcentaje / 100)) : $cine->getValor_entrada() ?></span>
             </div>
             <div class="flex-fill text-right">
-                <a type="button" id="activar_mercado_pago" onclick=" alert('This method is a work in progress and wont be available on this web at the moment'); " href="<?php echo $preference->init_point; ?>"><button class="btn btn-primary">Purchace by MercadoPago</button></a>
+                <a type="button" id="activar_mercado_pago" onclick=" alert('This method is a work in progress and wont be available on this web at the moment'); " href="<?php echo $preference->init_point; ?>"><button class="btn btn-primary">Purchase by MercadoPago</button></a>
             </div>
             <form action="<?php echo FRONT_ROOT . "Entrada/ShowPagoDeTarjetaViews" ?>" method="post">
                 <div class="flex-fill text-right" style="margin-left: 4px;">
@@ -89,7 +89,7 @@ if ($porcentaje) { ?>
                     <input class="hide" name="monto_compra" id="monto_compra" value="<?= $porcentaje ? $cine->getValor_entrada() - ($cine->getValor_entrada() * ($porcentaje / 100)) : $cine->getValor_entrada() ?>" />
                     <input class="hide" name="id_funcion" value="<?= $funcion->getId_funcion() ?>" />
                     <input class="hide" name="politica_descuento" value="<?= $politica_descuento_id ?>" />
-                    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalPagar">Purchace</button>
+                    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalPagar">Purchase</button>
 
                 </div>
             </form>
@@ -114,7 +114,7 @@ if ($porcentaje) { ?>
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h2>Pay with credit card</h2>
-                    <p>You can use Visa or Mastercard to complete you purchace</p>
+                    <p>You can use Visa or Mastercard to complete you purchase</p>
                     <hr>
 
                     <div class="form-group">
@@ -133,7 +133,7 @@ if ($porcentaje) { ?>
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Finish purchace</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Finish purchase</button>
                     </div>
 
                 </form>

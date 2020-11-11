@@ -16,7 +16,7 @@
                         <th class="text-center">Number of tickets</th>
                         <th class="text-center">Discount obtained</th>
                         <th class="text-center">Total amount</th>
-                        <th class="text-center">Date of purchace</th>
+                        <th class="text-center">Date of purchase</th>
                         <th class="text-center">Options</th>
                     </tr>
                 </thead>
