@@ -1,5 +1,7 @@
 <?php require_once("nav.php"); ?>
 
+
+
 <div class="container content espaciado-sup">
     <div class="text-left mb-2">
         <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowFiltersViewsAdminOutCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
@@ -13,7 +15,8 @@
     <div class="cart-fondo">
         <?php if (!empty($movieListRta)) {
             foreach ($movieListRta as $movie) { ?>
-                <div class="col-3">
+                <div class="col-3" style="display:block;
+margin:auto;">
 
                     <?php if ($movie->getPoster_path()) { ?>
                         <input type="image" class="img-movies" src="<?php echo $movie->getImage(); ?>" alt="" width="200px" height="300px" title="<?php echo $movie->getTitle(); ?>" data-toggle="modal" data-target="<?php echo "#modal" . $movie->getId() ?>">

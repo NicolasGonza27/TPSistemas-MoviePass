@@ -8,6 +8,9 @@ if ($error) {
 if ($porcentaje) { ?>
     <div class="col_57 espaciado-sup">
         <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <h4 class="alert-heading">Today you have a discount!</h4>
             <p> You discount is <?= $porcentaje ?> percent of your total purchase.</p>
         </div>

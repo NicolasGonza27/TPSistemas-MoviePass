@@ -1,10 +1,23 @@
 <?php
-   require_once(VIEWS_PATH."header.php");
-   require_once("nav.php");
+require_once(VIEWS_PATH . "header.php");
+require_once("nav.php");
 ?>
 
-<br>
 <div class="col_57 espaciado-sup">
+
+
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Billboard as administrator</h4>
+        <p> This section is for see the movies of Billboard and add their functions. You can filter for search movies</p>
+        <hr>
+        <p class="mb-0">Below you will find the most popular movies in the billboard.</p>
+    </div>
+
+
+
 
     <div valign="middle" class="text-center">
         <div class="btn-group btn-group-toggle list-group" id="myList" role="tablist" data-toggle="buttons">
@@ -26,9 +39,9 @@
     </div>
 
     <br>
-    
+
     <div class="tab-content">
-        
+
         <div class="tab-pane active" id="genre" role="tabpanel">
             <div style="text-align:center" class="black-box">
                 <form action="<?php echo FRONT_ROOT . "Movie/ShowListViewsByGenderAdminCartelera" ?>" method="post">
@@ -69,21 +82,28 @@
                 </form>
             </div>
         </div>
-
     </div>
 </div>
-
-<div class="container content espaciado-sup">
-    <table class="table text-white" style="font-weight: bold;">
-        <thead class="thead-dark">
-            <th colspan=3 class="text-center h3">The most popular movies</th>
+<br>
+<div class="container content">
+    <table class="">
+        <thead class="">
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="alert-heading">Some of the most popular movies that you could add functions</h4>
+                <p> Click on the movie for see details</p>
+                <hr>
+            </div>
         </thead>
     </table>
     <div class="cart-fondo">
         <?php
         if (!empty($listMovie)) {
             foreach ($listMovie as $movie) { ?>
-                <div class="col-3">
+                <div class="col-3" style="display:block;
+margin:auto;">
                     <form action="<?php echo FRONT_ROOT . 'Funcion/ShowContentMovieFuncionesViews'; ?>" method="post">
                         <?php if ($movie->getPoster_path()) { ?>
 
