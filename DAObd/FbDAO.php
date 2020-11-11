@@ -9,7 +9,7 @@ use PDOException;
 class FbDAO{
    
     private $connection;
-    private $tableName = "facebook";
+    private $tableName = "fbook";
 
     /* public function Add(Usuario $usuario, Facebook $user)
         {
@@ -49,18 +49,17 @@ class FbDAO{
         {
             try
             {
-                $query = "INSERT INTO facebook (id, name_user, email, id_usuario) 
-                VALUES (:id, :name_user, :email, :id_usuario);";
+                $query = "INSERT INTO fbook (id, id_usuario) 
+                VALUES (:id, :id_usuario);";
                 
-                $parameters["id_tipo_usuario"] = $user->getTipo_usuario();
-                $parameters["nombre_usuario"] = $user->getName_user();
-                $parameters["email"] = $user->getEmail();
+                $parameters["id"] = $user->getId();
                 $parameters["id_usuario"] = $user->getId_user();
-
-
+                
                 $this->connection = Connection::GetInstance();
                 
+                
                 return $this->connection->ExecuteNonQuery($query,$parameters);
+                
                
             }
             catch(PDOException $e)
@@ -74,7 +73,10 @@ class FbDAO{
         {
             try 
             {
-                $query = "SELECT * FROM facebook" ;
+                $query = "SELECT *
+                from usuarios
+                inner join fbook
+                on usuarios.id_usuario = fbook.id_usuario;";
 
                 $this->connection = Connection::GetInstance();
 
@@ -100,29 +102,12 @@ class FbDAO{
         {   
             $resp = array_map(function($p)
             {
-                return new Facebook($p['id'],$p['id_usuario'],$p['nombre_usuario'],$p['email']);
+                return new Fbook($p['id'],$p['nombre_usuario'],$p['email'],$p['id_usuario']);
             }, $usuarios);
 
             return $resp;
         }
 
-        public function nextId()
-        {
-            $query = "SELECT id_usuario from usuarios where (eliminado = false) order by id_usuario DESC limit 1;";
-
-            $this->connection = Connection::GetInstance();
-
-            $resultSet = $this->connection->Execute($query,$parameters);
-
-            if($resultSet) 
-            {
-                return  $resultSet;
-            }
-
-            return  array();
-
-
-        }
 
 }
 

@@ -25,6 +25,7 @@
             try
             {
                 $this->user_face->AddUser($user);
+                
             }
             catch(Exception $e)
             {
@@ -36,28 +37,32 @@
         {
             try
             {
-                if(isset($_SESSION['fbUserId']))
-                {
-                    $id = $_SESSION['fbUserId'];
-                    $name = $_SESSION['fbUserName'];
-                    $email = $_SESSION['email'];
-                }
- 
-               // $id_usuario = $this->FbDAO->nextId();
-                $user = new Fbook($id,3,$name,$email);
+                $id = $_SESSION['fbUserId'];
+                $name = $_SESSION['fbUserName'];
+                $email = $_SESSION['email'];
+                
+                $user = new Fbook($id,$name,$email,null); //creo elusuario de fb
                 $error = 0;
-                if($this->usuarioDAO->GetOneByEmail($email)) 
-                {
-                    $_SESSION["error"] = 2;
-                    $this->StartLogin();   
+
+                $us = $this->usuarioDAO->GetOneByEmail($email); //chequeo que no este en el siste,a
+ 
+
+                if($us) 
+                {       
+                    $_SESSION["userLogged"] = $this->usuarioDAO->GetOne($us->getId_usuario()); //si existe me devuelve el usuario
+                    $this->StartHome();   
                 }
                 else 
-                {
-                    $this->Add($user);
+                {  
                     $nombre_completo = explode(" ", $name);
                     $usuario = new Usuario(null,$user->getTipo_usuario(),$nombre_completo[0],$nombre_completo[1],null,$email,null,null);
                     $this->usuarioDAO->Add($usuario);
-                    $_SESSION["userLogged"] = $usuario;
+
+                    $usuarioNuevo = $this->usuarioDAO->GetOneByEmail($email); 
+                    $user->setId_user($usuarioNuevo->getId_usuario());
+
+                    $this->Add($user);
+                    $_SESSION["userLogged"] = $this->usuarioDAO->GetOne($usuarioNuevo->getId_usuario());
                     $this->StartHome();
                 }
             }
@@ -87,7 +92,7 @@
 
         public function StartLogin()
         {
-            require_once(VIEWS_PATH."login.php");
+            header('location: http://localhost/dashboard/TPSistemas-MoviePass/Home/StartLogin');
         }
        
     }

@@ -176,7 +176,7 @@
                 throw new PDOException($e->getMessage());
             }
         }
-        public function GetAllEntradasXcinePesos(bool $eliminado = false)
+        public function GetAllEntradasXcinePesos(bool $eliminado = false, $date_inicial = "2020-01-01" , $date_limite = "2020-01-01" )
         {
             try 
             {
@@ -192,7 +192,7 @@
                 on s.id_sala = f.id_sala
                 inner join cines cines
                 on s.id_cine = cines.id_cine
-                where (c.eliminado = :eliminado) and (e.eliminado = :eliminado) and (f.eliminado = :eliminado) and (s.eliminado = :eliminado) and (cines.eliminado = :eliminado)
+                where  (c.fecha_compra >= ':date_inicial') && (c.fecha_compra <= ':date_limite') && (c.eliminado = :eliminado) and (e.eliminado = :eliminado) and (f.eliminado = :eliminado) and (s.eliminado = :eliminado) and (cines.eliminado = :eliminado)
                 group by cines.id_cine
                 ) as cantidad2
                 on cines.id_cine = cantidad2.id_cine

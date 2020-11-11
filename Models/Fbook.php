@@ -11,7 +11,7 @@ class Fbook
     
 
 
-    function __construct($id = null, $id_user, $name_user,$email){
+    function __construct($id = null,$name_user,$email,$id_user){
        
         $this->id = $id;
         $this->id_user = $id_user;
