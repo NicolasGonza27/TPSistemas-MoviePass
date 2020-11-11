@@ -271,7 +271,7 @@
                 p_d.id_politica_descuento AS id_politica_descuento,
                 p_dxdia.dia_de_la_semana AS dia_de_la_semana, 
                 p_d.porcentaje_descuento AS porcentaje_descuento*/
-                $porcentaje_descuento = $this->politicaDescuentoDAO->GetOnePorcentajeDeDescuentoPorDia(date('N')-1);
+                $porcentaje_descuento = $this->politicaDescuentoDAO->GetOnePorcentajeDeDescuentoPorDia(1);
                 $porcentaje = null;
                 if(isset($porcentaje_descuento["porcentaje_descuento"])){
                     $porcentaje = $porcentaje_descuento["porcentaje_descuento"];

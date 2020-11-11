@@ -242,6 +242,12 @@ from peliculas_cartelera p
 inner join funciones f
 on p.id = f.id_pelicula;
 
+/* Filtrar usuarios faceboook */
+select *
+from usuarios
+inner join fbook
+on usuarios.id_usuario = fbook.id_usuario;
+
 /*Query funciones de una pelicula*/
 select 
 f.id_funcion,
@@ -282,11 +288,7 @@ FROM compras c
 LEFT JOIN politicas_descuento p
 ON c.id_politica_descuento = p.id_politica_descuento
 WHERE ((c.eliminado = 0) AND (c.id_usuario = 4));
-<<<<<<< HEAD
-                                   
-=======
 
->>>>>>> RamaEntradas
 select 
 p.title as titulo_pelicula,
 ci.nombre_cine as nombre_cine,
@@ -307,10 +309,7 @@ on s.id_cine = ci.id_cine
 where c.id_compra = 4;
 
 /*query cantidad vendida por funcion */
-<<<<<<< HEAD
 
-=======
->>>>>>> RamaEntradas
 select e.id_funcion, sum(c.monto) as monto
 from compras c
 inner join entradas e
@@ -318,7 +317,7 @@ on c.id_compra = e.id_compra
 inner join funciones f
 on e.id_funcion = f.id_funcion
 group by e.id_funcion;
-<<<<<<< HEAD
+
 
 /*query con subconsulta que devuelve la cantidad de entradas por funcion*/
 select f.id_funcion, ifnull(entradas,0) as entradas
@@ -433,8 +432,6 @@ on s.id_cine = cines.id_cine
 group by cines.id_cine,f.id_sala,f.id_pelicula) as cantidad
 on pelis.id = cantidad.id_pelicula;
 
-=======
->>>>>>> RamaEntradas
 
 /*query con subconsulta que devuelve la cantidad de entradas por funcion*/
 select f.id_funcion, ifnull(entradas,0) as entradas
@@ -544,13 +541,14 @@ inner join cines cines
 on s.id_cine = cines.id_cine
 group by cines.id_cine,f.id_sala,f.id_pelicula) as cantidad
 on pelis.id = cantidad.id_pelicula;
+
 /*EJECUTAR ESTE CODIGO*/
-create table facebook(
+create table fbook(
   id int not null,
-  name_user varchar(30) not null,
-  email varchar(50) not null,
-  constraint PK_facebook primary key (id)
+  id_usuario int not null,
+  constraint PK_fbook primary key (id),
+  constraint fk_idUsuario foreign key (id_usuario) references usuarios(id_usuario) on delete cascade on update cascade,
+  constraint unique_id unique (id)
  );
- alter table facebook add column id_usuario int not null;
- alter table facebook add constraint fk_idUsuario foreign key (id_usuario) references usuarios(id_usuario) on delete cascade on update cascade;
- 
+
+
