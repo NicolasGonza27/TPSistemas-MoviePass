@@ -2,7 +2,7 @@
 
     <div class="container content espaciado-sup">
     <div class="text-left mb-2">
-        <a class="boton-atras" href="<?php echo FRONT_ROOT . "Home/ShowHomeClientViews" ?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+        <a class="boton-atras" href="<?php echo FRONT_ROOT . "Home/ShowHomeClientViews" ?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
     </div>
 
         <table class="table text-white" style="font-weight: bold;">

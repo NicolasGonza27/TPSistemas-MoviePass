@@ -11,15 +11,15 @@
             <?php if(isset($_SESSION["backbutton"])) { ?>
                 <?php $backButton = $_SESSION["backbutton"];?>
                 <?php if($backButton == "busquedaTitleCartelera") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTituloAdminCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTituloAdminCartelera"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } elseif($backButton == "busquedaGenderCartelera") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderAdminCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderAdminCartelera"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } elseif($backButton == "busquedaDateCartelera") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminCartelera"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } elseif($backButton == "cartelera") { ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/GetCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/GetCartelera"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } elseif($backButton == "filterCartelera") {  ?>
-                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowFiltersViewsAdminCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowFiltersViewsAdminCartelera"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
             <?php } }?>        
         </div>
         <div class="ml-auto">
