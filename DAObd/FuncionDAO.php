@@ -176,7 +176,7 @@
                 throw new PDOException($e->getMessage());
             }
         }
-        public function GetAllEntradasXcinePesos($fecha_desde  , $fecha_hasta  )
+        public function GetAllEntradasXcinePesos($fecha_desde, $fecha_hasta)
         {
             try 
             {
