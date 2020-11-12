@@ -124,6 +124,7 @@ class HomeController
             $movieDAO = new MovieDAO();
             $listMovie = $movieDAO->GetAllMostPopularity(500);
             $listMovieGender = $this->movieGenderAPI->GetAll();
+            $_SESSION["backbutton"] = "filterCartelera";
             require_once(VIEWS_PATH . "Views-Admin/filterCartelera.php");
         }
         catch(Exception $e)
@@ -178,7 +179,7 @@ class HomeController
         try
         {
             $movieAPI = new MovieAPI();
-            $listMovie = $movieAPI->GetAllMostPopularityOutCartelera();
+            $listMovie = $movieAPI->GetAllMostPopularityOutCartelera(100);
             $listMovieGender = $this->movieGenderAPI->GetAll();
             require_once(VIEWS_PATH . "Views-Admin/filterOutCartelera.php");
         }
@@ -192,9 +193,9 @@ class HomeController
     {
         try
         {
-            $movieAPI = new MovieAPI();
+            $movieDAO = new MovieDAO();
             $_SESSION["backbutton"] = "BusquedaMostPopularity";
-            $listMovie = $movieAPI->GetAllMostPopularityOutCartelera();
+            $listMovie = $movieDAO->GetAllMostPopularity(500);
             $listMovieGender = $this->movieGenderAPI->GetAll();
             require_once(VIEWS_PATH."home.php");
         }

@@ -4,7 +4,6 @@
         echo "<script>alert('The date and time of the room you have indicated are not available to program this function, check the hours and try again');</script>";
     }
 ?>
-
 <div class="container content espaciado-sup">
 
     <div class="mb-2 d-flex">
@@ -19,8 +18,9 @@
                     <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateAdminCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
                 <?php } elseif($backButton == "cartelera") { ?>
                     <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/GetCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
-                <?php } ?> 
-            <?php } ?>        
+                <?php } elseif($backButton == "filterCartelera") {  ?>
+                    <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowFiltersViewsAdminCartelera"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+            <?php } }?>        
         </div>
         <div class="ml-auto">
             <button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Remove of billboard</button>

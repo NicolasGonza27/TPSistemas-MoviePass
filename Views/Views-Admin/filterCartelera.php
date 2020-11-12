@@ -102,8 +102,7 @@ require_once("nav.php");
         <?php
         if (!empty($listMovie)) {
             foreach ($listMovie as $movie) { ?>
-                <div class="col-3" style="display:block;
-margin:auto;">
+                <div class="col-3" style="display:block; margin:auto;">
                     <form action="<?php echo FRONT_ROOT . 'Funcion/ShowContentMovieFuncionesViews'; ?>" method="post">
                         <?php if ($movie->getPoster_path()) { ?>
 

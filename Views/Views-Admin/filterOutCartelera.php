@@ -128,7 +128,7 @@ margin:auto;">
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="<?php echo FRONT_ROOT . 'Movie/AddCartelera' ?>" method="post">
+                <form action="<?php echo FRONT_ROOT . 'Movie/AddCarteleraForMostPopularity' ?>" method="post">
 
                     <div class="modal-header">
 
