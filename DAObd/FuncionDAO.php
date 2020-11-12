@@ -141,7 +141,7 @@
             {
                 $query = "SELECT cines.id_cine, ifnull(cantidad,0) as cantidad
                 from cines as cines
-                left join (select cines.id_cine, sum(c.cant_entradas) as cantidad
+                left join (select cines.id_cine, count(e.id_compra) as cantidad
                 from compras c
                 inner join entradas e
                 on c.id_compra = e.id_compra
@@ -176,30 +176,31 @@
                 throw new PDOException($e->getMessage());
             }
         }
-        public function GetAllEntradasXcinePesos(bool $eliminado = false, $date_inicial = "2020-01-01" , $date_limite = "2020-01-01" )
+        public function GetAllEntradasXcinePesos($fecha_desde, $fecha_hasta)
         {
             try 
             {
-                $query = "SELECT cines.id_cine, ifnull(monto,0) as monto
-                from cines as cines
-                left join (select cines.id_cine, sum(c.cant_entradas*c.monto) as monto
-                from compras c
-                inner join entradas e
-                on c.id_compra = e.id_compra
+                $query = "SELECT c.id_cine, ifnull(sum(cineMonto.monto),0) as cantidad
+                from cines c
+                left join (select e.id_compra, c.monto , s.id_cine, c.fecha_compra
+                from entradas e 
+                inner join compras c 
+                on c.id_compra = e.id_compra 
                 inner join funciones f
                 on e.id_funcion = f.id_funcion
                 inner join salas s
                 on s.id_sala = f.id_sala
                 inner join cines cines
                 on s.id_cine = cines.id_cine
-                where  (c.fecha_compra >= ':date_inicial') && (c.fecha_compra <= ':date_limite') && (c.eliminado = :eliminado) and (e.eliminado = :eliminado) and (f.eliminado = :eliminado) and (s.eliminado = :eliminado) and (cines.eliminado = :eliminado)
-                group by cines.id_cine
-                ) as cantidad2
-                on cines.id_cine = cantidad2.id_cine
-                where (cines.eliminado = :eliminado);";
+                where (c.fecha_compra >= :fecha_desde) and (c.fecha_compra <= :fecha_hasta)
+                 group by e.id_compra, s.id_cine) as cineMonto
+                on cineMonto.id_cine = c.id_cine
+                group by c.id_cine;";
                 
 
-                $parameters["eliminado"] =  $eliminado;
+                $parameters["fecha_desde"] =  $fecha_desde;
+                $parameters["fecha_hasta"] =  $fecha_desde;
+
 
                 $this->connection = Connection::GetInstance();
 
@@ -224,7 +225,7 @@
             {
                 $query = "SELECT f.id_funcion, ifnull(entradas,0) as entradas, ifnull(s.cant_butacas-entradas, s.cant_butacas) as disponible
                 from funciones f
-                left join (select e.id_funcion, sum(c.cant_entradas) as entradas
+                left join (select e.id_funcion, count(e.id_compra) as entradas
                 from compras c
                 inner join entradas e
                 on c.id_compra = e.id_compra
@@ -257,24 +258,28 @@
             }
         }
 
-        public function GetAllEntradasXpelicula(bool $eliminado = false)
+        public function GetAllEntradasXpelicula()
         {
             try 
             {
-                $query = "SELECT cine.id_cine,f.id_pelicula, ifnull(sum(c.cant_entradas),0) as entradas, s.cant_butacas
-                from cines cine
-                left join salas s
-                on cine.id_cine = s.id_cine
-                left join funciones f
-                on s.id_sala = f.id_sala
-                left join entradas e
-                on f.id_funcion = e.id_funcion
-                left join compras c
-                on c.id_compra = e.id_compra
-                left join peliculas_cartelera p
-                on p.id = f.id_pelicula
-                where (p.eliminado = :eliminado)
-                group by cine.id_cine, f.id_pelicula;";
+                $query = "SELECT peliculas.id_pelicula, peliculas.entradas, funciones.butacas as cant_butacas
+                from(select f.id_pelicula, sum(s.cant_butacas) as butacas from funciones f inner join salas s on f.id_sala = s.id_sala where(f.eliminado = false) and (s.eliminado= false) group by id_pelicula) as funciones
+                inner join (SELECT cine.id_cine, f.id_pelicula, ifnull(count(e.id_compra),0) as entradas, s.cant_butacas
+                                from cines cine
+                                left join salas s
+                                on cine.id_cine = s.id_cine
+                                left join funciones f
+                                on s.id_sala = f.id_sala
+                                left join entradas e
+                                on f.id_funcion = e.id_funcion
+                                left join compras c
+                                on c.id_compra = e.id_compra
+                                left join peliculas_cartelera p
+                                on p.id = f.id_pelicula
+                                where (p.eliminado = false) and (f.eliminado = false) and (s.eliminado = false)
+                                group by f.id_pelicula) as peliculas
+                                on peliculas.id_pelicula = funciones.id_pelicula
+                                group by funciones.id_pelicula;";
 
                 
 
@@ -297,6 +302,7 @@
             }
         }
 
+        /*Descartada
         public function GetAllEntradasXpeliculaPesos(bool $eliminado = false)
         {
             try 
@@ -333,7 +339,46 @@
             {
                 echo $e->getMessage();
             }
+        }*/
+        public function GetAllEntradasXpeliculaPesos ($fecha_desde, $fecha_hasta)
+        {
+            try 
+            {
+                $query = "SELECT p.id, IFNULL(SUM(peliculaMonto.monto),0) AS monto
+                FROM peliculas_cartelera p
+                LEFT JOIN (
+                            SELECT e.id_compra, c.monto AS monto , p.id AS id_pelicula,c.fecha_compra
+                            FROM entradas e 
+                            INNER JOIN compras c 
+                            ON c.id_compra = e.id_compra 
+                            INNER JOIN funciones f
+                            ON e.id_funcion = f.id_funcion
+                            INNER JOIN peliculas_cartelera p
+                            ON p.id = f.id_pelicula
+                            WHERE c.fecha_compra BETWEEN :fecha_desde AND :fecha_hasta
+                            GROUP BY e.id_compra, p.id
+                ) AS peliculaMonto
+                ON peliculaMonto.id_pelicula = p.id
+                GROUP BY p.id;";
+
+                $this->connection = Connection::GetInstance();
+                $parameters["fecha_desde"] = $fecha_desde;
+                $parameters["fecha_hasta"] =  $fecha_hasta;
+
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+
+                return $resultSet;
+            }
+            catch(PDOException $e)
+            {
+                throw new PDOException($e->getMessage());
+            }
         }
+
+         
+
+
 
         public function GetOneByMovieInfo($id_movie, bool $eliminado = false)
         {
@@ -374,7 +419,7 @@
         {
             try 
             {
-                $query = "SELECT funcion.id_cine, funcion.nombre_cine, funcion.calle, funcion.numero, funcion.title, funcion.id_sala, funcion.numero_sala, funcion.fecha_hora, funcion.id_funcion, funcion.id_pelicula, funcion.butacas_disp, ifnull(sum(cant_entradas),0) as entradas
+                $query = "SELECT funcion.id_cine, funcion.nombre_cine, funcion.calle, funcion.numero, funcion.title, funcion.id_sala, funcion.numero_sala, funcion.fecha_hora, funcion.id_funcion, funcion.id_pelicula, funcion.butacas_disp, ifnull(count(e.id_compra),0) as entradas
                 from funciones fun
                 right join (select c.id_cine, c.nombre_cine, c.calle, c.numero, p.title, s.id_sala, s.numero_sala, s.cant_butacas as butacas_disp, f.fecha_hora, f.id_funcion, p.id as id_pelicula
                 FROM funciones f 

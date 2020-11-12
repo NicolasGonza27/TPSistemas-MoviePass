@@ -153,7 +153,7 @@ class HomeController
         }
     }
 
-    public function ShowTicketsPrice()
+    public function ShowTicketsPrice($fecha_desde = '2020-01-01' , $fecha_hasta = '2020-12-31')
     {
         try
         {
@@ -161,8 +161,8 @@ class HomeController
             $movieDAO = new MovieDAO();
             $listMovie = $movieDAO->GetAll();
             $listFunciones = $this->funcionDAO->GetAllInfoFunctions();
-            $entradasVendidasXcinePesos = $this->funcionDAO->GetAllEntradasXcinePesos();
-            $entradasVendidasXpeliculasPesos = $this->funcionDAO->GetAllEntradasXpeliculaPesos();
+            $entradasVendidasXcinePesos = $this->funcionDAO->GetAllEntradasXcinePesos($fecha_desde,$fecha_hasta);
+            $entradasVendidasXpeliculasPesos = $this->funcionDAO->GetAllEntradasXpeliculaPesos($fecha_desde, $fecha_hasta);
             require_once(VIEWS_PATH."Views-Admin/ticketSales.php"); 
         }
         catch(Exception $e)
