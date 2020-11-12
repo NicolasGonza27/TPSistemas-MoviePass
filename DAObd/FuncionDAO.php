@@ -281,13 +281,10 @@
                                 on peliculas.id_pelicula = funciones.id_pelicula
                                 group by funciones.id_pelicula;";
 
-                
-
-                $parameters["eliminado"] =  $eliminado;
 
                 $this->connection = Connection::GetInstance();
 
-                $resultSet = $this->connection->Execute($query,$parameters);
+                $resultSet = $this->connection->Execute($query);
 
                 if($resultSet) 
                 {
