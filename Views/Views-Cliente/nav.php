@@ -47,7 +47,7 @@
           <input class="form-control mr-sm-2" type="search" placeholder="Title of movie" name="title" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <a class="nav-link text-white"> Welcome <span class="font-weight-bold"><?php if(isset($user)){echo ucfirst($user->getNombre_usuario())."!";}else if(isset($_SESSION['fbUserName'])){ echo $_SESSION['fbUserName']."!";};?></span></a>
+        <a class="nav-link text-white"> Welcome <span class="font-weight-bold"><?php if(isset($user)){echo ucfirst($user->getNombre_usuario())."!";}?></span></a>
         <a class="nav-link text-white"  href= "<?php echo FRONT_ROOT."Home/Logout"?>" >Log out</a>
     </div>
 </nav>

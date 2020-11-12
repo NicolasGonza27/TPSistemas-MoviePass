@@ -157,6 +157,7 @@ alter table compras add column fecha_compra date not null default('2020-01-01') 
 
 alter table compras change column id_politica_descuento id_politica_descuento int default null;
 
+
 create table entradas(
 id_entrada int not null auto_increment,
 id_compra int not null,
@@ -242,6 +243,12 @@ from peliculas_cartelera p
 inner join funciones f
 on p.id = f.id_pelicula;
 
+/* Filtrar usuarios faceboook */
+select *
+from usuarios
+inner join fbook
+on usuarios.id_usuario = fbook.id_usuario;
+
 /*Query funciones de una pelicula*/
 select 
 f.id_funcion,
@@ -282,11 +289,7 @@ FROM compras c
 LEFT JOIN politicas_descuento p
 ON c.id_politica_descuento = p.id_politica_descuento
 WHERE ((c.eliminado = 0) AND (c.id_usuario = 4));
-<<<<<<< HEAD
-                                   
-=======
 
->>>>>>> RamaEntradas
 select 
 p.title as titulo_pelicula,
 ci.nombre_cine as nombre_cine,
@@ -307,10 +310,7 @@ on s.id_cine = ci.id_cine
 where c.id_compra = 4;
 
 /*query cantidad vendida por funcion */
-<<<<<<< HEAD
 
-=======
->>>>>>> RamaEntradas
 select e.id_funcion, sum(c.monto) as monto
 from compras c
 inner join entradas e
@@ -318,7 +318,7 @@ on c.id_compra = e.id_compra
 inner join funciones f
 on e.id_funcion = f.id_funcion
 group by e.id_funcion;
-<<<<<<< HEAD
+
 
 /*query con subconsulta que devuelve la cantidad de entradas por funcion*/
 select f.id_funcion, ifnull(entradas,0) as entradas
@@ -433,8 +433,6 @@ on s.id_cine = cines.id_cine
 group by cines.id_cine,f.id_sala,f.id_pelicula) as cantidad
 on pelis.id = cantidad.id_pelicula;
 
-=======
->>>>>>> RamaEntradas
 
 /*query con subconsulta que devuelve la cantidad de entradas por funcion*/
 select f.id_funcion, ifnull(entradas,0) as entradas
@@ -544,13 +542,71 @@ inner join cines cines
 on s.id_cine = cines.id_cine
 group by cines.id_cine,f.id_sala,f.id_pelicula) as cantidad
 on pelis.id = cantidad.id_pelicula;
+
 /*EJECUTAR ESTE CODIGO*/
-create table facebook(
+create table fbook(
   id int not null,
-  name_user varchar(30) not null,
-  email varchar(50) not null,
-  constraint PK_facebook primary key (id)
+  id_usuario int not null,
+  constraint PK_fbook primary key (id),
+  constraint fk_idUsuario foreign key (id_usuario) references usuarios(id_usuario) on delete cascade on update cascade,
+  constraint unique_id unique (id)
  );
- alter table facebook add column id_usuario int not null;
- alter table facebook add constraint fk_idUsuario foreign key (id_usuario) references usuarios(id_usuario) on delete cascade on update cascade;
+
+/* Querys para peliculas 
+SELECT cine.id_cine, f.id_pelicula, ifnull(count(e.id_compra),0) as entradas, s.cant_butacas
+                from cines cine
+                left join salas s
+                on cine.id_cine = s.id_cine
+                left join funciones f
+                on s.id_sala = f.id_sala
+                left join entradas e
+                on f.id_funcion = e.id_funcion
+                left join compras c
+                on c.id_compra = e.id_compra
+                left join peliculas_cartelera p
+                on p.id = f.id_pelicula
+                where (p.eliminado = false)
+                group by f.id_pelicula;
+  
+select f.id_pelicula, sum(s.cant_butacas) as butacas from funciones f inner join salas s on f.id_sala = s.id_sala group by id_pelicula;
+*/
+
+select peliculas.id_pelicula, peliculas.entradas, funciones.butacas as cant_butacas
+from(select f.id_pelicula, sum(s.cant_butacas) as butacas from funciones f inner join salas s on f.id_sala = s.id_sala where(f.eliminado = false) and (s.eliminado= false) group by id_pelicula) as funciones
+inner join (SELECT cine.id_cine, f.id_pelicula, ifnull(count(e.id_compra),0) as entradas, s.cant_butacas
+from cines cine
+left join salas s
+on cine.id_cine = s.id_cine
+left join funciones f
+on s.id_sala = f.id_sala
+left join entradas e
+on f.id_funcion = e.id_funcion
+left join compras c
+on c.id_compra = e.id_compra
+left join peliculas_cartelera p
+on p.id = f.id_pelicula
+where (p.eliminado = false) and (f.eliminado = false) and (s.eliminado = false)
+group by f.id_pelicula) as peliculas
+on peliculas.id_pelicula = funciones.id_pelicula
+group by funciones.id_pelicula;
+			
  
+                
+/*Filtro para saber la cantidad en pesos recaudado por cine entre fechas*/
+select c.id_cine, ifnull(sum(cineMonto.monto),0) as monto
+from cines c
+left join (select e.id_compra, c.monto , s.id_cine, c.fecha_compra
+from entradas e 
+inner join compras c 
+on c.id_compra = e.id_compra 
+inner join funciones f
+on e.id_funcion = f.id_funcion
+inner join salas s
+on s.id_sala = f.id_sala
+inner join cines cines
+on s.id_cine = cines.id_cine
+where (c.fecha_compra >= '2020-11-11') and (c.fecha_compra <= '2020-11-13')
+ group by e.id_compra, s.id_cine) as cineMonto
+on cineMonto.id_cine = c.id_cine
+group by c.id_cine;
+
