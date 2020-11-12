@@ -235,8 +235,6 @@ foreach ($listFunciones as $funcion) {
 <?php
 foreach ($listMovie as $movie) {
     foreach ($entradasVendidasXpeliculas as $entradasPelicula) {
-        if ($movie->getId() == $entradasPelicula['id_pelicula']) {
-            $cine = $this->cineDAO->GetOneWithCapacity($entradasPelicula['id_cine']);
 ?>
 
             <div class="modal fade" id="<?php echo "modalMovie" . $entradasPelicula['id_pelicula'] ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
@@ -260,7 +258,7 @@ foreach ($listMovie as $movie) {
 
                             <div class="row form-group pr-3">
                                 <label class="col-6">Quantity of tickets without sales:</label>
-                                <input type="text" name="nombre" class="col-6" disabled value="<?php echo $cine->getCapacidad() - $entradasPelicula['entradas'] ?>" />
+                                <input type="text" name="nombre" class="col-6" disabled value="<?php echo $entradasPelicula['cant_butacas'] - $entradasPelicula['entradas'] ?>" />
                             </div>
                         </div>
 
@@ -271,7 +269,6 @@ foreach ($listMovie as $movie) {
                 </div>
             </div>
 <?php }
-    }
 }
 ?>
 

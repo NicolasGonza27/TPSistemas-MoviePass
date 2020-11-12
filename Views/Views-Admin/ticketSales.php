@@ -38,12 +38,14 @@ require_once("nav.php");
             </div>
             <br>
             <div class="black-box">
+            <form action="<?php FRONT_ROOT."Home/ShowTicketsPrice"?>" method = "post">
                 <div class="row">
-                    <div class="col"><label for="from" class="text-white">From</label><input class="form-control form-control-sm" type="date" id="from"></div>
-                    <div class="col"><label for="to" class="text-white">To</label><input class="form-control form-control-sm" type="date" id="to"></div>
+                    <div class="col"><label for="from" class="text-white">From</label><input class="form-control form-control-sm" name="fecha_desde" type="date" id="from"></div>
+                    <div class="col"><label for="to" class="text-white">To</label><input class="form-control form-control-sm" name="fecha_hasta" type="date" id="to"></div>
                 </div>
                 <br>
                 <div class="row text-center mx-auto"><button type="submit" class="btn btn-primary btn-block btn-sm">Filter</button></div>
+            </form>
             </div>
             <!-- <a class="list-group-item list-group-item-action list-group-item-dark" data-toggle="list" href="#genre" role="tab">Filter for gender</a>
         <a class="list-group-item list-group-item-action list-group-item-dark" data-toggle="list" href="#date" role="tab">Filter for date</a> -->
@@ -139,7 +141,7 @@ foreach ($listaCine as $cine) {
                         <div class="modal-body pl-3 pr-3">
                             <div class="row form-group pr-3">
                                 <label class="col-6">Sales amount</label>
-                                <input type="text" name="nombre" class="col-6" disabled value="<?php echo $entradas['monto'] ?>" />
+                                <input type="text" name="nombre" class="col-6" disabled value="<?php echo $entradas['cantidad'] ?>" />
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -157,10 +159,10 @@ foreach ($listaCine as $cine) {
 <?php
 foreach ($listMovie as $movie) {
     foreach ($entradasVendidasXpeliculasPesos as $entradasPelicula) {
-        if ($movie->getId() == $entradasPelicula['id_pelicula']) {
+        if ($movie->getId() == $entradasPelicula['id']) {
 ?>
 
-            <div class="modal fade" id="<?php echo "modalMovie" . $entradasPelicula['id_pelicula'] ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
+            <div class="modal fade" id="<?php echo "modalMovie" . $entradasPelicula['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">

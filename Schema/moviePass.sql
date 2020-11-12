@@ -157,6 +157,7 @@ alter table compras add column fecha_compra date not null default('2020-01-01') 
 
 alter table compras change column id_politica_descuento id_politica_descuento int default null;
 
+
 create table entradas(
 id_entrada int not null auto_increment,
 id_compra int not null,
@@ -551,4 +552,61 @@ create table fbook(
   constraint unique_id unique (id)
  );
 
+/* Querys para peliculas 
+SELECT cine.id_cine, f.id_pelicula, ifnull(count(e.id_compra),0) as entradas, s.cant_butacas
+                from cines cine
+                left join salas s
+                on cine.id_cine = s.id_cine
+                left join funciones f
+                on s.id_sala = f.id_sala
+                left join entradas e
+                on f.id_funcion = e.id_funcion
+                left join compras c
+                on c.id_compra = e.id_compra
+                left join peliculas_cartelera p
+                on p.id = f.id_pelicula
+                where (p.eliminado = false)
+                group by f.id_pelicula;
+  
+select f.id_pelicula, sum(s.cant_butacas) as butacas from funciones f inner join salas s on f.id_sala = s.id_sala group by id_pelicula;
+*/
+
+select peliculas.id_pelicula, peliculas.entradas, funciones.butacas as cant_butacas
+from(select f.id_pelicula, sum(s.cant_butacas) as butacas from funciones f inner join salas s on f.id_sala = s.id_sala where(f.eliminado = false) and (s.eliminado= false) group by id_pelicula) as funciones
+inner join (SELECT cine.id_cine, f.id_pelicula, ifnull(count(e.id_compra),0) as entradas, s.cant_butacas
+from cines cine
+left join salas s
+on cine.id_cine = s.id_cine
+left join funciones f
+on s.id_sala = f.id_sala
+left join entradas e
+on f.id_funcion = e.id_funcion
+left join compras c
+on c.id_compra = e.id_compra
+left join peliculas_cartelera p
+on p.id = f.id_pelicula
+where (p.eliminado = false) and (f.eliminado = false) and (s.eliminado = false)
+group by f.id_pelicula) as peliculas
+on peliculas.id_pelicula = funciones.id_pelicula
+group by funciones.id_pelicula;
+			
+ 
+                
+/*Filtro para saber la cantidad en pesos recaudado por cine entre fechas*/
+select c.id_cine, ifnull(sum(cineMonto.monto),0) as monto
+from cines c
+left join (select e.id_compra, c.monto , s.id_cine, c.fecha_compra
+from entradas e 
+inner join compras c 
+on c.id_compra = e.id_compra 
+inner join funciones f
+on e.id_funcion = f.id_funcion
+inner join salas s
+on s.id_sala = f.id_sala
+inner join cines cines
+on s.id_cine = cines.id_cine
+where (c.fecha_compra >= '2020-11-11') and (c.fecha_compra <= '2020-11-13')
+ group by e.id_compra, s.id_cine) as cineMonto
+on cineMonto.id_cine = c.id_cine
+group by c.id_cine;
 
