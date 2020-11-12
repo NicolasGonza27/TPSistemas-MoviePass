@@ -4,8 +4,9 @@
     use API\MovieAPI;
     use DAObd\MovieDAO as MovieDAO;
     use Controllers\FuncionController as FuncionController;
-    use Models\Movie;
+    use API\MovieGenderAPI as MovieGenderAPI;
     use Exception;
+
 
 class MovieController
     {
@@ -513,6 +514,23 @@ class MovieController
                 $_SESSION["backbutton"] = "busquedaDate";
                 
                 require_once(VIEWS_PATH."list-movie-not-login.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+        public function AddCarteleraForMostPopularity($id_movie)
+        {
+            try
+            {
+                $this->movieDAO->Add($id_movie);
+                $movieAPI = new MovieAPI();
+                $movieGenderAPI = new MovieGenderAPI();
+                $listMovie = $movieAPI->GetAllMostPopularityOutCartelera(100);
+                $listMovieGender = $movieGenderAPI->GetAll();
+                require_once(VIEWS_PATH . "Views-Admin/filterOutCartelera.php");
             }
             catch(Exception $e)
             {

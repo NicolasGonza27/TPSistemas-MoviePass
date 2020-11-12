@@ -86,14 +86,18 @@ class MovieAPI
 
         public function GetAllMostPopularityOutCartelera($popularity = 300)
         {
-            $this->RetrieveData();
+            $this->RetrieveDataOutCartelera();
+            $movieDAO = new MovieDAO();
             $moviesMostPopularity= array();
 
             foreach($this->movieList as $movie)
             {   
-                if($movie->getPopularity() >= $popularity)
+                if( ($movie->getPopularity() >= $popularity) )
                 {   
-                    array_push($moviesMostPopularity,$movie);
+
+                        array_push($moviesMostPopularity,$movie);
+                    
+                  
                 }
             }
         
