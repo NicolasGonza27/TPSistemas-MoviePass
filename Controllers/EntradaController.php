@@ -134,16 +134,14 @@
                     $this->compraDAO->Add($compra);
                     $rta = $this->compraDAO->GetAll();
                     $pasar_compra = $rta[array_key_last($rta)];
-                    
-                    $arrayEntradas = array();
+
                     for( $i=0 ; $i<$cant_entradas ; $i++) {
                         $numero_entrada = $this->entradaDAO->AutoincrementalNumEntradaXFuncion($id_funcion);
                         $this->Add($pasar_compra->getId_compra(), $id_funcion, $numero_entrada);
                         $rta = $this->entradaDAO->GetAll();
-                        $pasar_entrada = $rta[array_key_last($rta)];
-                        array_push($arrayEntradas, $pasar_entrada);
                     }
-
+                    
+                    $listEntradas = $this->GetAllByCompra($pasar_compra->getId_compra());
                     require_once(ROOT.'enviarMensaje.php');
                 }
                 else {

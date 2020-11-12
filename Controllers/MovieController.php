@@ -4,8 +4,9 @@
     use API\MovieAPI;
     use DAObd\MovieDAO as MovieDAO;
     use Controllers\FuncionController as FuncionController;
-    use Models\Movie;
+    use API\MovieGenderAPI as MovieGenderAPI;
     use Exception;
+
 
 class MovieController
     {
@@ -441,6 +442,10 @@ class MovieController
                     { 
                         $this->GetCartelera();
                     } 
+                    elseif($backButton == "filterCartelera") 
+                    { 
+                        $this->ShowFiltersViewsAdminCartelera();
+                    } 
                 }
                 
             }
@@ -518,6 +523,41 @@ class MovieController
             {
                 echo $e->getMessage();
             }
+        }
+
+        public function AddCarteleraForMostPopularity($id_movie)
+        {
+            try
+            {
+                $this->movieDAO->Add($id_movie);
+                $movieAPI = new MovieAPI();
+                $movieGenderAPI = new MovieGenderAPI();
+                $listMovie = $movieAPI->GetAllMostPopularityOutCartelera(100);
+                $listMovieGender = $movieGenderAPI->GetAll();
+                require_once(VIEWS_PATH . "Views-Admin/filterOutCartelera.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+        public function ShowFiltersViewsAdminCartelera()
+        {
+            try
+            {
+                $movieDAO = new MovieDAO();
+                $movieGenderAPI = new MovieGenderAPI();
+                $listMovie = $movieDAO->GetAllMostPopularity(500);
+                $listMovieGender = $movieGenderAPI->GetAll();
+                $_SESSION["backbutton"] = "filterCartelera";
+                require_once(VIEWS_PATH . "Views-Admin/filterCartelera.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
+
         }
 
         

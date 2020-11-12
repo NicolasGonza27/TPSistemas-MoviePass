@@ -113,7 +113,7 @@
                 ON f.id_sala = s.id_sala
                 INNER JOIN cines c
                 ON s.id_cine = c.id_cine
-                WHERE (p.id = :id) AND (f.eliminado = :eliminado);";
+                WHERE (p.id = :id) AND (f.eliminado = :eliminado) AND (NOW() < f.fecha_hora );";
 
                 $parameters["id"] = $id_movie;
                 $parameters["eliminado"] =  $eliminado;
