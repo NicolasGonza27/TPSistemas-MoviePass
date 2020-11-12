@@ -8,14 +8,17 @@
         <?php if(isset($_SESSION["backbutton"])) { ?>
             <?php $backButton = $_SESSION["backbutton"];?>
             <?php if($backButton == "busquedaTitle") { ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTitleNotLogin"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTitleNotLogin"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
             <?php } elseif($backButton == "busquedaDate") { ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateNotLogin"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDateNotLogin"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
             <?php } elseif($backButton == "busquedaGender") { ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderNotLogin"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGenderNotLogin"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
             <?php }  elseif($backButton == "BusquedaMostPopularity") {  ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowHomeNotLogin"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
-        <?php } }?>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowHomeNotLogin"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+        <?php  } } else { ?>  
+            <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowHomeNotLogin"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+        <?php }?>   
+        
     </div>
 
     <table class="table text-white" style="font-weight: bold;">

@@ -7,13 +7,13 @@
         <?php if(isset($_SESSION["backbutton"])) { ?>
             <?php $backButton = $_SESSION["backbutton"];?>
             <?php if($backButton == "busquedaTitle") { ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTitle"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByTitle"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
             <?php } elseif($backButton == "busquedaDate") { ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDate"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByDate"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
             <?php } elseif($backButton == "busquedaGender") { ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGender"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Movie/ShowListViewsByGender"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
             <?php } elseif($backButton == "BusquedaMostPopularity") { ?>
-                <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowHomeClientViews"?>"><button class="btn btn-secondary"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
+                <a class="boton-atras" href="<?php echo FRONT_ROOT."Home/ShowHomeClientViews"?>"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Back</i></button></a>
         <?php } }  ?>
 
 
