@@ -195,7 +195,7 @@ class MovieAPI
             $this->movieList = array();
             $movieDAO = new MovieDAO();
 
-            for($i = 1; $i < 10; $i++)
+            for($i = 1; $i < 15; $i++)
             {
                 $jsonContent = file_get_contents($this->fileName."&page=$i");
                 $contentArray = ($jsonContent) ? json_decode($jsonContent, true) : array();
@@ -248,7 +248,7 @@ class MovieAPI
             $this->movieList = array();
             $movieDAO = new MovieDAO();
 
-            for($i = 1; $i < 10; $i++)
+            for($i = 1; $i < 15; $i++)
             {
                 $jsonContent = file_get_contents($this->fileName."&page=$i");
                 $contentArray = ($jsonContent) ? json_decode($jsonContent, true) : array();

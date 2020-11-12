@@ -36,10 +36,14 @@
         $mail->addAddress($user->getEmail(), $user->getNombre_usuario());        // Name is optional
 
         // Attachments
-        foreach($arrayEntradas as $entrada) {
-            $contenido = "Ticket number: " . $entrada->getNro_entrada();
+        foreach($listEntradas as $entrada) {
 
-            $filename = $entrada->getNro_entrada() . 'test.png';
+            $contenido = "Movie: " . $entrada["titulo_pelicula"] . " - " .
+                        "Ticket number: " . $entrada["numero_entrada"] . " - " .
+                        "Cinema: " . $entrada["nombre_cine"] . " - " .
+                        "Seat number: " . $entrada["numero_sala"];
+
+            $filename = $entrada["numero_entrada"] . 'test.png';
             $ruta = $dir . $filename;
 
             QRcode::png($contenido, $ruta, $level, $tamaño, $framSize);

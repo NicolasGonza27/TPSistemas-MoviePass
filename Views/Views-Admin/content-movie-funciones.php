@@ -47,17 +47,16 @@
                 <td class="text-uppercase">Vote average</td>
                 <td>
                     <div>
-                        <input class="range" disabled value="<?php echo $movie->getVote_average()?>" type="range" min="0" max="10" step="0.01">
+                        <input class="range form-control-range" disabled value="<?php echo $movie->getVote_average()?>" type="range" step="0.1" min="0" max="10" step="0.01">
                     </div>
                 </td>
-                
             </tr>
             <tr  class="bg-bordo">
                 <td class="text-uppercase">Overview</td>
                 <td><?php echo $movie->getOverview()?></td>
             </tr>
 
-            <tr  style="background-color: #6F1E1E;">
+            <tr  class="bg-bordo">
                 <td class="text-uppercase">Runtime</td>
                 <td><?php echo $movie->getRuntime()?></td>
             </tr>
