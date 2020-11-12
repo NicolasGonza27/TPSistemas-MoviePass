@@ -161,6 +161,8 @@ class HomeController
             $movieDAO = new MovieDAO();
             $listMovie = $movieDAO->GetAll();
             $listFunciones = $this->funcionDAO->GetAllInfoFunctions();
+            $_SESSION['desde'] = $fecha_desde;
+            $_SESSION['hasta'] = $fecha_hasta;
             $entradasVendidasXcinePesos = $this->funcionDAO->GetAllEntradasXcinePesos($fecha_desde,$fecha_hasta);
             $entradasVendidasXpeliculasPesos = $this->funcionDAO->GetAllEntradasXpeliculaPesos($fecha_desde, $fecha_hasta);
             require_once(VIEWS_PATH."Views-Admin/ticketSales.php"); 
