@@ -15,8 +15,7 @@
     <div class="cart-fondo">
         <?php if (!empty($movieListRta)) {
             foreach ($movieListRta as $movie) { ?>
-                <div class="col-3" style="display:block;
-margin:auto;">
+                <div class="col-3" style="display:block; margin:auto;">
 
                     <?php if ($movie->getPoster_path()) { ?>
                         <input type="image" class="img-movies" src="<?php echo $movie->getImage(); ?>" alt="" width="200px" height="300px" title="<?php echo $movie->getTitle(); ?>" data-toggle="modal" data-target="<?php echo "#modal" . $movie->getId() ?>">
