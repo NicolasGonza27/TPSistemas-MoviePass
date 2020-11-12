@@ -19,7 +19,7 @@ require_once("nav.php");
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="alert-heading">Select a filter to see the number of tickets sold</h4>
+        <h4 class="alert-heading">Select a filter to see the number of tickets sold <?php echo $_SESSION['desde'].'///'. $_SESSION['hasta']; ?></h4>
         <hr>
     </div>
 
@@ -38,10 +38,10 @@ require_once("nav.php");
             </div>
             <br>
             <div class="black-box">
-            <form action="<?php FRONT_ROOT."Home/ShowTicketsPrice"?>" method = "post">
+            <form action="<?php echo FRONT_ROOT."Home/ShowTicketsPrice"?>" method = "post">
                 <div class="row">
-                    <div class="col"><label for="from" class="text-white">From</label><input class="form-control form-control-sm" name="fecha_desde" type="date" id="from"></div>
-                    <div class="col"><label for="to" class="text-white">To</label><input class="form-control form-control-sm" name="fecha_hasta" type="date" id="to"></div>
+                    <div class="col"><label for="from" class="text-white">From</label><input class="form-control form-control-sm" name="fecha_desde" type="date" id="fecha_desde"></div>
+                    <div class="col"><label for="to" class="text-white">To</label><input class="form-control form-control-sm" name="fecha_hasta" type="date" id="fecha_hasta"></div>
                 </div>
                 <br>
                 <div class="row text-center mx-auto"><button type="submit" class="btn btn-primary btn-block btn-sm">Filter</button></div>
