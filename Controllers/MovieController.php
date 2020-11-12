@@ -442,6 +442,10 @@ class MovieController
                     { 
                         $this->GetCartelera();
                     } 
+                    elseif($backButton == "filterCartelera") 
+                    { 
+                        $this->ShowFiltersViewsAdminCartelera();
+                    } 
                 }
                 
             }
@@ -536,6 +540,24 @@ class MovieController
             {
                 echo $e->getMessage();
             }
+        }
+
+        public function ShowFiltersViewsAdminCartelera()
+        {
+            try
+            {
+                $movieDAO = new MovieDAO();
+                $movieGenderAPI = new MovieGenderAPI();
+                $listMovie = $movieDAO->GetAllMostPopularity(500);
+                $listMovieGender = $movieGenderAPI->GetAll();
+                $_SESSION["backbutton"] = "filterCartelera";
+                require_once(VIEWS_PATH . "Views-Admin/filterCartelera.php");
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
+
         }
 
         

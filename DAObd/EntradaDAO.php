@@ -125,7 +125,7 @@
                     return  $resultSet;
                 }
 
-                return  false;
+                return  array();
             }
             catch(PDOException $e)
             {

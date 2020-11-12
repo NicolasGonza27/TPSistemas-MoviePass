@@ -50,7 +50,7 @@
                 <td><?php echo $movie->getOverview()?></td>
             </tr>
 
-            <tr  style="background-color: #6F1E1E;">
+            <tr  class="bg-bordo">
                 <td class="text-uppercase">Runtime</td>
                 <td><?php echo $movie->getRuntime()?></td>
             </tr>
