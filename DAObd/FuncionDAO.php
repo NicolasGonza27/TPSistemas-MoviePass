@@ -192,17 +192,15 @@
                 on s.id_sala = f.id_sala
                 inner join cines cines
                 on s.id_cine = cines.id_cine
-                where (c.fecha_compra >= :fecha_desde) and (c.fecha_compra <= :fecha_hasta)
+                WHERE c.fecha_compra BETWEEN :fecha_desde AND :fecha_hasta
                  group by e.id_compra, s.id_cine) as cineMonto
                 on cineMonto.id_cine = c.id_cine
                 group by c.id_cine;";
                 
+                $this->connection = Connection::GetInstance();
 
                 $parameters["fecha_desde"] =  $fecha_desde;
-                $parameters["fecha_hasta"] =  $fecha_desde;
-
-
-                $this->connection = Connection::GetInstance();
+                $parameters["fecha_hasta"] =  $fecha_hasta;
 
                 $resultSet = $this->connection->Execute($query,$parameters);
 
